@@ -1,0 +1,402 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewAction action="#{produtoFormularioBean.inicializar()}" />
+			<o:viewParam name="produto" value="#{produtoFormularioBean.produto}"
+				converter="#{produtoConverter}" />
+		</f:metadata>
+
+		<h:form id="frm">
+			<p:tabView id="tabView">
+				<div class="ui-fluid">
+					<br />
+					<p:tab title="Gerais">
+						<p:panel header="Cadastro de Produtos" id="painelProduto">
+							<h:panelGrid id="dadosProduto" columns="4"
+								columnClasses="rotulo, campo, rotulo, campo">
+								<p:outputLabel value="Codigo:" for="codigo" />
+								<p:inputText id="codigo"
+									value="#{produtoFormularioBean.produto.codigo}" />
+
+								<p:outputLabel value="Código Barras:" />
+								<p:inputMask mask="9?999999999999999"
+									value="#{produtoFormularioBean.produto.codigoBrras}" />
+
+								<p:outputLabel value="Descrição:" for="nome" />
+								<p:inputText id="nome"
+									value="#{produtoFormularioBean.produto.descricao}" />
+
+								<p:outputLabel value="Unidade de Venda:" for="unidadeMedida" />
+								<p:selectOneMenu id="unidadeMedida"
+									value="#{produtoFormularioBean.produto.unidadeMedida}">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItems value="#{produtoFormularioBean.unidadeMedida}"
+										var="dados" itemValue="#{dados.codigo}"
+										itemLabel="#{dados.nome}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Preço:" for="preco" />
+								<p:inputNumber id="preco" symbol="R$ "
+									value="#{produtoFormularioBean.produto.precoVenda}"
+									decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+
+								<p:outputLabel value="" />
+								<p:outputLabel value="" />
+
+								<p:outputLabel value="NCM:" for="ncm" />
+								<h:panelGroup style="display:flex;">
+									<p:inputText
+										value="#{produtoFormularioBean.produto.codigo_ncm}"
+										style="opacity: 1;" id="ncm" disabled="true" />
+									<p:commandButton icon="fa fa-search"
+										styleClass="ui-priority-primary" style="max-width: 30px"
+										type="button" onclick="PF('ncmDialog').show();" />
+								</h:panelGroup>
+
+								<p:outputLabel value="Cest:" for="cest" />
+								<h:panelGroup style="display:flex;">
+									<p:inputText
+										value="#{produtoFormularioBean.produto.codigo_cest}" id="cest"
+										disabled="true" style="opacity: 1;" />
+									<p:commandButton icon="fa fa-search"
+										styleClass="ui-priority-primary" style="max-width: 30px"
+										type="button" onclick="PF('cestDialog').show();" />
+								</h:panelGroup>
+
+
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+
+					<p:tab title="Impostos">
+						<p:panel header="Impostos do Produto">
+							<h:panelGrid id="impostoProduto" columns="2"
+								style="margin-top:20px" columnClasses="rotulo">
+
+								<p:outputLabel value="CST de ICMS:" for="cstIcms" />
+								<p:selectOneMenu id="cstIcms"
+									value="#{produtoFormularioBean.produto.cstIcms}">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<!--	<f:selectItem itemLabel="00-Tributacão Normal" itemValue="00" />
+						<f:selectItem itemLabel="20-Tributação com redução na Base o ICMS"
+							itemValue="20" />
+						<f:selectItem
+							itemLabel="10-Substituição Tributária calculada na compra"
+							itemValue="10" />
+						<f:selectItem
+							itemLabel="30-Isenta de ICMS mas com Substituição Tributária"
+							itemValue="30" />
+						<f:selectItem itemLabel="40-Insento de ICMS" itemValue="40" />
+						<f:selectItem itemLabel="41-Não Tributado" itemValue="41" />
+						<f:selectItem itemLabel="50-Suspenso de Tributação no Estado"
+							itemValue="50" />
+						<f:selectItem itemLabel="60-Substituição Tributária sem custos"
+							itemValue="60" />
+						<f:selectItem
+							itemLabel="70-Redução na Base de Substituição Tributária"
+							itemValue="70" />
+						<f:selectItem itemLabel="90-Outros" itemValue="90" /> -->
+									<f:selectItem itemLabel="51-Tributo diferido no Estado"
+										itemValue="51" />
+									<f:selectItem
+										itemLabel="101-Tributado com Permissão de Crédito"
+										itemValue="101" />
+									<f:selectItem
+										itemLabel="102-Tributado sem Permissão de Crédito"
+										itemValue="102" />
+									<!--		<f:selectItem
+							itemLabel="201-Tributado c/ Permissão de Crédito com Substituição Tributária"
+							itemValue="201" />
+						<f:selectItem
+							itemLabel="202-Tributado s/ Permissão de Crédito com Substituição Tributária"
+							itemValue="202" />
+						<f:selectItem itemLabel="300-Imune de tributação no Estado"
+							itemValue="300" />
+						<f:selectItem itemLabel="400-Insento de tributar ICMS"
+							itemValue="400" /> -->
+									<f:selectItem
+										itemLabel="500-Substituição Tributária paga anteriormente"
+										itemValue="500" />
+									<!-- 
+						<f:selectItem itemLabel="900-Outos" itemValue="900" /> -->
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Alíquota ICMS:" for="aliquotaIcms" />
+								<p:inputNumber id="aliquotaIcms" symbol="%" symbolPosition="s"
+									emptyValue="zero" decimalSeparator="," thousandSeparator="."
+									value="#{produtoFormularioBean.produto.aliquotaIcms}" />
+
+
+								<p:outputLabel value="CST de IPI:" for="cstIpi" />
+								<p:selectOneMenu id="cstIpi"
+									value="#{produtoFormularioBean.produto.cstIpi}">
+									<!--		<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItem itemLabel="50-Saída Tributada" itemValue="50" />
+						<f:selectItem itemLabel="51-Saída Tributável com Alíquota Zero"
+							itemValue="51" />
+						<f:selectItem itemLabel="52-Saída Isenta" itemValue="52" /> -->
+									<f:selectItem itemLabel="53-Saída Não-Tributada" itemValue="53" />
+									<!--		<f:selectItem itemLabel="54-Saída Imune" itemValue="54" />
+						<f:selectItem itemLabel="55-Saída com Suspensão" itemValue="55" />
+						<f:selectItem itemLabel="99-Outras Saídas" itemValue="99" /> -->
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Alíquota IPI:" for="aliquotaIpi" />
+								<p:inputNumber id="aliquotaIpi" symbol="%" symbolPosition="s"
+									emptyValue="zero" decimalSeparator="," thousandSeparator="."
+									value="#{produtoFormularioBean.produto.aliquotaIpi}" />
+
+
+								<p:outputLabel value="CST de PIS:" for="cstPis" />
+								<p:selectOneMenu id="cstPis"
+									value="#{produtoFormularioBean.produto.cstPis}">
+									<!-- 					<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItem
+							itemLabel="01-Operação Tributável com Alíquota Básica"
+							itemValue="01" />
+						<f:selectItem
+							itemLabel="03-Operação Tributável com Alíquota por Und. de Medida de Produto"
+							itemValue="03" />
+						<f:selectItem
+							itemLabel="04-Operação Tributável Monofásica - Revenda a Alíquota Zero"
+							itemValue="04" />
+						<f:selectItem
+							itemLabel="05-Operação Tributável por Substituição Tributária"
+							itemValue="05" />
+						<f:selectItem itemLabel="06-Operação Tributável a Alíquota Zero"
+							itemValue="06" /> -->
+									<f:selectItem
+										itemLabel="02-Operação Tributável com Alíquota Diferenciada"
+										itemValue="02" />
+									<f:selectItem itemLabel="07-Operação Isenta da Contribuição"
+										itemValue="07" />
+									<!-- 					<f:selectItem
+							itemLabel="08-Operação sem Incidência da Contribuição"
+							itemValue="08" />
+						<f:selectItem
+							itemLabel="09-Operação com Suspensão da Contribuição"
+							itemValue="09" />
+						<f:selectItem itemLabel="49-Outras Operações de Saída"
+							itemValue="49" />  -->
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Alíquota PIS:" for="aliquotaPis" />
+								<p:inputNumber id="aliquotaPis" symbol="%" symbolPosition="s"
+									emptyValue="zero" decimalSeparator="," thousandSeparator="."
+									value="#{produtoFormularioBean.produto.aliquotaPis}" />
+
+								<p:outputLabel value="CST de Cofins:" for="cstCofins" />
+								<p:selectOneMenu id="cstCofins"
+									value="#{produtoFormularioBean.produto.cstCofins}">
+									<!-- 					<f:selectItem itemLabel="Selecione..." itemValue="" />
+						<f:selectItem
+							itemLabel="01-Operação Tributável com Alíquota Básica"
+							itemValue="01" />
+						<f:selectItem
+							itemLabel="03-Operação Tributável com Alíquota por Und. de Medida de Produto"
+							itemValue="03" />
+						<f:selectItem
+							itemLabel="04-Operação Tributável Monofásica - Revenda a Alíquota Zero"
+							itemValue="04" />
+						<f:selectItem
+							itemLabel="05-Operação Tributável por Substituição Tributária"
+							itemValue="05" />
+						<f:selectItem itemLabel="06-Operação Tributável a Alíquota Zero"
+							itemValue="06" /> -->
+									<f:selectItem
+										itemLabel="02-Operação Tributável com Alíquota Diferenciada"
+										itemValue="02" />
+									<f:selectItem itemLabel="07-Operação Isenta da Contribuição"
+										itemValue="07" />
+									<!-- 					<f:selectItem
+							itemLabel="08-Operação sem Incidência da Contribuição"
+							itemValue="08" />
+						<f:selectItem
+							itemLabel="09-Operação com Suspensão da Contribuição"
+							itemValue="09" />
+						<f:selectItem itemLabel="49-Outras Operações de Saída"
+							itemValue="49" />  -->
+								</p:selectOneMenu>
+
+								<p:outputLabel value="Alíquota Cofins:" for="aliquotaCofins" />
+								<p:inputNumber id="aliquotaCofins" symbol="%" symbolPosition="s"
+									emptyValue="zero" decimalSeparator="," thousandSeparator="."
+									value="#{produtoFormularioBean.produto.aliquotaCofins}" />
+
+
+								<p:outputLabel value="Origem:" for="origem" />
+								<p:selectOneMenu id="origem"
+									value="#{produtoFormularioBean.produto.origem}">
+									<f:selectItem itemLabel="Selecione..." itemValue="" />
+									<f:selectItem
+										itemLabel="0-Nacional, exceto as indicadas nos códigos 3 4 e 5"
+										itemValue="0" />
+									<f:selectItem
+										itemLabel="1-Estrangeira - Importação direta, exceto a indicada no código 6"
+										itemValue="1" />
+									<f:selectItem
+										itemLabel="2-Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7"
+										itemValue="2" />
+									<f:selectItem
+										itemLabel="3-Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%"
+										itemValue="3" />
+									<f:selectItem
+										itemLabel="4-Nacional, cuja produção segue legislação"
+										itemValue="4" />
+									<f:selectItem
+										itemLabel="5-Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%"
+										itemValue="5" />
+									<f:selectItem
+										itemLabel="6-Estrangeira - Importação direta, sem similar nacional, constante em lista de Resolução CAMEX"
+										itemValue="6" />
+									<f:selectItem
+										itemLabel="7-Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista de Resolução CAMEX"
+										itemValue="7" />
+									<f:selectItem
+										itemLabel="8-Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%"
+										itemValue="8" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="CFOP Estadual:" for="cfopEstadual" />
+								<p:selectOneMenu id="cfopEstadual"
+												 value="#{produtoFormularioBean.produto.cfopEstadual}">
+									<f:selectItem itemLabel="Selecione..." />
+									<f:selectItems value="#{produtoFormularioBean.cfopsEstaduais}"
+												   var="dados" itemValue="#{dados}"
+												   itemLabel="#{dados.codigo} - #{dados.cfop}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel value="CFOP Interestadual:" for="cfopInterestadual" />
+								<p:selectOneMenu id="cfopInterestadual"
+												 value="#{produtoFormularioBean.produto.cfopInterestadual}">
+									<f:selectItem itemLabel="Selecione..." />
+									<f:selectItems value="#{produtoFormularioBean.cfopsInterestaduais}"
+												   var="dados" itemValue="#{dados}"
+												   itemLabel="#{dados.codigo} - #{dados.cfop}" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</p:panel>
+					</p:tab>
+				</div>
+
+			</p:tabView>
+			<p:messages autoUpdate="true" closable="true" />
+
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton styleClass="ui-priority-primary"
+						style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+						value="Salvar Cadastro" action="#{produtoFormularioBean.salvar()}"
+						process="@form @this tabView:impostoProduto" update="@form"
+						onclick="PF('salvarCadastro').disable();"
+						widgetVar="salvarCadastro" />
+				</f:facet>
+				<f:facet name="right">
+					<p:button outcome="Produto" icon="fa fa-refresh"
+						styleClass="ui-priority-primary"
+						style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+
+		<p:dialog widgetVar="ncmDialog" modal="true" height="450" width="850"
+			resizable="false">
+			<h:form>
+				<p:dataTable value="#{produtoFormularioBean.ncms}"
+					widgetVar="listaNcms" selectionMode="single"
+					emptyMessage="Nenhum item adicionado" reflow="true" var="dados"
+					id="dadosTabela" multiViewState="true" rowKey="#{dados.id}"
+					selection="#{produtoFormularioBean.produto.ncm}"
+					filteredValue="#{produtoFormularioBean.ncmsFiltro}" rows="10"
+					paginator="true"
+					paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+
+					<f:facet name="header">
+						<div align="left">
+							<p:outputPanel style="aling:left">
+								<p:outputLabel value="Pesquisar: " for="globalFilter" />
+								<p:inputText id="globalFilter"
+									onkeyup="PF('listaNcms').filter()" />
+								<p:button icon="fa fa-refresh" style="float:right"
+									styleClass="ui-priority-primary" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:ajax event="rowSelect" process="dadosTabela"
+						update="dadosTabela" />
+
+					<p:column headerText="NCM" filterBy="#{dados.ncm}"
+						filterStyle="display:none">
+						<h:outputText value="#{dados.ncm}" />
+					</p:column>
+
+					<f:facet name="footer">
+						<div align="left">
+							<p:commandButton value="Selecionar"
+								action="#{produtoFormularioBean.selecionaNcm()}"
+								oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm" />
+						</div>
+					</f:facet>
+
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
+
+
+		<p:dialog widgetVar="cestDialog" modal="true" height="450" width="850"
+			resizable="false">
+			<h:form>
+				<p:dataTable value="#{produtoFormularioBean.cest}"
+							 widgetVar="listaCest" selectionMode="single"
+							 emptyMessage="Nenhum item adicionado" reflow="true" var="dados"
+							 id="dadosTabelaCest" multiViewState="true" rowKey="#{dados.id}"
+							 selection="#{produtoFormularioBean.produto.cest}"
+							 filteredValue="#{produtoFormularioBean.cestFiltro}" rows="10"
+							 paginator="true"
+							 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+							 rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+
+					<f:facet name="header">
+						<div align="left">
+							<p:outputPanel style="aling:left">
+								<p:outputLabel value="Pesquisar: " for="globalFilterCest" />
+								<p:inputText id="globalFilterCest"
+									onkeyup="PF('listaCest').filter()" />
+								<p:button icon="fa fa-refresh" style="float:right"
+									styleClass="ui-priority-primary" />
+							</p:outputPanel>
+						</div>
+					</f:facet>
+
+					<p:ajax event="rowSelect" process="dadosTabelaCest"
+						update="dadosTabelaCest" />
+
+					<p:column headerText="Cest" filterBy="#{dados.cest}"
+						filterStyle="display:none">
+						<h:outputText value="#{dados.cest}" />
+					</p:column>
+
+					<f:facet name="footer">
+						<div align="left">
+							<p:commandButton value="Selecionar" styleClass="ui-priority-primary"
+								action="#{produtoFormularioBean.selecionaCest()}"
+								oncomplete="PF('cestDialog').hide()" update="frm:tabView:cest" />
+						</div>
+					</f:facet>
+
+				</p:dataTable>
+			</h:form>
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

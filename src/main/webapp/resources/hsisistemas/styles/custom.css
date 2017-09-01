@@ -1,0 +1,63 @@
+/* BASE */
+body {
+	margin: 0;
+	font-size: 13px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+/* TABVIEW */
+.ui-tabs .ui-tabs-nav li.ui-tabs-selected a {
+	background-color: #2cb34a;
+	color: #ffffff;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #2cb34a;
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#39b354),to(#2cb34a));
+	background-image: -webkit-linear-gradient(top, #39b354, #2cb34a);
+	background-image: -o-linear-gradient(top, #39b354, #2cb34a);
+	background-image: linear-gradient(to bottom, #39b354, #2cb34a);
+	background-image: -moz-linear-gradient(top, #39b354, #2cb34a);
+	background-repeat: repeat-x;
+	border-color: #2cb34a #2cb34a #1f8035;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff39b354',endColorstr='#ff2cb34a', GradientType=0);
+	filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+	font-weight: bold;
+}
+
+@media ( max-width : 640px) {
+	.ui-tabs.ui-tabs-top>.ui-tabs-nav li {
+		width: 100%;
+	}
+}
+
+/* PANELGRID */
+.ui-panelgrid.panelgrid-noborder .ui-grid-responsive {
+	border: none !important;
+}
+
+@media ( max-width : 640px) {
+	.ui-panelgrid.panelgrid-noborder .ui-grid-responsive .ui-grid-row {
+		border: none;
+	}
+}
+
+/* FileUpload */
+.ui-fileupload-buttonbar.ui-widget-header {
+	border: 0;
+	background: #ffffff;
+	color: #333333;
+	font-weight: bold;
+}
+
+.ui-fileupload-content.ui-widget-content {
+	border: 0;
+}
+
+.ui-fileupload-buttonbar {
+	padding: 0 !important;
+}
+
+.ui-selectonemenu-panel .ui-selectonemenu-filter {
+    width: 100% !important;
+    padding-right: 0 !important;
+}

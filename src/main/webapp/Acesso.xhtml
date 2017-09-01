@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>HSI Automação Comercial</title>
+</h:head>
+
+<f:metadata>
+	<f:viewParam name="dummy" />
+	<f:event listener="#{loginBean.preRender}" type="preRenderView"  />
+</f:metadata>
+
+<h:body>
+	<div id="login-dialog">
+
+
+		<p:dialog id="dialog" minWidth="600" width="370"
+			modal="true" closable="false" position="center" showEffect="slide"
+			draggable="true" resizable="false" visible="true">
+			
+			<f:facet name="header">
+				<img src="/HSI/javax.faces.resource/images/HSI_SISTEMAS.png.xhtml?ln=hsisistemas" title="."/>
+			</f:facet>
+
+			<h:form id="frm" prependId="false">
+
+				<h:panelGrid columns="2" styleClass="grid-login">
+					<p:outputLabel value="Usuário:" />
+					<p:inputText size="30" id="username" label="username" value="#{loginBean.email}" />
+
+					<p:outputLabel value="Senha:" />
+					<p:password size="30" id="password" label="password"/>
+
+
+					<h:panelGroup />
+					<p:commandButton value="Acessar Sistema" styleClass="ui-priority-primary"
+						action="#{loginBean.login}" ajax="false" />
+
+					<p:outputLabel value="" />						
+					<h:link value="Esqueci Minha Senha" outcome="RecuperaSenha" />
+				</h:panelGrid>
+					<p:messages autoUpdate="true" />
+					<p:watermark for="username" value="hsi@hsiautomacao.com.br" id="marcaDaguaEmail" />
+					<p:watermark for="password" value="senha" id="marcaDaguaSenha" />
+
+			</h:form>
+		</p:dialog>
+
+	</div>
+</h:body>
+</html>

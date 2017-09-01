@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+	  xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>HSI Sistemas</title>
+
+	<h:outputStylesheet library="hsisistemas" name="styles/custom.css" />
+	<h:outputStylesheet library="hsisistemas" name="styles/layout.css" />
+	<h:outputStylesheet library="hsisistemas" name="styles/components.css" />
+
+	<h:outputScript target="body" library="hsisistemas" name="javascripts/app.js" />
+	<h:outputScript target="body" library="hsisistemas" name="javascripts/calendar-pt.js" />
+	<h:outputScript target="body" library="hsisistemas" name="javascripts/menu.js" />
+
+
+</h:head>
+
+<h:body>
+
+	<header class="aw-topbar">
+
+
+		<a href="#" class="aw-toggle  js-toggle"> <i class="fa fa-bars fa-2x" /></a>
+
+		<h:graphicImage library="hsisistemas" name="images/logo_hsi.png" />
+
+		<div class="drop aw-preferences-toggle">
+			<ul class="drop_menu">
+				<li><a href='#'><i class="fa fa-cog fa-lg" /> Preferências</a>
+					<ul>
+						<li><a href="/HSI/Sistemas/Empresa.xhtml">Empresa</a></li>
+						<li><a href='/HSI/Sistemas/Usuario.xhtml'>Usuários</a></li>
+						<li><a href='/HSI/Sistemas/Inutilizacao.xhtml'>Inutilização de Numeração</a></li>
+						<li><a href='/HSI/Sistemas/Cfop.xhtml'>CFOP</a></li>
+					</ul>
+				</li>
+				<li><a href='#'><i class="fa fa-user fa-lg" /> Olá #{seguranca.usuarioLogado.usuario.nome}</a>
+					<ul>
+						<li><a href='#'>Alterar Senha</a></li>
+						<li><a href='/HSI/logout'>Sair</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+
+		<div style="display: none;">
+			<h:form styleClass="aw-preferences-toggle" >
+				<p:menuButton menuStyleClass="aw-menu-preferences"
+							  value=" Olá #{seguranca.usuarioLogado.usuario.nome}"
+							  icon="fa fa-user fa-lg" >
+					<p:menuitem value="Alterar Senha" outcome="AlterarSenha" >
+						<f:param name="usuario"
+								 value="#{seguranca.usuarioLogado.usuario.id}" />
+					</p:menuitem>
+					<p:menuitem value="Sair" url="/logout" />
+				</p:menuButton>
+				<p:menuButton style="left: 10px"
+							  menuStyleClass="aw-menu-preferences" icon="fa fa-cog fa-lg" >
+					<p:menuitem value="Empresa" outcome="Empresa" />
+					<p:menuitem value="Usuários" outcome="Usuario" />
+				</p:menuButton>
+			</h:form>
+		</div>
+	</header>
+
+	<aside class="aw-sidebar  js-sidebar">
+		<ui:include src="MenuCliente.xhtml" />
+	</aside>
+
+	<section class="aw-content  js-content">
+		<ui:insert name="content" />
+	</section>
+
+</h:body>
+
+</html>

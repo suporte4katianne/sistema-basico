@@ -1,0 +1,211 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/template/Layout.xhtml">
+
+	<ui:define name="content">
+		<f:metadata>
+			<f:viewAction action="#{empresaFormularioBean.inicializar()}"/>
+			<o:viewParam name="empresa" value="#{empresaFormularioBean.empresa}" converter="#{emitenteConverter}" />
+		</f:metadata>
+		
+		<h:form id="frm">
+			<br />
+			<p:tabView>
+				<p:tab title="Dados do Emitente">
+					<div class="ui-fluid">
+						<p:messages autoUpdate="true" closable="true" />
+						<h:panelGrid id="capaPanel" columns="4" layout="grid"
+							style="width: 90%" columnClasses="rotulo, campo, rotulo">
+
+							<p:outputLabel value="Razão Social: " for="razao" />
+							<p:inputText id="razao" value="#{empresaFormularioBean.empresa.nome}"
+								style="width: 100%" />
+
+							<p:outputLabel value=" CNPJ: " for="cnpj" />
+							<p:inputMask id="cnpj" mask="99.999.999/9999-99"
+								value="#{empresaFormularioBean.empresa.cpfCnpj}" />
+
+
+							<p:outputLabel value="Inscrição Estadual: " for="inscricao" />
+							<p:inputText id="inscricao"
+								value="#{empresaFormularioBean.empresa.inscricaoEstadual}" />
+							<p:outputLabel value=" Enquadramento Fiscal: " for="fiscal" />
+							<p:selectOneMenu id="fiscal"
+								value="#{empresaFormularioBean.empresa.enquadramentoFiscal}">
+								<f:selectItem itemLabel="Micro Empreendedor Individual"
+									itemValue="MEI" />
+								<f:selectItem itemLabel="Simples Nacional" itemValue="Simples" />
+								<f:selectItem itemLabel="Lucro Real" itemValue="Real" />
+								<f:selectItem itemLabel="Lucro Presumido" itemValue="Presuimdo" />
+							</p:selectOneMenu>
+
+
+
+							<p:outputLabel value="CEP:" for="cep" />
+							<p:inputMask id="cep" mask="99999-999"
+								value="#{empresaFormularioBean.empresa.cep}">
+								<p:ajax process="cep" update="estado cidade rua bairro" listener="#{empresaFormularioBean.buscaEndereco()}" />
+							</p:inputMask>
+							
+							<p:ajaxStatus>
+								<f:facet name="start">
+									<i class="fa fa-spinner fa-pulse fa-fw"></i>
+								</f:facet>
+								<f:facet name="complete">
+									<p:outputLabel value="" />
+								</f:facet>
+							</p:ajaxStatus>
+							<p:outputLabel value="" />
+
+							<p:outputLabel value="Estado:" for="estado" />
+							<p:selectOneMenu id="estado" value="#{empresaFormularioBean.empresa.estado}"
+								converter="#{estadoConverter}">
+								<p:ajax event="change" listener="#{empresaFormularioBean.carregaCidades}"
+									process="estado" update="cidade" />
+								<f:selectItems value="#{empresaFormularioBean.estados}" var="dados"
+                                               itemLabel="#{dados.estado}" itemValue="#{dados}" />
+							</p:selectOneMenu>
+							
+							<p:outputLabel value="Cidade:" for="cidade" />
+							<p:selectOneMenu id="cidade" value="#{empresaFormularioBean.empresa.cidade}"
+								converter="#{cidadeConverter}">
+								<f:selectItem itemLabel="Selecione..." />
+								<f:selectItems value="#{empresaFormularioBean.cidades}" var="dados"
+                                               itemLabel="#{dados.cidade}" itemValue="#{dados}" />
+							</p:selectOneMenu>
+
+
+							<p:outputLabel value="Rua:" for="rua" />
+							<p:inputText id="rua" value="#{empresaFormularioBean.empresa.rua}" />
+
+							<p:outputLabel value="Numero" for="numeroEndereco" />
+							<p:inputText id="numeroEndereco"
+								value="#{empresaFormularioBean.empresa.numero}" />
+
+							<p:outputLabel value="Bairro:" for="bairro" />
+							<p:inputText id="bairro" value="#{empresaFormularioBean.empresa.bairro}" />
+
+							<p:outputLabel value="Complemento:" for="complemento" />
+							<p:inputText id="complemento"
+								value="#{empresaFormularioBean.empresa.complemento}" />
+
+
+							<p:outputLabel value="Telefone:" for="telefone" />
+							<p:inputMask id="telefone" mask="(99) 9999-9999"
+								value="#{empresaFormularioBean.empresa.telefone}" />
+
+							<p:outputLabel value="Celular:" for="celular" />
+							<p:inputMask id="celular" mask="(99) 99999-9999"
+                                         value="#{empresaFormularioBean.empresa.celular}" autocomplete="false" />
+
+							<p:outputLabel value="E-mail:" for="email" />
+							<p:inputText id="email" value="#{empresaFormularioBean.empresa.email}" />
+
+							<p:selectBooleanCheckbox itemLabel="Inativo"
+								value="#{empresaFormularioBean.empresa.inativo}" />
+
+							<p:outputLabel value="" />
+
+							<p:outputLabel value="Crédito de ICMS:" for="creditoIcms" />
+							<p:inputNumber symbol="%" symbolPosition="s" emptyValue="zero"
+								decimalSeparator="," thousandSeparator="." id="creditoIcms"
+								value="#{empresaFormularioBean.empresa.creditoIcms}" />
+
+						</h:panelGrid>
+					</div>
+				</p:tab>
+				
+				<p:tab title="Arquivos Externos">
+					<p:messages autoUpdate="true" closable="true" />
+				
+					<h:panelGrid columns="3" style="margin-bottom: 10px">
+						
+						<p:outputLabel for="modeloCertificado" value="Modelo de Certificado:"/>
+						<p:selectOneMenu id="modeloCertificado" value="#{empresaFormularioBean.empresa.tipoCertificado}">
+							<f:selectItem itemLabel="Certificado A1" itemValue="A1"/>
+							<f:selectItem itemLabel="Certificado A3" itemValue="A3"/>
+							<p:ajax process="modeloCertificado" update="senhaCertificado, fileCert" />					
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="" />
+						
+						<p:outputLabel for="senhaCertificado" value="Senha do Certificado Digital:" style="margin-bottom: 15px" />
+						<p:inputText id="senhaCertificado" value="#{empresaFormularioBean.empresa.senhaCertificado}" autocomplete="false"
+                                     disabled="#{empresaFormularioBean.empresa.tipoCertificado == 'A3'}">
+							<p:ajax process="@this"  />
+						</p:inputText>
+						<p:outputLabel
+							value="Status do Certificado: #{empresaFormularioBean.empresa.statusCertificado}"
+							id="statusCertificado" />
+					</h:panelGrid>
+
+					<p:fileUpload fileUploadListener="#{empresaFormularioBean.carregaArquivo}"
+						mode="advanced" dragDropSupport="false" id="fileCert"
+						cancelLabel="Cancelar" label="Certificado Digital" disabled="#{empresaFormularioBean.empresa.tipoCertificado == 'A3'}"
+						sizeLimit="100000" uploadLabel="Importar" process="senhaCertificado" update="dadosCertificadoDigital, statusCertificado"
+						fileLimitMessage="Limite de arquivos excedido!"
+						invalidFileMessage="Selecione apenas arquivos de Certificado Digital (.pfx ou .p12)"
+						allowTypes="/(\.|\/)(pfx|p12)$/" />
+					
+					<h:panelGrid id="dadosCertificadoDigital" columns="5" >
+						<p:outputLabel value="Razão Social: " />
+						<p:inputText value="#{empresaFormularioBean.razaoSocialCertificado}" size="80" style="opacity: 100;" disabled="true"/>
+						
+						<p:outputLabel value="CNPJ: " />
+						<p:inputMask value="#{empresaFormularioBean.cnpjCertificado}" mask="99.999.999/9999-99" size="18" style="opacity: 100;" disabled="true" />
+						
+						<h:panelGroup>
+							<p:outputLabel value="Valido de: " />
+							<p:inputText value="#{empresaFormularioBean.validadeInicialCertificado}" size="15" style="opacity: 100;" disabled="true"/>
+							<p:outputLabel value=" até " />
+							<p:inputText value="#{empresaFormularioBean.validadeFinalCertificado}" size="15" style="opacity: 100;" disabled="true"/>
+						</h:panelGroup>
+					</h:panelGrid>
+					
+					<br />
+					
+					<p:fileUpload mode="advanced" allowTypes="/(\.|\/)(jpe?g|png)$/"
+						id="logoNfe" fileUploadListener="#{empresaFormularioBean.carregaLogo}"
+						sizeLimit="100000000" skinSimple="true" uploadLabel="Importar"
+						fileLimitMessage="Limite de arquivos excedido!"
+						label="Logo da NF-e" cancelLabel="Cancelar"
+						invalidFileMessage="Selecione apenas arquivos no formato (.jpeg ou .pnj)" />
+						
+
+				</p:tab>
+				<p:tab title="Configurações da NF-e">
+					<p:messages autoUpdate="true" closable="true" />
+
+					<div class="ui-fluid">
+						<h:panelGrid style="width: 100%	">
+							<p:outputLabel value="Informação complementar Personalizada:" />
+							<p:inputTextarea value="#{empresaFormularioBean.empresa.infoComplementar}" rows="5" />
+						</h:panelGrid>
+					</div>
+					
+				</p:tab>
+			</p:tabView>
+
+
+
+
+			<p:toolbar>
+				<f:facet name="left">
+					<p:commandButton styleClass="ui-priority-primary" process="@form"
+						style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+						value="Salvar Cadastro" action="#{empresaFormularioBean.salvar()}"
+						onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro" />
+				</f:facet>
+				<f:facet name="right">
+					<p:button outcome="Empresa" icon="fa fa-refresh" styleClass="ui-priority-primary"
+						style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+				</f:facet>
+			</p:toolbar>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
