@@ -3,6 +3,7 @@ package br.com.hsi.nfe.service;
 import br.com.hsi.nfe.model.Numeracao;
 import br.com.hsi.nfe.repository.NumeracaoRepository;
 import br.com.hsi.nfe.util.Transacional;
+import br.com.hsi.nfe.util.exception.NegocioException;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -14,8 +15,16 @@ public class GestaoNumeracao implements Serializable {
     private NumeracaoRepository numeracaoRepository;
 
     @Transacional
-    public void salvar(Numeracao numeraca) {
-        numeracaoRepository.salvar(numeraca);
+    public void salvar(Numeracao numeracao) throws NegocioException {
+        if(numeracao.getId() == null){
+            if(!numeracaoRepository.verificaExistentes(numeracao)){
+                numeracaoRepository.salvar(numeracao);
+            } else {
+                throw new NegocioException("Este valor já existe no banco de dados");
+            }
+        } else {
+            numeracaoRepository.salvar(numeracao);
+        }
     }
 
     @Transacional
@@ -33,4 +42,9 @@ public class GestaoNumeracao implements Serializable {
         return numeracaoRepository.numeracoes();
     }
 
+    @Transacional
+    public void atualizaSequenciaNumeracao(Numeracao numeracao) {
+        numeracao.setNumero( (numeracao.getNumero() + 1) );
+        numeracaoRepository.salvar(numeracao);
+    }
 }

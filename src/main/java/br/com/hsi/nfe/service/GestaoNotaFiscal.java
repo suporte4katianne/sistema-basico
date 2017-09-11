@@ -66,21 +66,6 @@ public class GestaoNotaFiscal implements Serializable{
 	public Inutilizacao inutilizacaoPorId(long id) {
 		return notasFiscais.inutilizacaoPorId(id);
 	}
-	
-
-
-	// ----------- Numeração -----------
-
-	@Transacional
-	public List<Numeracao> listarNumeracoes() {
-		return notasFiscais.listarNumeracoes();
-	}
-
-	@Transacional
-	public void atualizaSequenciaNumeracao(Numeracao numeracao) {
-		numeracao.setNumero( (numeracao.getNumero() + 1) );
-		notasFiscais.atualizaSequenciaNumeracao(numeracao);
-	}
 
 
 

@@ -5,6 +5,7 @@ import br.com.hsi.nfe.model.dados.Cfop;
 import br.com.hsi.nfe.security.Seguranca;
 import br.com.hsi.nfe.service.GestaoEntidade;
 import br.com.hsi.nfe.service.GestaoNotaFiscal;
+import br.com.hsi.nfe.service.GestaoNumeracao;
 import br.com.hsi.nfe.service.GestaoProduto;
 import br.com.hsi.nfe.util.exception.NegocioException;
 import br.com.hsi.nfe.util.jsf.FacesUtil;
@@ -25,42 +26,45 @@ import java.util.List;
 public class NotaFiscalFormularioBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	@Inject
-	private GestaoNotaFiscal gestaoNotaFiscal;
-	@Inject
-	private GestaoEntidade gestaoEntidade;
-	@Inject
-	private HttpServletRequest request;
-	@Inject
-	private GestaoProduto gestaoProduto;
-	@Inject
-	private Seguranca seguranca;
-	
-	private NotaFiscal notaFiscal;
-	private NotaFiscalItem notaFiscalItem;
-	private NotaFiscalReferencia notaFiscalReferencia;
-	private Numeracao numeracao;
-	private List<Numeracao> numeracoes;
-	private List<Entidade> destinatarios;
-	private List<Entidade> destinatariosFiltro;
-	private List<Entidade> transportadoras;
-	private List<Entidade> transportadorasFiltro;
-	private List<Produto> produtos;
-	private List<Produto> produtosFiltro;
-	private List<Cfop> cfops;
 
-	
-	@PostConstruct
+    @Inject
+	private GestaoNotaFiscal gestaoNotaFiscal;
+    @Inject
+    private GestaoNumeracao gestaoNumeracao;
+    @Inject
+	private GestaoEntidade gestaoEntidade;
+    @Inject
+	private HttpServletRequest request;
+    @Inject
+	private GestaoProduto gestaoProduto;
+    @Inject
+	private Seguranca seguranca;
+
+    private NotaFiscal notaFiscal;
+    private NotaFiscalItem notaFiscalItem;
+    private NotaFiscalReferencia notaFiscalReferencia;
+    private Numeracao numeracao;
+    private List<Numeracao> numeracoes;
+    private List<Entidade> destinatarios;
+    private List<Entidade> destinatariosFiltro;
+    private List<Entidade> transportadoras;
+    private List<Entidade> transportadorasFiltro;
+    private List<Produto> produtos;
+    private List<Produto> produtosFiltro;
+    private List<Cfop> cfops;
+
+
+    @PostConstruct
 	public void init(){
 		destinatarios = gestaoEntidade.listarEntidades("C");
 		produtos = gestaoProduto.listarProdutos();
 		transportadoras = gestaoEntidade.listarEntidades("T");
-		numeracoes = gestaoNotaFiscal.listarNumeracoes();
+		numeracoes = gestaoNumeracao.numeracoes();
 	}
 	
 	public void inicializar() {
 		if(notaFiscal == null){
+			System.out.println("Entrei aqui");
 			limpar();
 			carregaDadosDoEmitente();
 
@@ -235,7 +239,7 @@ public class NotaFiscalFormularioBean implements Serializable {
 		gestaoNotaFiscal.salvar(geraChaveAcesso.chave());
 
 		if(notaFiscal.getId() == null){
-			gestaoNotaFiscal.atualizaSequenciaNumeracao(numeracao);
+			gestaoNumeracao.atualizaSequenciaNumeracao(numeracao);
 		}
 
 		FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/NotaFiscal.xhtml");

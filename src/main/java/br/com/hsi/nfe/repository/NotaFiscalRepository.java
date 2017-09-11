@@ -68,9 +68,6 @@ public class NotaFiscalRepository implements Serializable{
 	}
 
 
-
-
-
 	// ----------- Inutilizações -----------
 
 	public void salvarInutilizacao(Inutilizacao inutilizacao) {
@@ -85,22 +82,6 @@ public class NotaFiscalRepository implements Serializable{
 	public Inutilizacao inutilizacaoPorId(long id) {
 		return manager.find(Inutilizacao.class, id);
 	}
-
-
-
-
-	// ----------- Numeração -----------
-
-	public Numeracao atualizaSequenciaNumeracao(Numeracao numeracao) {
-		return manager.merge(numeracao);
-	}
-
-	public List<Numeracao> listarNumeracoes() {
-		TypedQuery<Numeracao> selectQuery = manager.createQuery("FROM Numeracao", Numeracao.class);
-		return selectQuery.getResultList();
-	}
-
-
 
 
 	// ----------- CFOP -----------

@@ -3,6 +3,7 @@ package br.com.hsi.nfe.controller;
 import br.com.hsi.nfe.model.Inutilizacao;
 import br.com.hsi.nfe.model.Numeracao;
 import br.com.hsi.nfe.service.GestaoNotaFiscal;
+import br.com.hsi.nfe.service.GestaoNumeracao;
 import br.com.hsi.nfe.util.exception.TransmissaoException;
 import br.com.hsi.nfe.util.jsf.FacesUtil;
 import br.com.hsi.nfe.util.nfe.inutilizacao.GeraXmlInutilizacao;
@@ -18,6 +19,8 @@ import java.util.List;
 @ViewScoped
 public class InutilizacaoBean implements Serializable {
 
+    @Inject
+    private GestaoNumeracao gestaoNumeracao;
 
     @Inject
     private GestaoNotaFiscal gestaoNotaFiscal;
@@ -25,7 +28,6 @@ public class InutilizacaoBean implements Serializable {
     private List<Inutilizacao> inutilizacoes;
     private List<Inutilizacao> inutilizacoesFiltro;
     private Inutilizacao inutilizacao;
-    private Numeracao numeracao;
 
     @PostConstruct
     public void init(){
@@ -40,13 +42,15 @@ public class InutilizacaoBean implements Serializable {
             inutilizacao = new GeraXmlInutilizacao().inutilizaSequencia(inutilizacao);
             gestaoNotaFiscal.salvarInutilizacao(inutilizacao);
 
-            numeracao = gestaoNotaFiscal.listarNumeracoes().get(0);
-            if(numeracao.getSerie() == inutilizacao.getSerie()){
-                if(numeracao.getNumero() <= inutilizacao.getNumeroFim()){
-                    numeracao.setNumero((inutilizacao.getNumeroFim()));
-                    gestaoNotaFiscal.atualizaSequenciaNumeracao(numeracao);
+            for (Numeracao numeracao: gestaoNumeracao.numeracoes()) {
+                if(numeracao.getSerie() == inutilizacao.getSerie() && numeracao.getModelo().equals("55")){
+                    if(numeracao.getNumero() <= inutilizacao.getNumeroFim()){
+                        numeracao.setNumero((inutilizacao.getNumeroFim()));
+                        gestaoNumeracao.atualizaSequenciaNumeracao(numeracao);
+                    }
                 }
             }
+
 
 
             FacesUtil.addInfoMessage("Sequência de númeração cancelada com sucesso!");

@@ -131,4 +131,6 @@ div.ui-overlaypanel-content {
 	}
 }
 
-
+.ui-datatable-tablewrapper {
+	overflow: visible !important;
+}

@@ -29,14 +29,6 @@ public class NumeracaoBean implements Serializable {
         numeracoes = gestaoNumeracao.numeracoes();
     }
 
-    public GestaoNumeracao getGestaoNumeracao() {
-        return gestaoNumeracao;
-    }
-
-    public void setGestaoNumeracao(GestaoNumeracao gestaoNumeracao) {
-        this.gestaoNumeracao = gestaoNumeracao;
-    }
-
     public List<Numeracao> getNumeracoes() {
         return numeracoes;
     }

@@ -24,9 +24,8 @@ public class NotaFiscalConverter implements Converter{
 			notaFiscal = gestaoNotaFiscal.notaFiscalPorId(Long.parseLong(value));
 			return notaFiscal;
 		} catch (Exception e) {
-
+			return null;
 		}
-		return null;
 	}
 
 	@Override
@@ -34,9 +33,8 @@ public class NotaFiscalConverter implements Converter{
 		try {
 			return String.valueOf(((NotaFiscal) value).getId());
 		} catch (Exception e) {
-
+			return null;
 		}
-		return null;
 	}
 
 
