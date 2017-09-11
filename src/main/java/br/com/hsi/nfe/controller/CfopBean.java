@@ -30,9 +30,6 @@ public class CfopBean implements Serializable {
         cfops = gestaoNotaFiscal.listarCfops();
     }
 
-    public void excluir () {
-
-    }
 
 
     public List<Cfop> getCfops() {

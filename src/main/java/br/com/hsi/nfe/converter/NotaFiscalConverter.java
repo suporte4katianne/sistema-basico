@@ -12,17 +12,17 @@ import javax.inject.Named;
 
 @Named
 @ApplicationScoped
-public class nfeConverter implements Converter{
+public class NotaFiscalConverter implements Converter{
 
 	@Inject
-	private GestaoNotaFiscal gestaoNfe;
+	private GestaoNotaFiscal gestaoNotaFiscal;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		try {
-			NotaFiscal nfe = new NotaFiscal();
-			nfe = gestaoNfe.notaFiscalPorId(Long.parseLong(value));
-			return nfe;
+			NotaFiscal notaFiscal;
+			notaFiscal = gestaoNotaFiscal.notaFiscalPorId(Long.parseLong(value));
+			return notaFiscal;
 		} catch (Exception e) {
 
 		}

@@ -11,7 +11,7 @@
 			<f:viewAction action="#{notaFiscalFormularioBean.inicializar()}" />
 			<o:viewParam name="notaFiscal"
 				value="#{notaFiscalFormularioBean.notaFiscal}"
-				converter="#{nfeConverter}" />
+				converter="#{NotaFiscalConverter}" />
 		</f:metadata>
 
 		<h:form id="formNfe">
@@ -68,7 +68,7 @@
 						<h:panelGrid columns="6" columnClasses="rotulo, campo">
 
 							<p:outputLabel for="modelo" value="Modelo:" rendered="#{notaFiscalFormularioBean.alteracao()}" />
-							<p:selectOneMenu id="modelo" converter="#{numercaoConverter}"
+							<p:selectOneMenu id="modelo" converter="#{numeracaoConverter}"
 											 rendered="#{notaFiscalFormularioBean.alteracao()}"
 											 value="#{notaFiscalFormularioBean.numeracao}">
 								<f:selectItem itemValue="" itemLabel="Selecione..." />

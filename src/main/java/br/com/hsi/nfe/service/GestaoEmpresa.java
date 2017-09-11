@@ -57,15 +57,5 @@ public class GestaoEmpresa implements Serializable{
 	public Empresa emitentePorId(Long id){
 		return empresas.emitentePorId(id);
 	}
-
-	@Transacional
-	public Numeracao numeracaoPorId(Long id){
-		return empresas.numeracaoPorId(id);
-	}
-
-	@Transacional
-	public void atualizarNumeracao(Numeracao numeracao){
-		empresas.atualizarNumeracao(numeracao); 
-	}
 	
 }

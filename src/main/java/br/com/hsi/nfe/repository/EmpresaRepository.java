@@ -40,13 +40,6 @@ public class EmpresaRepository implements Serializable {
 		selectQuery.setParameter("cnpj", cnpj);
         return selectQuery.getResultList().size() != 0;
 	}
-	
-	public Numeracao numeracaoPorId(Long id){
-		return manager.find(Numeracao.class, id);
-	}
 
-	public void atualizarNumeracao(Numeracao numeracaoNota) {
-		manager.merge(numeracaoNota);
-	}
 
 }

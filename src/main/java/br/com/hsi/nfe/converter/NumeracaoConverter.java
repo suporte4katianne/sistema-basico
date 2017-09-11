@@ -1,7 +1,7 @@
 package br.com.hsi.nfe.converter;
 
 import br.com.hsi.nfe.model.Numeracao;
-import br.com.hsi.nfe.service.GestaoEmpresa;
+import br.com.hsi.nfe.service.GestaoNumeracao;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.component.UIComponent;
@@ -12,16 +12,16 @@ import javax.inject.Named;
 
 @Named
 @ApplicationScoped
-public class NumercaoConverter implements Converter {
+public class NumeracaoConverter implements Converter {
 	
 	@Inject
-	private GestaoEmpresa gestaoEmpresa;
+	private GestaoNumeracao gestaoNumeracao;
 
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		try {
-			Numeracao numeracao = new Numeracao();
-			numeracao = gestaoEmpresa.numeracaoPorId(Long.parseLong(value));
+			Numeracao numeracao;
+			numeracao = gestaoNumeracao.numeracaoPorId(Long.parseLong(value));
 			return numeracao;
 		} catch (Exception e) {
 			return null;
