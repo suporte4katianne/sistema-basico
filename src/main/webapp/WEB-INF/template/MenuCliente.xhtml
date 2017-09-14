@@ -9,9 +9,15 @@
 			<li class="#{view.viewId == '/Sistemas/Cliente.xhtml' ? 'is-selected' : ''}">
 				<h:link outcome="Cliente" ><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
 			</li>
+
+            <li class="#{view.viewId == '/Sistemas/Fornecedor.xhtml' ? 'is-selected' : ''}">
+                <h:link outcome="Fornecedor" ><i class="fa  fa-fw  fa-user"></i>Fornecedores</h:link>
+            </li>
+
 			<li class="#{view.viewId == '/Sistemas/Transportadora.xhtml' ? 'is-selected' : ''}">
 				<h:link outcome="Transportadora" ><i class="fa  fa-fw  fa-user"></i>Transportadoras</h:link>
 			</li>
+
 			<li class="#{view.viewId == '/Sistemas/Produto.xhtml' ? 'is-selected' : ''}" >
 				<h:link outcome="Produto" ><i class="fa  fa-fw  fa-cube"></i>Produtos</h:link>
 			</li>
@@ -22,8 +28,40 @@
 	<div class="panel">
 		<ul>
 			<li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
-				<h:link outcome="NotaFiscal" ><i class="fa  fa-fw  fa-file-text"></i>Notas Fiscais</h:link>
+				<h:link outcome="Saida" ><i class="fa  fa-fw  fa-calculator"></i>Orçamentos</h:link>
 			</li>
 		</ul>
+
+
 	</div>
+
+	<button class="accordion">Estoque</button>
+	<div class="panel">
+
+        <ul>
+            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+                <h:link outcome="Saida" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Saidas</h:link>
+            </li>
+        </ul>
+
+		<ul>
+			<li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+				<h:link outcome="Entrada" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Entradas</h:link>
+			</li>
+		</ul>
+
+        <ul>
+            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+                <h:link  ><i class="fa  fa-fw fa-pencil-square-o"></i>Ajustes de Estoque</h:link>
+            </li>
+        </ul>
+
+        <ul>
+            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+                <h:link  ><i class="fa  fa-fw  fa-exchange"></i>Extrato</h:link>
+            </li>
+        </ul>
+	</div>
+
+
 </ui:composition>

@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+    <ui:define name="content">
+        <h:form>
+            <br />
+            <p:messages closable="true" autoUpdate="true" />
+            <p:dataTable value="#{entidadeBean.entidades}" widgetVar="listaFornecedores"
+                         selectionMode="single" emptyMessage="Nenhum item adicionado"
+                         reflow="true" var="dados" id="dadosTabela" multiViewState="true"
+                         rowKey="#{dados.id}" selection="#{entidadeBean.entidade}" filteredValue="#{entidadeBean.entidadesFiltro}"
+                         rows="20" paginator="true"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="20,45,60"
+                         paginatorPosition="top">
+
+                <f:facet name="header">
+                    <div align="left">
+                        <p:outputPanel style="aling:left">
+                            <p:outputLabel value="Pesquisar: " for="globalFilter"/>
+                            <p:inputText id="globalFilter"  onkeyup="PF('listaFornecedores').filter()" />
+                            <p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+                        </p:outputPanel>
+                    </div>
+                </f:facet>
+
+                <p:ajax event="rowSelect" process="dadosTabela" update="dadosTabela" />
+
+
+                <p:column headerText="Razão Social" style="width:30%" filterBy="#{dados.nome}" filterStyle="display:none">
+                    <h:outputText value="#{dados.nome}" />
+                </p:column>
+
+                <p:column headerText="CPF/CNPJ" style="width:10%" filterBy="#{dados.cpfCnpj}" filterStyle="display:none">
+                    <h:outputText value="#{dados.cpfCnpj}" />
+                </p:column>
+
+                <p:column headerText="Cidade" style="width:10%" filterBy="#{dados.cidade.cidade}" filterStyle="display:none">
+                    <h:outputText value="#{dados.cidade.cidade}" />
+                </p:column>
+
+                <p:column headerText="Estado" style="width:5%" filterBy="#{dados.estado.siglaEstado}" filterStyle="display:none">
+                    <h:outputText value="#{dados.estado.siglaEstado}" />
+                </p:column>
+
+                <p:column headerText="Telefone" style="width:10%" filterBy="#{dados.telefone}" filterStyle="display:none">
+                    <h:outputText value="#{dados.telefone}" />
+                </p:column>
+
+                <f:facet name="footer">
+                    <div align="left">
+                        <p:button outcome="FornecedorFormulario"
+                                  styleClass="ui-priority-primary" value="Incluir Cadastro" />
+
+                        <p:button outcome="FornecedorFormulario" disabled="#{entidadeBean.entidade == null}"
+                                  value="Alterar Cadastro" styleClass="ui-priority-primary">
+                            <f:param name="entidade" value="#{entidadeBean.entidade.id}" />
+                        </p:button>
+
+                        <p:commandButton value="Excluir Cadastro" process="dadosTabela"
+                                         styleClass="ui-priority-primary" disabled="#{entidadeBean.entidade == null}"
+                                         action="#{entidadeBean.excluir()}" global="false" />
+                    </div>
+                </f:facet>
+
+            </p:dataTable>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,249 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+				xmlns:h="http://xmlns.jcp.org/jsf/html"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				template="/WEB-INF/template/Layout.xhtml">
+
+
+	<ui:define name="content">
+		<h:form id="frm">
+			<br />
+			<p:messages autoUpdate="true" id="statusMensagem" closable="true" />
+
+			<p:dataTable value="#{notaFiscalBean.nfes}" widgetVar="listaNfes"
+						 selectionMode="single" emptyMessage="Nenhum item adicionado"
+						 reflow="true" var="dados" id="tabelaNfe" multiViewState="true"
+						 rowKey="#{dados.id}" selection="#{notaFiscalBean.notaFiscal}"
+						 filteredValue="#{notaFiscalBean.nfesFiltro}" rows="15"
+						 paginator="true"
+						 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						 rowsPerPageTemplate="15,45,60" paginatorPosition="top">
+
+				<f:facet name="header">
+					<div align="left">
+						<p:outputPanel style="aling:lef; vertical-align:middle;">
+							<p:outputLabel value="Pesquisar: " for="globalFilter" />
+							<p:inputText id="globalFilter" onkeyup="PF('listaNfes').filter()" />
+							<p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+
+							<p:ajaxStatus styleClass="ajax-status">
+								<f:facet name="start">
+									<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
+								</f:facet>
+								<f:facet name="complete">
+									<h:outputText value="" />
+								</f:facet>
+							</p:ajaxStatus>
+						</p:outputPanel>
+					</div>
+				</f:facet>
+
+
+				<p:ajax event="rowSelect" process="tabelaNfe" update="tabelaNfe" />
+
+				<p:column headerText="Numero" style="width:10%" filterBy="#{dados.numeroNota}" filterStyle="display:none">
+					<h:outputText value="#{dados.numeroNota}" />
+				</p:column>
+
+				<p:column headerText="Serie" style="width:10%" filterBy="#{dados.serieNota}" filterStyle="display:none">
+					<h:outputText value="#{dados.serieNota}" />
+				</p:column>
+
+				<p:column headerText="Emissão" style="width:10%" filterBy="#{dados.dataHoraEmissao}" filterStyle="display:none">
+					<h:outputText value="#{dados.dataHoraEmissao}" >
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</h:outputText>
+				</p:column>
+
+				<p:column headerText="Destinatário" style="width:30%" filterBy="#{dados.nomeDestinatario}" filterStyle="display:none">
+					<h:outputText value="#{dados.nomeDestinatario}" />
+				</p:column>
+
+				<p:column headerText="Valor" style="width:10%" filterBy="#{dados.valorTotalNfe}" filterStyle="display:none">
+					<h:outputText value="R$ #{dados.valorTotalNfe}" />
+				</p:column>
+
+				<p:column headerText="Status" style="width:30%" filterBy="#{dados.mensagemRetorno}" filterStyle="display:none">
+					<h:outputText value="#{dados.mensagemRetorno}" />
+				</p:column>
+
+
+				<f:facet name="footer">
+					<div align="left">
+						<p:button id="incluirNota" value="Incluir Nota Fiscal" disabled="#{notaFiscalBean.teste()}"
+								  outcome="SaidaFormulario" styleClass="ui-priority-primary" widgetVar="incluirNota"/>
+
+						<p:commandButton value="Transmitir" widgetVar="transmitir"
+										 onclick="PF('transmitir').disable();PF('incluirNota').disable();PF('alterarNota').disable()"
+										 oncomplete="PF('transmitir').enable();PF('incluirNota').enable();PF('alterarNota').enable()"
+										 styleClass="ui-priority-primary" actionListener="#{notaFiscalBean.transmitirNfe()}" update="@form"
+										 disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C') or notaFiscalBean.notaFiscal == null}" >
+						</p:commandButton>
+
+						<p:button value="Alterar Nota Fiscal" widgetVar="alterarNota"
+								  outcome="SaidaFormulario" styleClass="ui-priority-primary"
+								  disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C') or notaFiscalBean.notaFiscal == null}" >
+							<f:param name="notaFiscal" value="#{notaFiscalBean.notaFiscal.id}" />
+						</p:button>
+
+						<p:button value="Excluir Nota Fiscal" widgetVar="excluirNota"
+								  styleClass="ui-priority-primary" actionListener="#{notaFiscalBean.excluirNotaFiscal()}" update="@form"
+								  disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C')
+								  or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" >
+						</p:button>
+
+						<p:commandButton value="Cancelar NF-e Autorizada"
+										 action="#{notaFiscalBean.cancelarNotaFiscal()}" widgetVar="cancelarNota"
+										 styleClass="ui-priority-primary" update="@form"
+										 disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" />
+
+						<p:commandButton id="imprimirDanfe" value="Imprimir DANFE"
+										 styleClass="ui-priority-primary" widgetVar="imprimirDanfe"
+										 disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}"
+										 ajax="false" process="imprimirDanfe"
+										 action="#{notaFiscalBean.imprirmirDanfe()}" />
+
+						<p:menuButton value="Outros" widgetVar="outros"
+									  disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" >
+							<p:menuitem value="Enviar NF-e por E-mail"
+										onclick="PF('enviarNfeEmail').show(); return false" process="@this" />
+							<p:menuitem value="Enviar Lote de XML para o contador"
+										onclick="PF('enviarLoteXmlEmail').show(); return false"
+										process="@this" />
+							<p:menuitem value="Carta de Correção" process="@this"
+										onclick="PF('cartaDeCorrecaoDialog').show(); return false" />
+							<p:menuitem value="Inutilização de documentos"/>
+						</p:menuButton>
+
+						<p:button value="Exportar" style="float:right" styleClass="ui-priority-primary"
+								  onclick="PF('exportarDados').show(); return false" />
+
+					</div>
+				</f:facet>
+			</p:dataTable>
+
+			<!-- ************************************************** Dialogs ************************************************** -->
+
+
+			<p:dialog widgetVar="exportarDados" header="Exportar Dados"
+					  draggable="false" resizable="false" modal="true">
+				<h:panelGrid style="width: 100%;">
+					<h:commandLink>
+						<p:commandButton icon="fa fa-fw fa-file-pdf-o" value="para PDF"
+										 style="width: 100%;" />
+						<p:dataExporter type="pdf" target="tabelaNfe" fileName="notas_pdf"
+										pageOnly="true" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:commandButton icon="fa fa-fw fa-file-excel-o"
+										 value="para EXCEL" style="width: 100%;" />
+						<p:dataExporter type="xls" target="tabelaNfe"
+										fileName="notas_excel" pageOnly="true" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:commandButton icon="fa fa-fw fa-file-text-o" value="para CSV"
+										 style="width: 100%;" />
+						<p:dataExporter type="csv" target="tabelaNfe" fileName="notas_csv"
+										pageOnly="true" />
+					</h:commandLink>
+					<h:commandLink>
+						<p:commandButton icon="fa fa-fw fa-file-code-o" value="para XML"
+										 style="width: 100%;" />
+						<p:dataExporter type="xml" target="tabelaNfe" fileName="notas_xml"
+										pageOnly="true" />
+					</h:commandLink>
+				</h:panelGrid>
+			</p:dialog>
+
+			<p:dialog id="enviarEmailDialog" widgetVar="enviarNfeEmail"
+					  header="Enviar NF-e por E-mail" minWidth="600" width="600"
+					  draggable="false" resizable="false" modal="true" height="410">
+				<p:outputLabel
+						value="* Informe os emails separados por ponto e Vírgula (;)"
+						style="font-size:10px" />
+				<h:panelGrid columns="2" columnClasses="rotuloEmail, campo"
+							 style="width: 98%;">
+					<p:outputLabel value="Enviar para:" for="emails" />
+					<p:inputText id="emails" style="width: 100%;"
+								 value="#{notaFiscalBean.listaDeDestinatarios}" />
+				</h:panelGrid>
+				<h:panelGrid style="width: 98%;">
+					<p:inputTextarea id="corpoEmail" style="width: 100%;"
+									 autoResize="true" rows="19" value="#{notaFiscalBean.textoPadrao}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="2">
+					<p:commandButton process="enviarEmailDialog" value="Enviar"
+									 action="#{notaFiscalBean.enviarNotaPorEmail()}"
+									 oncomplete="PF('enviarEmail').hide();" />
+
+					<p:ajaxStatus>
+						<f:facet name="start">
+							<i class="fa fa-spinner fa-pulse fa-fw"></i>
+						</f:facet>
+						<f:facet name="complete">
+							<h:outputText value="" />
+						</f:facet>
+					</p:ajaxStatus>
+
+				</h:panelGrid>
+			</p:dialog>
+
+			<p:dialog id="enviarLoteXml" widgetVar="enviarLoteXmlEmail"
+					  header="Enviar Lote de XML por E-mail" minWidth="600" width="600"
+					  draggable="false" resizable="false" modal="true" height="120">
+
+				<p:outputLabel
+						value="* Informe os emails separados por ponto e Vírgula (;)"
+						style="font-size:10px" />
+				<h:panelGrid columns="2" columnClasses="rotuloEmail, campo"
+							 style="width: 98%;">
+					<p:outputLabel value="Enviar para:" for="emailContador" />
+					<p:inputText id="emailContador" style="width: 100%;"
+								 value="#{notaFiscalBean.listaDeDestinatarios}" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="4">
+					<p:outputLabel value="Período Inicial:" />
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR"
+								value="#{notaFiscalBean.dataInicio}" />
+					<p:outputLabel value="Período Final:" />
+					<p:calendar pattern="dd/MM/yyyy" locale="pt_BR"
+								value="#{notaFiscalBean.dataFim}" />
+				</h:panelGrid>
+
+
+				<h:panelGrid>
+					<p:commandButton value="Enviar" process="enviarLoteXml" styleClass="ui-priority-primary"
+									 action="#{notaFiscalBean.enviarLoteXmlPorEmail()}"
+									 oncomplete="PF('enviarLoteXmlEmail').hide()" />
+					<p:ajaxStatus>
+						<f:facet name="start">
+							<i class="fa fa-spinner fa-pulse fa-fw"></i>
+						</f:facet>
+						<f:facet name="complete">
+							<h:outputText value="" />
+						</f:facet>
+					</p:ajaxStatus>
+
+				</h:panelGrid>
+			</p:dialog>
+
+			<p:dialog id="cartaDeCorrecaoDialog" widgetVar="cartaDeCorrecaoDialog"
+					  header="Enviar NF-e por E-mail" minWidth="600" width="600"
+					  draggable="false" resizable="false" modal="true" height="410">
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Correção:" />
+					<p:inputTextarea value="#{notaFiscalBean.correcao}" />
+					<p:outputLabel value="" />
+					<p:commandButton value="Corrigir documento" styleClass="ui-priority-primary"
+									 action="#{notaFiscalBean.cartaDeCorrecao()}" process="cartaDeCorrecaoDialog"
+									 oncomplete="PF('cartaDeCorrecaoDialog').hide()"/>
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+
+</ui:composition>

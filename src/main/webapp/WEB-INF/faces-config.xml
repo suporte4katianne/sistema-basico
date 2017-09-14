@@ -36,6 +36,16 @@
             <from-outcome>TransportadoraFormulario</from-outcome>
             <to-view-id>/Sistemas/TransportadoraFormulario.xhtml</to-view-id>
         </navigation-case>
+
+        <navigation-case>
+            <from-outcome>Fornecedor</from-outcome>
+            <to-view-id>/Sistemas/Fornecedor.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>FornecedorFormulario</from-outcome>
+            <to-view-id>/Sistemas/FornecedorFormulario.xhtml</to-view-id>
+        </navigation-case>
+
         <navigation-case>
             <from-outcome>Servico</from-outcome>
             <to-view-id>/Sistemas/Servico.xhtml</to-view-id>
@@ -48,14 +58,25 @@
             <from-outcome>ProdutoFormulario</from-outcome>
             <to-view-id>/Sistemas/ProdutoFormulario.xhtml</to-view-id>
         </navigation-case>
+
         <navigation-case>
-            <from-outcome>NotaFiscalFormulario</from-outcome>
-            <to-view-id>/Sistemas/NotaFiscalFormulario.xhtml</to-view-id>
+            <from-outcome>SaidaFormulario</from-outcome>
+            <to-view-id>/Sistemas/SaidaFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
-            <from-outcome>NotaFiscal</from-outcome>
-            <to-view-id>/Sistemas/NotaFiscal.xhtml</to-view-id>
+            <from-outcome>Saida</from-outcome>
+            <to-view-id>/Sistemas/Saida.xhtml</to-view-id>
         </navigation-case>
+
+        <navigation-case>
+            <from-outcome>EntradaFormulario</from-outcome>
+            <to-view-id>/Sistemas/EntradaFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Entrada</from-outcome>
+            <to-view-id>/Sistemas/Entrada.xhtml</to-view-id>
+        </navigation-case>
+
         <navigation-case>
             <from-outcome>Relatorio</from-outcome>
             <to-view-id>/Sistemas/Relatorio.xhtml</to-view-id>
@@ -84,6 +105,15 @@
         <navigation-case>
             <from-outcome>CfopFormulario</from-outcome>
             <to-view-id>/Sistemas/CfopFormulario.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>UnidadeMedida</from-outcome>
+            <to-view-id>/Sistemas/UnidadeMedida.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>UnidadeMedidaFormulario</from-outcome>
+            <to-view-id>/Sistemas/UnidadeMedidaFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
