@@ -1,6 +1,7 @@
 package br.com.hsi.service;
 
 import br.com.hsi.model.Embalagem;
+import br.com.hsi.model.Movimentacao;
 import br.com.hsi.model.Produto;
 import br.com.hsi.model.dados.Ncm;
 import br.com.hsi.model.dados.UnidadeMedida;
@@ -18,38 +19,61 @@ public class GestaoProduto implements Serializable{
 	
 	@Inject
 	private ProdutoRepository produtos;
-	
+
+	//Produto
 	
 	@Transacional
 	public void salvar(Produto produto) {
 		produtos.salvar(produto);
 	}
-	
+
 	@Transacional
 	public void excluir(Produto produto){
 		produtos.exclui(produto);
 	}
-	
+
 	@Transacional
 	public List<Produto> listarProdutos(){
 		return produtos.listarProdutos();
-	}
-	
-	@Transacional
-	public List<UnidadeMedida> listaUnidadeMedida(){
-		return produtos.listaUnidadeMedida();
 	}
 
 	@Transacional
 	public Produto produtoPorId(Long idProduto) {
 		return produtos.produtoPorId(idProduto);
 	}
-	
+
 	@Transacional
 	public int pesquisaUltimoCodigo() {
 		return produtos.pesquisaUltimoCodigo();
 	}
-	
+
+	//Embalagem
+
+	@Transacional
+	public Embalagem embalagemPorId(long id) {
+		return produtos.embalagemPorId(id);
+	}
+
+
+	// Unidade de Medida
+
+	@Transacional
+	public List<UnidadeMedida> listaUnidadeMedida(){
+		return produtos.listaUnidadeMedida();
+	}
+
+	@Transacional
+	public UnidadeMedida unidadeMedidaPorId(long id) {
+		return produtos.unidadeMedidaPorId(id);
+	}
+
+	@Transacional
+	public void salvarUnidadeMedida(UnidadeMedida unidadeMedida) {
+		produtos.salvarUnidadeMedida(unidadeMedida);
+	}
+
+	// Ncm e Cest
+
 	@Transacional
 	public Ncm ncmPorId(long idNcm) {
 		return produtos.ncmPorId(idNcm);
@@ -65,18 +89,12 @@ public class GestaoProduto implements Serializable{
 		return produtos.listarCest();
 	}
 
-	@Transacional
-    public Embalagem embalagemPorId(long id) {
-		return produtos.embalagemPorId(id);
-    }
+	// Movimentacao
 
 	@Transacional
-	public UnidadeMedida unidadeMedidaPorId(long id) {
-		return produtos.unidadeMedidaPorId(id);
+	public List<Movimentacao> movimentacoesPorProduto(Produto produto) {
+		return produtos.movimentacoesPorProduto(produto);
 	}
 
-	@Transacional
-	public void salvarUnidadeMedida(UnidadeMedida unidadeMedida) {
-		produtos.salvarUnidadeMedida(unidadeMedida);
-	}
+
 }

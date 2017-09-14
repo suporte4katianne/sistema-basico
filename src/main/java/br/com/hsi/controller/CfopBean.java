@@ -24,9 +24,7 @@ public class CfopBean implements Serializable {
 
     @PostConstruct
     public void init(){
-        if(cfopsFiltro != null){
-            cfopsFiltro.clear();
-        }
+
         cfops = gestaoNotaFiscal.listarCfops();
     }
 

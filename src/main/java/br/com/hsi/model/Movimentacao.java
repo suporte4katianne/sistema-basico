@@ -2,6 +2,7 @@ package br.com.hsi.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "movimentacao")
@@ -22,6 +23,9 @@ public class Movimentacao {
     @Column(name = "numero_documento")
     private String numeroDocumento;
 
+    @Column
+    private Date data;
+
     @ManyToOne
     @JoinColumn(name = "id_produto")
     private Produto produto;
@@ -33,21 +37,20 @@ public class Movimentacao {
     // Documentos
 
     @OneToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "id_notaFiscalItem")
+    @JoinColumn(name = "id_nota_fiscal_item")
     private NotaFiscalItem notaFiscalItem;
 
-    /*
-
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_ajuste_estoque_item")
     private AjusteEstoqueItem ajusteEstoqueItem;
 
-     */
 
 
     public Movimentacao() {
 
     }
 
-    public Movimentacao(String tipoMovimentacao, BigDecimal qunatidade, String tipoDocumento, String numeroDocumento, Produto produto, Empresa empresa, NotaFiscalItem notaFiscalItem) {
+    public Movimentacao(String tipoMovimentacao, BigDecimal qunatidade, String tipoDocumento, String numeroDocumento, Produto produto, Empresa empresa, NotaFiscalItem notaFiscalItem, Date data) {
         this.tipoMovimentacao = tipoMovimentacao;
         this.qunatidade = qunatidade;
         this.tipoDocumento = tipoDocumento;
@@ -55,6 +58,18 @@ public class Movimentacao {
         this.produto = produto;
         this.empresa = empresa;
         this.notaFiscalItem = notaFiscalItem;
+        this.data = data;
+    }
+
+    public Movimentacao(String tipoMovimentacao, BigDecimal qunatidade, String tipoDocumento, String numeroDocumento, Produto produto, Empresa empresa, AjusteEstoqueItem ajusteEstoqueItem, Date data) {
+        this.tipoMovimentacao = tipoMovimentacao;
+        this.qunatidade = qunatidade;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.produto = produto;
+        this.empresa = empresa;
+        this.ajusteEstoqueItem = ajusteEstoqueItem;
+        this.data = data;
     }
 
     public Long getId() {
@@ -119,6 +134,22 @@ public class Movimentacao {
 
     public void setNotaFiscalItem(NotaFiscalItem notaFiscalItem) {
         this.notaFiscalItem = notaFiscalItem;
+    }
+
+    public AjusteEstoqueItem getAjusteEstoqueItem() {
+        return ajusteEstoqueItem;
+    }
+
+    public void setAjusteEstoqueItem(AjusteEstoqueItem ajusteEstoqueItem) {
+        this.ajusteEstoqueItem = ajusteEstoqueItem;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 }
 

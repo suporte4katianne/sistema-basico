@@ -78,6 +78,15 @@
         </navigation-case>
 
         <navigation-case>
+            <from-outcome>AjusteEstoqueFormulario</from-outcome>
+            <to-view-id>/Sistemas/AjusteEstoqueFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>AjusteEstoque</from-outcome>
+            <to-view-id>/Sistemas/AjusteEstoque.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
             <from-outcome>Relatorio</from-outcome>
             <to-view-id>/Sistemas/Relatorio.xhtml</to-view-id>
         </navigation-case>
@@ -105,6 +114,11 @@
         <navigation-case>
             <from-outcome>CfopFormulario</from-outcome>
             <to-view-id>/Sistemas/CfopFormulario.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>Extrato</from-outcome>
+            <to-view-id>/Sistemas/Extrato.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>

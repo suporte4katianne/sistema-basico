@@ -27,7 +27,7 @@
 	<button class="accordion">Atendimento</button>
 	<div class="panel">
 		<ul>
-			<li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+			<li class="#{view.viewId == '/Sistemas/Orcamento.xhtml' ? 'is-selected' : ''}" >
 				<h:link outcome="Saida" ><i class="fa  fa-fw  fa-calculator"></i>Orçamentos</h:link>
 			</li>
 		</ul>
@@ -39,26 +39,26 @@
 	<div class="panel">
 
         <ul>
-            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+            <li class="#{view.viewId == '/Sistemas/Saida.xhtml' ? 'is-selected' : ''}" >
                 <h:link outcome="Saida" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Saidas</h:link>
             </li>
         </ul>
 
 		<ul>
-			<li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
+			<li class="#{view.viewId == '/Sistemas/Entrada.xhtml' ? 'is-selected' : ''}" >
 				<h:link outcome="Entrada" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Entradas</h:link>
 			</li>
 		</ul>
 
         <ul>
-            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
-                <h:link  ><i class="fa  fa-fw fa-pencil-square-o"></i>Ajustes de Estoque</h:link>
+            <li class="#{view.viewId == '/Sistemas/AjusteEstoque.xhtml' ? 'is-selected' : ''}" >
+                <h:link outcome="AjusteEstoque" ><i class="fa  fa-fw fa-pencil-square-o"></i>Ajustes de Estoque</h:link>
             </li>
         </ul>
 
         <ul>
-            <li class="#{view.viewId == '/Sistemas/NotaFiscal.xhtml' ? 'is-selected' : ''}" >
-                <h:link  ><i class="fa  fa-fw  fa-exchange"></i>Extrato</h:link>
+            <li class="#{view.viewId == '/Sistemas/Extrato.xhtml' ? 'is-selected' : ''}" >
+                <h:link outcome="Extrato" ><i class="fa  fa-fw  fa-exchange"></i>Extrato</h:link>
             </li>
         </ul>
 	</div>

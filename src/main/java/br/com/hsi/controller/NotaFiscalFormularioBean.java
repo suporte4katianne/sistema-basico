@@ -19,6 +19,7 @@ import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Named
@@ -206,7 +207,7 @@ public class NotaFiscalFormularioBean implements Serializable {
 	public void incluirProduto() {
         notaFiscalItem.setMovimentacao(new Movimentacao(tipoMovimentacao(), notaFiscalItem.getQuantidade(),
                 "Nota Fiscal", String.valueOf(notaFiscal.getNumeroNota()), notaFiscalItem.getProduto(),
-                notaFiscal.getEmpresa(), notaFiscalItem));
+                notaFiscal.getEmpresa(), notaFiscalItem, new Date(System.currentTimeMillis())));
 		notaFiscalItem.setValorTotal(notaFiscalItem.getQuantidade().multiply(notaFiscalItem.getValorUnitario()));		
 		notaFiscal.setValorTotalDesconto(notaFiscal.getValorTotalDesconto().add(notaFiscalItem.getDesconto()));
 		notaFiscal.setValorTotalProdutos(notaFiscal.getValorTotalProdutos().add(notaFiscalItem.getValorTotal()));
