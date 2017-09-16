@@ -50,11 +50,6 @@
                         <p:button outcome="AjusteEstoqueFormulario"
                                   styleClass="ui-priority-primary" value="Incluir Cadastro"/>
 
-                        <p:button outcome="AjusteEstoqueFormulario" disabled="#{ajusteEstoqueBean.ajusteEstoque == null}"
-                                  value="Alterar Cadastro" styleClass="ui-priority-primary">
-                            <f:param name="ajusteEstoque" value="#{ajusteEstoqueBean.ajusteEstoque.id}"/>
-                        </p:button>
-
                         <p:commandButton disabled="#{ajusteEstoqueBean.ajusteEstoque == null}"
                                          actionListener="#{ajusteEstoqueBean.excluir()}"
                                          value="Excluir" styleClass="ui-priority-primary" />

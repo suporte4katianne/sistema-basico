@@ -103,6 +103,7 @@ public class ProdutoFormularioBean implements Serializable {
     }
 
     public void incluirEmbalagem() {
+		embalagem.setProduto(produto);
         produto.getEmbalagens().add(embalagem);
         embalagem = new Embalagem();
     }

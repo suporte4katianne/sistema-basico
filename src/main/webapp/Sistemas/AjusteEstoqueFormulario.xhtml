@@ -44,7 +44,7 @@
                     <br />
 
                     <p:panel id="painelAjusteEstoqueItem" header="Produtos do Ajuste">
-                        <h:panelGrid id="dadosAjusteEstoqueItem" columns="4" style="width: 90%"
+                        <h:panelGrid id="dadosAjusteEstoqueItem" columns="5" style="width: 90%"
                                      columnClasses="rotulo, campo, rotulo, campo" >
                             <p:outputLabel value="Produto:" for="produto" />
                             <h:panelGroup style="display:flex;">
@@ -59,8 +59,8 @@
                             <p:outputLabel value="Quantidade:" for="quantidade" />
                             <p:inputText id="quantidade" value="#{ajusteEstoqueFormularioBean.ajusteEstoqueItem.quantidade}" />
 
-                            <p:outputLabel value="" />
-                            <p:commandButton value="Incluir Produto" style="width: 40%" styleClass="ui-priority-primary"
+
+                            <p:commandButton value="Incluir" styleClass="ui-priority-primary"
                                              process="frm:dadosAjusteEstoqueItem, dadosTabelaProduto"
                                              update="frm:dadosAjusteEstoqueItem,dadosTabelaProduto"
                                              action="#{ajusteEstoqueFormularioBean.incluirProduto()}" />
@@ -72,15 +72,15 @@
                                      var="dados" style="margin-top: 15px" id="dadosTabelaProduto"
                                      rowKey="#{dados.codProd}">
 
-                            <p:column headerText="Nome" style="width:60%">
+                            <p:column headerText="Descrição" style="width:60%">
                                 <h:outputText value="#{dados.produto.descricao}" />
                             </p:column>
 
-                            <p:column headerText="Qunatidade" style="width:10%">
+                            <p:column headerText="Quantidade" style="width:10%">
                                 <h:outputText value="#{dados.quantidade}" />
                             </p:column>
 
-                            <p:column headerText="unidade" style="width:10%">
+                            <p:column headerText="Unidade" style="width:10%">
                                 <h:outputText value="#{dados.produto.unidadeMedida}" />
                             </p:column>
 

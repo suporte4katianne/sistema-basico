@@ -47,6 +47,7 @@ public class NotaFiscalFormularioBean implements Serializable {
     private NotaFiscalItem notaFiscalItem;
     private NotaFiscalReferencia notaFiscalReferencia;
     private Numeracao numeracao;
+    private Embalagem embalagem;
     private List<Numeracao> numeracoes;
     private List<Entidade> entidades;
     private List<Entidade> entidadesFiltro;
@@ -174,7 +175,20 @@ public class NotaFiscalFormularioBean implements Serializable {
 	
 	public void carregaDadosDoProduto() {
 
-        notaFiscalItem.setCfop(notaFiscal.getCfop().getCodigo());
+	    if(notaFiscal.getOperacao().equals("1")){
+            if(notaFiscalItem.getProduto().getCfopEstadual() != null ){
+                notaFiscalItem.setCfop(notaFiscalItem.getProduto().getCodigoCfopEstadual());
+            } else {
+                notaFiscalItem.setCfop(notaFiscal.getCfop().getCodigo());
+            }
+        } else {
+            if(notaFiscalItem.getProduto().getCfopInterestadual() != null ){
+                notaFiscalItem.setCfop(notaFiscalItem.getProduto().getCodigoCfopInterestadual());
+            } else {
+                notaFiscalItem.setCfop(notaFiscal.getCfop().getCodigo());
+            }
+        }
+
         notaFiscalItem.setCodProd(String.valueOf(notaFiscalItem.getProduto().getCodigo()));
         notaFiscalItem.setNomeProduto(notaFiscalItem.getProduto().getDescricao());
         notaFiscalItem.setNcm(notaFiscalItem.getProduto().getCodigo_ncm());
@@ -195,6 +209,26 @@ public class NotaFiscalFormularioBean implements Serializable {
 
 	}
 
+	public void carregaDadosDoProdutoEntrada() {
+	    if(notaFiscal.getCfop() != null) {
+            notaFiscalItem.setCfop(notaFiscal.getCfop().getCodigo());
+        }
+        notaFiscalItem.setCodProd(String.valueOf(notaFiscalItem.getProduto().getCodigo()));
+        notaFiscalItem.setNomeProduto(notaFiscalItem.getProduto().getDescricao());
+        notaFiscalItem.setNcm(notaFiscalItem.getProduto().getCodigo_ncm());
+        notaFiscalItem.setCest(notaFiscalItem.getProduto().getCodigo_cest());
+        notaFiscalItem.setCodigoBarras(notaFiscalItem.getProduto().getCodigoBrras());
+        notaFiscalItem.setCompoeValorNota("1");
+
+        //Origem, CST ICMS
+
+        //Valor ICMS ST, VALOR BASE ICMS ST
+
+        // CST PIS/COFINS, ALIQUOTA PIS COFINS
+
+        notaFiscalItem.setNfe(notaFiscal);
+    }
+
 	private String tipoMovimentacao() {
 		if(notaFiscal.getTipoNf() == "0"){
 			return "E";
@@ -208,6 +242,7 @@ public class NotaFiscalFormularioBean implements Serializable {
         notaFiscalItem.setMovimentacao(new Movimentacao(tipoMovimentacao(), notaFiscalItem.getQuantidade(),
                 "Nota Fiscal", String.valueOf(notaFiscal.getNumeroNota()), notaFiscalItem.getProduto(),
                 notaFiscal.getEmpresa(), notaFiscalItem, new Date(System.currentTimeMillis())));
+
 		notaFiscalItem.setValorTotal(notaFiscalItem.getQuantidade().multiply(notaFiscalItem.getValorUnitario()));		
 		notaFiscal.setValorTotalDesconto(notaFiscal.getValorTotalDesconto().add(notaFiscalItem.getDesconto()));
 		notaFiscal.setValorTotalProdutos(notaFiscal.getValorTotalProdutos().add(notaFiscalItem.getValorTotal()));
@@ -270,7 +305,12 @@ public class NotaFiscalFormularioBean implements Serializable {
 	public void salvar() throws NegocioException, IOException{
 		contadorProduto();
 		GeraChaveAcesso geraChaveAcesso = new GeraChaveAcesso(notaFiscal);
-		gestaoNotaFiscal.salvar(geraChaveAcesso.chave());
+
+		if(facesContext.getViewRoot().getViewId().contains("Saida")) {
+			gestaoNotaFiscal.salvar(geraChaveAcesso.chave());
+		} else {
+			gestaoNotaFiscal.salvar(notaFiscal);
+		}
 
 		if(notaFiscal.getId() == null){
 		    if(numeracao != null){
@@ -413,4 +453,12 @@ public class NotaFiscalFormularioBean implements Serializable {
 	public void setNumeracao(Numeracao numeracao){
 		this.numeracao = numeracao;
 	}
+
+    public Embalagem getEmbalagem() {
+        return embalagem;
+    }
+
+    public void setEmbalagem(Embalagem embalagem) {
+        this.embalagem = embalagem;
+    }
 }

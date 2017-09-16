@@ -27,7 +27,7 @@
                                              value="#{notaFiscalFormularioBean.notaFiscal.operacao}"
                                              required="true">
                                 <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                <f:selectItem itemLabel="1 - Operação Interna" itemValue="1" />
+                                <f:selectItem itemLabel="1 - Operação Estadual" itemValue="1" />
                                 <f:selectItem itemLabel="2 - Operação Interestadual"
                                               itemValue="2" />
                                 <p:ajax process="opercao" update="cfopCabecalho" event="change"
@@ -48,7 +48,7 @@
 
                         </h:panelGrid>
 
-                        <h:panelGrid columns="2" columnClasses="rotulo">
+                        <h:panelGrid columns="4" columnClasses="rotulo">
                             <p:outputLabel for="cfopCabecalho" value="Natureza Operação:" />
                             <p:selectOneMenu id="cfopCabecalho" converter="#{cfopConverter}"
                                              value="#{notaFiscalFormularioBean.notaFiscal.cfop}" required="true">
@@ -90,6 +90,11 @@
                             <p:inputText id="numero"
                                          value="#{notaFiscalFormularioBean.notaFiscal.numeroNota}" />
 
+                        </h:panelGrid>
+                        <h:panelGrid id="chaveAcesso" style="width: 90%" rendered="#{notaFiscalFormularioBean.emissao().equals('false')}"
+                                     columns="2" columnClasses="rotulo">
+                            <p:outputLabel for="chaveDeAcesso" value="Chave de Acesso:" />
+                            <p:inputText id="chaveDeAcesso" style="width: 90%" value="#{notaFiscalFormularioBean.notaFiscal.chaveAcesso}" />
                         </h:panelGrid>
 
 
@@ -222,47 +227,50 @@
                     <div class="ui-fluid">
                         <p:panel header="Dados do Produto" id="dadosProduto">
                             <p:messages />
-                            <h:panelGrid columns="8" style="width:90%;text-align:right"
+                            <h:panelGrid columns="6" style="width:90%;text-align:right"
                                          columnClasses="rotulo">
                                 <p:outputLabel value="Produto:" for="produto" />
                                 <h:panelGroup style="display:flex;">
-                                    <p:inputText
-                                            value="#{notaFiscalFormularioBean.notaFiscalItem.produto.descricao}"
+                                    <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.produto.descricao}"
                                             style="opacity: 1;" id="produto" disabled="true" />
                                     <p:commandButton icon="fa fa-search"
                                                      styleClass="ui-priority-primary" style="max-width: 30px"
                                                      type="button" onclick="PF('produtoDialog').show();" />
                                 </h:panelGroup>
 
-                                <p:outputLabel value="Quantidade:" for="quantidade" />
-                                <p:inputText
-                                        value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}"
-                                        id="quantidade" />
+                                <p:outputLabel value="Embalagem:" for="embalagem" />
+                                <p:selectOneMenu value="#{notaFiscalFormularioBean.embalagem}" id="embalagem"
+                                                 converter="#{embalagemConverter}">
+
+                                    <f:selectItem itemValue="" itemLabel="#{notaFiscalFormularioBean.notaFiscalItem.produto.unidadeMedida}" />
+
+                                    <f:selectItems value="#{notaFiscalFormularioBean.notaFiscalItem.produto.embalagens}"
+                                                   var="embalagem" itemValue="#{embalagem}"
+                                                   itemLabel="#{embalagem.unidadeMedida.codigo}(#{embalagem.fatorConversao})" />
+                                </p:selectOneMenu>
+                                <p:outputLabel value="CFOP: " for="cfopProduto" />
+                                <p:selectOneMenu id="cfopProduto" converter="#{cfopConverter}"
+                                                 value="#{notaFiscalFormularioBean.notaFiscal.cfop}" required="true">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{notaFiscalFormularioBean.cfops}"
+                                                   var="dados" itemValue="#{dados}"
+                                                   itemLabel="#{dados.codigo}" />
+                                </p:selectOneMenu>
+
 
                                 <p:outputLabel value="Valor:" for="valor" />
-                                <p:inputText
-                                        value="#{notaFiscalFormularioBean.notaFiscalItem.valorUnitario}"
-                                        id="valor" />
+                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.valorUnitario}" id="valor" />
+
+                                <p:outputLabel value="Quantidade:" for="quantidade" />
+                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}" id="quantidade" />
 
                                 <p:outputLabel value="Desconto:" for="desconto" />
-                                <p:inputText
-                                        value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}"
-                                        id="desconto" />
+                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto" />
                             </h:panelGrid>
 
                             <h:panelGrid columns="2" style="width:90%"
                                          columnClasses="rotulo, campo">
-                                <p:outputLabel value="CFOP: " for="cfopProduto" />
-                                <p:selectOneMenu id="cfopProduto" converter="#{cfopConverter}"
-                                                 value="#{notaFiscalFormularioBean.notaFiscal.cfop}" required="true">
 
-                                    <f:selectItem itemLabel="Selecione..." />
-
-                                    <f:selectItems value="#{notaFiscalFormularioBean.cfops}"
-                                                   var="dados" itemValue="#{dados}"
-                                                   itemLabel="#{dados.codigo} - #{dados.cfop}" />
-
-                                </p:selectOneMenu>
 
                                 <p:outputLabel value="" />
 
@@ -714,7 +722,7 @@
                         <div align="left">
                             <p:commandButton value="Selecionar"
                                              styleClass="ui-priority-primary"
-                                             action="#{notaFiscalFormularioBean.carregaDadosDoProduto()}"
+                                             action="#{notaFiscalFormularioBean.carregaDadosDoProdutoEntrada()}"
                                              oncomplete="PF('produtoDialog').hide()"
                                              update="formNfe:tabView:dadosProduto" />
                         </div>
