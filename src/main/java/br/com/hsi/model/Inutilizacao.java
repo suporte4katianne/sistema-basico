@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "inutilacao")
+@Table(name = "inutilizacao")
 public class Inutilizacao {
 
     @Id

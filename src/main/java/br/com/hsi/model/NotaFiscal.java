@@ -314,12 +314,12 @@ public class NotaFiscal {
     
     // Informações Complementares
    
-    @Column(name = "dados_complementares")
+    @Column(name = "dados_complementares", columnDefinition = "TEXT")
     private String informacoesComplementare;
     
     // Produtos
     
-    @OneToMany(mappedBy = "nfe", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "notaFiscal", cascade = CascadeType.ALL, orphanRemoval = true)
 	@LazyCollection(LazyCollectionOption.FALSE)
     private List<NotaFiscalItem> notaFiscalItens = new ArrayList<>();
     

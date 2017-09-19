@@ -7,6 +7,10 @@ import br.com.hsi.model.dados.Cest;
 import br.com.hsi.model.dados.Cfop;
 import br.com.hsi.model.dados.Ncm;
 import br.com.hsi.model.dados.UnidadeMedida;
+import br.com.hsi.model.dados.text.CSTICMS;
+import br.com.hsi.model.dados.text.CSTIPI;
+import br.com.hsi.model.dados.text.CSTPISCOFINS;
+import br.com.hsi.model.dados.text.Origem;
 import br.com.hsi.service.GestaoNotaFiscal;
 import br.com.hsi.service.GestaoProduto;
 import br.com.hsi.util.jsf.FacesUtil;
@@ -15,6 +19,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.PersistenceException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -65,8 +70,12 @@ public class ProdutoFormularioBean implements Serializable {
 		if(produto.getCfopInterestadual() != null){
 			produto.setCodigoCfopInterestadual(produto.getCfopInterestadual().getCodigo());
 		}
-		gestaoProduto.salvar(produto);
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Produto.xhtml");
+		try{
+			gestaoProduto.salvar(produto);
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Produto.xhtml");
+		}catch (PersistenceException e) {
+			FacesUtil.addErrorMessage("Este valor já existe no banco de dados");
+		}
 	}
 
     public void geraEAN() {
@@ -216,4 +225,23 @@ public class ProdutoFormularioBean implements Serializable {
     public void setEmbalagem(Embalagem embalagem) {
         this.embalagem = embalagem;
     }
+
+	public Origem[] getOrigens() {
+		return Origem.values();
+	}
+
+	public CSTICMS[] getCsts() {
+		return CSTICMS.csosns();
+	}
+
+	public CSTPISCOFINS[] getCstsPisCofins() {
+		return CSTPISCOFINS.saidaPisCofins();
+	}
+
+	public CSTIPI[] getCstsIpi() {
+		return CSTIPI.saidaIpi();
+	}
+
+
+
 }

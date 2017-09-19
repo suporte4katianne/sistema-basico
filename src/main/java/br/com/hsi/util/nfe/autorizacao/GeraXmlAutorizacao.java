@@ -122,7 +122,7 @@ public class GeraXmlAutorizacao {
 	private static Ide dadosDeIdentificacao() {
 		LocalDateTime now = LocalDateTime.now();
 
-		String hora = now.withNano(0) + "-02:00";
+		String hora = now.withNano(0) + "-03:00";
 
 		notaFiscal.setDataHoraEmissao(Date.from(now.withNano(0).atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
 		notaFiscal.setDataHoraSaidaEntrada(Date.from(now.withNano(0).atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
@@ -325,116 +325,112 @@ public class GeraXmlAutorizacao {
 			ICMS icms = new ICMS();
 
 
-			if (notaFiscalItem.getCst().equals("101")) {
+			if (notaFiscalItem.getCst().getCodigo().equals("101")) {
 				ICMSSN101 icmssn101 = new ICMSSN101();
-				icmssn101.setOrig(notaFiscalItem.getOrigem());
-				icmssn101.setCSOSN(notaFiscalItem.getCst());
+				icmssn101.setOrig(notaFiscalItem.getOrigem().getCodigo());
+				icmssn101.setCSOSN(notaFiscalItem.getCst().getCodigo());
 				icmssn101.setPCredSN(notaFiscal.getCreditoIcms());
 				Double creditoIcms = Double.parseDouble(notaFiscal.getCreditoIcms());
 				Double valorTotalItem = notaFiscalItem.getValorTotal().doubleValue();
 				icmssn101.setVCredICMSSN(String.format("%.2f", ((valorTotalItem * (creditoIcms / 100)))).replaceAll(",", "\\."));
 				icms.setICMSSN101(icmssn101);
-			} else if (notaFiscalItem.getCst().equals("102")) {
+			} else if (notaFiscalItem.getCst().getCodigo().equals("102")) {
 				ICMSSN102 icmssn102 = new ICMSSN102();
-				icmssn102.setOrig(notaFiscalItem.getOrigem());
-				icmssn102.setCSOSN(notaFiscalItem.getCst());
+				icmssn102.setOrig(notaFiscalItem.getOrigem().getCodigo());
+				icmssn102.setCSOSN(notaFiscalItem.getCst().getCodigo());
 				icms.setICMSSN102(icmssn102);
-			} else if (notaFiscalItem.getCst().equals("103")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("103")){
 
 
-			} else if (notaFiscalItem.getCst().equals("201")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("201")){
 
 
-			} else if (notaFiscalItem.getCst().equals("202")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("202")){
 
 
-			} else if (notaFiscalItem.getCst().equals("203")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("203")){
 
 
-			} else if (notaFiscalItem.getCst().equals("300")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("300")){
 
 
-			} else if (notaFiscalItem.getCst().equals("400")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("400")){
 
 
-			} else if (notaFiscalItem.getCst().equals("500")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("500")){
 				ICMSSN500 icmssn500 = new ICMSSN500();
-				icmssn500.setCSOSN(notaFiscalItem.getCst());
-				icmssn500.setOrig(notaFiscalItem.getOrigem());
+				icmssn500.setCSOSN(notaFiscalItem.getCst().getCodigo());
+				icmssn500.setOrig(notaFiscalItem.getOrigem().getCodigo());
 				icmssn500.setVBCSTRet("0.00");
 				icmssn500.setVICMSSTRet("0.00");
 				icms.setICMSSN500(icmssn500);
-			} else if (notaFiscalItem.getCst().equals("900")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("900")){
 
 
-			} else if (notaFiscalItem.getCst().equals("00")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("00")){
 
 
-			} else if (notaFiscalItem.getCst().equals("10")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("10")){
 
 
-			} else if (notaFiscalItem.getCst().equals("20")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("20")){
 
 
-			} else if (notaFiscalItem.getCst().equals("30")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("30")){
 
 
-			} else if (notaFiscalItem.getCst().equals("40")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("40")){
 
 
-			} else if (notaFiscalItem.getCst().equals("41")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("41")){
 
 
-			} else if (notaFiscalItem.getCst().equals("50")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("50")){
 
 
-			} else if (notaFiscalItem.getCst().equals("51")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("51")){
 				ICMS51 icms51 = new ICMS51();
-				icms51.setOrig(notaFiscalItem.getOrigem());
-				icms51.setCST(notaFiscalItem.getCst());
+				icms51.setOrig(notaFiscalItem.getOrigem().getCodigo());
+				icms51.setCST(notaFiscalItem.getCst().getCodigo());
 				icms51.setModBC("0");
 				icms.setICMS51(icms51);
-			} else if (notaFiscalItem.getCst().equals("60")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("60")){
 
 
-			} else if (notaFiscalItem.getCst().equals("70")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("70")){
 
 
-			} else if (notaFiscalItem.getCst().equals("90")){
+			} else if (notaFiscalItem.getCst().getCodigo().equals("90")){
 
 
 			}
 
-
-
-
-
 			PIS pis = new PIS();
 			COFINS cofins = new COFINS();
 
-			if(notaFiscalItem.getCstPis().equals("02")){
+			if(notaFiscalItem.getCstPisCofins().getCodigo().equals("02")){
 				PISAliq pisaliq = new PISAliq();
-				pisaliq.setCST(notaFiscalItem.getCstPis());
+				pisaliq.setCST(notaFiscalItem.getCstPisCofins().getCodigo());
 				pisaliq.setVBC(String.valueOf(notaFiscal.getValorTotalNfe()));
 				pisaliq.setPPIS(notaFiscalItem.getAliquotaPis().toString());
 				pisaliq.setVPIS(notaFiscalItem.getValorTotalPis().toString());
 				pis.setPISAliq(pisaliq);
 			}else{
 				PISNT pisnt = new PISNT();
-				pisnt.setCST(notaFiscalItem.getCstPis());
+				pisnt.setCST(notaFiscalItem.getCstPisCofins().getCodigo());
 				pis.setPISNT(pisnt);
 			}
 
-			if(notaFiscalItem.getCstPis().equals("02")){
+			if(notaFiscalItem.getCstPisCofins().getCodigo().equals("02")){
 				COFINSAliq cofinsaliq = new COFINSAliq();
-				cofinsaliq.setCST(notaFiscalItem.getCstPis());
+				cofinsaliq.setCST(notaFiscalItem.getCstPisCofins().getCodigo());
 				cofinsaliq.setVBC(String.valueOf(notaFiscal.getValorTotalNfe()));
 				cofinsaliq.setPCOFINS(notaFiscalItem.getAliquotaPis().toString());
 				cofinsaliq.setVCOFINS(notaFiscalItem.getValorTotalPis().toString());
 				cofins.setCOFINSAliq(cofinsaliq);
 			}else{
 				COFINSNT cofinsnt = new COFINSNT();
-				cofinsnt.setCST(notaFiscalItem.getCstCofins());
+				cofinsnt.setCST(notaFiscalItem.getCstPisCofins().getCodigo());
 				cofins.setCOFINSNT(cofinsnt);
 			}
 

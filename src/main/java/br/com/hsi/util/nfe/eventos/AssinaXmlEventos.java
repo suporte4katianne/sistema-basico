@@ -83,41 +83,11 @@ public class AssinaXmlEventos {
         return assinaCancelametoInutilizacao(xml, caminhoDoCertificadoDoCliente, senhaDoCertificadoDoCliente, INFCANC);
     }
 
-    public String assinaCancelametoInutilizacao(String xml, String certificado, String senha, String tagCancInut) throws Exception {
-        Document document = documentFactory(xml);
-
-        XMLSignatureFactory signatureFactory = XMLSignatureFactory
-                .getInstance("DOM");
-        ArrayList<Transform> transformList = signatureFactory(signatureFactory);
-        loadCertificates(certificado, senha, signatureFactory);
-
-        NodeList elements = document.getElementsByTagName(tagCancInut);
-        org.w3c.dom.Element el = (org.w3c.dom.Element) elements.item(0);
-        String id = el.getAttribute("Id");
-        el.setIdAttribute("Id", true);
-
-        Reference ref = signatureFactory.newReference("#" + id,
-                signatureFactory.newDigestMethod(DigestMethod.SHA1, null),
-                transformList, null, null);
-
-        SignedInfo si = signatureFactory.newSignedInfo(signatureFactory
-                        .newCanonicalizationMethod(CanonicalizationMethod.INCLUSIVE,
-                                (C14NMethodParameterSpec) null), signatureFactory
-                        .newSignatureMethod(SignatureMethod.RSA_SHA1, null),
-                Collections.singletonList(ref));
-
-        XMLSignature signature = signatureFactory.newXMLSignature(si, keyInfo);
-
-        DOMSignContext dsc = new DOMSignContext(privateKey, document.getFirstChild());
-        signature.sign(dsc);
-
-        return outputXML(document);
-    }
-
 //    public String assinaCancelametoInutilizacao(String xml, String certificado, String senha, String tagCancInut) throws Exception {
 //        Document document = documentFactory(xml);
 //
-//        XMLSignatureFactory signatureFactory = XMLSignatureFactory.getInstance("DOM");
+//        XMLSignatureFactory signatureFactory = XMLSignatureFactory
+//                .getInstance("DOM");
 //        ArrayList<Transform> transformList = signatureFactory(signatureFactory);
 //        loadCertificates(certificado, senha, signatureFactory);
 //
@@ -138,11 +108,41 @@ public class AssinaXmlEventos {
 //
 //        XMLSignature signature = signatureFactory.newXMLSignature(si, keyInfo);
 //
-//        DOMSignContext dsc = new DOMSignContext(privateKey, document.getElementsByTagNameNS("http://www.portalfiscal.inf.br/nfe", "evento").item(0));
+//        DOMSignContext dsc = new DOMSignContext(privateKey, document.getFirstChild());
 //        signature.sign(dsc);
 //
 //        return outputXML(document);
 //    }
+
+    public String assinaCancelametoInutilizacao(String xml, String certificado, String senha, String tagCancInut) throws Exception {
+        Document document = documentFactory(xml);
+
+        XMLSignatureFactory signatureFactory = XMLSignatureFactory.getInstance("DOM");
+        ArrayList<Transform> transformList = signatureFactory(signatureFactory);
+        loadCertificates(certificado, senha, signatureFactory);
+
+        NodeList elements = document.getElementsByTagName(tagCancInut);
+        org.w3c.dom.Element el = (org.w3c.dom.Element) elements.item(0);
+        String id = el.getAttribute("Id");
+        el.setIdAttribute("Id", true);
+
+        Reference ref = signatureFactory.newReference("#" + id,
+                signatureFactory.newDigestMethod(DigestMethod.SHA1, null),
+                transformList, null, null);
+
+        SignedInfo si = signatureFactory.newSignedInfo(signatureFactory
+                        .newCanonicalizationMethod(CanonicalizationMethod.INCLUSIVE,
+                                (C14NMethodParameterSpec) null), signatureFactory
+                        .newSignatureMethod(SignatureMethod.RSA_SHA1, null),
+                Collections.singletonList(ref));
+
+        XMLSignature signature = signatureFactory.newXMLSignature(si, keyInfo);
+
+        DOMSignContext dsc = new DOMSignContext(privateKey, document.getElementsByTagNameNS("http://www.portalfiscal.inf.br/nfe", "evento").item(0));
+        signature.sign(dsc);
+
+        return outputXML(document);
+    }
 
     private ArrayList<Transform> signatureFactory(XMLSignatureFactory signatureFactory)
             throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {

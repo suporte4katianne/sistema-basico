@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 public class GeraXmlEventos {
     private static NotaFiscal notaFiscal;
-    //private static final int SSL_PORT = 443;
 
     public GeraXmlEventos(NotaFiscal notaFiscal) {
         GeraXmlEventos.notaFiscal = notaFiscal;
@@ -20,14 +19,17 @@ public class GeraXmlEventos {
 
     public NotaFiscal gerarCancelamento(String motivo) throws IOException, InterruptedException {
         LocalDateTime now = LocalDateTime.now();
+
         String Id = "ID110111" + (notaFiscal.getChaveAcesso().replaceAll("NFe", "")) + "01";
         String estadoEmpresa = notaFiscal.getCodIbgeEstadoEmpresa();
         String cnpj = notaFiscal.getCnpjEmpresa()
                 .replaceAll("\\.", "")
-                .replaceAll("-", "").replaceAll("/", "");
+                .replaceAll("-", "")
+                .replaceAll("/", "");
         String chave = (notaFiscal.getChaveAcesso().replaceAll("NFe", ""));
-        String dataHoraEvento = now.withNano(0)+"-02:00";
+        String dataHoraEvento = now.withNano(0)+"-03:00";
         String protocoloNfe = notaFiscal.getProtocoloAutorizacao();
+
         StringBuilder xml = new StringBuilder();
         xml.append("<envEvento xmlns=\"http://www.portalfiscal.inf.br/nfe\" versao=\"1.00\">")
                 .append("<idLote>1</idLote>")
@@ -63,7 +65,7 @@ public class GeraXmlEventos {
                 .replaceAll("\\.", "")
                 .replaceAll("-", "").replaceAll("/", "");
         String chave = (notaFiscal.getChaveAcesso().replaceAll("NFe", ""));
-        String dataHoraEvento = now.withNano(0)+"-02:00";
+        String dataHoraEvento = now.withNano(0)+"-03:00";
         String condicoesDeUso = "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15" +
                 " de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal," +
                 " desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base " +

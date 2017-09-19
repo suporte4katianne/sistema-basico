@@ -35,8 +35,9 @@
                             </p:selectOneMenu>
 
 
-                            <p:outputLabel for="tipoNota" value="Movimentação:" />
+                            <p:outputLabel  for="tipoNota" value="Movimentação:" rendered="false" />
                             <p:selectOneMenu id="tipoNota" disabled="true" style="opacity: 0.8"
+                                             rendered="false"
                                              value="#{notaFiscalFormularioBean.notaFiscal.tipoNf}"
                                              required="true">
                                 <f:selectItem
@@ -50,7 +51,7 @@
 
                         <h:panelGrid columns="4" columnClasses="rotulo">
                             <p:outputLabel for="cfopCabecalho" value="Natureza Operação:" />
-                            <p:selectOneMenu id="cfopCabecalho" converter="#{cfopConverter}"
+                            <p:selectOneMenu id="cfopCabecalho" converter="#{cfopConverter}" autoWidth="false"
                                              value="#{notaFiscalFormularioBean.notaFiscal.cfop}" required="true">
                                 <f:selectItem itemLabel="Selecione..." />
                                 <f:selectItems value="#{notaFiscalFormularioBean.cfops}"
@@ -83,11 +84,11 @@
                             </p:selectOneMenu>
 
                             <p:outputLabel for="serie" value="Serie:" />
-                            <p:inputText id="serie"
+                            <p:inputText id="serie" style="width: 50px;"
                                          value="#{notaFiscalFormularioBean.notaFiscal.serieNota}" />
 
-                            <p:outputLabel for="numero" value="Numero da Nota:" />
-                            <p:inputText id="numero"
+                            <p:outputLabel for="numero" value="Número:" />
+                            <p:inputText id="numero" style="width: 50px;"
                                          value="#{notaFiscalFormularioBean.notaFiscal.numeroNota}" />
 
                         </h:panelGrid>
@@ -227,8 +228,7 @@
                     <div class="ui-fluid">
                         <p:panel header="Dados do Produto" id="dadosProduto">
                             <p:messages />
-                            <h:panelGrid columns="6" style="width:90%;text-align:right"
-                                         columnClasses="rotulo">
+                            <h:panelGrid columns="6" style="width:90%;text-align:right">
                                 <p:outputLabel value="Produto:" for="produto" />
                                 <h:panelGroup style="display:flex;">
                                     <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.produto.descricao}"
@@ -240,7 +240,7 @@
 
                                 <p:outputLabel value="Embalagem:" for="embalagem" />
                                 <p:selectOneMenu value="#{notaFiscalFormularioBean.embalagem}" id="embalagem"
-                                                 converter="#{embalagemConverter}">
+                                                 converter="#{embalagemConverter}" >
 
                                     <f:selectItem itemValue="" itemLabel="#{notaFiscalFormularioBean.notaFiscalItem.produto.unidadeMedida}" />
 
@@ -268,13 +268,79 @@
                                 <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto" />
                             </h:panelGrid>
 
-                            <h:panelGrid columns="2" style="width:90%"
-                                         columnClasses="rotulo, campo">
+                            <br />
+
+                            <p:panel header="Imposto" >
+                                <h:panelGrid columns="14" style="width:100%" >
+                                    <p:outputLabel value="Origem:" for="origem" />
+                                    <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.origem}" id="origem" >
+                                        <f:selectItems value="#{notaFiscalFormularioBean.origens}" var="origem"
+                                                       itemValue="#{origem}" itemLabel="#{origem.codigo}" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="CST:" for="cst" />
+                                    <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.cst}" id="cst" >
+                                        <f:selectItems value="#{notaFiscalFormularioBean.csts}" var="CSTICMS"
+                                                       itemValue="#{CSTICMS}" itemLabel="#{CSTICMS.codigo}" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="Red. Base:" for="reducaoBase" />
+                                    <p:inputNumber placeholder="%" id="reducaoBase"
+                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.reducaoBaseIcms}"
+                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="Base ICMS:" for="baseIcms" />
+                                    <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcms}" id="baseIcms"
+                                                   placeholder="R$"
+                                                 symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="ICMS:" for="icms"/>
+                                    <p:inputNumber placeholder="%" id="icms"
+                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.icms}"
+                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="Base ICMS ST:" for="baseIcmsSt" />
+                                    <p:inputNumber id="baseIcmsSt" value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcmsSt}"
+                                                   placeholder="R$"
+                                                 symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="ICMS ST:" for="icmsSt" />
+                                    <p:inputNumber placeholder="%" id="icmsSt"
+                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.icmsSt}"
+                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="4" >
+                                    <p:outputLabel value="CST IPI:" for="cstIPI"/>
+                                    <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.cstIpi}" id="cstIPI" >
+                                        <f:selectItems value="#{notaFiscalFormularioBean.cstsIpi}" var="cstIpi"
+                                                       itemValue="#{cstIpi}" itemLabel="#{cstIpi.codigo}" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="% IPI:" for="ipi" />
+                                    <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.aliquotaIpi}" id="ipi"
+                                                   placeholder="%"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                </h:panelGrid>
+
+                                <h:panelGrid columns="6"  >
+                                    <p:outputLabel value="CST Pis/Cofins:" for="cstPisCofins"/>
+                                    <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.cstPisCofins}" id="cstPisCofins" >
+                                        <f:selectItems value="#{notaFiscalFormularioBean.cstsPisCofins}" var="cstPisCofins"
+                                                       itemValue="#{cstPisCofins}" itemLabel="#{cstPisCofins.codigo}" />
+                                    </p:selectOneMenu>
+                                    <p:outputLabel value="% Pis:" for="pis" />
+                                    <p:inputNumber id="pis" value="#{notaFiscalFormularioBean.notaFiscalItem.aliquotaPis}"
+                                                   placeholder="%"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="% Cofins:" for="cofins" />
+                                    <p:inputNumber id="cofins" value="#{notaFiscalFormularioBean.notaFiscalItem.aliquitaCofins}"
+                                                   placeholder="%"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                </h:panelGrid>
 
 
-                                <p:outputLabel value="" />
+                            </p:panel>
 
-                                <p:commandButton value="Incluir Produto" style="width:20%"
+                            <br />
+
+
+
+                            <h:panelGrid columns="1" style="width:10%">
+                                <p:commandButton value="Incluir"
                                                  action="#{notaFiscalFormularioBean.incluirProduto()}"
                                                  styleClass="ui-priority-primary" process="dadosProduto, formNfe:tabView:numero"
                                                  update="dadosProduto, formNfe:tabView:dadosTotais, formNfe:tabView:dadosImpostos" />
@@ -283,53 +349,53 @@
 
                             <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
                                          value="#{notaFiscalFormularioBean.notaFiscal.notaFiscalItens}"
-                                         var="dados" style="margin-top: 15px" id="dadosTabelaProduto"
-                                         rowKey="#{dados.codProd}">
+                                         var="produtoItem" style="margin-top: 15px" id="dadosTabelaProduto"
+                                         rowKey="#{produtoItem.codProd}">
 
                                 <p:column headerText="Código" style="width:10%">
-                                    <h:outputText value="#{dados.codProd}" />
+                                    <h:outputText value="#{produtoItem.codProd}" />
                                 </p:column>
 
                                 <p:column headerText="Nome" style="width:60%">
-                                    <h:outputText value="#{dados.nomeProduto}" />
+                                    <h:outputText value="#{produtoItem.nomeProduto}" />
                                 </p:column>
 
                                 <p:column headerText="Qtd." style="width:10%">
-                                    <h:outputText value="#{dados.quantidade}" />
+                                    <h:outputText value="#{produtoItem.quantidade}" />
                                 </p:column>
 
                                 <p:column headerText="P. Und." style="width:10%">
-                                    <h:outputText value="#{dados.valorUnitario}" />
+                                    <h:outputText value="#{produtoItem.valorUnitario}" />
                                 </p:column>
 
                                 <p:column headerText="Desc." style="width:10%">
-                                    <h:outputText value="#{dados.desconto}" />
+                                    <h:outputText value="#{produtoItem.desconto}" />
                                 </p:column>
 
                                 <p:column headerText="P. Total" style="width:13%">
-                                    <h:outputText value="#{dados.valorTotal}" />
+                                    <h:outputText value="#{produtoItem.valorTotal}" />
                                 </p:column>
 
                                 <p:column headerText="CST" style="width:10%">
-                                    <h:outputText value="#{dados.cst}" />
+                                    <h:outputText value="#{produtoItem.cst.codigo}" />
                                 </p:column>
 
                                 <p:column headerText="PIS/Cofins" style="width:13%">
-                                    <h:outputText value="#{dados.cstCofins}/#{dados.cstPis}" />
+                                    <h:outputText value="#{produtoItem.cstPisCofins.codigo}" />
                                 </p:column>
 
                                 <p:column headerText="CFOP" style="width:10%">
-                                    <h:outputText value="#{dados.cfop}" />
+                                    <h:outputText value="#{produtoItem.cfop}" />
                                 </p:column>
 
                                 <p:column headerText="Ações" style="width:10%">
                                     <p:commandButton icon="fa fa-trash-o"
                                                      styleClass="ui-priority-primary"
-                                                     actionListener="#{notaFiscalFormularioBean.removerProduto(dados)}"
+                                                     actionListener="#{notaFiscalFormularioBean.removerProduto(produtoItem)}"
                                                      update="dadosTabelaProduto, formNfe:tabView:dadosImpostos, formNfe:tabView:dadosTotais"/>
                                     <p:commandButton icon="fa fa-pencil"
                                                      styleClass="ui-priority-primary"
-                                                     actionListener="#{notaFiscalFormularioBean.editarProduto(dados)}"
+                                                     actionListener="#{notaFiscalFormularioBean.editarProduto(produtoItem)}"
                                                      update="dadosTabelaProduto, formNfe:tabView:dadosImpostos, formNfe:tabView:dadosProduto, formNfe:tabView:dadosTotais" />
                                 </p:column>
 
@@ -352,7 +418,7 @@
                                                  value="#{notaFiscalFormularioBean.notaFiscal.modeloFrete}">
                                     <f:selectItem itemValue="0" itemLabel="0-Por conta do empresa" />
                                     <f:selectItem itemValue="1"
-                                                  itemLabel="1-Por conta do destinatário/remetente" />
+                                                  itemLabel="1-Por conta do destinatário" />
                                     <f:selectItem itemValue="2"
                                                   itemLabel="2-Por conta de terceiros" />
                                     <f:selectItem itemValue="9" itemLabel="9-Sem frete" />
@@ -639,8 +705,8 @@
         </h:form>
 
 
-        <p:dialog widgetVar="fornecedorDialog" modal="true" height="450"
-                  width="850" resizable="false">
+        <p:dialog widgetVar="fornecedorDialog" modal="true" height="400"
+                  width="700" resizable="false">
             <h:form>
                 <p:dataTable value="#{notaFiscalFormularioBean.entidades}"
                              widgetVar="listaFornecedors" selectionMode="single"
@@ -685,8 +751,8 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="produtoDialog" modal="true" height="450"
-                  width="850" resizable="false">
+        <p:dialog widgetVar="produtoDialog" modal="true" height="400"
+                  width="700" resizable="false">
             <h:form>
                 <p:dataTable value="#{notaFiscalFormularioBean.produtos}"
                              widgetVar="listaProdutos" selectionMode="single"
@@ -732,8 +798,8 @@
         </p:dialog>
 
 
-        <p:dialog widgetVar="transportadoraDialog" modal="true" height="450"
-                  width="850" resizable="false">
+        <p:dialog widgetVar="transportadoraDialog" modal="true" height="700"
+                  width="700" resizable="false">
             <h:form>
                 <p:dataTable value="#{notaFiscalFormularioBean.transportadoras}"
                              widgetVar="listaTransportadoras" selectionMode="single"

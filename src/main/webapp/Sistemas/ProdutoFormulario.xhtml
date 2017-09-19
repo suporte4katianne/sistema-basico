@@ -47,7 +47,7 @@
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Preço:" for="preco" />
-                                <p:inputNumber id="preco" symbol="R$ "
+                                <p:inputNumber id="preco"  symbol="R$ "
                                                value="#{produtoFormularioBean.produto.precoVenda}"
                                                decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
@@ -57,7 +57,7 @@
                                 <p:outputLabel value="NCM:" for="ncm" />
                                 <h:panelGroup style="display:flex;">
                                     <p:inputText
-                                            value="#{produtoFormularioBean.produto.codigo_ncm}"
+                                            value="#{produtoFormularioBean.produto.codigo_ncm}" required="true"
                                             style="opacity: 1;" id="ncm" disabled="true" />
                                     <p:commandButton icon="fa fa-search"
                                                      styleClass="ui-priority-primary" style="max-width: 30px"
@@ -66,7 +66,7 @@
 
                                 <p:outputLabel value="Cest:" for="cest" />
                                 <h:panelGroup style="display:flex;">
-                                    <p:inputText
+                                    <p:inputText required="true"
                                             value="#{produtoFormularioBean.produto.codigo_cest}" id="cest"
                                             disabled="true" style="opacity: 1;" />
                                     <p:commandButton icon="fa fa-search"
@@ -84,52 +84,10 @@
                             <h:panelGrid id="impostoProduto" columns="2"
                                          style="margin-top:20px" columnClasses="rotulo">
 
-                                <p:outputLabel value="CST de ICMS:" for="cstIcms" />
-                                <p:selectOneMenu id="cstIcms"
-                                                 value="#{produtoFormularioBean.produto.cstIcms}">
-                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                    <!--	<f:selectItem itemLabel="00-Tributacão Normal" itemValue="00" />
-                        <f:selectItem itemLabel="20-Tributação com redução na Base o ICMS"
-                            itemValue="20" />
-                        <f:selectItem
-                            itemLabel="10-Substituição Tributária calculada na compra"
-                            itemValue="10" />
-                        <f:selectItem
-                            itemLabel="30-Isenta de ICMS mas com Substituição Tributária"
-                            itemValue="30" />
-                        <f:selectItem itemLabel="40-Insento de ICMS" itemValue="40" />
-                        <f:selectItem itemLabel="41-Não Tributado" itemValue="41" />
-                        <f:selectItem itemLabel="50-Suspenso de Tributação no Estado"
-                            itemValue="50" />
-                        <f:selectItem itemLabel="60-Substituição Tributária sem custos"
-                            itemValue="60" />
-                        <f:selectItem
-                            itemLabel="70-Redução na Base de Substituição Tributária"
-                            itemValue="70" />
-                        <f:selectItem itemLabel="90-Outros" itemValue="90" /> -->
-                                    <f:selectItem itemLabel="51-Tributo diferido no Estado"
-                                                  itemValue="51" />
-                                    <f:selectItem
-                                            itemLabel="101-Tributado com Permissão de Crédito"
-                                            itemValue="101" />
-                                    <f:selectItem
-                                            itemLabel="102-Tributado sem Permissão de Crédito"
-                                            itemValue="102" />
-                                    <!--		<f:selectItem
-                            itemLabel="201-Tributado c/ Permissão de Crédito com Substituição Tributária"
-                            itemValue="201" />
-                        <f:selectItem
-                            itemLabel="202-Tributado s/ Permissão de Crédito com Substituição Tributária"
-                            itemValue="202" />
-                        <f:selectItem itemLabel="300-Imune de tributação no Estado"
-                            itemValue="300" />
-                        <f:selectItem itemLabel="400-Insento de tributar ICMS"
-                            itemValue="400" /> -->
-                                    <f:selectItem
-                                            itemLabel="500-Substituição Tributária paga anteriormente"
-                                            itemValue="500" />
-                                    <!--
-                        <f:selectItem itemLabel="900-Outos" itemValue="900" /> -->
+                                <p:outputLabel value="CST de ICMS:" for="CSTICMSIcms" />
+                                <p:selectOneMenu id="CSTICMSIcms" autoWidth="false" value="#{produtoFormularioBean.produto.cstIcms}">
+                                    <f:selectItems value="#{produtoFormularioBean.csts}" var="CSTICMS"
+                                                   itemValue="#{CSTICMS}" itemLabel="#{CSTICMS.codigo} - #{CSTICMS.descricao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota ICMS:" for="aliquotaIcms" />
@@ -141,15 +99,8 @@
                                 <p:outputLabel value="CST de IPI:" for="cstIpi" />
                                 <p:selectOneMenu id="cstIpi"
                                                  value="#{produtoFormularioBean.produto.cstIpi}">
-                                    <!--		<f:selectItem itemLabel="Selecione..." itemValue="" />
-                        <f:selectItem itemLabel="50-Saída Tributada" itemValue="50" />
-                        <f:selectItem itemLabel="51-Saída Tributável com Alíquota Zero"
-                            itemValue="51" />
-                        <f:selectItem itemLabel="52-Saída Isenta" itemValue="52" /> -->
-                                    <f:selectItem itemLabel="53-Saída Não-Tributada" itemValue="53" />
-                                    <!--		<f:selectItem itemLabel="54-Saída Imune" itemValue="54" />
-                        <f:selectItem itemLabel="55-Saída com Suspensão" itemValue="55" />
-                        <f:selectItem itemLabel="99-Outras Saídas" itemValue="99" /> -->
+                                    <f:selectItems value="#{produtoFormularioBean.cstsIpi}" var="cstIpi"
+                                                   itemValue="#{cstIpi}" itemLabel="#{cstIpi.codigo} - #{cstIpi.descircao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota IPI:" for="aliquotaIpi" />
@@ -158,76 +109,17 @@
                                                value="#{produtoFormularioBean.produto.aliquotaIpi}" />
 
 
-                                <p:outputLabel value="CST de PIS:" for="cstPis" />
-                                <p:selectOneMenu id="cstPis"
-                                                 value="#{produtoFormularioBean.produto.cstPis}">
-                                    <!-- 					<f:selectItem itemLabel="Selecione..." itemValue="" />
-                        <f:selectItem
-                            itemLabel="01-Operação Tributável com Alíquota Básica"
-                            itemValue="01" />
-                        <f:selectItem
-                            itemLabel="03-Operação Tributável com Alíquota por Und. de Medida de Produto"
-                            itemValue="03" />
-                        <f:selectItem
-                            itemLabel="04-Operação Tributável Monofásica - Revenda a Alíquota Zero"
-                            itemValue="04" />
-                        <f:selectItem
-                            itemLabel="05-Operação Tributável por Substituição Tributária"
-                            itemValue="05" />
-                        <f:selectItem itemLabel="06-Operação Tributável a Alíquota Zero"
-                            itemValue="06" /> -->
-                                    <f:selectItem
-                                            itemLabel="02-Operação Tributável com Alíquota Diferenciada"
-                                            itemValue="02" />
-                                    <f:selectItem itemLabel="07-Operação Isenta da Contribuição"
-                                                  itemValue="07" />
-                                    <!-- 					<f:selectItem
-                            itemLabel="08-Operação sem Incidência da Contribuição"
-                            itemValue="08" />
-                        <f:selectItem
-                            itemLabel="09-Operação com Suspensão da Contribuição"
-                            itemValue="09" />
-                        <f:selectItem itemLabel="49-Outras Operações de Saída"
-                            itemValue="49" />  -->
+                                <p:outputLabel value="CST PIS/Cofins:" for="cstPis" />
+                                <p:selectOneMenu id="cstPis" autoWidth="false" value="#{produtoFormularioBean.produto.cstPisCofins}">
+                                    <f:selectItems value="#{produtoFormularioBean.cstsPisCofins}" var="cstPisCofins"
+                                                   itemValue="#{cstPisCofins}"
+                                                   itemLabel="#{cstPisCofins.codigo} - #{cstPisCofins.descricao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota PIS:" for="aliquotaPis" />
                                 <p:inputNumber id="aliquotaPis" symbol="%" symbolPosition="s"
                                                emptyValue="zero" decimalSeparator="," thousandSeparator="."
                                                value="#{produtoFormularioBean.produto.aliquotaPis}" />
-
-                                <p:outputLabel value="CST de Cofins:" for="cstCofins" />
-                                <p:selectOneMenu id="cstCofins"
-                                                 value="#{produtoFormularioBean.produto.cstCofins}">
-                                    <!-- 					<f:selectItem itemLabel="Selecione..." itemValue="" />
-                        <f:selectItem
-                            itemLabel="01-Operação Tributável com Alíquota Básica"
-                            itemValue="01" />
-                        <f:selectItem
-                            itemLabel="03-Operação Tributável com Alíquota por Und. de Medida de Produto"
-                            itemValue="03" />
-                        <f:selectItem
-                            itemLabel="04-Operação Tributável Monofásica - Revenda a Alíquota Zero"
-                            itemValue="04" />
-                        <f:selectItem
-                            itemLabel="05-Operação Tributável por Substituição Tributária"
-                            itemValue="05" />
-                        <f:selectItem itemLabel="06-Operação Tributável a Alíquota Zero"
-                            itemValue="06" /> -->
-                                    <f:selectItem
-                                            itemLabel="02-Operação Tributável com Alíquota Diferenciada"
-                                            itemValue="02" />
-                                    <f:selectItem itemLabel="07-Operação Isenta da Contribuição"
-                                                  itemValue="07" />
-                                    <!-- 					<f:selectItem
-                            itemLabel="08-Operação sem Incidência da Contribuição"
-                            itemValue="08" />
-                        <f:selectItem
-                            itemLabel="09-Operação com Suspensão da Contribuição"
-                            itemValue="09" />
-                        <f:selectItem itemLabel="49-Outras Operações de Saída"
-                            itemValue="49" />  -->
-                                </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota Cofins:" for="aliquotaCofins" />
                                 <p:inputNumber id="aliquotaCofins" symbol="%" symbolPosition="s"
@@ -236,36 +128,9 @@
 
 
                                 <p:outputLabel value="Origem:" for="origem" />
-                                <p:selectOneMenu id="origem"
-                                                 value="#{produtoFormularioBean.produto.origem}">
-                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                    <f:selectItem
-                                            itemLabel="0-Nacional, exceto as indicadas nos códigos 3 4 e 5"
-                                            itemValue="0" />
-                                    <f:selectItem
-                                            itemLabel="1-Estrangeira - Importação direta, exceto a indicada no código 6"
-                                            itemValue="1" />
-                                    <f:selectItem
-                                            itemLabel="2-Estrangeira - Adquirida no mercado interno, exceto a indicada no código 7"
-                                            itemValue="2" />
-                                    <f:selectItem
-                                            itemLabel="3-Nacional, mercadoria ou bem com Conteúdo de Importação superior a 40%"
-                                            itemValue="3" />
-                                    <f:selectItem
-                                            itemLabel="4-Nacional, cuja produção segue legislação"
-                                            itemValue="4" />
-                                    <f:selectItem
-                                            itemLabel="5-Nacional, mercadoria ou bem com Conteúdo de Importação inferior ou igual a 40%"
-                                            itemValue="5" />
-                                    <f:selectItem
-                                            itemLabel="6-Estrangeira - Importação direta, sem similar nacional, constante em lista de Resolução CAMEX"
-                                            itemValue="6" />
-                                    <f:selectItem
-                                            itemLabel="7-Estrangeira - Adquirida no mercado interno, sem similar nacional, constante em lista de Resolução CAMEX"
-                                            itemValue="7" />
-                                    <f:selectItem
-                                            itemLabel="8-Nacional, mercadoria ou bem com Conteúdo de Importação superior a 70%"
-                                            itemValue="8" />
+                                <p:selectOneMenu id="origem" autoWidth="false" value="#{produtoFormularioBean.produto.origem}">
+                                    <f:selectItems value="#{produtoFormularioBean.origens}" var="origem"
+                                                   itemValue="#{origem}" itemLabel="#{origem.codigo} - #{origem.descricao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="CFOP Estadual:" for="cfopEstadual" />
@@ -374,7 +239,7 @@
             </p:toolbar>
         </h:form>
 
-        <p:dialog widgetVar="ncmDialog" modal="true" height="450" width="850"
+        <p:dialog widgetVar="ncmDialog" modal="true" height="400" width="700"
                   resizable="false">
             <h:form>
                 <p:dataTable value="#{produtoFormularioBean.ncms}"
@@ -420,7 +285,7 @@
         </p:dialog>
 
 
-        <p:dialog widgetVar="cestDialog" modal="true" height="450" width="850"
+        <p:dialog widgetVar="cestDialog" modal="true" height="400" width="700"
                   resizable="false">
             <h:form>
                 <p:dataTable value="#{produtoFormularioBean.cest}"

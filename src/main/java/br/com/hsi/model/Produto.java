@@ -3,10 +3,13 @@ package br.com.hsi.model;
 import br.com.hsi.model.dados.Cest;
 import br.com.hsi.model.dados.Cfop;
 import br.com.hsi.model.dados.Ncm;
+import br.com.hsi.model.dados.text.CSTICMS;
+import br.com.hsi.model.dados.text.CSTIPI;
+import br.com.hsi.model.dados.text.CSTPISCOFINS;
+import br.com.hsi.model.dados.text.Origem;
 import br.com.hsi.util.validation.CodigoBarras;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.EAN;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -16,78 +19,125 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "produto")
+@Table(name = "produto", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "codigo_barras"),
+		@UniqueConstraint(columnNames = "codigo"),
+})
+
+
 public class Produto{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column(name = "tipo_cadastro")
 	private String tipoCadastro;
+
 	@ManyToOne
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
+
 	@CodigoBarras
 	@Column(name = "codigo_barras")
 	private String codigoBrras;
+
 	private int codigo;
+
 	@NotNull
 	private String descricao;
+
 	@ManyToOne
 	@JoinColumn(name = "ncm_id")
 	private Ncm ncm;
+
 	@ManyToOne
 	@JoinColumn(name = "cest_id")
 	private Cest cest;
+
 	@NotNull
 	private String codigo_ncm;
+
 	@NotNull
 	private String codigo_cest;
-	@NotNull
-	private String origem;
+
+	@Enumerated(EnumType.STRING)
+	private Origem origem;
+
 	@NotNull
 	@Column(name = "unidade_medida")
 	private String unidadeMedida;
+
 	@Column(name = "preco_venda")
 	private BigDecimal precoVenda = new BigDecimal(0.0);	
+
 	@NotNull
 	@Column(name = "aliquota_icms")
 	private BigDecimal aliquotaIcms =  new BigDecimal(0.0);
+
 	@Column(name = "aliquota_ipi")
 	private BigDecimal aliquotaIpi =  new BigDecimal(0.0);
+
 	@Column(name = "aliquota_pis")
 	private BigDecimal aliquotaPis  =  new BigDecimal(0.0);
+
 	@Column(name = "aliquota_cofins")
 	private BigDecimal aliquotaCofins  =  new BigDecimal(0.0);
-	@NotNull
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "cst_icms")
-	private String cstIcms;
+	private CSTICMS cstIcms;
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "cst_ipi")
-	private String cstIpi;
-	@Column(name = "cst_pis")
-	private String cstPis;
+	private CSTIPI cstIpi;
+
+	@Enumerated(EnumType.STRING)
 	@Column(name = "cst_cofins")
-	private String cstCofins;
+	private CSTPISCOFINS cstPisCofins;
+
 	private String iss;
+
 	@Column(name = "aliquota_iss")
 	private BigDecimal AliquotaIss;
+
 	@Column(name = "codigo_lc")
 	private String codigoLc;
+
 	@ManyToOne
     @JoinColumn(name = "id_cfop_estadual")
 	private Cfop cfopEstadual;
-    @ManyToOne
+
+	@ManyToOne
     @JoinColumn(name = "id_cfop_interestadual")
 	private Cfop cfopInterestadual;
+
+	@Column(name = "cfop_estadual")
 	private String codigoCfopEstadual;
+
+	@Column(name = "cfop_interestadual")
 	private String codigoCfopInterestadual;
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Embalagem> embalagens = new ArrayList<>();
 
-	
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getTipoCadastro() {
+		return tipoCadastro;
+	}
+
+	public void setTipoCadastro(String tipoCadastro) {
+		this.tipoCadastro = tipoCadastro;
+	}
 
 	public Empresa getEmpresa() {
 		return empresa;
@@ -97,12 +147,12 @@ public class Produto{
 		this.empresa = empresa;
 	}
 
-	public Long getId() {
-		return id;
+	public String getCodigoBrras() {
+		return codigoBrras;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCodigoBrras(String codigoBrras) {
+		this.codigoBrras = codigoBrras;
 	}
 
 	public int getCodigo() {
@@ -121,11 +171,43 @@ public class Produto{
 		this.descricao = descricao;
 	}
 
-	public String getOrigem() {
+	public Ncm getNcm() {
+		return ncm;
+	}
+
+	public void setNcm(Ncm ncm) {
+		this.ncm = ncm;
+	}
+
+	public Cest getCest() {
+		return cest;
+	}
+
+	public void setCest(Cest cest) {
+		this.cest = cest;
+	}
+
+	public String getCodigo_ncm() {
+		return codigo_ncm;
+	}
+
+	public void setCodigo_ncm(String codigo_ncm) {
+		this.codigo_ncm = codigo_ncm;
+	}
+
+	public String getCodigo_cest() {
+		return codigo_cest;
+	}
+
+	public void setCodigo_cest(String codigo_cest) {
+		this.codigo_cest = codigo_cest;
+	}
+
+	public Origem getOrigem() {
 		return origem;
 	}
 
-	public void setOrigem(String origem) {
+	public void setOrigem(Origem origem) {
 		this.origem = origem;
 	}
 
@@ -177,52 +259,28 @@ public class Produto{
 		this.aliquotaCofins = aliquotaCofins;
 	}
 
-	public String getCstIcms() {
+	public CSTICMS getCstIcms() {
 		return cstIcms;
 	}
 
-	public void setCstIcms(String cstIcms) {
+	public void setCstIcms(CSTICMS cstIcms) {
 		this.cstIcms = cstIcms;
 	}
 
-	public String getCstIpi() {
+	public CSTIPI getCstIpi() {
 		return cstIpi;
 	}
 
-	public void setCstIpi(String cstIpi) {
+	public void setCstIpi(CSTIPI cstIpi) {
 		this.cstIpi = cstIpi;
 	}
 
-	public String getCstPis() {
-		return cstPis;
+	public CSTPISCOFINS getCstPisCofins() {
+		return cstPisCofins;
 	}
 
-	public void setCstPis(String cstPis) {
-		this.cstPis = cstPis;
-	}
-
-	public String getCstCofins() {
-		return cstCofins;
-	}
-
-	public void setCstCofins(String cstCofins) {
-		this.cstCofins = cstCofins;
-	}
-
-	public String getCodigoBrras() {
-		return codigoBrras;
-	}
-
-	public void setCodigoBrras(String codigoBrras) {
-		this.codigoBrras = codigoBrras;
-	}
-
-	public String getTipoCadastro() {
-		return tipoCadastro;
-	}
-
-	public void setTipoCadastro(String tipoCadastro) {
-		this.tipoCadastro = tipoCadastro;
+	public void setCstPisCofins(CSTPISCOFINS cstPisCofins) {
+		this.cstPisCofins = cstPisCofins;
 	}
 
 	public String getIss() {
@@ -249,82 +307,47 @@ public class Produto{
 		this.codigoLc = codigoLc;
 	}
 
-	public Ncm getNcm() {
-		return ncm;
+	public Cfop getCfopEstadual() {
+		return cfopEstadual;
 	}
 
-	public void setNcm(Ncm ncm) {
-		this.ncm = ncm;
+	public void setCfopEstadual(Cfop cfopEstadual) {
+		this.cfopEstadual = cfopEstadual;
 	}
 
-	public Cest getCest() {
-		return cest;
+	public Cfop getCfopInterestadual() {
+		return cfopInterestadual;
 	}
 
-	public void setCest(Cest cest) {
-		this.cest = cest;
+	public void setCfopInterestadual(Cfop cfopInterestadual) {
+		this.cfopInterestadual = cfopInterestadual;
 	}
 
-	public String getCodigo_ncm() {
-		return codigo_ncm;
+	public String getCodigoCfopEstadual() {
+		return codigoCfopEstadual;
 	}
 
-	public void setCodigo_ncm(String codigo_ncm) {
-		this.codigo_ncm = codigo_ncm;
+	public void setCodigoCfopEstadual(String codigoCfopEstadual) {
+		this.codigoCfopEstadual = codigoCfopEstadual;
 	}
 
-	public String getCodigo_cest() {
-		return codigo_cest;
+	public String getCodigoCfopInterestadual() {
+		return codigoCfopInterestadual;
 	}
 
-	public void setCodigo_cest(String codigo_cest) {
-		this.codigo_cest = codigo_cest;
+	public void setCodigoCfopInterestadual(String codigoCfopInterestadual) {
+		this.codigoCfopInterestadual = codigoCfopInterestadual;
 	}
 
-    public Cfop getCfopEstadual() {
-        return cfopEstadual;
-    }
+	public List<Embalagem> getEmbalagens() {
+		return embalagens;
+	}
 
-    public void setCfopEstadual(Cfop cfopEstadual) {
-        this.cfopEstadual = cfopEstadual;
-    }
+	public void setEmbalagens(List<Embalagem> embalagens) {
+		this.embalagens = embalagens;
+	}
 
-    public Cfop getCfopInterestadual() {
-        return cfopInterestadual;
-    }
-
-    public void setCfopInterestadual(Cfop cfopInterestadual) {
-        this.cfopInterestadual = cfopInterestadual;
-    }
-
-    public String getCodigoCfopEstadual() {
-        return codigoCfopEstadual;
-    }
-
-    public void setCodigoCfopEstadual(String codigoCfopEstadual) {
-        this.codigoCfopEstadual = codigoCfopEstadual;
-    }
-
-    public String getCodigoCfopInterestadual() {
-        return codigoCfopInterestadual;
-    }
-
-    public void setCodigoCfopInterestadual(String codigoCfopInterestadual) {
-        this.codigoCfopInterestadual = codigoCfopInterestadual;
-    }
-
-    public List<Embalagem> getEmbalagens() {
-        return embalagens;
-    }
-
-    public void setEmbalagens(List<Embalagem> embalagens) {
-        this.embalagens = embalagens;
-    }
-
-    @LazyCollection(LazyCollectionOption.FALSE)
-
-
-    @Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;

@@ -25,7 +25,8 @@
                         <p:outputPanel style="aling:lef; vertical-align:middle;">
                             <p:outputLabel value="Pesquisar: " for="globalFilter" />
                             <p:inputText id="globalFilter" onkeyup="PF('listaNfes').filter()" />
-                            <p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+                            <p:button id="refresh" icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary" />
+                            <p:tooltip for="refresh" value="Recarregar" position="left" />
 
                             <p:ajaxStatus styleClass="ajax-status">
                                 <f:facet name="start">

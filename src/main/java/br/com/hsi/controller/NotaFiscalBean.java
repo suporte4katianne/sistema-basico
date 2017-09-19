@@ -104,17 +104,22 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public void cancelarNotaFiscal() throws IOException, InterruptedException {
-		GeraXmlEventos xmlCancelamento = new GeraXmlEventos(notaFiscal);
-		notaFiscal = xmlCancelamento.gerarCancelamento("Cancelamento de NFe com erros de digitacao ou informacao");
-		if (notaFiscal.getMensagemRetorno().contains("Evento registrado")) {
-			notaFiscal.setMensagemRetorno("Cancelado! " + notaFiscal.getMensagemRetorno());
-			notaFiscal.setStatus("C");
-			gestaoNotaFiscal.salvar(notaFiscal);
-			FacesUtil.addInfoMessage("Nota Fiscal Cancelada com Sucesso!");
-		} else {
-			FacesUtil.addErrorMessage("Data para envio do evento Expirou");
+		try{
+			GeraXmlEventos xmlCancelamento = new GeraXmlEventos(notaFiscal);
+			notaFiscal = xmlCancelamento.gerarCancelamento("Cancelamento de NFe com erros de digitacao ou informacao");
+			if (notaFiscal.getMensagemRetorno().contains("Evento registrado")) {
+				notaFiscal.setMensagemRetorno("Cancelado! " + notaFiscal.getMensagemRetorno());
+				notaFiscal.setStatus("C");
+				gestaoNotaFiscal.salvar(notaFiscal);
+				FacesUtil.addInfoMessage("Nota Fiscal Cancelada com Sucesso!");
+			} else {
+				FacesUtil.addErrorMessage("Data para envio do evento Expirou");
+			}
+			listarNotasFiscais();
+		}catch (Exception e){
+			e.printStackTrace();
 		}
-		listarNotasFiscais();
+
 	}
 
 	public void cartaDeCorrecao() throws IOException, InterruptedException {

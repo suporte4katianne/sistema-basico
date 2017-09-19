@@ -69,4 +69,32 @@ public class Embalagem {
     public void setProduto(Produto produto) {
         this.produto = produto;
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Embalagem embalagem = (Embalagem) o;
+
+        if (id != null ? !id.equals(embalagem.id) : embalagem.id != null) return false;
+        if (codigoBarras != null ? !codigoBarras.equals(embalagem.codigoBarras) : embalagem.codigoBarras != null)
+            return false;
+        if (unidadeMedida != null ? !unidadeMedida.equals(embalagem.unidadeMedida) : embalagem.unidadeMedida != null)
+            return false;
+        if (fatorConversao != null ? !fatorConversao.equals(embalagem.fatorConversao) : embalagem.fatorConversao != null)
+            return false;
+        return produto != null ? produto.equals(embalagem.produto) : embalagem.produto == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (codigoBarras != null ? codigoBarras.hashCode() : 0);
+        result = 31 * result + (unidadeMedida != null ? unidadeMedida.hashCode() : 0);
+        result = 31 * result + (fatorConversao != null ? fatorConversao.hashCode() : 0);
+        result = 31 * result + (produto != null ? produto.hashCode() : 0);
+        return result;
+    }
 }

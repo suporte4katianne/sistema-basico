@@ -15,7 +15,6 @@
 			<property name="hibernate.generate_statistics" value="false"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-
 		</properties>
 	</persistence-unit>
 </persistence>

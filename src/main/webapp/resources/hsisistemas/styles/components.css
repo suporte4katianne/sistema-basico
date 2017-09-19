@@ -75,6 +75,11 @@
 	width: 301px;
 }
 
+.rotuloFixo {
+	width: 60px;
+}
+
+
 .rotulo {
 	width: 150px !important;
 	text-align: right;
