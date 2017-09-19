@@ -92,10 +92,10 @@
                                          value="#{notaFiscalFormularioBean.notaFiscal.numeroNota}" />
 
                         </h:panelGrid>
-                        <h:panelGrid id="chaveAcesso" style="width: 90%" rendered="#{notaFiscalFormularioBean.emissao().equals('false')}"
+                        <h:panelGrid id="chaveAcesso" rendered="#{notaFiscalFormularioBean.emissao().equals('false')}"
                                      columns="2" columnClasses="rotulo">
                             <p:outputLabel for="chaveDeAcesso" value="Chave de Acesso:" />
-                            <p:inputText id="chaveDeAcesso" style="width: 90%" value="#{notaFiscalFormularioBean.notaFiscal.chaveAcesso}" />
+                            <p:inputText id="chaveDeAcesso" style="min-width: 440px" value="#{notaFiscalFormularioBean.notaFiscal.chaveAcesso}" />
                         </h:panelGrid>
 
 
@@ -259,13 +259,16 @@
 
 
                                 <p:outputLabel value="Valor:" for="valor" />
-                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.valorUnitario}" id="valor" />
+                                <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.valorUnitario}" id="valor"
+                                               symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
                                 <p:outputLabel value="Quantidade:" for="quantidade" />
-                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}" id="quantidade" />
+                                <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}" id="quantidade"
+                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
                                 <p:outputLabel value="Desconto:" for="desconto" />
-                                <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto" />
+                                <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto"
+                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                             </h:panelGrid>
 
                             <br />
@@ -284,24 +287,24 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="Red. Base:" for="reducaoBase" />
                                     <p:inputNumber placeholder="%" id="reducaoBase"
-                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.reducaoBaseIcms}"
-                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                                   value="#{notaFiscalFormularioBean.notaFiscalItem.reducaoBaseIcms}"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                     <p:outputLabel value="Base ICMS:" for="baseIcms" />
                                     <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcms}" id="baseIcms"
                                                    placeholder="R$"
-                                                 symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                                   symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                     <p:outputLabel value="ICMS:" for="icms"/>
                                     <p:inputNumber placeholder="%" id="icms"
-                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.icms}"
-                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                                   value="#{notaFiscalFormularioBean.notaFiscalItem.icms}"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                     <p:outputLabel value="Base ICMS ST:" for="baseIcmsSt" />
                                     <p:inputNumber id="baseIcmsSt" value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcmsSt}"
                                                    placeholder="R$"
-                                                 symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                                   symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                     <p:outputLabel value="ICMS ST:" for="icmsSt" />
                                     <p:inputNumber placeholder="%" id="icmsSt"
-                                                 value="#{notaFiscalFormularioBean.notaFiscalItem.icmsSt}"
-                                                 symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                                   value="#{notaFiscalFormularioBean.notaFiscalItem.icmsSt}"
+                                                   symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                 </h:panelGrid>
 
                                 <h:panelGrid columns="4" >
@@ -312,7 +315,7 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="% IPI:" for="ipi" />
                                     <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.aliquotaIpi}" id="ipi"
-                                                   placeholder="%"
+                                                   placeholder="%" inputStyle="max-width: 80px"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                 </h:panelGrid>
 
@@ -324,21 +327,15 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel value="% Pis:" for="pis" />
                                     <p:inputNumber id="pis" value="#{notaFiscalFormularioBean.notaFiscalItem.aliquotaPis}"
-                                                   placeholder="%"
+                                                   placeholder="%" inputStyle="max-width: 80px"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                     <p:outputLabel value="% Cofins:" for="cofins" />
                                     <p:inputNumber id="cofins" value="#{notaFiscalFormularioBean.notaFiscalItem.aliquitaCofins}"
-                                                   placeholder="%"
+                                                   placeholder="%" inputStyle="max-width: 80px"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                 </h:panelGrid>
-
-
                             </p:panel>
-
                             <br />
-
-
-
                             <h:panelGrid columns="1" style="width:10%">
                                 <p:commandButton value="Incluir"
                                                  action="#{notaFiscalFormularioBean.incluirProduto()}"
@@ -350,7 +347,7 @@
                             <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
                                          value="#{notaFiscalFormularioBean.notaFiscal.notaFiscalItens}"
                                          var="produtoItem" style="margin-top: 15px" id="dadosTabelaProduto"
-                                         rowKey="#{produtoItem.codProd}">
+                                         rowKey="produtoItem.codProd">
 
                                 <p:column headerText="Código" style="width:10%">
                                     <h:outputText value="#{produtoItem.codProd}" />
