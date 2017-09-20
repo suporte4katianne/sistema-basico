@@ -14,16 +14,16 @@ public class GestaoEntidade implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private EntidadeRepository clientes;
+	private EntidadeRepository entidades;
 	
 	
 	@Transacional
 	public void salvar(Entidade destinatario) throws NegocioException {
 
-		if(!clientes.checaCnpj(destinatario.getCpfCnpj())){
-			clientes.salvar(destinatario);
+		if(!entidades.checaCnpj(destinatario.getCpfCnpj())){
+			entidades.salvar(destinatario);
 		}else if(destinatario.getId() > 0){
-			clientes.salvar(destinatario);
+			entidades.salvar(destinatario);
 		}else{
 			throw new NegocioException("O CNPJ Informado ja consta no Banco de Dados");
 		}
@@ -31,17 +31,17 @@ public class GestaoEntidade implements Serializable{
 	
 	@Transacional
 	public void excluir(Entidade destinatario) throws NegocioException{
-		clientes.exclui(destinatario);
+		entidades.excluir(destinatario);
 	}
 	
 	@Transacional
 	public List<Entidade> listarEntidades(String tipoEntidade){
-		return clientes.listarEntidades(tipoEntidade);
+		return entidades.listarEntidades(tipoEntidade);
 	}
 	
 	@Transacional
-	public Entidade clientePorId(Long id){
-		return clientes.clientePorId(id);
+	public Entidade entidadePorId(Long id){
+		return entidades.entidadePorId(id);
 	}
 
 }

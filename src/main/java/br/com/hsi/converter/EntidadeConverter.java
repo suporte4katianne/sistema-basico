@@ -20,9 +20,9 @@ public class EntidadeConverter implements Converter{
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		try {
-			Entidade cliente;
-			cliente = gestaoEntidade.clientePorId(Long.parseLong(value));
-			return cliente;
+			Entidade entidade;
+			entidade = gestaoEntidade.entidadePorId(Long.parseLong(value));
+			return entidade;
 		} catch (Exception e) {
 			return null;
 		}

@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -72,12 +73,36 @@ public class AjusteEstoqueFormularioBean implements Serializable {
 
     private void geraMovimentacao() {
         for (int i = 0; i < ajusteEstoque.getAjusteEstoqueItens().size(); i++) {
-            ajusteEstoque.getAjusteEstoqueItens().get(i).setMovimentacao(new Movimentacao(ajusteEstoque.getTipo(),
-                    ajusteEstoque.getAjusteEstoqueItens().get(i).getQuantidade(),
-                    "Ajuste de Estoque", ajusteEstoque.getDocumento(),
-                    ajusteEstoque.getAjusteEstoqueItens().get(i).getProduto(),
-                    ajusteEstoque.getEmpresa(), ajusteEstoque.getAjusteEstoqueItens().get(i), ajusteEstoque.getData())
-            );
+
+            BigDecimal quantidade;
+            if(ajusteEstoque.getTipo().equals("I")) {
+                quantidade = gestaoProduto.saldoAtualProduto(ajusteEstoque.getAjusteEstoqueItens().get(i).getProduto())
+                        .subtract(ajusteEstoque.getAjusteEstoqueItens().get(i).getQuantidade());
+
+                String tipo;
+                if(quantidade.doubleValue() > 0) {
+                    tipo = "S";
+                } else {
+                    tipo = "E";
+                    quantidade = quantidade.multiply(new BigDecimal(-1));
+                }
+
+                ajusteEstoque.getAjusteEstoqueItens().get(i).setMovimentacao(new Movimentacao(tipo, quantidade,
+                        "Ajuste de Estoque", ajusteEstoque.getDocumento(),
+                        ajusteEstoque.getAjusteEstoqueItens().get(i).getProduto(),
+                        ajusteEstoque.getEmpresa(), ajusteEstoque.getAjusteEstoqueItens().get(i), ajusteEstoque.getData())
+                );
+
+            } else {
+                ajusteEstoque.getAjusteEstoqueItens().get(i).setMovimentacao(new Movimentacao(ajusteEstoque.getTipo(),
+                        ajusteEstoque.getAjusteEstoqueItens().get(i).getQuantidade(),
+                        "Ajuste de Estoque", ajusteEstoque.getDocumento(),
+                        ajusteEstoque.getAjusteEstoqueItens().get(i).getProduto(),
+                        ajusteEstoque.getEmpresa(), ajusteEstoque.getAjusteEstoqueItens().get(i), ajusteEstoque.getData())
+                );
+            }
+
+
         }
     }
 
