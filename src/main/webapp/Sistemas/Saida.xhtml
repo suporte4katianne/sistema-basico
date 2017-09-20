@@ -23,10 +23,13 @@
 				<f:facet name="header">
 					<div align="left">
 						<p:outputPanel style="aling:lef; vertical-align:middle;">
+							<p:outputLabel style="color: #39b354; margin-right: 10px" value="NF-e de Saida" >
+								<i class="fa fa-arrow-right" aria-hidden="true"></i>
+							</p:outputLabel>
 							<p:outputLabel value="Pesquisar: " for="globalFilter" />
 							<p:inputText id="globalFilter" onkeyup="PF('listaNfes').filter()" />
-							<p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
-
+							<p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
+							<p:tooltip for="refresh" value="Atualizar" position="left"/>
 							<p:ajaxStatus styleClass="ajax-status">
 								<f:facet name="start">
 									<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i>
@@ -46,7 +49,7 @@
 					<h:outputText value="#{dados.numeroNota}" />
 				</p:column>
 
-				<p:column headerText="Serie" style="width:10%" filterBy="#{dados.serieNota}" filterStyle="display:none">
+				<p:column headerText="Serie" style="width:6%" filterBy="#{dados.serieNota}" filterStyle="display:none">
 					<h:outputText value="#{dados.serieNota}" />
 				</p:column>
 
@@ -71,34 +74,34 @@
 
 				<f:facet name="footer">
 					<div align="left">
-						<p:button id="incluirNota" value="Incluir Nota Fiscal" disabled="#{notaFiscalBean.teste()}"
+						<p:button id="incluirNota" value="Incluir" icon="fa fa-plus-circle" disabled="#{notaFiscalBean.teste()}"
 								  outcome="SaidaFormulario" styleClass="ui-priority-primary" widgetVar="incluirNota"/>
 
-						<p:commandButton value="Transmitir" widgetVar="transmitir"
+						<p:commandButton value="Transmitir" icon="fa fa-rss" widgetVar="transmitir"
 										 onclick="PF('transmitir').disable();PF('incluirNota').disable();PF('alterarNota').disable()"
 										 oncomplete="PF('transmitir').enable();PF('incluirNota').enable();PF('alterarNota').enable()"
 										 styleClass="ui-priority-primary" actionListener="#{notaFiscalBean.transmitirNfe()}" update="@form"
 										 disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C') or notaFiscalBean.notaFiscal == null}" >
 						</p:commandButton>
 
-						<p:button value="Alterar Nota Fiscal" widgetVar="alterarNota"
+						<p:button value="Alterar" icon="fa fa-pencil-square-o" widgetVar="alterarNota"
 								  outcome="SaidaFormulario" styleClass="ui-priority-primary"
 								  disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C') or notaFiscalBean.notaFiscal == null}" >
 							<f:param name="notaFiscal" value="#{notaFiscalBean.notaFiscal.id}" />
 						</p:button>
 
-						<p:button value="Excluir Nota Fiscal" widgetVar="excluirNota"
+						<p:button value="Excluir" icon="fa fa-minus-circle" widgetVar="excluirNota"
 								  styleClass="ui-priority-primary" actionListener="#{notaFiscalBean.excluirNotaFiscal()}" update="@form"
 								  disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C')
 								  or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" >
 						</p:button>
 
-						<p:commandButton value="Cancelar NF-e Autorizada"
+						<p:commandButton value="Cancelar NF-e" icon="fa fa-stop-circle"
 										 action="#{notaFiscalBean.cancelarNotaFiscal()}" widgetVar="cancelarNota"
 										 styleClass="ui-priority-primary" update="@form"
 										 disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" />
 
-						<p:commandButton id="imprimirDanfe" value="Imprimir DANFE"
+						<p:commandButton id="imprimirDanfe" value="DANFE" icon="fa fa-print"
 										 styleClass="ui-priority-primary" widgetVar="imprimirDanfe"
 										 disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}"
 										 ajax="false" process="imprimirDanfe"

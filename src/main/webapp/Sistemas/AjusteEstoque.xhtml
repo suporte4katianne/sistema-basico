@@ -21,9 +21,13 @@
                 <f:facet name="header">
                     <div align="left">
                         <p:outputPanel style="aling:left">
+                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Ajuste de Estoque" >
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </p:outputLabel>
                             <p:outputLabel value="Pesquisar: " for="globalFilter"/>
                             <p:inputText id="globalFilter" onkeyup="PF('listaAjusteEstoque').filter()"/>
-                            <p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+                            <p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
+                            <p:tooltip for="refresh" value="Atualizar" position="left"/>
                         </p:outputPanel>
                     </div>
                 </f:facet>
@@ -48,11 +52,11 @@
                 <f:facet name="footer">
                     <div align="left">
                         <p:button outcome="AjusteEstoqueFormulario"
-                                  styleClass="ui-priority-primary" value="Incluir Cadastro"/>
+                                  styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle"/>
 
                         <p:commandButton disabled="#{ajusteEstoqueBean.ajusteEstoque == null}"
                                          actionListener="#{ajusteEstoqueBean.excluir()}"
-                                         value="Excluir" styleClass="ui-priority-primary" />
+                                         value="Excluir" icon="fa fa-minus-circle" styleClass="ui-priority-primary" />
                     </div>
                 </f:facet>
 

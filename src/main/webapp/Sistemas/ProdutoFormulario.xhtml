@@ -226,13 +226,13 @@
                 <f:facet name="left">
                     <p:commandButton styleClass="ui-priority-primary"
                                      style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
-                                     value="Salvar Cadastro" action="#{produtoFormularioBean.salvar()}"
+                                     value="Salvar" icon="fa fa-floppy-o" action="#{produtoFormularioBean.salvar()}"
                                      process="@form @this tabView:impostoProduto" update="@form"
                                      onclick="PF('salvarCadastro').disable();"
                                      widgetVar="salvarCadastro" />
                 </f:facet>
                 <f:facet name="right">
-                    <p:button outcome="Produto" icon="fa fa-refresh"
+                    <p:button outcome="Produto" value="Cancelar" icon="fa fa-reply"
                               styleClass="ui-priority-primary"
                               style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
                 </f:facet>

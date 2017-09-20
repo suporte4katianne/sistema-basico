@@ -21,9 +21,13 @@
 				<f:facet name="header">
 					<div align="left">
 						<p:outputPanel style="aling:left">
+							<p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Empresas" >
+								<i class="fa fa-arrow-right" aria-hidden="true"></i>
+							</p:outputLabel>
 							<h:outputText value="Pesquisar: " />
 							<p:inputText id="globalFilter"  onkeyup="PF('listaEmpresas').filter()"  />
-							<p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+							<p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
+							<p:tooltip for="refresh" value="Atualizar" position="left"/>
 						</p:outputPanel>
 					</div>
 				</f:facet>
@@ -53,7 +57,7 @@
 
 				<f:facet name="footer">
 					<div align="left">
-						<p:button outcome="EmpresaFormulario" value="Alterar Cadastro" styleClass="ui-priority-primary" >
+						<p:button outcome="EmpresaFormulario" icon="fa fa-pencil-square-o" value="Alterar" styleClass="ui-priority-primary" >
 							<f:param name="empresa" value="#{empresaBean.empresa.id}"/>
 						</p:button>
 						<p:outputLabel id="cadastros" style="float:right" />

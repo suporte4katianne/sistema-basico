@@ -22,10 +22,14 @@
 				<f:facet name="header">
 					<div align="left">
 						<p:outputPanel style="aling:left">
+							<p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Produtos" >
+								<i class="fa fa-arrow-right" aria-hidden="true"></i>
+							</p:outputLabel>
 							<p:outputLabel value="Pesquisar: " for="globalFilter" />
 							<p:inputText id="globalFilter"
 								onkeyup="PF('listaProdutos').filter()" />
-							<p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary" />
+							<p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary" />
+							<p:tooltip for="refresh" value="Atualizar" position="left"/>
 						</p:outputPanel>
 					</div>
 				</f:facet>
@@ -65,13 +69,13 @@
 
 				<f:facet name="footer">
 					<div align="left">
-						<p:button value="Incluir Cadastro" outcome="ProdutoFormulario"
+						<p:button value="Incluir" icon="fa fa-plus-circle" outcome="ProdutoFormulario"
 							styleClass="ui-priority-primary" />
-						<p:button value="Alterar Cadastro" outcome="ProdutoFormulario"
+						<p:button value="Alterar" icon="fa fa-pencil-square-o" outcome="ProdutoFormulario"
 							styleClass="ui-priority-primary" disabled="#{produtoBean.produto == null}">
 							<f:param name="produto" value="#{produtoBean.produto.id}" />
 						</p:button>
-						<p:commandButton value="Excluir Cadastro" proces="dadosTabela"
+						<p:commandButton value="Excluir" icon="fa fa-minus-circle" proces="dadosTabela"
 							update="dadosTabela" action="#{produtoBean.excluir()}"
 							styleClass="ui-priority-primary" disabled="#{produtoBean.produto == null}" />
 					</div>

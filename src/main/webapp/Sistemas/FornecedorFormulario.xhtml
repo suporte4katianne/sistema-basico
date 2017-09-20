@@ -9,7 +9,7 @@
     <ui:define name="content">
         <f:metadata>
             <f:viewAction action="#{entidadeFormularioBean.inicializar()}"/>
-            <o:viewParam name="fornecedor" value="#{entidadeFormularioBean.entidade}"  converter="#{entidadeConverter}" />
+            <o:viewParam name="entidade" value="#{entidadeFormularioBean.entidade}"  converter="#{entidadeConverter}" />
         </f:metadata>
 
         <h:form id="frm">
@@ -129,12 +129,12 @@
                     <p:commandButton
                             onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro"
                             style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
-                            value="Salvar Cadastro" action="#{entidadeFormularioBean.salvar()}"
+                            value="Salvar" icon="fa fa-floppy-o" action="#{entidadeFormularioBean.salvar()}"
                             process="frm:painelFornecedor @this" styleClass="ui-priority-primary"
                             update="frm:painelFornecedor mensagem" />
                 </f:facet>
                 <f:facet name="right">
-                    <p:button outcome="Fornecedor" icon="fa fa-refresh" styleClass="ui-priority-primary"
+                    <p:button outcome="Fornecedor" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
                               style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
                 </f:facet>
             </p:toolbar>

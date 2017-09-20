@@ -22,10 +22,14 @@
 				<f:facet name="header">
 					<div align="left">
 						<p:outputPanel style="aling:left">
+							<p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Usuarios" >
+								<i class="fa fa-arrow-right" aria-hidden="true"></i>
+							</p:outputLabel>
 							<p:outputLabel value="Pesquisar: " for="globalFilter" />
 							<p:inputText id="globalFilter"
 								onkeyup="PF('listaUsuarios').filter()" />
-							<p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary" />
+							<p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary" />
+							<p:tooltip for="refresh" value="Atualizar" position="left"/>
 						</p:outputPanel>
 					</div>
 				</f:facet>
@@ -44,9 +48,9 @@
 
 				<f:facet name="footer">
 					<div align="left">
-						<p:button value="Incluir Cadastro" 
+						<p:button value="Incluir" icon="fa fa-plus-circle"
 							styleClass="ui-priority-primary" outcome="UsuarioFormulario" />
-						<p:button value="Alterar Cadastro" 
+						<p:button value="Alterar" icon="fa fa-pencil-square-o"
 							styleClass="ui-priority-primary" outcome="UsuarioFormulario" >
 							<f:param name="usuario" value="#{usuarioBean.usuario.id}" />
 						</p:button>

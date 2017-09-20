@@ -21,9 +21,13 @@
                 <f:facet name="header">
                     <div align="left">
                         <p:outputPanel style="aling:left">
+                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Numeração de NF-e" >
+                                <i class="fa fa-arrow-right" aria-hidden="true"></i>
+                            </p:outputLabel>
                             <p:outputLabel value="Pesquisar: " for="globalFilter"/>
                             <p:inputText id="globalFilter"  onkeyup="PF('listaInutilizacoes').filter()" />
-                            <p:button icon="fa fa-refresh" style="float:right" styleClass="ui-priority-primary"/>
+                            <p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
+                            <p:tooltip for="refresh" value="Atualizar" position="left"/>
                         </p:outputPanel>
                     </div>
                 </f:facet>
@@ -46,10 +50,10 @@
                 <f:facet name="footer">
                     <div align="left">
                         <p:button outcome="NumeracaoFormulario"
-                                  styleClass="ui-priority-primary" value="Incluir Cadastro" />
+                                  styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle" />
 
                         <p:button outcome="NumeracaoFormulario" disabled="#{numeracaoBean.numeracao.id == null}"
-                                  value="Alterar Cadastro" styleClass="ui-priority-primary">
+                                  value="Alterar" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary">
                             <f:param name="numeracao" value="#{numeracaoBean.numeracao.id}" />
                         </p:button>
                     </div>
