@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="sistema-bascio" />
+        <module name="sistema-basico" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="sistema-bascio" target="1.8" />
+      <module name="sistema-basico" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -2,6 +2,7 @@ package br.com.hsi.util.nfe.inutilizacao;
 
 import br.com.hsi.model.Inutilizacao;
 import br.com.hsi.util.exception.TransmissaoException;
+import br.com.hsi.util.nfe.CarregaAssinaturaA3;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -38,8 +39,17 @@ public class GeraXmlInutilizacao implements Serializable {
                     .append("</infInut>")
                     .append("</inutNFe>");
 
-            AssinaXmlInutilizacao xmlInutilizacao = new AssinaXmlInutilizacao(inutilizacao, xml.toString());
-            return xmlInutilizacao.assinaXmlInutilizacao();
+            if(inutilizacao.getEmpresa().getTipoCertificado().equals("A1")) {
+                AssinaXmlInutilizacao xmlInutilizacao = new AssinaXmlInutilizacao(inutilizacao, xml.toString());
+                return xmlInutilizacao.assinaXmlInutilizacao();
+            } else {
+                CarregaAssinaturaA3 carregaAssinaturaA3 = new CarregaAssinaturaA3();
+                carregaAssinaturaA3.carregaAssinatura(inutilizacao.getEmpresa().getSenhaCertificado());
+                AssinaXmlInutilizacao xmlInutilizacao = new AssinaXmlInutilizacao(inutilizacao, xml.toString());
+                return xmlInutilizacao.assinaXmlInutilizacaoA3(carregaAssinaturaA3.getKs(), carregaAssinaturaA3.getPrivateKeyEntry(), carregaAssinaturaA3.getPrivateKey());
+            }
+
+
         }catch (Exception e){
             throw new TransmissaoException("Erro ao transmitir XML de Inutilização");
         }

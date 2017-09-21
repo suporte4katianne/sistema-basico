@@ -34,7 +34,7 @@ public class InutilizacaoFormularioBean implements Serializable{
         inutilizacao.setData(new Date(System.currentTimeMillis()));
         inutilizacao.setEmpresa(seguranca.getUsuarioLogado().getUsuario().getEmpresa());
         inutilizacao.setStatus("Normal");
-        inutilizacao.setAmbiente(1);
+        inutilizacao.setAmbiente(inutilizacao.getEmpresa().getAmbiente());
         gestaoNotaFiscal.salvarInutilizacao(inutilizacao);
         FacesUtil.addInfoMessage("Inutilizaçao salva com sucesso!");
         FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Inutilizacao.xhtml");

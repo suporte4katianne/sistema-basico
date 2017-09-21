@@ -18,10 +18,7 @@ import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -64,7 +61,11 @@ public class EmpresaFormularioBean implements Serializable {
 		if(empresa.getId() != null){
 			cidades = gestaoEndereco.cidadePorEstado(empresa.getEstado().getIdEstado());
 			if(empresa.getTipoCertificado().equals("A1")){
-				validaCertificado(FileUtils.openInputStream(new File("/HSI/Certificado/" + empresa.getNomeCertificado())));
+				try {
+					validaCertificado(FileUtils.openInputStream(new File("/HSI/Certificado/" + empresa.getNomeCertificado())));
+				} catch (FileNotFoundException e) {
+					System.out.println(e.getMessage());
+				}
 			}
 		}else{
 			empresa = new Empresa();

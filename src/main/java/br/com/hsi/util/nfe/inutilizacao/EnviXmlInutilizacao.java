@@ -115,4 +115,61 @@ public class EnviXmlInutilizacao {
         String[] retornoNf_2 = retornoNf_1[retornoNf_1.length - 1].split("</xMotivo>");
         return retornoNf_2[0];
     }
+
+
+    public Inutilizacao enviaInutilizacaoA3(X509Certificate cert, PrivateKey privateKey) {
+
+        try {
+            String codigoDoEstado = inutilizacao.getEmpresa().getCodigoIbgeEstado();
+
+
+            if( inutilizacao.getAmbiente() == 1){
+                url = new URL("https://nfe.svrs.rs.gov.br/ws/nfeinutilizacao/nfeinutilizacao2.asmx");
+            }else{
+                url = new URL("https://nfe-homologacao.svrs.rs.gov.br/ws/nfeinutilizacao/nfeinutilizacao2.asmx");
+            }
+
+            String arquivoCacertsGeradoTodosOsEstados = "/HSI/NFeCacerts";
+
+            SocketFactoryDinamico socketFactoryDinamico = new SocketFactoryDinamico(cert, privateKey);
+            socketFactoryDinamico.setFileCacerts(arquivoCacertsGeradoTodosOsEstados);
+
+            Protocol protocol = new Protocol("https", socketFactoryDinamico, SSL_PORT);
+            Protocol.registerProtocol("https", protocol);
+
+
+
+            String xmlEnvInutilizacao = xml.toString();
+            OMElement ome = AXIOMUtil.stringToOM(xmlEnvInutilizacao);
+
+            Iterator<?> children = ome.getChildrenWithLocalName("NFe");
+            while (children.hasNext()) {
+                OMElement omElement = (OMElement) children.next();
+                if ((omElement != null) && ("NFe".equals(omElement.getLocalName()))) {
+                    omElement.addAttribute("xmlns", "http://www.portalfiscal.inf.br/nfe", null);
+                }
+            }
+
+            NfeInutilizacao2Stub.NfeDadosMsg dadosMsg = new NfeInutilizacao2Stub.NfeDadosMsg();
+            dadosMsg.setExtraElement(ome);
+
+            NfeInutilizacao2Stub.NfeCabecMsg nfeCabecMsg = new NfeInutilizacao2Stub.NfeCabecMsg();
+            nfeCabecMsg.setCUF(codigoDoEstado);
+            nfeCabecMsg.setVersaoDados("2.00");
+
+            NfeInutilizacao2Stub.NfeCabecMsgE nfeCabecMsgE = new NfeInutilizacao2Stub.NfeCabecMsgE();
+            nfeCabecMsgE.setNfeCabecMsg(nfeCabecMsg);
+
+            NfeInutilizacao2Stub stub = new NfeInutilizacao2Stub(url.toString());
+            NfeInutilizacao2Stub.NfeInutilizacaoNF2Result result = stub.nfeInutilizacaoNF2(dadosMsg, nfeCabecMsgE);
+
+            inutilizacao.setStatus(retorno(result.getExtraElement().toString()));
+
+            return inutilizacao;
+
+        }catch (Exception e){
+            return null;
+        }
+
+    }
 }

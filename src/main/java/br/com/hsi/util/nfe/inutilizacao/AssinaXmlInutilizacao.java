@@ -3,6 +3,9 @@ package br.com.hsi.util.nfe.inutilizacao;
 import br.com.hsi.model.Inutilizacao;
 import br.com.hsi.util.nfe.eventos.AssinaXmlEventos;
 
+import java.security.KeyStore;
+import java.security.PrivateKey;
+
 
 public class AssinaXmlInutilizacao {
 
@@ -33,6 +36,20 @@ public class AssinaXmlInutilizacao {
     }
 
 
+    public Inutilizacao assinaXmlInutilizacaoA3(KeyStore ks, KeyStore.PrivateKeyEntry privateKeyEntry, PrivateKey privateKey) {
+        try {
+            String senhaDoCertificadoDoCliente = inutilizacao.getEmpresa().getSenhaCertificado();
 
+            AssinaXmlEventos assinaXmlEventos = new AssinaXmlEventos(privateKeyEntry, ks, privateKey);
+            String xmlAssinado = assinaXmlEventos.assinaCancelametoInutilizacaoA3(xml, senhaDoCertificadoDoCliente, INFINUT);
+            EnviXmlInutilizacao xmlInutilizacao = new EnviXmlInutilizacao(inutilizacao, xmlAssinado);
+            return xmlInutilizacao.enviaInutilizacaoA3(assinaXmlEventos.getCert(), privateKey);
 
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+            e.getCause();
+            return null;
+        }
+    }
 }

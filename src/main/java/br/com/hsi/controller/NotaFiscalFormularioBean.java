@@ -111,6 +111,7 @@ public class NotaFiscalFormularioBean implements Serializable {
 		notaFiscal.setCreditoIcms(notaFiscal.getEmpresa().getCreditoIcms().toString());
 		notaFiscal.setNomePaisEmpresa("Brasil");
 		notaFiscal.setCodigoPaisEmpresa("1058");
+		notaFiscal.setAmbiente(notaFiscal.getEmpresa().getAmbiente());
 		notaFiscal.setCnpjEmpresa(notaFiscal.getEmpresa().getCpfCnpj());
 		notaFiscal.setNomeFantasiaEmpresa(notaFiscal.getEmpresa().getNome());
 		notaFiscal.setSenhaCertificado(notaFiscal.getEmpresa().getSenhaCertificado());
@@ -352,7 +353,7 @@ public class NotaFiscalFormularioBean implements Serializable {
 		notaFiscal.setTipoConsumidor(1);
 		notaFiscal.setPresencaConsumidor(1);
 		notaFiscal.setModeloFrete("9");
-		notaFiscal.setAmbiente(2);
+
 
 	}
 	

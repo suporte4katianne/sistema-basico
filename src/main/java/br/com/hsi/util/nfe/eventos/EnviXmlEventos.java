@@ -112,4 +112,69 @@ public class EnviXmlEventos implements Serializable {
         String[] retornoNf_2 = retornoNf_1[retornoNf_1.length - 1].split("</xMotivo>");
         return retornoNf_2[0];
     }
+
+
+    /*************DAQUI PRA BAIXO A3****************/
+
+    public NotaFiscal enviaEventoA3(X509Certificate cert, PrivateKey privateKeyA3) {
+
+
+        try {
+            URL url;
+            if (notaFiscal.getAmbiente() == 1) {
+                url = new URL("https://nfe.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx");
+            } else {
+                url = new URL("https://nfe-homologacao.svrs.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx");
+            }
+
+            String arquivoCacertsGeradoTodosOsEstados = "/HSI/NFeCacerts";
+
+            SocketFactoryDinamico socketFactoryDinamico = new SocketFactoryDinamico(cert, privateKeyA3);
+            socketFactoryDinamico.setFileCacerts(arquivoCacertsGeradoTodosOsEstados);
+
+            Protocol protocol = new Protocol("https", socketFactoryDinamico, SSL_PORT);
+            Protocol.registerProtocol("https", protocol);
+
+
+            StringBuilder xml = new StringBuilder();
+            String linha;
+            String caminhoArquivo = "/HSI/Envio/"+ notaFiscal.getChaveAcesso() + "-AssinadoEvento.xml";
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    new FileInputStream(caminhoArquivo), "ISO-8859-1"));
+            while ((linha = in.readLine()) != null) {
+                xml.append(linha);
+            }
+            in.close();
+
+            String xmlEnvNFe = xml.toString();
+
+            System.out.println("xmlEnvNFe = " + xmlEnvNFe);
+
+            OMElement ome = AXIOMUtil.stringToOM(xmlEnvNFe);
+
+
+            RecepcaoEventoStub.NfeDadosMsg dadosMsg = new RecepcaoEventoStub.NfeDadosMsg();
+            dadosMsg.setExtraElement(ome);
+
+            RecepcaoEventoStub.NfeCabecMsg nfeCabecMsg = new RecepcaoEventoStub.NfeCabecMsg();
+            nfeCabecMsg.setCUF(notaFiscal.getCodIbgeEstadoEmpresa());
+            nfeCabecMsg.setVersaoDados("1.00");
+
+            RecepcaoEventoStub.NfeCabecMsgE nfeCabecMsgE = new RecepcaoEventoStub.NfeCabecMsgE();
+            nfeCabecMsgE.setNfeCabecMsg(nfeCabecMsg);
+
+
+            RecepcaoEventoStub stub = new RecepcaoEventoStub(url.toString());
+            RecepcaoEventoStub.NfeRecepcaoEventoResult result = stub.nfeRecepcaoEvento(dadosMsg, nfeCabecMsgE);
+
+            new File("/HSI/Envio/"+ notaFiscal.getChaveAcesso() + "-AssinadoEvento.xml").delete();
+
+            notaFiscal.setMensagemRetorno("Evento: " +retorno(result.getExtraElement().toString()));
+
+            return notaFiscal;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

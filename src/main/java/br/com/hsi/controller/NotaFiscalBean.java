@@ -6,6 +6,8 @@ import br.com.hsi.service.GestaoNotaFiscal;
 import br.com.hsi.util.jsf.FacesUtil;
 import br.com.hsi.util.mail.Mailer;
 import br.com.hsi.util.mail.SimpleEmailConcat;
+import br.com.hsi.util.nfe.CertificadoFactory;
+import br.com.hsi.util.nfe.TipoCertificado;
 import br.com.hsi.util.nfe.autorizacao.GeraXmlAutorizacao;
 import br.com.hsi.util.nfe.eventos.GeraXmlEventos;
 import com.outjected.email.api.ContentDisposition;
@@ -27,6 +29,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.security.KeyStore;
+import java.security.PrivateKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -45,6 +49,7 @@ public class NotaFiscalBean implements Serializable {
 	private FacesContext facesContext;
 	@Inject
 	private Mailer mailer;
+
 
 	private Empresa empresa;
 	private NotaFiscal notaFiscal;
@@ -70,7 +75,7 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public boolean teste() {
-        return geranota != null;
+		return geranota != null;
 	}
 
 	public void listarNotasFiscais(){
@@ -228,13 +233,16 @@ public class NotaFiscalBean implements Serializable {
 		if (email.contains("@") && email.contains(".") && !email.contains(" ")) {
 			String usuario = new String(email.substring(0, email.lastIndexOf('@')));
 			String dominio = new String(email.substring(email.lastIndexOf('@') + 1, email.length()));
-            return (usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains("."))
-                    && (!dominio.contains("@")) && (dominio.indexOf(".") >= 1)
-                    && (dominio.lastIndexOf(".") < dominio.length() - 1);
+			return (usuario.length() >= 1) && (!usuario.contains("@")) && (dominio.contains("."))
+					&& (!dominio.contains("@")) && (dominio.indexOf(".") >= 1)
+					&& (dominio.lastIndexOf(".") < dominio.length() - 1);
 		} else {
 			return false;
 		}
 	}
+
+
+
 
 
 

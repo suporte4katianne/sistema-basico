@@ -20,10 +20,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.KeyStore;
-import java.security.NoSuchAlgorithmException;
-import java.security.PrivateKey;
+import java.security.*;
 import java.security.cert.X509Certificate;
 import java.text.Normalizer;
 import java.util.ArrayList;
@@ -32,14 +29,20 @@ import java.util.Enumeration;
 import java.util.List;
 
 public class AssinaXmlAutorizacao {
+	private static AssinaXmlAutorizacao instance;
 	private static final String INFINUT = "infInut";
 	private static final String INFCANC = "infCanc";
 	private static final String NFE = "NFe";
 
 	private NotaFiscal notaFiscal;
+	private String xml;
 	private PrivateKey privateKey;
 	private KeyInfo keyInfo;
-	private String xml;
+
+	private KeyStore.PrivateKeyEntry privateKeyEntry;
+	private KeyStore ks;
+	private X509Certificate cert;
+	private PrivateKey privateKeyA3;
 
 	public AssinaXmlAutorizacao(NotaFiscal notaFiscal, String xml) {
 		this.notaFiscal = notaFiscal;
@@ -52,45 +55,18 @@ public class AssinaXmlAutorizacao {
 			String senhaDoCertificadoDoCliente = notaFiscal.getSenhaCertificado();
 
 			String xmlEnviNFeAssinado = assinaEnviNFe(xml, caminhoDoCertificadoDoCliente, senhaDoCertificadoDoCliente);
-			FileWriter arquivo;
-			try {
-				arquivo = new FileWriter(new File("/HSI/Envio/" + notaFiscal.getChaveAcesso() + "-Assinado.xml"));
-				arquivo.write(xmlEnviNFeAssinado);
-				arquivo.close();
-			} catch (IOException e) {
-				System.out.println(e);
-			}
-
-			/*
-			 * /** Assinando o XML de Inutilizacao da NF-e fileInutNFe = Caminho
-			 * do Arquivo XML (InutNFe) gerado;
-			 * 
-			 * info(""); String fileInutNFe = "C:/JavaC/NF-e/xmlInutNFe.xml";
-			 * String xmlInutNFe = lerXML(fileInutNFe); String
-			 * xmlInutNFeAssinado = assinaInutNFe(xmlInutNFe,
-			 * caminhoDoCertificadoDoCliente, senhaDoCertificadoDoCliente);
-			 * info("XML InutNFe Assinado: " + xmlInutNFeAssinado);
-			 */
+			geraXML(xmlEnviNFeAssinado);
 
 			EnviXmlAutorizacao autorizaNfe = new EnviXmlAutorizacao(notaFiscal);
 			return autorizaNfe.autorizaNfe();
 
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("teste |ERRO: " + e.getMessage());
 			return null;
 		}
 	}
 
-	/**
-	 * Assinatura do XML de Envio de Lote da NF-e utilizando Certificado Digital
-	 * A1.
-	 * 
-	 * @param xml
-	 * @param certificado
-	 * @param senha
-	 * @return
-	 * @throws Exception
-	 */
 	public String assinaEnviNFe(String xml, String certificado, String senha) throws Exception {
 		Document document = documentFactory(xml);
 		XMLSignatureFactory signatureFactory = XMLSignatureFactory.getInstance("DOM");
@@ -104,34 +80,15 @@ public class AssinaXmlAutorizacao {
 		return outputXML(document);
 	}
 
-	/**
-	 * Assintaruda do XML de Cancelamento da NF-e utilizando Certificado Digital
-	 * A1.
-	 * 
-	 * @param xml
-	 * @param certificado
-	 * @param senha
-	 * @return
-	 * @throws Exception
-	 */
+
 	public String assinaCancNFe(String xml, String certificado, String senha) throws Exception {
 		return assinaCancelametoInutilizacao(xml, certificado, senha, INFCANC);
 	}
 
-	/**
-	 * Assinatura do XML de Inutilizacao de sequenciais da NF-e utilizando
-	 * Certificado Digital A1.
-	 * 
-	 * @param xml
-	 * @param certificado
-	 * @param senha
-	 * @return
-	 * @throws Exception
-	 */
 	public String assinaInutNFe(String xml, String certificado, String senha) throws Exception {
 		return assinaCancelametoInutilizacao(xml, certificado, senha, INFINUT);
 	}
-	
+
 	public static String removeAcentos(String str) {
 		CharSequence cs = new StringBuilder(str == null ? "" : str);
 		return Normalizer.normalize(cs, Normalizer.Form.NFKD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
@@ -250,6 +207,137 @@ public class AssinaXmlAutorizacao {
 			xml = xml.replaceAll(" standalone=\"no\"", "");
 		}
 		return xml;
+	}
+
+
+	/*******DAQUI PRA BAIXO A3******/
+
+
+	public NotaFiscal AssinaXmlCertificadoA3(KeyStore ks, KeyStore.PrivateKeyEntry privateKeyEntry, PrivateKey privateKeyA3) throws Exception {
+		this.ks = ks;
+		this.privateKeyEntry = privateKeyEntry;
+		this.privateKeyA3 = privateKeyA3;
+
+		try {
+			String senhaDoCertificadoDoCliente = notaFiscal.getSenhaCertificado();
+
+			String xmlEnviNFeAssinado = assinaEnviNFeA3(xml, senhaDoCertificadoDoCliente);
+
+			geraXML(xmlEnviNFeAssinado);
+
+			EnviXmlAutorizacao autorizaNfe = new EnviXmlAutorizacao(notaFiscal);
+			return autorizaNfe.enviXmlAturorizacaoA3(cert, privateKeyA3);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("teste |ERRO: " + e.getMessage());
+			return null;
+		}
+	}
+
+
+	public static String removeAcentosA3(String str) {
+		CharSequence cs = new StringBuilder(str == null ? "" : str);
+		return Normalizer.normalize(cs, Normalizer.Form.NFKD).replaceAll("\\p{InCombiningDiacriticalMarks}+", "");
+	}
+
+	private String assinaEnviNFeA3(String xml, String senha) throws Exception {
+		Document document = documentFactoryA3(xml);
+		XMLSignatureFactory signatureFactory = XMLSignatureFactory.getInstance("DOM");
+		ArrayList<Transform> transformList = signatureFactoryA3(signatureFactory);
+		loadCertificatesA3(senha, signatureFactory);
+
+		for (int i = 0; i < document.getDocumentElement().getElementsByTagName(NFE).getLength(); i++) {
+			assinarNFeA3(signatureFactory, transformList, privateKeyA3, keyInfo, document, i);
+		}
+
+		return outputXMLA3(document);
+	}
+
+	private void assinarNFeA3(XMLSignatureFactory fac, ArrayList<Transform> transformList,
+							PrivateKey privateKey, KeyInfo ki, Document document, int indexNFe) throws Exception {
+
+
+		NodeList elements = document.getElementsByTagName("infNFe");
+		org.w3c.dom.Element el = (org.w3c.dom.Element) elements.item(indexNFe);
+		String id = el.getAttribute("Id");
+		el.setIdAttribute("Id", true);
+
+		Reference ref = fac.newReference("#" + id, fac.newDigestMethod(DigestMethod.SHA1, null), transformList, null, null);
+
+		SignedInfo si = fac.newSignedInfo(
+				fac.newCanonicalizationMethod(CanonicalizationMethod.INCLUSIVE, (C14NMethodParameterSpec) null),
+				fac.newSignatureMethod(SignatureMethod.RSA_SHA1, null), Collections.singletonList(ref));
+
+		XMLSignature signature = fac.newXMLSignature(si, ki);
+
+		System.out.println(document.getDocumentElement().getElementsByTagName(NFE).item(indexNFe));
+		System.out.println(privateKey);
+
+		DOMSignContext dsc = new DOMSignContext(privateKey, document.getDocumentElement().getElementsByTagName(NFE).item(indexNFe));
+		signature.sign(dsc);
+
+	}
+
+	private ArrayList<Transform> signatureFactoryA3(XMLSignatureFactory signatureFactory)
+			throws NoSuchAlgorithmException, InvalidAlgorithmParameterException {
+		ArrayList<Transform> transformList = new ArrayList<Transform>();
+		TransformParameterSpec tps = null;
+		Transform envelopedTransform = signatureFactory.newTransform(Transform.ENVELOPED, tps);
+		Transform c14NTransform = signatureFactory.newTransform("http://www.w3.org/TR/2001/REC-xml-c14n-20010315", tps);
+
+		transformList.add(envelopedTransform);
+		transformList.add(c14NTransform);
+		return transformList;
+	}
+
+	private Document documentFactoryA3(String xml) throws SAXException, IOException, ParserConfigurationException {
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		Document document = factory.newDocumentBuilder().parse(new ByteArrayInputStream(removeAcentosA3(xml).getBytes()));
+		return document;
+	}
+
+	@SuppressWarnings("restriction")
+	private void loadCertificatesA3(String senha, XMLSignatureFactory signatureFactory) throws Exception {
+
+		cert = (X509Certificate) privateKeyEntry.getCertificate();
+
+		KeyInfoFactory keyInfoFactory = signatureFactory.getKeyInfoFactory();
+		List<X509Certificate> x509Content = new ArrayList<X509Certificate>();
+
+		x509Content.add(cert);
+		X509Data x509Data = keyInfoFactory.newX509Data(x509Content);
+		keyInfo = keyInfoFactory.newKeyInfo(Collections.singletonList(x509Data));
+		Provider p = new sun.security.pkcs11.SunPKCS11("/HSI/properites.cfg");
+		Security.addProvider(p);
+		ks = KeyStore.getInstance("pkcs11", p);
+	}
+
+	private String outputXMLA3(Document doc) throws TransformerException {
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		TransformerFactory tf = TransformerFactory.newInstance();
+		Transformer trans = tf.newTransformer();
+		trans.transform(new DOMSource(doc), new StreamResult(os));
+		String xml = os.toString();
+		if ((xml != null) && (!"".equals(xml))) {
+			xml = xml.replaceAll("\\r\\n", "");
+			xml = xml.replaceAll(" standalone=\"no\"", "");
+		}
+		return xml;
+	}
+
+
+
+	private void geraXML(String xmlEnviNFeAssinado) {
+		FileWriter arquivo;
+		try {
+			arquivo = new FileWriter(new File("/HSI/Envio/" + notaFiscal.getChaveAcesso() + "-Assinado.xml"));
+			arquivo.write(xmlEnviNFeAssinado);
+			arquivo.close();
+		} catch (IOException e) {
+			System.out.println(e);
+		}
 	}
 
 }

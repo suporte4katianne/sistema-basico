@@ -71,6 +71,7 @@ public class Empresa {
 	private String statusCertificado;
 	@Column(name = "tipo_certificado")
 	private String tipoCertificado;
+	private int ambiente;
 	
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Entidade> destinatarios = new ArrayList<>();
@@ -275,7 +276,13 @@ public class Empresa {
 		this.usuarios = usuarios;
 	}
 
+	public int getAmbiente() {
+		return ambiente;
+	}
 
+	public void setAmbiente(int ambiente) {
+		this.ambiente = ambiente;
+	}
 
 	@Override
 	public int hashCode() {

@@ -27,8 +27,6 @@
         <spring.security.version>4.2.1.RELEASE</spring.security.version>
     </properties>
 
-
-
     <dependencies>
         <dependency>
             <groupId>org.primefaces</groupId>

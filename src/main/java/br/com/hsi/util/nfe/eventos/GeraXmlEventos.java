@@ -1,6 +1,7 @@
 package br.com.hsi.util.nfe.eventos;
 
 import br.com.hsi.model.NotaFiscal;
+import br.com.hsi.util.nfe.CarregaAssinaturaA3;
 import br.inf.portalfiscal.www.nfe.wsdl.nfeconsulta2.NfeConsulta2Stub;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.util.AXIOMUtil;
@@ -51,8 +52,21 @@ public class GeraXmlEventos {
                 .append("</infEvento>")
                 .append("</evento>")
                 .append("</envEvento>");
-        AssinaXmlEventos xmlCancelamento = new AssinaXmlEventos(notaFiscal, xml.toString());
-        return xmlCancelamento.assinaXmlEventos();
+
+        try{
+            if (notaFiscal.getEmpresa().getTipoCertificado().equals("A1")) {
+                AssinaXmlEventos assinaXmlEventos = new AssinaXmlEventos(notaFiscal, xml.toString());
+                return assinaXmlEventos.assinaXmlEventos();
+            } else {
+                CarregaAssinaturaA3 carregaAssinaturaA3 = new CarregaAssinaturaA3();
+                carregaAssinaturaA3.carregaAssinatura(notaFiscal.getSenhaCertificado());
+                AssinaXmlEventos assinaXmlEventos = new AssinaXmlEventos(notaFiscal, xml.toString());
+                return assinaXmlEventos.assinaXmlEventosA3(carregaAssinaturaA3.getKs(), carregaAssinaturaA3.getPrivateKeyEntry(), carregaAssinaturaA3.getPrivateKey());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public NotaFiscal gerarCartaDeCorrecao(String correcao) throws IOException, InterruptedException {
@@ -92,9 +106,23 @@ public class GeraXmlEventos {
                 .append("</infEvento>")
                 .append("</evento>")
                 .append("</envEvento>");
-        AssinaXmlEventos xmlCancelamento = new AssinaXmlEventos(notaFiscal, xml.toString());
-        return xmlCancelamento.assinaXmlEventos();
+        try{
+            if (notaFiscal.getEmpresa().getTipoCertificado().equals("A1")) {
+                AssinaXmlEventos assinaXmlEventos = new AssinaXmlEventos(notaFiscal, xml.toString());
+                return assinaXmlEventos.assinaXmlEventos();
+            } else {
+                CarregaAssinaturaA3 carregaAssinaturaA3 = new CarregaAssinaturaA3();
+                carregaAssinaturaA3.carregaAssinatura(notaFiscal.getSenhaCertificado());
+                AssinaXmlEventos assinaXmlEventos = new AssinaXmlEventos(notaFiscal, xml.toString());
+                return assinaXmlEventos.assinaXmlEventosA3(carregaAssinaturaA3.getKs(), carregaAssinaturaA3.getPrivateKeyEntry(), carregaAssinaturaA3.getPrivateKey());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
+
+
 
     @Deprecated
     public void consultaNotaFiscal(){

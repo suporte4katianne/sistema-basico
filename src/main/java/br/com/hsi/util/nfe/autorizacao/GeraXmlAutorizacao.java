@@ -3,6 +3,9 @@ package br.com.hsi.util.nfe.autorizacao;
 import br.com.hsi.model.NotaFiscal;
 import br.com.hsi.model.NotaFiscalItem;
 import br.com.hsi.model.NotaFiscalReferencia;
+import br.com.hsi.util.nfe.CarregaAssinaturaA3;
+import br.com.hsi.util.nfe.CertificadoFactory;
+import br.com.hsi.util.nfe.TipoCertificado;
 import enviNFe_v310.*;
 import enviNFe_v310.TNFe.InfNFe;
 import enviNFe_v310.TNFe.InfNFe.*;
@@ -32,19 +35,25 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.*;
+import java.security.KeyStore;
+import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.List;
 
 public class GeraXmlAutorizacao {
 	private static NotaFiscal notaFiscal;
 
+
 	public GeraXmlAutorizacao(NotaFiscal notaFiscal) {
 		GeraXmlAutorizacao.notaFiscal = notaFiscal;
 	}
+
+
 
 	public NotaFiscal GerandoNfe() throws Exception {
 		try {
@@ -81,36 +90,11 @@ public class GeraXmlAutorizacao {
                 return assinaXml.AssinaXml();
 			}
 			else {
-//				String cnjpEmpresa = notaFiscal.getCnpjEmpresa().replaceAll("\\.", "").replaceAll("/", "").replaceAll("-","");
-//
-//				FileWriter arquivo;
-//				arquivo = new FileWriter(new File("/var/HSI/Sistemas/NF-e/" + cnjpEmpresa + "/Envio/" + notaFiscal.getChaveAcesso() + "-enviNfe.xml"));
-//				arquivo.write(strValueOf(enviNFe));
-//				arquivo.close();
-//
-//				File xmlEnviNfe = new File("/var/HSI/Sistemas/NF-e/" + cnjpEmpresa + "/Envio/" + notaFiscal.getChaveAcesso() + "-enviNfe.xml");
-//				xmlEnviNfe.setReadable(Boolean.TRUE, Boolean.FALSE);
-//				xmlEnviNfe.setWritable(Boolean.TRUE, Boolean.FALSE);
-//				xmlEnviNfe.setExecutable(Boolean.TRUE, Boolean.FALSE);
-//
-//				long now = System.currentTimeMillis();
-//				long expectedElapsedTime = now + 15000;
-//				while(now < expectedElapsedTime){
-//				    now = System.currentTimeMillis();
-//				}
-//
-//				String xmlRetConsReciNFe = "";
-//				String xmlEnviNFe = "";
-//				try{
-//					xmlRetConsReciNFe = lerXML("/var/HSI/Sistemas/NF-e/" + cnjpEmpresa + "/Envio/" + notaFiscal.getChaveAcesso() + "-Retorno.xml");
-//					xmlEnviNFe = lerXML("/var/HSI/Sistemas/NF-e/" + cnjpEmpresa + "/Envio/" + notaFiscal.getChaveAcesso() + "-Assinado.xml");
-//				}catch (FileNotFoundException e) {
-//					FacesUtil.addErrorMessage("Arquivos assinados não foram encontrados, verifique se o aplicativo de assinatura esta aberto em sua maquina");
-//				}
-//				xmlEnviNfe.delete();
-//				ProcessaXmlAutorizacao xmlAutorizacao = new ProcessaXmlAutorizacao(notaFiscal, xmlEnviNFe, xmlRetConsReciNFe);
-//				return xmlAutorizacao.GerandoNfe();
-                return null;
+				CarregaAssinaturaA3 carregaAssinaturaA3 = new CarregaAssinaturaA3();
+				carregaAssinaturaA3.carregaAssinatura(notaFiscal.getSenhaCertificado());
+				AssinaXmlAutorizacao assinaXml = new AssinaXmlAutorizacao(notaFiscal, strValueOf(enviNFe));
+				System.out.println("strValueOf(enviNFe) = " + strValueOf(enviNFe));
+				return assinaXml.AssinaXmlCertificadoA3(carregaAssinaturaA3.getKs(), carregaAssinaturaA3.getPrivateKeyEntry(), carregaAssinaturaA3.getPrivateKey());
 			}
 
 		} catch (JAXBException e) {
@@ -556,20 +540,6 @@ public class GeraXmlAutorizacao {
 		return xml;
 	}
 
-	
-	public static String lerXML(String fileXML) throws IOException {
-		String linha = "";
-		StringBuilder xml = new StringBuilder();
-
-		BufferedReader in = new BufferedReader(new InputStreamReader(new FileInputStream(fileXML)));
-		while ((linha = in.readLine()) != null) {
-			xml.append(linha);
-		}
-		in.close();
-
-		return xml.toString();
-	}
-	
 
 
 }

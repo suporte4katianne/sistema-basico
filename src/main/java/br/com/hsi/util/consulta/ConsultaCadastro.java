@@ -8,9 +8,12 @@ import br.com.hsi.service.GestaoEmpresa;
 import br.com.hsi.service.GestaoEndereco;
 import br.com.hsi.util.SocketFactoryDinamico;
 import br.com.hsi.util.cdi.CDIServiceLocator;
+import br.com.hsi.util.nfe.CarregaAssinaturaA3;
 import br.inf.portalfiscal.www.nfe.wsdl.cadconsultacadastro2.CadConsultaCadastro2Stub;
 import org.apache.commons.httpclient.protocol.Protocol;
 
+import javax.xml.crypto.dsig.keyinfo.KeyInfoFactory;
+import javax.xml.crypto.dsig.keyinfo.X509Data;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamReader;
 import java.io.FileInputStream;
@@ -20,9 +23,10 @@ import java.io.StringReader;
 import java.net.URL;
 import java.security.KeyStore;
 import java.security.PrivateKey;
+import java.security.Provider;
+import java.security.Security;
 import java.security.cert.X509Certificate;
-import java.util.Enumeration;
-import java.util.Properties;
+import java.util.*;
 
 public class ConsultaCadastro {
 
@@ -49,31 +53,45 @@ public class ConsultaCadastro {
 			FileInputStream arquivoIn = new FileInputStream("/HSI/WS_SEFAZ.properties");
 			properties.load(arquivoIn);
 			arquivoIn.close();
-
-			
 			URL url = new URL(properties.getProperty(estado.getUrlConsultaCadastro()));
 
-            InputStream entrada = new FileInputStream(caminhoCertificado);  
-            KeyStore ks = KeyStore.getInstance("pkcs12");  
-            try {  
-                ks.load(entrada, senhaCertificado.toCharArray());  
-            } catch (IOException e) {  
-                throw new Exception("Senha do Certificado Digital esta incorreta ou Certificado inválido.");  
-            }
-			
-            String alias = "";    
-            Enumeration<String> aliasesEnum = ks.aliases();    
-            while (aliasesEnum.hasMoreElements()) {    
-                alias = aliasesEnum.nextElement();
-                if (ks.isKeyEntry(alias)) break;    
-            }  
-            X509Certificate certificate = (X509Certificate) ks.getCertificate(alias);  
-            PrivateKey privateKey = (PrivateKey) ks.getKey(alias, senhaCertificado.toCharArray());  
-            SocketFactoryDinamico socketFactoryDinamico = new SocketFactoryDinamico(certificate, privateKey);  
-            socketFactoryDinamico.setFileCacerts(NFE_CACERTS);  
-  
-            Protocol protocol = new Protocol("https", socketFactoryDinamico, SSL_PORT);    
-            Protocol.registerProtocol("https", protocol);   
+
+			if(empresa.getTipoCertificado().equals("A1")) {
+				InputStream entrada = new FileInputStream(caminhoCertificado);
+				KeyStore ks = KeyStore.getInstance("pkcs12");
+				try {
+					ks.load(entrada, senhaCertificado.toCharArray());
+				} catch (IOException e) {
+					throw new Exception("Senha do Certificado Digital esta incorreta ou Certificado inválido.");
+				}
+
+				String alias = "";
+				Enumeration<String> aliasesEnum = ks.aliases();
+				while (aliasesEnum.hasMoreElements()) {
+					alias = aliasesEnum.nextElement();
+					if (ks.isKeyEntry(alias)) break;
+				}
+				X509Certificate certificate = (X509Certificate) ks.getCertificate(alias);
+				PrivateKey privateKey = (PrivateKey) ks.getKey(alias, senhaCertificado.toCharArray());
+				SocketFactoryDinamico socketFactoryDinamico = new SocketFactoryDinamico(certificate, privateKey);
+				socketFactoryDinamico.setFileCacerts(NFE_CACERTS);
+
+				Protocol protocol = new Protocol("https", socketFactoryDinamico, SSL_PORT);
+				Protocol.registerProtocol("https", protocol);
+			} else {
+				CarregaAssinaturaA3 carregaAssinaturaA3 = new CarregaAssinaturaA3();
+				carregaAssinaturaA3.carregaAssinatura(empresa.getSenhaCertificado());
+
+				X509Certificate cert = (X509Certificate) carregaAssinaturaA3.getPrivateKeyEntry().getCertificate();
+
+				SocketFactoryDinamico socketFactoryDinamico = new SocketFactoryDinamico(cert, carregaAssinaturaA3.getPrivateKey());
+				socketFactoryDinamico.setFileCacerts(NFE_CACERTS);
+
+				Protocol protocol = new Protocol("https", socketFactoryDinamico, SSL_PORT);
+				Protocol.registerProtocol("https", protocol);
+
+			}
+
             
 
 
