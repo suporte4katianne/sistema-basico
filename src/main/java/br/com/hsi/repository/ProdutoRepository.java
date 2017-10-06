@@ -76,7 +76,7 @@ public class ProdutoRepository implements Serializable{
     }
 
     public List<Movimentacao> movimentacoesPorProduto(Produto produto){
-        return manager.createQuery("SELECT m FROM Movimentacao m WHERE m.produto = :produto")
+        return manager.createQuery("SELECT m FROM Movimentacao m WHERE m.produto = :produto", Movimentacao.class)
                 .setParameter("produto",produto)
                 .getResultList();
     }

@@ -44,11 +44,13 @@ public class EntidadeFormularioBean implements Serializable{
 	
 	public void inicializar(){
 		estados = gestaoEndereco.estados();
-		if(entidade != null){
-			cidades = gestaoEndereco.cidadePorEstado(entidade.getEstado().getIdEstado());
-		}else{
+
+		if(entidade == null) {
 			entidade = new Entidade();
+			entidade.setEstado(estados.get(0));
 		}
+
+		cidades = gestaoEndereco.cidadePorEstado(entidade.getEstado().getIdEstado());
 	}
 
 	public void salvar() throws IOException {
@@ -105,10 +107,10 @@ public class EntidadeFormularioBean implements Serializable{
 		entidade.setEstado(gestaoEndereco.estadoPorId(cep.getCidade().getEstado().getIdEstado()));
 		cidades = gestaoEndereco.cidadePorEstado(entidade.getEstado().getIdEstado());
 		entidade.setCidade(gestaoEndereco.cidadePorId(cep.getCidade().getIdCidade()));
-		entidade.setRua(cep.getEndereco());
 		entidade.setBairro(cep.getBairro());
+		entidade.setRua(cep.getEndereco());
 	}
-	
+
 	//-------------- Getters and Setters --------------
 	
 	public Entidade getEntidade() {

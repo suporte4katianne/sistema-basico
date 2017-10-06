@@ -1,62 +1,92 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html">
+				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+				xmlns:p="http://primefaces.org/ui"
+				xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
 	<button class="accordion">Cadastros</button>
 	<div class="panel">
-		<ul>
-			<li class="#{view.viewId == '/Sistemas/Cliente.xhtml' ? 'is-selected' : ''}">
-				<h:link outcome="Cliente" ><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
-			</li>
+		<h:form>
+			<ul>
+				<li class="#{view.viewId == '/Sistemas/Cliente.xhtml' ? 'is-selected' : ''}">
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-user"/>Clientes
+						<p:ajax listener="${menuBean.segurancaFormulario('Cliente')}" />
+					</h:commandLink>
+				</li>
 
-            <li class="#{view.viewId == '/Sistemas/Fornecedor.xhtml' ? 'is-selected' : ''}">
-                <h:link outcome="Fornecedor" ><i class="fa  fa-fw  fa-user"></i>Fornecedores</h:link>
-            </li>
+				<li class="#{view.viewId == '/Sistemas/Fornecedor.xhtml' ? 'is-selected' : ''}">
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-user"/>Fornecedores
+						<p:ajax listener="${menuBean.segurancaFormulario('Fornecedor')}" />
+					</h:commandLink>
+				</li>
 
-			<li class="#{view.viewId == '/Sistemas/Transportadora.xhtml' ? 'is-selected' : ''}">
-				<h:link outcome="Transportadora" ><i class="fa  fa-fw  fa-user"></i>Transportadoras</h:link>
-			</li>
+				<li class="#{view.viewId == '/Sistemas/Transportadora.xhtml' ? 'is-selected' : ''}">
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-user"/>Transportadoras
+						<p:ajax listener="${menuBean.segurancaFormulario('Transportadora')}" />
+					</h:commandLink>
+				</li>
 
-			<li class="#{view.viewId == '/Sistemas/Produto.xhtml' ? 'is-selected' : ''}" >
-				<h:link outcome="Produto" ><i class="fa  fa-fw  fa-cube"></i>Produtos</h:link>
-			</li>
-		</ul>
+				<li class="#{view.viewId == '/Sistemas/Produto.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-cube"/>Produtos
+						<p:ajax listener="${menuBean.segurancaFormulario('Produto')}" />
+					</h:commandLink>
+				</li>
+			</ul>
+		</h:form>
 	</div>
 
 	<button class="accordion">Atendimento</button>
 	<div class="panel">
-		<ul>
-			<li class="#{view.viewId == '/Sistemas/Orcamento.xhtml' ? 'is-selected' : ''}" >
-				<h:link outcome="Saida" ><i class="fa  fa-fw  fa-calculator"></i>Orçamentos</h:link>
-			</li>
-		</ul>
-
-
+		<h:form>
+			<ul>
+				<li class="#{view.viewId == '/Sistemas/Orcamento.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-calculator"/>Orçamentos
+						<p:ajax listener="${menuBean.segurancaFormulario('Orcamento')}" />
+					</h:commandLink>
+				</li>
+			</ul>
+		</h:form>
 	</div>
 
 	<button class="accordion">Estoque</button>
 	<div class="panel">
-
-        <ul>
-            <li class="#{view.viewId == '/Sistemas/Saida.xhtml' ? 'is-selected' : ''}" >
-                <h:link outcome="Saida" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Saidas</h:link>
-            </li>
-        </ul>
-
-		<ul>
-			<li class="#{view.viewId == '/Sistemas/Entrada.xhtml' ? 'is-selected' : ''}" >
-				<h:link outcome="Entrada" ><i class="fa  fa-fw  fa-file-text"></i>Notas de Entradas</h:link>
-			</li>
-		</ul>
-
-        <ul>
-            <li class="#{view.viewId == '/Sistemas/AjusteEstoque.xhtml' ? 'is-selected' : ''}" >
-                <h:link outcome="AjusteEstoque" ><i class="fa  fa-fw fa-pencil-square-o"></i>Ajustes de Estoque</h:link>
-            </li>
-        </ul>
-
+		<h:form>
+			<ul>
+				<li class="#{view.viewId == '/Sistemas/Saida.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-file-text"/>Notas de Saidas
+						<p:ajax listener="${menuBean.segurancaFormulario('Saida')}" />
+					</h:commandLink>
+				</li>
+				<li class="#{view.viewId == '/Sistemas/Entrada.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-file-text"/>Notas de Entradas
+						<p:ajax listener="${menuBean.segurancaFormulario('Entrada')}" />
+					</h:commandLink>
+				</li>
+				<li class="#{view.viewId == '/Sistemas/AjusteEstoque.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw fa-pencil-square-o"/>Ajustes de Estoque
+						<p:ajax listener="${menuBean.segurancaFormulario('AjusteEstoque')}" />
+					</h:commandLink>
+				</li>
+			</ul>
+		</h:form>
 	</div>
 
+
+	<p:dialog header="Sair?" widgetVar="cancelarOperacao" modal="true" height="250" width="400"
+			  resizable="false">
+		<h:outputText value="Deseja continuar? todo o conteudo atual será perdido!" />
+		<p:commandButton value="Sim" actionListener="#{menuBean.direcionaPage()}" styleClass="ui-priority-primary"
+				  oncomplete="PF('cancelarOperacao').hide()" />
+		<p:commandButton value="Não" styleClass="ui-priority-primary"
+						 oncomplete="PF('cancelarOperacao').hide()" />
+	</p:dialog>
 
 </ui:composition>

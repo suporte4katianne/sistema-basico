@@ -14,7 +14,6 @@ public class Embalagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CodigoBarras
     @Column(name = "codigo_barras")
     private String codigoBarras;
 

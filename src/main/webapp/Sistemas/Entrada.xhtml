@@ -83,16 +83,14 @@
                             <f:param name="notaFiscal" value="#{notaFiscalBean.notaFiscal.id}" />
                         </p:button>
 
-                        <p:button value="Excluir" icon="fa fa-minus-circle" widgetVar="excluirNota"
-                                  styleClass="ui-priority-primary" actionListener="#{notaFiscalBean.excluirNotaFiscal()}" update="@form"
-                                  disabled="#{notaFiscalBean.notaFiscal.status.equals('A') or notaFiscalBean.notaFiscal.status.equals('C')
-								  or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" >
-                        </p:button>
 
                         <p:commandButton value="Cancelar" icon="fa fa-stop-circle"
                                          action="#{notaFiscalBean.cancelarNotaFiscal()}" widgetVar="cancelarNota"
                                          styleClass="ui-priority-primary" update="@form"
-                                         disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or notaFiscalBean.notaFiscal.status.equals('R') or notaFiscalBean.notaFiscal == null}" />
+                                         disabled="#{notaFiscalBean.notaFiscal.status.equals('N') or
+                                         notaFiscalBean.notaFiscal.status.equals('R') or
+                                         notaFiscalBean.notaFiscal.status.equals('C') or
+                                         notaFiscalBean.notaFiscal == null}" />
 
                         <p:commandButton id="imprimirDanfe" value="DANFE" icon="fa fa-print"
                                          styleClass="ui-priority-primary" widgetVar="imprimirDanfe"

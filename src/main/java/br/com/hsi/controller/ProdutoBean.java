@@ -2,6 +2,7 @@ package br.com.hsi.controller;
 
 import br.com.hsi.model.Produto;
 import br.com.hsi.service.GestaoProduto;
+import br.com.hsi.util.exception.NegocioException;
 import br.com.hsi.util.jsf.FacesUtil;
 
 import javax.annotation.PostConstruct;
@@ -32,11 +33,13 @@ public class ProdutoBean implements Serializable {
 	}
 	
 	public void excluir() {
-		gestaoProduto.excluir(produto);
-		produtos = gestaoProduto.listarProdutos();
-		produto = new Produto();
-		FacesUtil.addInfoMessage("Produto removido com sucesso!");
-
+		try {
+			gestaoProduto.excluir(produto);
+			produtos = gestaoProduto.listarProdutos();
+			produto = new Produto();
+		} catch (NegocioException e){
+			FacesUtil.addErrorMessage(e.getMessage());
+		}
 	}
 	
 	

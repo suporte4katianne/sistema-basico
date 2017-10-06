@@ -30,8 +30,12 @@ public class GestaoEntidade implements Serializable{
 	}
 	
 	@Transacional
-	public void excluir(Entidade destinatario) throws NegocioException{
-		entidades.excluir(destinatario);
+	public void excluir(Entidade entidade) throws NegocioException{
+		if(entidades.getNotasFiscaisDaEntidade(entidade).size() > 0) {
+			entidades.excluir(entidade);
+		} else {
+			throw new NegocioException("Este cadastro possui vinculo com notas fiscais, não é possivel removelo");
+		}
 	}
 	
 	@Transacional

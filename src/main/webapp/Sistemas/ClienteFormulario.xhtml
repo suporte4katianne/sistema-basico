@@ -11,12 +11,12 @@
 			<f:viewAction action="#{entidadeFormularioBean.inicializar()}"/>
 			<o:viewParam name="entidade" value="#{entidadeFormularioBean.entidade}" converter="#{entidadeConverter}" />
 		</f:metadata>
-		
+
 		<h:form id="frm">
 			<div class="ui-fluid">
 				<br />
 				<p:panel header="Cadastro de Clientes" id="painelCliente">
-					<h:panelGrid id="capaPanel" style="width:90%"  columns="4" 
+					<h:panelGrid id="capaPanel" style="width:90%"  columns="4"
 						columnClasses="rotulo,campo,rotulo ">
 						<p:outputLabel value="Nome:" for="nome" />
 						<p:inputText id="nome"
@@ -25,7 +25,7 @@
 						<p:outputLabel value="" />
 						<p:outputLabel value="" />
 
-						<p:outputLabel value="Tipo do Modalidade:" for="tipoCliente" />
+						<p:outputLabel value="Modalidade:" for="tipoCliente" />
 						<p:selectOneMenu id="tipoCliente"
 							value="#{entidadeFormularioBean.entidade.tipoModalidade}">
 							<f:selectItem itemLabel="Pessoa Fisica" itemValue="2" />
@@ -59,7 +59,7 @@
 						<p:outputLabel value="CEP:" for="cep" />
 						<p:inputMask id="cep" mask="99999-999"
 							value="#{entidadeFormularioBean.entidade.cep}">
-							<p:ajax process="cep" update="estado cidade rua bairro"
+							<p:ajax process="cep, estado, cidade, rua, bairro" update="estado cidade rua bairro"
 								listener="#{entidadeFormularioBean.buscaEnderecoEntidade()}" />
 						</p:inputMask>
 
@@ -146,8 +146,8 @@
 						style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
 				</f:facet>
 			</p:toolbar>
-			
-			
+
+
 			<p:dialog id="consultaCadstroSefaz" widgetVar="consultaCadstroSefaz"
 				header="Consulta Cadstro Sefaz" minWidth="350" width="350"
 				draggable="false" resizable="false" modal="true" height="120">

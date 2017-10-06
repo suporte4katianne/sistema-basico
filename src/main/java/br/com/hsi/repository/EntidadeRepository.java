@@ -1,6 +1,7 @@
 package br.com.hsi.repository;
 
 import br.com.hsi.model.Entidade;
+import br.com.hsi.model.NotaFiscal;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -25,7 +26,8 @@ public class EntidadeRepository implements Serializable{
 	}
 	
 	public List<Entidade> listarEntidades(String tipoEntidade){
-		TypedQuery<Entidade> selectQuery = manager.createQuery("SELECT e FROM Entidade e WHERE e.tipoEntidade = :tipoEntidade", Entidade.class);
+		TypedQuery<Entidade> selectQuery = manager.createQuery("SELECT e FROM Entidade e " +
+				"WHERE e.tipoEntidade = :tipoEntidade", Entidade.class);
 		selectQuery.setParameter("tipoEntidade", tipoEntidade);
 		return selectQuery.getResultList();
 	}
@@ -36,9 +38,23 @@ public class EntidadeRepository implements Serializable{
 	}
 
 	public boolean checaCnpj(String cnpj){
-		TypedQuery<Entidade> selectQuery = manager.createQuery("SELECT e FROM Entidade e WHERE e.cpfCnpj = :cnpj", Entidade.class);
+		TypedQuery<Entidade> selectQuery = manager.createQuery("SELECT e FROM Entidade e " +
+				"WHERE e.cpfCnpj = :cnpj", Entidade.class);
 		selectQuery.setParameter("cnpj", cnpj);
         return selectQuery.getResultList().size() != 0;
 	}
 
+    public List<NotaFiscal> getNotasFiscaisDaEntidade(Entidade entidade) {
+		TypedQuery<NotaFiscal> selectQuery;
+		if(entidade.getTipoEntidade().equals("T")){
+			selectQuery = manager.createQuery("SELECT n FROM NotaFiscal n " +
+					"WHERE n.transportadora.id = :id", NotaFiscal.class);
+			selectQuery.setParameter("id", entidade.getId());
+		} else {
+			selectQuery = manager.createQuery("SELECT n FROM NotaFiscal n " +
+					"WHERE n.entidade.id = :id", NotaFiscal.class);
+		}
+		selectQuery.setParameter("id", entidade.getId());
+		return selectQuery.getResultList();
+    }
 }

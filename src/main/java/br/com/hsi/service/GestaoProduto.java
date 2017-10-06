@@ -8,6 +8,7 @@ import br.com.hsi.model.dados.UnidadeMedida;
 import br.com.hsi.model.dados.Cest;
 import br.com.hsi.repository.ProdutoRepository;
 import br.com.hsi.util.Transacional;
+import br.com.hsi.util.exception.NegocioException;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -29,8 +30,12 @@ public class GestaoProduto implements Serializable{
 	}
 
 	@Transacional
-	public void excluir(Produto produto){
-		produtos.exclui(produto);
+	public void excluir(Produto produto) throws NegocioException{
+		if(produtos.movimentacoesPorProduto(produto).size() > 0){
+			produtos.exclui(produto);
+		} else {
+			throw new NegocioException("Este produto ja possui movimentação, Não é possivel removelo!");
+		}
 	}
 
 	@Transacional

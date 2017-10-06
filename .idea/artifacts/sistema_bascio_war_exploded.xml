@@ -1,10 +1,10 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="sistema-basico:war exploded">
-    <output-path>$PROJECT_DIR$/classes/artifacts/sistema_basico_war_exploded</output-path>
+  <artifact type="exploded-war" name="sistema-bascio:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/sistema_bascio_war_exploded</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
-          <element id="module-output" name="sistema-basico" />
+          <element id="module-output" name="sistema-bascio" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="Maven: org.primefaces:primefaces:6.1" />
@@ -124,7 +124,7 @@
           <element id="library" level="project" name="Maven: org.jrobin:jrobin:1.5.9" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="sistema-basico/web/Web" />
+      <element id="javaee-facet-resources" facet="sistema-bascio/web/Web" />
     </root>
   </artifact>
 </component>

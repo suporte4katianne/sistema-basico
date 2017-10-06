@@ -11,12 +11,12 @@
 			<f:viewAction action="#{entidadeFormularioBean.inicializar()}"/>
 			<o:viewParam name="trnasportadora" value="#{entidadeFormularioBean.entidade}"  converter="#{entidadeConverter}" />
 		</f:metadata>
-		
+
 		<h:form id="frm">
 			<div class="ui-fluid">
 				<br />
 				<p:panel header="Cadastro de Transportadoras" id="painelTransportadora">
-										<h:panelGrid id="capaPanel" style="width:90%"  columns="4" 
+										<h:panelGrid id="capaPanel" style="width:90%"  columns="4"
 						columnClasses="rotulo,campo,rotulo ">
 						<p:outputLabel value="Nome:" for="nome" />
 						<p:inputText id="nome"

@@ -25,7 +25,7 @@ public class NotaFiscalRepository implements Serializable{
 		return manager.merge(nfe);
 	}
 	
-	public List<NotaFiscal> notaFiscalPorEmitente(Long idEmitente){
+	public List<NotaFiscal> getNotaFiscalPorEmpresa(Long idEmitente){
 		TypedQuery<NotaFiscal> selectQuery = manager.createQuery("SELECT n FROM NotaFiscal n WHERE " +
 				"n.empresa.id = :idEmitente ORDER BY n.id DESC", NotaFiscal.class);
 		selectQuery.setParameter("idEmitente", idEmitente);
@@ -76,7 +76,7 @@ public class NotaFiscalRepository implements Serializable{
 	}
 
 	public List<Inutilizacao> listarInutilizacoes() {
-		TypedQuery<Inutilizacao> selectQuery = manager.createQuery("FROM Inutilizacao", Inutilizacao.class);
+		TypedQuery<Inutilizacao> selectQuery = manager.createQuery("SELECT i FROM Inutilizacao i", Inutilizacao.class);
 		return selectQuery.getResultList();
 	}
 

@@ -85,9 +85,12 @@
                                          style="margin-top:20px" columnClasses="rotulo">
 
                                 <p:outputLabel value="CST de ICMS:" for="CSTICMSIcms" />
-                                <p:selectOneMenu id="CSTICMSIcms" autoWidth="false" value="#{produtoFormularioBean.produto.cstIcms}">
+                                <p:selectOneMenu id="CSTICMSIcms" autoWidth="false"
+                                                 value="#{produtoFormularioBean.produto.cstIcms}">
+                                    <f:selectItem itemLabel="Selecione..." />
                                     <f:selectItems value="#{produtoFormularioBean.csts}" var="CSTICMS"
-                                                   itemValue="#{CSTICMS}" itemLabel="#{CSTICMS.codigo} - #{CSTICMS.descricao}" />
+                                                   itemValue="#{CSTICMS}"
+                                                   itemLabel="#{CSTICMS.codigo} - #{CSTICMS.descricao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota ICMS:" for="aliquotaIcms" />
@@ -99,8 +102,10 @@
                                 <p:outputLabel value="CST de IPI:" for="cstIpi" />
                                 <p:selectOneMenu id="cstIpi"
                                                  value="#{produtoFormularioBean.produto.cstIpi}">
+                                    <f:selectItem itemLabel="Selecione..." />
                                     <f:selectItems value="#{produtoFormularioBean.cstsIpi}" var="cstIpi"
-                                                   itemValue="#{cstIpi}" itemLabel="#{cstIpi.codigo} - #{cstIpi.descircao}" />
+                                                   itemValue="#{cstIpi}"
+                                                   itemLabel="#{cstIpi.codigo} - #{cstIpi.descircao}" />
                                 </p:selectOneMenu>
 
                                 <p:outputLabel value="Alíquota IPI:" for="aliquotaIpi" />
@@ -111,6 +116,7 @@
 
                                 <p:outputLabel value="CST PIS/Cofins:" for="cstPis" />
                                 <p:selectOneMenu id="cstPis" autoWidth="false" value="#{produtoFormularioBean.produto.cstPisCofins}">
+                                    <f:selectItem itemLabel="Selecione..." />
                                     <f:selectItems value="#{produtoFormularioBean.cstsPisCofins}" var="cstPisCofins"
                                                    itemValue="#{cstPisCofins}"
                                                    itemLabel="#{cstPisCofins.codigo} - #{cstPisCofins.descricao}" />
@@ -232,9 +238,11 @@
                                      widgetVar="salvarCadastro" />
                 </f:facet>
                 <f:facet name="right">
-                    <p:button outcome="Produto" value="Cancelar" icon="fa fa-reply"
+                    <p:commandButton value="Cancelar" icon="fa fa-reply"
                               styleClass="ui-priority-primary"
-                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
+                        <p:confirm header="Cancelar?" message="Ao cancelar a operação atual todo progresso será perdido!" icon="fa fa-exclamation-triangle"/>
+                    </p:commandButton>
                 </f:facet>
             </p:toolbar>
         </h:form>
@@ -247,10 +255,7 @@
                              emptyMessage="Nenhum item adicionado" reflow="true" var="dados"
                              id="dadosTabela" multiViewState="true" rowKey="#{dados.id}"
                              selection="#{produtoFormularioBean.produto.ncm}"
-                             filteredValue="#{produtoFormularioBean.ncmsFiltro}" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+                             filteredValue="#{produtoFormularioBean.ncmsFiltro}" rows="10">
 
                     <f:facet name="header">
                         <div align="left">
@@ -276,6 +281,7 @@
                         <div align="left">
                             <p:commandButton value="Selecionar"
                                              action="#{produtoFormularioBean.selecionaNcm()}"
+                                             styleClass="ui-priority-primary"
                                              oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm" />
                         </div>
                     </f:facet>
@@ -287,16 +293,13 @@
 
         <p:dialog widgetVar="cestDialog" modal="true" height="400" width="700"
                   resizable="false">
-            <h:form>
+            <h:form id="cestFiltro">
                 <p:dataTable value="#{produtoFormularioBean.cest}"
                              widgetVar="listaCest" selectionMode="single"
                              emptyMessage="Nenhum item adicionado" reflow="true" var="dadosCest"
                              id="dadosTabelaCest" multiViewState="true" rowKey="#{dadosCest.id}"
                              selection="#{produtoFormularioBean.produto.cest}"
-                             filteredValue="#{produtoFormularioBean.cestFiltro}" rows="10"
-                             paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+                             filteredValue="#{produtoFormularioBean.cestFiltro}" rows="10">
 
                     <f:facet name="header">
                         <div align="left">
@@ -309,6 +312,11 @@
                         </div>
                     </f:facet>
 
+                    <p:ajax event="rowDblselect" process="dadosTabelaCest"
+                            listener="#{produtoFormularioBean.selecionaCest()}"
+                            oncomplete="PF('cestDialog').hide()"
+                            update="dadosTabelaCest, frm:tabView:cest" />
+
                     <p:ajax event="rowSelect" process="dadosTabelaCest"
                             update="dadosTabelaCest" />
 
@@ -320,14 +328,21 @@
                     <f:facet name="footer">
                         <div align="left">
                             <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
-                                             action="#{produtoFormularioBean.selecionaCest()}"
+                                             action="#{produtoFormularioBean.selecionaCest()}" id="selecionarCest"
                                              oncomplete="PF('cestDialog').hide()" update="frm:tabView:cest" />
                         </div>
                     </f:facet>
 
                 </p:dataTable>
+
+                <p:defaultCommand target="cestFiltro:dadosTabelaCest:selecionarCest" />
             </h:form>
         </p:dialog>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:button value="Sim" outcome="Produto" type="button" styleClass="ui-confirmdialog-yes ui-priority-primary" icon="fa fa-check" />
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-priority-primary" icon="fa fa-close" />
+        </p:confirmDialog>
 
     </ui:define>
 

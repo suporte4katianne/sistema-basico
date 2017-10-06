@@ -7,9 +7,9 @@ import br.com.hsi.model.dados.text.CSTICMS;
 import br.com.hsi.model.dados.text.CSTIPI;
 import br.com.hsi.model.dados.text.CSTPISCOFINS;
 import br.com.hsi.model.dados.text.Origem;
-import br.com.hsi.util.validation.CodigoBarras;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,12 +19,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "produto", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "codigo_barras"),
-		@UniqueConstraint(columnNames = "codigo"),
-})
-
-
+@Table(name = "produto")
 public class Produto{
 
 	@Id
@@ -38,13 +33,12 @@ public class Produto{
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
 
-	@CodigoBarras
 	@Column(name = "codigo_barras")
 	private String codigoBrras;
 
 	private int codigo;
 
-	@NotNull
+	@NotBlank
 	private String descricao;
 
 	@ManyToOne
@@ -55,10 +49,10 @@ public class Produto{
 	@JoinColumn(name = "cest_id")
 	private Cest cest;
 
-	@NotNull
+	@NotBlank
 	private String codigo_ncm;
 
-	@NotNull
+	@NotBlank
 	private String codigo_cest;
 
 	@Enumerated(EnumType.STRING)
@@ -84,6 +78,7 @@ public class Produto{
 	@Column(name = "aliquota_cofins")
 	private BigDecimal aliquotaCofins  =  new BigDecimal(0.0);
 
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "cst_icms")
 	private CSTICMS cstIcms;

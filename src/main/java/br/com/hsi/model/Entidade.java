@@ -3,11 +3,10 @@ package br.com.hsi.model;
 import br.com.hsi.model.dados.Cidade;
 import br.com.hsi.model.dados.Estado;
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "entidade")
@@ -16,57 +15,76 @@ public class Entidade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotNull
+
+	@NotBlank
 	private String nome;
+
 	@Column(name = "tipo_entidade")
 	private String tipoEntidade; // C, F ou T
+
 	@Column(name = "tipo_modalidade")
 	private String tipoModalidade; // 1 ou 2
-	@NotNull
+
+	@NotBlank
 	@Column(name = "cpf_cnpj")
 	private String cpfCnpj;
+
 	@NotNull
 	@Column(name = "tipo_contribuinte")
 	private int tipoContribuinte; // 1 2 ou 9
+
 	@NotNull
 	@Column(name = "inscricao_estadual")
 	private String inscricaoEstadual;
-	@NotNull
+
 	private String cep;
+
 	@ManyToOne
 	@JoinColumn(name = "cidade_id")
+	@NotNull
 	private Cidade cidade;
+
 	@Column(name = "cidade")
 	private String nomecidade;
+
 	@Column(name = "codigo_ibge_cidade")
 	private String codigoIbgeCidade;
+
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
+	@NotNull
 	private Estado estado;
+
 	@Column(name = "estado")
 	private String nomeEstado;
+
 	@Column(name = "codigo_ibge_estado")
 	private String codigoIbgeEstado;
+
 	@NotNull
 	private String rua;
 	private String numero;
-	@NotNull
+
 	private String bairro;
+
 	private String complemento;
-	@NotNull
+
+	@NotBlank
 	private String telefone;
+
 	private String celular;
+
 	@ManyToOne
 	@JoinColumn(name = "id_empresa")
 	private Empresa empresa;
+
 	@Email
 	private String email;
+
 	@Column(name = "produtor_rural")
 	private Boolean produtorRural;
 
-//	@OneToMany(mappedBy = "entidade", cascade = CascadeType.MERGE, orphanRemoval = true)
-//	private List<NotaFiscal> notasFiscais = new ArrayList<NotaFiscal>();
-	
+
 
 	public Long getId() {
 		return id;
@@ -77,11 +95,7 @@ public class Entidade {
 	}
 
 	public String getNome() {
-		if(nome != null){
-		    return nome.trim();
-        }else{
-		    return nome;
-        }
+		return nome;
 	}
 
 	public void setNome(String nome) {
@@ -241,11 +255,7 @@ public class Entidade {
 	}
 
 	public String getEmail() {
-		if(email != null){
-			return email.trim();
-		}else{
-			return email;
-		}
+		return email;
 	}
 
 	public void setEmail(String email) {
@@ -262,28 +272,17 @@ public class Entidade {
 
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Entidade entidade = (Entidade) o;
+
+		return id != null ? id.equals(entidade.id) : entidade.id == null;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Entidade other = (Entidade) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public int hashCode() {
+		return id != null ? id.hashCode() : 0;
 	}
-
 }

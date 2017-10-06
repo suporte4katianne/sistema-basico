@@ -38,9 +38,9 @@ public class GestaoEmpresa implements Serializable{
 	}
 	
 	@Transacional
-	public void excluir(Empresa emitente) throws NegocioException{
-		if (notasFiscais.notaFiscalPorEmitente(emitente.getId()).size() == 0) {
-			empresas.excluir(emitente);
+	public void excluir(Empresa empresa) throws NegocioException{
+		if (notasFiscais.getNotaFiscalPorEmpresa(empresa.getId()).size() == 0) {
+			empresas.excluir(empresa);
 		}else{
 			throw new NegocioException("Não é possível excluir o emitente selecionado pois ele já possui notas emitidas");
 		}
