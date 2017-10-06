@@ -96,17 +96,41 @@ button.accordion.active, button.accordion:hover {
     background-color: #ddd;
 }
 
-button.accordion:after {
-    content: "\f077";
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
+
+ /*SELECIONADO*/
+button.active .fa:last-child {
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -o-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
 }
 
-button.accordion.active:after {
-    content: "\f078";
+button.active .fa:last-child {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    float: right;
 }
+
+/*Não selecionado*/
+button .fa:last-child {
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    float: right;
+}
+
+
+button .fa {
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+
+
 
 div.panel {
     background-color: white;
