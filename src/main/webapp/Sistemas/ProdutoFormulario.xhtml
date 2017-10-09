@@ -227,7 +227,6 @@
             </p:tabView>
             <p:messages autoUpdate="true" closable="true" />
 
-
             <p:toolbar>
                 <f:facet name="left">
                     <p:commandButton styleClass="ui-priority-primary"
@@ -241,7 +240,9 @@
                     <p:commandButton value="Cancelar" icon="fa fa-reply"
                               styleClass="ui-priority-primary"
                               style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
-                        <p:confirm header="Cancelar?" message="Ao cancelar a operação atual todo progresso será perdido!" icon="fa fa-exclamation-triangle"/>
+                        <p:confirm header = "Cancelar Operação"
+                                   message = "  Sair sem salvar?"
+                                   icon ="fa fa-hand-paper-o"/>
                     </p:commandButton>
                 </f:facet>
             </p:toolbar>
@@ -271,6 +272,9 @@
 
                     <p:ajax event="rowSelect" process="dadosTabela"
                             update="dadosTabela" />
+                    <p:ajax event="rowDblselect" listener="#{produtoFormularioBean.selecionaNcm()}"
+                            process="dadosTabela"
+                            oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm" />
 
                     <p:column headerText="NCM" filterBy="#{dados.ncm}"
                               filterStyle="display:none">
@@ -282,14 +286,13 @@
                             <p:commandButton value="Selecionar"
                                              action="#{produtoFormularioBean.selecionaNcm()}"
                                              styleClass="ui-priority-primary"
-                                             oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm" />
+                                             oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm"/>
                         </div>
                     </f:facet>
 
                 </p:dataTable>
             </h:form>
         </p:dialog>
-
 
         <p:dialog widgetVar="cestDialog" modal="true" height="400" width="700"
                   resizable="false">
@@ -340,8 +343,10 @@
         </p:dialog>
 
         <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-            <p:button value="Sim" outcome="Produto" type="button" styleClass="ui-confirmdialog-yes ui-priority-primary" icon="fa fa-check" />
-            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-priority-primary" icon="fa fa-close" />
+            <p:button value="Sim" outcome="Produto" type="button" styleClass="ui-confirmdialog-yes ui-priority-primary"
+                      icon="fa fa-check" />
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-priority-primary"
+                             icon="fa fa-close" />
         </p:confirmDialog>
 
     </ui:define>

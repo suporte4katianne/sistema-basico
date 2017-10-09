@@ -17,7 +17,7 @@
         <h:form id="formNfe">
             <p:tabView id="tabView">
                 <p:tab title="Dados do cabeçalho">
-                    <p:panel header="Dados do Documento Fiscal"
+                    <p:panel header="Dados do Documento Fiscal de Entrada"
                              id="dadosDocumentoFiscal">
 
                         <h:panelGrid columns="4" columnClasses="rotulo, campo">
@@ -88,14 +88,14 @@
                                          value="#{notaFiscalFormularioBean.notaFiscal.serieNota}" />
 
                             <p:outputLabel for="numero" value="Número:" />
-                            <p:inputText id="numero" style="width: 50px;"
+                            <p:inputText id="numero" style="width: 80px;"
                                          value="#{notaFiscalFormularioBean.notaFiscal.numeroNota}" />
 
                         </h:panelGrid>
                         <h:panelGrid id="chaveAcesso" rendered="#{notaFiscalFormularioBean.emissao().equals('false')}"
                                      columns="2" columnClasses="rotulo">
                             <p:outputLabel for="chaveDeAcesso" value="Chave de Acesso:" />
-                            <p:inputText id="chaveDeAcesso" style="min-width: 440px" value="#{notaFiscalFormularioBean.notaFiscal.chaveAcesso}" />
+                            <p:inputText id="chaveDeAcesso" style="min-width: 472px" value="#{notaFiscalFormularioBean.notaFiscal.chaveAcesso}" />
                         </h:panelGrid>
 
 
@@ -257,23 +257,23 @@
                                                    itemLabel="#{dados.codigo}" />
                                 </p:selectOneMenu>
 
+                                <p:outputLabel value="Quantidade:" for="quantidade" />
+                                <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}" id="quantidade"
+                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
                                 <p:outputLabel value="Valor:" for="valor" />
                                 <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.valorUnitario}" id="valor"
                                                symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
-                                <p:outputLabel value="Quantidade:" for="quantidade" />
-                                <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.quantidade}" id="quantidade"
-                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
-
                                 <p:outputLabel value="Desconto:" for="desconto" />
                                 <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto"
                                                decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+
                             </h:panelGrid>
 
                             <br />
 
-                            <p:panel header="Imposto" >
+                            <p:panel header="Impostos do Produto" >
                                 <h:panelGrid columns="14" style="width:100%" >
                                     <p:outputLabel value="Origem:" for="origem" />
                                     <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.origem}" id="origem" >
@@ -289,7 +289,7 @@
                                     <p:inputNumber placeholder="%" id="reducaoBase"
                                                    value="#{notaFiscalFormularioBean.notaFiscalItem.reducaoBaseIcms}"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
-                                    <p:outputLabel value="Base ICMS:" for="baseIcms" />
+                                    <p:outputLabel value="BC ICMS:" for="baseIcms" />
                                     <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcms}" id="baseIcms"
                                                    placeholder="R$"
                                                    symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
@@ -297,7 +297,7 @@
                                     <p:inputNumber placeholder="%" id="icms"
                                                    value="#{notaFiscalFormularioBean.notaFiscalItem.icms}"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
-                                    <p:outputLabel value="Base ICMS ST:" for="baseIcmsSt" />
+                                    <p:outputLabel value="BC ICMS ST:" for="baseIcmsSt" />
                                     <p:inputNumber id="baseIcmsSt" value="#{notaFiscalFormularioBean.notaFiscalItem.baseIcmsSt}"
                                                    placeholder="R$"
                                                    symbol="R$ " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
@@ -729,6 +729,10 @@
 
                     <p:ajax event="rowSelect" process="dadosFornecedorTabela"
                             update="dadosFornecedorTabela" />
+                    <p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDaEntidade()}"
+                            process="dadosFornecedorTabela"
+                            oncomplete="PF('fornecedorDialog').hide()"
+                            update="formNfe:tabView:dadosFornecedor" />
 
                     <p:column headerText="Nome" filterBy="#{dados.nome}"
                               filterStyle="display:none">
@@ -775,6 +779,10 @@
 
                     <p:ajax event="rowSelect" process="dadosProdutoTabela"
                             update="dadosProdutoTabela" />
+                    <p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDoProdutoEntrada()}"
+                            process="dadosProdutoTabela"
+                            oncomplete="PF('produtoDialog').hide()"
+                            update="formNfe:tabView:dadosProduto" />
 
                     <p:column headerText="Nome" filterBy="#{dados.descricao}"
                               filterStyle="display:none">
@@ -822,6 +830,10 @@
 
                     <p:ajax event="rowSelect" process="dadosTabela"
                             update="dadosTabela" />
+                    <p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDaTransportadora()}"
+                            process="dadosTabela"
+                            oncomplete="PF('transportadoraDialog').hide()"
+                            update="formNfe:tabView:dadosTransportadora" />
 
                     <p:column headerText="Nome" filterBy="#{dados.nome}"
                               filterStyle="display:none">

@@ -149,6 +149,10 @@
 
                     <p:ajax event="rowSelect" process="dadosProdutoTabela"
                             update="dadosProdutoTabela" />
+                    <p:ajax event="rowDblselect" listener="#{ajusteEstoqueFormularioBean.carregaDadosDoProduto()}"
+                            process="dadosProdutoTabela"
+                            oncomplete="PF('produtoDialog').hide()"
+                            update="frm:painelAjusteEstoqueItem" />
 
                     <p:column headerText="Nome" filterBy="#{dados.descricao}"
                               filterStyle="display:none">

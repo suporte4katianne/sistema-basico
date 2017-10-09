@@ -17,7 +17,7 @@
 		<h:form id="formNfe">
 			<p:tabView id="tabView">
 				<p:tab title="Dados do cabeçalho">
-					<p:panel header="Dados do Documento Fiscal"
+					<p:panel header="Dados do Documento Fiscal de Saída"
 						id="dadosDocumentoFiscal">
 
 						<h:panelGrid columns="4" columnClasses="rotulo, campo">
@@ -626,6 +626,10 @@
 
 					<p:ajax event="rowSelect" process="dadosEntidadeTabela"
 							update="dadosEntidadeTabela" />
+					<p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDaEntidade()}"
+							process="dadosEntidadeTabela"
+							oncomplete="PF('entidadeDialog').hide()"
+							update="formNfe:tabView:dadosEntidade"/>
 
 					<p:column headerText="Nome" filterBy="#{dados.nome}"
 							  filterStyle="display:none">
@@ -672,6 +676,10 @@
 
 					<p:ajax event="rowSelect" process="dadosProdutoTabela"
 							update="dadosProdutoTabela" />
+					<p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDoProduto()}"
+							process="dadosProdutoTabela"
+							oncomplete="PF('produtoDialog').hide()"
+							update="formNfe:tabView:dadosProduto" />
 
 					<p:column headerText="Nome" filterBy="#{dados.descricao}"
 							  filterStyle="display:none">
@@ -719,6 +727,10 @@
 
 					<p:ajax event="rowSelect" process="dadosTabela"
 							update="dadosTabela" />
+					<p:ajax event="rowDblselect" listener="#{notaFiscalFormularioBean.carregaDadosDaTransportadora()}"
+							process="dadosTabela"
+							oncomplete="PF('transportadoraDialog').hide()"
+							update="formNfe:tabView:dadosTransportadora" />
 
 					<p:column headerText="Nome" filterBy="#{dados.nome}"
 							  filterStyle="display:none">

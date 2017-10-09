@@ -15,11 +15,11 @@
         <property name="yearIsDateType" value="false" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="sistema_basico@192.168.7.111" uuid="82d3cc22-8f18-42ab-a6ec-0366e550815e">
+    <data-source source="LOCAL" name="sistema_basico@192.168.7.116" uuid="82d3cc22-8f18-42ab-a6ec-0366e550815e">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://192.168.7.111:3306/sistema_basico</jdbc-url>
+      <jdbc-url>jdbc:mysql://192.168.7.116:3306/sistema_basico</jdbc-url>
       <driver-properties>
         <property name="autoReconnect" value="true" />
         <property name="zeroDateTimeBehavior" value="convertToNull" />

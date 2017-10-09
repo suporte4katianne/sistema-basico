@@ -79,14 +79,17 @@
 		</h:form>
 	</div>
 
-
-	<p:dialog header="Sair?" widgetVar="cancelarOperacao" modal="true" height="250" width="400"
+	<p:dialog header="Sair sem Salvar" widgetVar="cancelarOperacao" modal="true" minHeight="250" width="400"
 			  resizable="false">
-		<h:outputText value="Deseja continuar? todo o conteudo atual será perdido!" />
-		<p:commandButton value="Sim" actionListener="#{menuBean.direcionaPage()}" styleClass="ui-priority-primary"
-				  oncomplete="PF('cancelarOperacao').hide()" />
-		<p:commandButton value="Não" styleClass="ui-priority-primary"
-						 oncomplete="PF('cancelarOperacao').hide()" />
+		<h:outputText value="O cadastro atual será perdido!" />
+		<div style="margin-top: 15px">
+				<p:commandButton value="Sim" icon="fa fa-check" style="margin-right: 5px"
+								 actionListener="#{menuBean.direcionaPage()}" styleClass="ui-priority-primary"
+								 oncomplete="PF('cancelarOperacao').hide()" />
+				<p:commandButton value="Não" icon="fa fa-close" styleClass="ui-priority-primary"
+						oncomplete="PF('cancelarOperacao').hide()" />
+		</div>
+
 	</p:dialog>
 
 </ui:composition>

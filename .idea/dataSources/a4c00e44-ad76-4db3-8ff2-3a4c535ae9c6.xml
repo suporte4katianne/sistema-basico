@@ -6,1582 +6,1579 @@
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
-    <schema id="3" parent="1" name="hsisistemas"/>
-    <schema id="4" parent="1" name="information_schema"/>
-    <schema id="5" parent="1" name="master_hsi"/>
-    <schema id="6" parent="1" name="mysql"/>
-    <schema id="7" parent="1" name="performance_schema"/>
-    <schema id="8" parent="1" name="sys"/>
-    <schema id="9" parent="1" name="hsi_facebook_app"/>
-    <table id="10" parent="2" name="ajuste_estoque"/>
-    <table id="11" parent="2" name="ajuste_estoque_item"/>
-    <table id="12" parent="2" name="cep">
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="mysql"/>
+    <schema id="5" parent="1" name="performance_schema"/>
+    <schema id="6" parent="1" name="sys"/>
+    <table id="7" parent="2" name="ajuste_estoque"/>
+    <table id="8" parent="2" name="ajuste_estoque_item"/>
+    <table id="9" parent="2" name="cep">
       <Comment>tabela de ceps</Comment>
     </table>
-    <table id="13" parent="2" name="cest"/>
-    <table id="14" parent="2" name="cfop"/>
-    <table id="15" parent="2" name="cidade"/>
-    <table id="16" parent="2" name="embalagem"/>
-    <table id="17" parent="2" name="empresa"/>
-    <table id="18" parent="2" name="entidade"/>
-    <table id="19" parent="2" name="estado"/>
-    <table id="20" parent="2" name="ibpt"/>
-    <table id="21" parent="2" name="inutilizacao"/>
-    <table id="22" parent="2" name="movimentacao"/>
-    <table id="23" parent="2" name="nota_fiscal"/>
-    <table id="24" parent="2" name="nota_fiscal_item"/>
-    <table id="25" parent="2" name="nota_fiscal_referencia"/>
-    <table id="26" parent="2" name="numeracao"/>
-    <table id="27" parent="2" name="produto"/>
-    <table id="28" parent="2" name="unidade_medida"/>
-    <table id="29" parent="2" name="usuario"/>
-    <column id="30" parent="10" name="id">
+    <table id="10" parent="2" name="cest"/>
+    <table id="11" parent="2" name="cfop"/>
+    <table id="12" parent="2" name="cidade"/>
+    <table id="13" parent="2" name="embalagem"/>
+    <table id="14" parent="2" name="empresa"/>
+    <table id="15" parent="2" name="entidade"/>
+    <table id="16" parent="2" name="estado"/>
+    <table id="17" parent="2" name="ibpt"/>
+    <table id="18" parent="2" name="inutilizacao"/>
+    <table id="19" parent="2" name="movimentacao"/>
+    <table id="20" parent="2" name="nota_fiscal"/>
+    <table id="21" parent="2" name="nota_fiscal_item"/>
+    <table id="22" parent="2" name="nota_fiscal_referencia"/>
+    <table id="23" parent="2" name="numeracao"/>
+    <table id="24" parent="2" name="produto"/>
+    <table id="25" parent="2" name="unidade_medida"/>
+    <table id="26" parent="2" name="usuario"/>
+    <column id="27" parent="7" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="31" parent="10" name="data">
+    <column id="28" parent="7" name="data">
       <Position>2</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="32" parent="10" name="documento">
+    <column id="29" parent="7" name="documento">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="33" parent="10" name="motivo">
+    <column id="30" parent="7" name="motivo">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="34" parent="10" name="tipo">
+    <column id="31" parent="7" name="tipo">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="35" parent="10" name="id_empresa">
+    <column id="32" parent="7" name="id_empresa">
       <Position>6</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="36" parent="10" name="FKs6tpufhj7y9s3h7se17kjpi5j">
+    <index id="33" parent="7" name="FKs6tpufhj7y9s3h7se17kjpi5j">
       <ColNames>id_empresa</ColNames>
     </index>
-    <key id="37" parent="10" name="PRIMARY">
+    <key id="34" parent="7" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="38" parent="11" name="id">
+    <column id="35" parent="8" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="39" parent="11" name="quantidade">
+    <column id="36" parent="8" name="quantidade">
       <Position>2</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="40" parent="11" name="id_ajuste_estoque">
+    <column id="37" parent="8" name="id_ajuste_estoque">
       <Position>3</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="41" parent="11" name="movimentacao_id">
+    <column id="38" parent="8" name="movimentacao_id">
       <Position>4</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="42" parent="11" name="id_produto">
+    <column id="39" parent="8" name="id_produto">
       <Position>5</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="43" parent="11" name="FK8ico2uc2s6py9md012nvjyucw">
+    <index id="40" parent="8" name="FK8ico2uc2s6py9md012nvjyucw">
       <ColNames>movimentacao_id</ColNames>
     </index>
-    <index id="44" parent="11" name="FKdop4q1kqu9mhku1beixf1du47">
+    <index id="41" parent="8" name="FKdop4q1kqu9mhku1beixf1du47">
       <ColNames>id_produto</ColNames>
     </index>
-    <index id="45" parent="11" name="FKhhbuk0hkbx155edm5t4a0p8mu">
+    <index id="42" parent="8" name="FKhhbuk0hkbx155edm5t4a0p8mu">
       <ColNames>id_ajuste_estoque</ColNames>
     </index>
-    <key id="46" parent="11" name="PRIMARY">
+    <key id="43" parent="8" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="47" parent="12" name="id">
+    <column id="44" parent="9" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="48" parent="12" name="endereco">
+    <column id="45" parent="9" name="endereco">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="49" parent="12" name="bairro">
+    <column id="46" parent="9" name="bairro">
       <Position>3</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="50" parent="12" name="cep">
+    <column id="47" parent="9" name="cep">
       <Position>4</Position>
       <DataType>varchar(8)|0</DataType>
     </column>
-    <column id="51" parent="12" name="idcidade">
+    <column id="48" parent="9" name="idcidade">
       <Position>5</Position>
       <Comment>id na tabela CIDADE</Comment>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="52" parent="12" name="idmunicipio">
+    <column id="49" parent="9" name="idmunicipio">
       <Position>6</Position>
       <Comment>código do município segundo o IBGE. está aqui para uma consulta rápida, se for o caso.</Comment>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="53" parent="12" name="currenttimemillis">
+    <column id="50" parent="9" name="currenttimemillis">
       <Position>7</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="54" parent="12" name="FK6t2nfck2hr8wk2k4t0afp74mh">
+    <index id="51" parent="9" name="FK6t2nfck2hr8wk2k4t0afp74mh">
       <ColNames>idcidade</ColNames>
     </index>
-    <key id="55" parent="12" name="PRIMARY">
+    <key id="52" parent="9" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="56" parent="12" name="FK6t2nfck2hr8wk2k4t0afp74mh">
+    <foreign-key id="53" parent="9" name="FK6t2nfck2hr8wk2k4t0afp74mh">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="57" parent="12" name="cep_ibfk_1">
+    <foreign-key id="54" parent="9" name="cep_ibfk_1">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="58" parent="12" name="cep_ibfk_2">
+    <foreign-key id="55" parent="9" name="cep_ibfk_2">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="59" parent="12" name="cep_ibfk_3">
+    <foreign-key id="56" parent="9" name="cep_ibfk_3">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="60" parent="12" name="cep_ibfk_4">
+    <foreign-key id="57" parent="9" name="cep_ibfk_4">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="61" parent="12" name="cep_ibfk_5">
+    <foreign-key id="58" parent="9" name="cep_ibfk_5">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="62" parent="12" name="cep_ibfk_6">
+    <foreign-key id="59" parent="9" name="cep_ibfk_6">
       <ColNames>idcidade</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>cidade</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="63" parent="13" name="id">
+    <column id="60" parent="10" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="64" parent="13" name="cest">
+    <column id="61" parent="10" name="cest">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <key id="65" parent="13" name="PRIMARY">
+    <key id="62" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="66" parent="14" name="id">
+    <column id="63" parent="11" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="67" parent="14" name="cfop">
+    <column id="64" parent="11" name="cfop">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="68" parent="14" name="codigo">
+    <column id="65" parent="11" name="codigo">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="69" parent="14" name="finalidade">
+    <column id="66" parent="11" name="finalidade">
       <Position>4</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="70" parent="14" name="operacao">
+    <column id="67" parent="11" name="operacao">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="71" parent="14" name="tipo">
+    <column id="68" parent="11" name="tipo">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <key id="72" parent="14" name="PRIMARY">
+    <key id="69" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="73" parent="15" name="id">
+    <column id="70" parent="12" name="id">
       <Position>1</Position>
       <Comment>identificacao unica de cidade</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="74" parent="15" name="codigo">
+    <column id="71" parent="12" name="codigo">
       <Position>2</Position>
       <Comment>codigo da cidade no cadastro do IBGE</Comment>
       <DataType>varchar(20)|0</DataType>
     </column>
-    <column id="75" parent="15" name="nome">
+    <column id="72" parent="12" name="nome">
       <Position>3</Position>
       <Comment>nome da cidade</Comment>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="76" parent="15" name="idestado">
+    <column id="73" parent="12" name="idestado">
       <Position>4</Position>
       <Comment>identificacao do estado</Comment>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="77" parent="15" name="FKroyptlyuv6j0if22h77gd4ww">
+    <index id="74" parent="12" name="FKroyptlyuv6j0if22h77gd4ww">
       <ColNames>idestado</ColNames>
     </index>
-    <key id="78" parent="15" name="PRIMARY">
+    <key id="75" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="79" parent="15" name="FKroyptlyuv6j0if22h77gd4ww">
+    <foreign-key id="76" parent="12" name="FKroyptlyuv6j0if22h77gd4ww">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="80" parent="15" name="cidade_ibfk_1">
+    <foreign-key id="77" parent="12" name="cidade_ibfk_1">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="81" parent="15" name="cidade_ibfk_2">
+    <foreign-key id="78" parent="12" name="cidade_ibfk_2">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="82" parent="15" name="cidade_ibfk_3">
+    <foreign-key id="79" parent="12" name="cidade_ibfk_3">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="83" parent="15" name="cidade_ibfk_4">
+    <foreign-key id="80" parent="12" name="cidade_ibfk_4">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="84" parent="15" name="cidade_ibfk_5">
+    <foreign-key id="81" parent="12" name="cidade_ibfk_5">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="85" parent="15" name="cidade_ibfk_6">
+    <foreign-key id="82" parent="12" name="cidade_ibfk_6">
       <ColNames>idestado</ColNames>
       <RefSchemaName>sistema_basico</RefSchemaName>
       <RefTableName>estado</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="86" parent="16" name="id">
+    <column id="83" parent="13" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="87" parent="16" name="codigo_barras">
+    <column id="84" parent="13" name="codigo_barras">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="88" parent="16" name="fator_conversao">
+    <column id="85" parent="13" name="fator_conversao">
       <Position>3</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="89" parent="16" name="produto_id">
+    <column id="86" parent="13" name="produto_id">
       <Position>4</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="90" parent="16" name="unidadeMedida_id">
+    <column id="87" parent="13" name="unidadeMedida_id">
       <Position>5</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="91" parent="16" name="FK2f5qu4q2ve9py6fvmessipgh8">
+    <index id="88" parent="13" name="FK2f5qu4q2ve9py6fvmessipgh8">
       <ColNames>produto_id</ColNames>
     </index>
-    <index id="92" parent="16" name="FKldayayv4irv9ya8s77oo636mf">
+    <index id="89" parent="13" name="FKldayayv4irv9ya8s77oo636mf">
       <ColNames>unidadeMedida_id</ColNames>
     </index>
-    <key id="93" parent="16" name="PRIMARY">
+    <key id="90" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="94" parent="17" name="id">
+    <column id="91" parent="14" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="95" parent="17" name="bairro">
+    <column id="92" parent="14" name="bairro">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="96" parent="17" name="celular">
+    <column id="93" parent="14" name="celular">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="97" parent="17" name="cep">
+    <column id="94" parent="14" name="cep">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="98" parent="17" name="codigo_ibge_cidade">
+    <column id="95" parent="14" name="codigo_ibge_cidade">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="99" parent="17" name="codigo_ibge_estado">
+    <column id="96" parent="14" name="codigo_ibge_estado">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="100" parent="17" name="complemento">
+    <column id="97" parent="14" name="complemento">
       <Position>7</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="101" parent="17" name="cpf_cnpj">
+    <column id="98" parent="14" name="cpf_cnpj">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="102" parent="17" name="credito_icms">
+    <column id="99" parent="14" name="credito_icms">
       <Position>9</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="103" parent="17" name="email">
+    <column id="100" parent="14" name="email">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="104" parent="17" name="enquadramento_fiscal">
+    <column id="101" parent="14" name="enquadramento_fiscal">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="105" parent="17" name="inativo">
+    <column id="102" parent="14" name="inativo">
       <Position>12</Position>
       <DataType>bit(1)|0</DataType>
     </column>
-    <column id="106" parent="17" name="informacao_complementar">
+    <column id="103" parent="14" name="informacao_complementar">
       <Position>13</Position>
       <DataType>longblob|0</DataType>
     </column>
-    <column id="107" parent="17" name="inscricao_estadual">
+    <column id="104" parent="14" name="inscricao_estadual">
       <Position>14</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="108" parent="17" name="logo">
+    <column id="105" parent="14" name="logo">
       <Position>15</Position>
       <DataType>longblob|0</DataType>
     </column>
-    <column id="109" parent="17" name="nome">
+    <column id="106" parent="14" name="nome">
       <Position>16</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="110" parent="17" name="nome_certificado">
+    <column id="107" parent="14" name="nome_certificado">
       <Position>17</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="111" parent="17" name="estado">
+    <column id="108" parent="14" name="estado">
       <Position>18</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="112" parent="17" name="cidade">
+    <column id="109" parent="14" name="cidade">
       <Position>19</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="113" parent="17" name="numero">
+    <column id="110" parent="14" name="numero">
       <Position>20</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="114" parent="17" name="rua">
+    <column id="111" parent="14" name="rua">
       <Position>21</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="115" parent="17" name="senha_certificado">
+    <column id="112" parent="14" name="senha_certificado">
       <Position>22</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="116" parent="17" name="status_certificado">
+    <column id="113" parent="14" name="status_certificado">
       <Position>23</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="117" parent="17" name="telefone">
+    <column id="114" parent="14" name="telefone">
       <Position>24</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="118" parent="17" name="tipo_certificado">
+    <column id="115" parent="14" name="tipo_certificado">
       <Position>25</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="119" parent="17" name="cidade_id">
+    <column id="116" parent="14" name="cidade_id">
       <Position>26</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="120" parent="17" name="estado_id">
+    <column id="117" parent="14" name="estado_id">
       <Position>27</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="121" parent="17" name="ambiente">
+    <column id="118" parent="14" name="ambiente">
       <Position>28</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="122" parent="17" name="FKlhbxac3ffp3bnr9qp7ilvx5d4">
+    <index id="119" parent="14" name="FKlhbxac3ffp3bnr9qp7ilvx5d4">
       <ColNames>estado_id</ColNames>
     </index>
-    <index id="123" parent="17" name="FKmwu5vrlfrn44ja26d5h4tcodh">
+    <index id="120" parent="14" name="FKmwu5vrlfrn44ja26d5h4tcodh">
       <ColNames>cidade_id</ColNames>
     </index>
-    <key id="124" parent="17" name="PRIMARY">
+    <key id="121" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="125" parent="18" name="id">
+    <column id="122" parent="15" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="126" parent="18" name="bairro">
+    <column id="123" parent="15" name="bairro">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="127" parent="18" name="celular">
+    <column id="124" parent="15" name="celular">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="128" parent="18" name="cep">
+    <column id="125" parent="15" name="cep">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="129" parent="18" name="codigo_ibge_cidade">
+    <column id="126" parent="15" name="codigo_ibge_cidade">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="130" parent="18" name="codigo_ibge_estado">
+    <column id="127" parent="15" name="codigo_ibge_estado">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="131" parent="18" name="complemento">
+    <column id="128" parent="15" name="complemento">
       <Position>7</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="132" parent="18" name="cpf_cnpj">
+    <column id="129" parent="15" name="cpf_cnpj">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="133" parent="18" name="email">
+    <column id="130" parent="15" name="email">
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="134" parent="18" name="inscricao_estadual">
+    <column id="131" parent="15" name="inscricao_estadual">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="135" parent="18" name="nome">
+    <column id="132" parent="15" name="nome">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="136" parent="18" name="estado">
+    <column id="133" parent="15" name="estado">
       <Position>12</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="137" parent="18" name="cidade">
+    <column id="134" parent="15" name="cidade">
       <Position>13</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="138" parent="18" name="numero">
+    <column id="135" parent="15" name="numero">
       <Position>14</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="139" parent="18" name="produtor_rural">
+    <column id="136" parent="15" name="produtor_rural">
       <Position>15</Position>
       <DataType>bit(1)|0</DataType>
     </column>
-    <column id="140" parent="18" name="rua">
+    <column id="137" parent="15" name="rua">
       <Position>16</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="141" parent="18" name="telefone">
+    <column id="138" parent="15" name="telefone">
       <Position>17</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="142" parent="18" name="tipo_contribuinte">
+    <column id="139" parent="15" name="tipo_contribuinte">
       <Position>18</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="143" parent="18" name="tipo_entidade">
+    <column id="140" parent="15" name="tipo_entidade">
       <Position>19</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="144" parent="18" name="tipo_modalidade">
+    <column id="141" parent="15" name="tipo_modalidade">
       <Position>20</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="145" parent="18" name="cidade_id">
+    <column id="142" parent="15" name="cidade_id">
       <Position>21</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="146" parent="18" name="id_empresa">
+    <column id="143" parent="15" name="id_empresa">
       <Position>22</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="147" parent="18" name="estado_id">
+    <column id="144" parent="15" name="estado_id">
       <Position>23</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="148" parent="18" name="FK27upxmnwm9csl3xh1uqfs83yy">
+    <index id="145" parent="15" name="FK27upxmnwm9csl3xh1uqfs83yy">
       <ColNames>estado_id</ColNames>
     </index>
-    <index id="149" parent="18" name="FK2nbf3c97ixmneryfv4xahfpbi">
+    <index id="146" parent="15" name="FK2nbf3c97ixmneryfv4xahfpbi">
       <ColNames>cidade_id</ColNames>
     </index>
-    <index id="150" parent="18" name="FKkmv1ybaxwltehcany9g4i98bv">
+    <index id="147" parent="15" name="FKkmv1ybaxwltehcany9g4i98bv">
       <ColNames>id_empresa</ColNames>
     </index>
-    <key id="151" parent="18" name="PRIMARY">
+    <key id="148" parent="15" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="152" parent="19" name="id">
+    <column id="149" parent="16" name="id">
       <Position>1</Position>
       <Comment>id segundo cÃ³digo do IBGE</Comment>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="153" parent="19" name="codigo">
+    <column id="150" parent="16" name="codigo">
       <Position>2</Position>
       <Comment>cÃ³digo do estado</Comment>
       <DataType>char(2)|0</DataType>
     </column>
-    <column id="154" parent="19" name="nome">
+    <column id="151" parent="16" name="nome">
       <Position>3</Position>
       <Comment>nome do estado</Comment>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <column id="155" parent="19" name="codigo_ibge">
+    <column id="152" parent="16" name="codigo_ibge">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="156" parent="19" name="url_consulta_cadastro">
+    <column id="153" parent="16" name="url_consulta_cadastro">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <key id="157" parent="19" name="PRIMARY">
+    <key id="154" parent="16" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="158" parent="20" name="id">
+    <column id="155" parent="17" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="159" parent="20" name="tipo">
+    <column id="156" parent="17" name="tipo">
       <Position>2</Position>
       <Comment>tipo codigo:  0=NCM, 1=NBS, 2=LC116</Comment>
       <DataType>smallint(6)|0</DataType>
     </column>
-    <column id="160" parent="20" name="execao">
+    <column id="157" parent="17" name="execao">
       <Position>3</Position>
       <DataType>varchar(16)|0</DataType>
     </column>
-    <column id="161" parent="20" name="ncm">
+    <column id="158" parent="17" name="ncm">
       <Position>4</Position>
       <DataType>varchar(10)|0</DataType>
     </column>
-    <column id="162" parent="20" name="nacionalfederal">
+    <column id="159" parent="17" name="nacionalfederal">
       <Position>5</Position>
       <DataType>decimal(10,2)|0</DataType>
     </column>
-    <column id="163" parent="20" name="importadofederal">
+    <column id="160" parent="17" name="importadofederal">
       <Position>6</Position>
       <DataType>decimal(10,2)|0</DataType>
     </column>
-    <column id="164" parent="20" name="estadual">
+    <column id="161" parent="17" name="estadual">
       <Position>7</Position>
       <DataType>decimal(10,2)|0</DataType>
     </column>
-    <column id="165" parent="20" name="municipal">
+    <column id="162" parent="17" name="municipal">
       <Position>8</Position>
       <DataType>decimal(10,2)|0</DataType>
     </column>
-    <column id="166" parent="20" name="versao">
+    <column id="163" parent="17" name="versao">
       <Position>9</Position>
       <DataType>varchar(11)|0</DataType>
     </column>
-    <key id="167" parent="20" name="PRIMARY">
+    <key id="164" parent="17" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="168" parent="21" name="id">
+    <column id="165" parent="18" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="169" parent="21" name="ambiente">
+    <column id="166" parent="18" name="ambiente">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="170" parent="21" name="data">
+    <column id="167" parent="18" name="data">
       <Position>3</Position>
       <DataType>datetime|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="171" parent="21" name="motivo">
+    <column id="168" parent="18" name="motivo">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="172" parent="21" name="numero_fim">
+    <column id="169" parent="18" name="numero_fim">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="173" parent="21" name="numero_inicio">
+    <column id="170" parent="18" name="numero_inicio">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="174" parent="21" name="serie">
+    <column id="171" parent="18" name="serie">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="175" parent="21" name="status">
+    <column id="172" parent="18" name="status">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="176" parent="21" name="id_empresa">
+    <column id="173" parent="18" name="id_empresa">
       <Position>9</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="177" parent="21" name="FKfjxq2dy48d1fstslt9qv5hebh">
+    <index id="174" parent="18" name="FKfjxq2dy48d1fstslt9qv5hebh">
       <ColNames>id_empresa</ColNames>
     </index>
-    <key id="178" parent="21" name="PRIMARY">
+    <key id="175" parent="18" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="179" parent="22" name="id">
+    <column id="176" parent="19" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="180" parent="22" name="numero_documento">
+    <column id="177" parent="19" name="numero_documento">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="181" parent="22" name="qunatidade">
+    <column id="178" parent="19" name="qunatidade">
       <Position>3</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="182" parent="22" name="tipo_documento">
+    <column id="179" parent="19" name="tipo_documento">
       <Position>4</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="183" parent="22" name="tipo_movimentacao">
+    <column id="180" parent="19" name="tipo_movimentacao">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="184" parent="22" name="id_ajuste_estoque_item">
+    <column id="181" parent="19" name="id_ajuste_estoque_item">
       <Position>6</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="185" parent="22" name="id_empresa">
+    <column id="182" parent="19" name="id_empresa">
       <Position>7</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="186" parent="22" name="id_nota_fiscal_item">
+    <column id="183" parent="19" name="id_nota_fiscal_item">
       <Position>8</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="187" parent="22" name="id_produto">
+    <column id="184" parent="19" name="id_produto">
       <Position>9</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="188" parent="22" name="data">
+    <column id="185" parent="19" name="data">
       <Position>10</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <index id="189" parent="22" name="FK1eppow3vr7cdui8wg2i9j394x">
+    <index id="186" parent="19" name="FK1eppow3vr7cdui8wg2i9j394x">
       <ColNames>id_empresa</ColNames>
     </index>
-    <index id="190" parent="22" name="FKlktvhoh96h5gxv4l4e3f7v0c8">
+    <index id="187" parent="19" name="FKlktvhoh96h5gxv4l4e3f7v0c8">
       <ColNames>id_produto</ColNames>
     </index>
-    <index id="191" parent="22" name="FKgpgvsaa4ub9un9brxyhv6uv0f">
+    <index id="188" parent="19" name="FKgpgvsaa4ub9un9brxyhv6uv0f">
       <ColNames>id_nota_fiscal_item</ColNames>
     </index>
-    <index id="192" parent="22" name="FKtk8v91p6s0oeknmg7pgimrwa">
+    <index id="189" parent="19" name="FKtk8v91p6s0oeknmg7pgimrwa">
       <ColNames>id_ajuste_estoque_item</ColNames>
     </index>
-    <key id="193" parent="22" name="PRIMARY">
+    <key id="190" parent="19" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="194" parent="23" name="id">
+    <column id="191" parent="20" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="195" parent="23" name="cidade_empresa">
+    <column id="192" parent="20" name="cidade_empresa">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="196" parent="23" name="senha_certificado">
+    <column id="193" parent="20" name="senha_certificado">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="197" parent="23" name="ambiente">
+    <column id="194" parent="20" name="ambiente">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="198" parent="23" name="bairro_empresa">
+    <column id="195" parent="20" name="bairro_empresa">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="199" parent="23" name="bairro_entidade">
+    <column id="196" parent="20" name="bairro_entidade">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="200" parent="23" name="caminho_certificado">
+    <column id="197" parent="20" name="caminho_certificado">
       <Position>7</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="201" parent="23" name="cep_empresa">
+    <column id="198" parent="20" name="cep_empresa">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="202" parent="23" name="cep_entidade">
+    <column id="199" parent="20" name="cep_entidade">
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="203" parent="23" name="chave_acesso">
+    <column id="200" parent="20" name="chave_acesso">
       <Position>10</Position>
       <DataType>varchar(60)|0</DataType>
     </column>
-    <column id="204" parent="23" name="cidade_transportadora">
+    <column id="201" parent="20" name="cidade_transportadora">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="205" parent="23" name="cnpj_empresa">
+    <column id="202" parent="20" name="cnpj_empresa">
       <Position>12</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="206" parent="23" name="cod_cidade_empresa">
+    <column id="203" parent="20" name="cod_cidade_empresa">
       <Position>13</Position>
       <DataType>varchar(20)|0</DataType>
     </column>
-    <column id="207" parent="23" name="cod_cidade_entidade">
+    <column id="204" parent="20" name="cod_cidade_entidade">
       <Position>14</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="208" parent="23" name="cod_estado_empresa">
+    <column id="205" parent="20" name="cod_estado_empresa">
       <Position>15</Position>
       <DataType>varchar(10)|0</DataType>
     </column>
-    <column id="209" parent="23" name="cod_pais_entidade">
+    <column id="206" parent="20" name="cod_pais_entidade">
       <Position>16</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="210" parent="23" name="cod_pais_empresa">
+    <column id="207" parent="20" name="cod_pais_empresa">
       <Position>17</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="211" parent="23" name="complemento_empresa">
+    <column id="208" parent="20" name="complemento_empresa">
       <Position>18</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="212" parent="23" name="complemento_entidade">
+    <column id="209" parent="20" name="complemento_entidade">
       <Position>19</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="213" parent="23" name="condicao_pagamento">
+    <column id="210" parent="20" name="condicao_pagamento">
       <Position>20</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="214" parent="23" name="cpf_cnpj_entidade">
+    <column id="211" parent="20" name="cpf_cnpj_entidade">
       <Position>21</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="215" parent="23" name="cpfCnpj_transportadora">
+    <column id="212" parent="20" name="cpfCnpj_transportadora">
       <Position>22</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="216" parent="23" name="credito_icms">
+    <column id="213" parent="20" name="credito_icms">
       <Position>23</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="217" parent="23" name="data_emissao">
+    <column id="214" parent="20" name="data_emissao">
       <Position>24</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="218" parent="23" name="data_saida_entrada">
+    <column id="215" parent="20" name="data_saida_entrada">
       <Position>25</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="219" parent="23" name="digito_verificador">
+    <column id="216" parent="20" name="digito_verificador">
       <Position>26</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="220" parent="23" name="email_empresa">
+    <column id="217" parent="20" name="email_empresa">
       <Position>27</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="221" parent="23" name="email_entidade">
+    <column id="218" parent="20" name="email_entidade">
       <Position>28</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="222" parent="23" name="emissao">
+    <column id="219" parent="20" name="emissao">
       <Position>29</Position>
       <DataType>bit(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="223" parent="23" name="endereco_transportadora">
+    <column id="220" parent="20" name="endereco_transportadora">
       <Position>30</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="224" parent="23" name="enquadramento_empresa">
+    <column id="221" parent="20" name="enquadramento_empresa">
       <Position>31</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="225" parent="23" name="estado_empresa">
+    <column id="222" parent="20" name="estado_empresa">
       <Position>32</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="226" parent="23" name="estado_entidade">
+    <column id="223" parent="20" name="estado_entidade">
       <Position>33</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="227" parent="23" name="estado_transportadora">
+    <column id="224" parent="20" name="estado_transportadora">
       <Position>34</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="228" parent="23" name="finalidade">
+    <column id="225" parent="20" name="finalidade">
       <Position>35</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="229" parent="23" name="dados_complementares">
+    <column id="226" parent="20" name="dados_complementares">
       <Position>36</Position>
       <DataType>longtext|0</DataType>
     </column>
-    <column id="230" parent="23" name="ie_empresa">
+    <column id="227" parent="20" name="ie_empresa">
       <Position>37</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="231" parent="23" name="ie_entidade">
+    <column id="228" parent="20" name="ie_entidade">
       <Position>38</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="232" parent="23" name="ie_transportadora">
+    <column id="229" parent="20" name="ie_transportadora">
       <Position>39</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="233" parent="23" name="retorno">
+    <column id="230" parent="20" name="retorno">
       <Position>40</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="234" parent="23" name="modelo_frete">
+    <column id="231" parent="20" name="modelo_frete">
       <Position>41</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="235" parent="23" name="modelo">
+    <column id="232" parent="20" name="modelo">
       <Position>42</Position>
       <DataType>varchar(2)|0</DataType>
     </column>
-    <column id="236" parent="23" name="cidade_entidade">
+    <column id="233" parent="20" name="cidade_entidade">
       <Position>43</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="237" parent="23" name="nome_entidade">
+    <column id="234" parent="20" name="nome_entidade">
       <Position>44</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="238" parent="23" name="nome_fantasia_empresa">
+    <column id="235" parent="20" name="nome_fantasia_empresa">
       <Position>45</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="239" parent="23" name="natureza_operacao">
+    <column id="236" parent="20" name="natureza_operacao">
       <Position>46</Position>
       <DataType>varchar(150)|0</DataType>
     </column>
-    <column id="240" parent="23" name="pais_empresa">
+    <column id="237" parent="20" name="pais_empresa">
       <Position>47</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="241" parent="23" name="pais_entidade">
+    <column id="238" parent="20" name="pais_entidade">
       <Position>48</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="242" parent="23" name="transportadora">
+    <column id="239" parent="20" name="transportadora">
       <Position>49</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="243" parent="23" name="numero_empresa">
+    <column id="240" parent="20" name="numero_empresa">
       <Position>50</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="244" parent="23" name="numero_entidade">
+    <column id="241" parent="20" name="numero_entidade">
       <Position>51</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="245" parent="23" name="numero">
+    <column id="242" parent="20" name="numero">
       <Position>52</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="246" parent="23" name="sequencia_chave">
+    <column id="243" parent="20" name="sequencia_chave">
       <Position>53</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="247" parent="23" name="numero_volume">
+    <column id="244" parent="20" name="numero_volume">
       <Position>54</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="248" parent="23" name="operacao">
+    <column id="245" parent="20" name="operacao">
       <Position>55</Position>
       <DataType>varchar(1)|0</DataType>
     </column>
-    <column id="249" parent="23" name="peso_bruto">
+    <column id="246" parent="20" name="peso_bruto">
       <Position>56</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="250" parent="23" name="peso_liquido">
+    <column id="247" parent="20" name="peso_liquido">
       <Position>57</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="251" parent="23" name="presenca_consumidor">
+    <column id="248" parent="20" name="presenca_consumidor">
       <Position>58</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="252" parent="23" name="protocolo">
+    <column id="249" parent="20" name="protocolo">
       <Position>59</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="253" parent="23" name="quantidade_volume">
+    <column id="250" parent="20" name="quantidade_volume">
       <Position>60</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="254" parent="23" name="razao_social_empresa">
+    <column id="251" parent="20" name="razao_social_empresa">
       <Position>61</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="255" parent="23" name="rua_empresa">
+    <column id="252" parent="20" name="rua_empresa">
       <Position>62</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="256" parent="23" name="rua_entidade">
+    <column id="253" parent="20" name="rua_entidade">
       <Position>63</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="257" parent="23" name="serie">
+    <column id="254" parent="20" name="serie">
       <Position>64</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="258" parent="23" name="status">
+    <column id="255" parent="20" name="status">
       <Position>65</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="259" parent="23" name="telefone_empresa">
+    <column id="256" parent="20" name="telefone_empresa">
       <Position>66</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="260" parent="23" name="telefone_entidade">
+    <column id="257" parent="20" name="telefone_entidade">
       <Position>67</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="261" parent="23" name="tipo_cadastro">
+    <column id="258" parent="20" name="tipo_cadastro">
       <Position>68</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="262" parent="23" name="tipo_cadastro_transportadora">
+    <column id="259" parent="20" name="tipo_cadastro_transportadora">
       <Position>69</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="263" parent="23" name="tipo_consumidor">
+    <column id="260" parent="20" name="tipo_consumidor">
       <Position>70</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="264" parent="23" name="tipo_contribuinte_entidade">
+    <column id="261" parent="20" name="tipo_contribuinte_entidade">
       <Position>71</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="265" parent="23" name="tipo_emissao">
+    <column id="262" parent="20" name="tipo_emissao">
       <Position>72</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="266" parent="23" name="tipo_nfe">
+    <column id="263" parent="20" name="tipo_nfe">
       <Position>73</Position>
       <DataType>varchar(1)|0</DataType>
     </column>
-    <column id="267" parent="23" name="base_icms">
+    <column id="264" parent="20" name="base_icms">
       <Position>74</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="268" parent="23" name="base_icms_st">
+    <column id="265" parent="20" name="base_icms_st">
       <Position>75</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="269" parent="23" name="total_cofins">
+    <column id="266" parent="20" name="total_cofins">
       <Position>76</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="270" parent="23" name="total_desconto">
+    <column id="267" parent="20" name="total_desconto">
       <Position>77</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="271" parent="23" name="total_frete">
+    <column id="268" parent="20" name="total_frete">
       <Position>78</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="272" parent="23" name="icms">
+    <column id="269" parent="20" name="icms">
       <Position>79</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="273" parent="23" name="icms_deson">
+    <column id="270" parent="20" name="icms_deson">
       <Position>80</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="274" parent="23" name="icms_st">
+    <column id="271" parent="20" name="icms_st">
       <Position>81</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="275" parent="23" name="imposto_aproximado">
+    <column id="272" parent="20" name="imposto_aproximado">
       <Position>82</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="276" parent="23" name="total_ipi">
+    <column id="273" parent="20" name="total_ipi">
       <Position>83</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="277" parent="23" name="total_nfe">
+    <column id="274" parent="20" name="total_nfe">
       <Position>84</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="278" parent="23" name="total_outros">
+    <column id="275" parent="20" name="total_outros">
       <Position>85</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="279" parent="23" name="total_pis">
+    <column id="276" parent="20" name="total_pis">
       <Position>86</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="280" parent="23" name="total_produtos">
+    <column id="277" parent="20" name="total_produtos">
       <Position>87</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="281" parent="23" name="total_seguro">
+    <column id="278" parent="20" name="total_seguro">
       <Position>88</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="282" parent="23" name="versao">
+    <column id="279" parent="20" name="versao">
       <Position>89</Position>
       <DataType>varchar(5)|0</DataType>
     </column>
-    <column id="283" parent="23" name="id_cfop">
+    <column id="280" parent="20" name="id_cfop">
       <Position>90</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="284" parent="23" name="id_empresa">
+    <column id="281" parent="20" name="id_empresa">
       <Position>91</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="285" parent="23" name="id_entidade">
+    <column id="282" parent="20" name="id_entidade">
       <Position>92</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="286" parent="23" name="id_transportadora">
+    <column id="283" parent="20" name="id_transportadora">
       <Position>93</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="287" parent="23" name="FK27e3o4asfeyaerbhy299plemo">
+    <index id="284" parent="20" name="FK27e3o4asfeyaerbhy299plemo">
       <ColNames>id_cfop</ColNames>
     </index>
-    <index id="288" parent="23" name="FKbejli3h3k09eeap6m4tbmfdqy">
+    <index id="285" parent="20" name="FKbejli3h3k09eeap6m4tbmfdqy">
       <ColNames>id_transportadora</ColNames>
     </index>
-    <index id="289" parent="23" name="FKbog1tpbeu4oolsf76ubo9t6j2">
+    <index id="286" parent="20" name="FKbog1tpbeu4oolsf76ubo9t6j2">
       <ColNames>id_empresa</ColNames>
     </index>
-    <index id="290" parent="23" name="FKg0b69qeck1fetvb6st4fdh7el">
+    <index id="287" parent="20" name="FKg0b69qeck1fetvb6st4fdh7el">
       <ColNames>id_entidade</ColNames>
     </index>
-    <key id="291" parent="23" name="PRIMARY">
+    <key id="288" parent="20" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="292" parent="24" name="id">
+    <column id="289" parent="21" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="293" parent="24" name="aliquota_cofins">
+    <column id="290" parent="21" name="aliquota_cofins">
       <Position>2</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="294" parent="24" name="aliquota_ipi">
+    <column id="291" parent="21" name="aliquota_ipi">
       <Position>3</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="295" parent="24" name="aliquota_pis">
+    <column id="292" parent="21" name="aliquota_pis">
       <Position>4</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="296" parent="24" name="valor_base_icms">
+    <column id="293" parent="21" name="valor_base_icms">
       <Position>5</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="297" parent="24" name="valor_base_icms_st">
+    <column id="294" parent="21" name="valor_base_icms_st">
       <Position>6</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="298" parent="24" name="cest">
+    <column id="295" parent="21" name="cest">
       <Position>7</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="299" parent="24" name="cfop">
+    <column id="296" parent="21" name="cfop">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="300" parent="24" name="cod_produto">
+    <column id="297" parent="21" name="cod_produto">
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="301" parent="24" name="codigo_barras">
+    <column id="298" parent="21" name="codigo_barras">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="302" parent="24" name="compoe_valor_nota">
+    <column id="299" parent="21" name="compoe_valor_nota">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="303" parent="24" name="cst">
+    <column id="300" parent="21" name="cst">
       <Position>12</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="304" parent="24" name="cst_ipi">
+    <column id="301" parent="21" name="cst_ipi">
       <Position>13</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="305" parent="24" name="cst_pis_cofins">
+    <column id="302" parent="21" name="cst_pis_cofins">
       <Position>14</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="306" parent="24" name="desconto">
+    <column id="303" parent="21" name="desconto">
       <Position>15</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="307" parent="24" name="valor_icms">
+    <column id="304" parent="21" name="valor_icms">
       <Position>16</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="308" parent="24" name="valor_icms_st">
+    <column id="305" parent="21" name="valor_icms_st">
       <Position>17</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="309" parent="24" name="informacao_adcional">
+    <column id="306" parent="21" name="informacao_adcional">
       <Position>18</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="310" parent="24" name="ncm">
+    <column id="307" parent="21" name="ncm">
       <Position>19</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="311" parent="24" name="nome_produto">
+    <column id="308" parent="21" name="nome_produto">
       <Position>20</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="312" parent="24" name="numero_item">
+    <column id="309" parent="21" name="numero_item">
       <Position>21</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="313" parent="24" name="origem">
+    <column id="310" parent="21" name="origem">
       <Position>22</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="314" parent="24" name="quantidade">
+    <column id="311" parent="21" name="quantidade">
       <Position>23</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="315" parent="24" name="reducao_base_icms">
+    <column id="312" parent="21" name="reducao_base_icms">
       <Position>24</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="316" parent="24" name="unidade_medida">
+    <column id="313" parent="21" name="unidade_medida">
       <Position>25</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="317" parent="24" name="valor_total">
+    <column id="314" parent="21" name="valor_total">
       <Position>26</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="318" parent="24" name="valor_total_cofins">
+    <column id="315" parent="21" name="valor_total_cofins">
       <Position>27</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="319" parent="24" name="valor_total_pis">
+    <column id="316" parent="21" name="valor_total_pis">
       <Position>28</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="320" parent="24" name="valor_unitario">
+    <column id="317" parent="21" name="valor_unitario">
       <Position>29</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="321" parent="24" name="movimentacao_id">
+    <column id="318" parent="21" name="movimentacao_id">
       <Position>30</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="322" parent="24" name="id_nota_fiscal">
+    <column id="319" parent="21" name="id_nota_fiscal">
       <Position>31</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="323" parent="24" name="id_produto">
+    <column id="320" parent="21" name="id_produto">
       <Position>32</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="324" parent="24" name="FKk1w33tug74a5stouitmg57c8m">
+    <index id="321" parent="21" name="FKk1w33tug74a5stouitmg57c8m">
       <ColNames>id_produto</ColNames>
     </index>
-    <index id="325" parent="24" name="FKrlsi95yq6frseitn8195hdb97">
+    <index id="322" parent="21" name="FKrlsi95yq6frseitn8195hdb97">
       <ColNames>id_nota_fiscal</ColNames>
     </index>
-    <index id="326" parent="24" name="FKsupv2oixtl5rvydmh3ejthq6c">
+    <index id="323" parent="21" name="FKsupv2oixtl5rvydmh3ejthq6c">
       <ColNames>movimentacao_id</ColNames>
     </index>
-    <key id="327" parent="24" name="PRIMARY">
+    <key id="324" parent="21" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="328" parent="25" name="id">
+    <column id="325" parent="22" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="329" parent="25" name="chave">
+    <column id="326" parent="22" name="chave">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="330" parent="25" name="coo">
+    <column id="327" parent="22" name="coo">
       <Position>3</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="331" parent="25" name="data">
+    <column id="328" parent="22" name="data">
       <Position>4</Position>
       <DataType>datetime|0</DataType>
     </column>
-    <column id="332" parent="25" name="ecfSerie">
+    <column id="329" parent="22" name="ecfSerie">
       <Position>5</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="333" parent="25" name="modelo">
+    <column id="330" parent="22" name="modelo">
       <Position>6</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="334" parent="25" name="numero">
+    <column id="331" parent="22" name="numero">
       <Position>7</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="335" parent="25" name="pdv">
+    <column id="332" parent="22" name="pdv">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="336" parent="25" name="serie">
+    <column id="333" parent="22" name="serie">
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="337" parent="25" name="tipo_documento">
+    <column id="334" parent="22" name="tipo_documento">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="338" parent="25" name="id_nfe">
+    <column id="335" parent="22" name="id_nfe">
       <Position>11</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="339" parent="25" name="FK3ex5jj05qm7tjxxnwer8axfsm">
+    <index id="336" parent="22" name="FK3ex5jj05qm7tjxxnwer8axfsm">
       <ColNames>id_nfe</ColNames>
     </index>
-    <key id="340" parent="25" name="PRIMARY">
+    <key id="337" parent="22" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="341" parent="26" name="id">
+    <column id="338" parent="23" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="342" parent="26" name="modelo">
+    <column id="339" parent="23" name="modelo">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="343" parent="26" name="numero">
+    <column id="340" parent="23" name="numero">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="344" parent="26" name="serie">
+    <column id="341" parent="23" name="serie">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="345" parent="26" name="id_empresa">
+    <column id="342" parent="23" name="id_empresa">
       <Position>5</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="346" parent="26" name="FK49pr3exe2tya46pdgigapxr1g">
+    <index id="343" parent="23" name="FK49pr3exe2tya46pdgigapxr1g">
       <ColNames>id_empresa</ColNames>
     </index>
-    <key id="347" parent="26" name="PRIMARY">
+    <key id="344" parent="23" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="348" parent="27" name="id">
+    <column id="345" parent="24" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="349" parent="27" name="aliquota_iss">
+    <column id="346" parent="24" name="aliquota_iss">
       <Position>2</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="350" parent="27" name="aliquota_cofins">
+    <column id="347" parent="24" name="aliquota_cofins">
       <Position>3</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="351" parent="27" name="aliquota_icms">
+    <column id="348" parent="24" name="aliquota_icms">
       <Position>4</Position>
       <DataType>decimal(19,2)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="352" parent="27" name="aliquota_ipi">
+    <column id="349" parent="24" name="aliquota_ipi">
       <Position>5</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="353" parent="27" name="aliquota_pis">
+    <column id="350" parent="24" name="aliquota_pis">
       <Position>6</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="354" parent="27" name="codigo">
+    <column id="351" parent="24" name="codigo">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="355" parent="27" name="codigo_barras">
+    <column id="352" parent="24" name="codigo_barras">
       <Position>8</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="356" parent="27" name="cfop_estadual">
+    <column id="353" parent="24" name="cfop_estadual">
       <Position>9</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="357" parent="27" name="cfop_interestadual">
+    <column id="354" parent="24" name="cfop_interestadual">
       <Position>10</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="358" parent="27" name="codigo_lc">
+    <column id="355" parent="24" name="codigo_lc">
       <Position>11</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="359" parent="27" name="codigo_cest">
+    <column id="356" parent="24" name="codigo_cest">
       <Position>12</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="360" parent="27" name="codigo_ncm">
+    <column id="357" parent="24" name="codigo_ncm">
       <Position>13</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="361" parent="27" name="cst_icms">
+    <column id="358" parent="24" name="cst_icms">
       <Position>14</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="362" parent="27" name="cst_ipi">
+    <column id="359" parent="24" name="cst_ipi">
       <Position>15</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="363" parent="27" name="cst_cofins">
+    <column id="360" parent="24" name="cst_cofins">
       <Position>16</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="364" parent="27" name="descricao">
+    <column id="361" parent="24" name="descricao">
       <Position>17</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="365" parent="27" name="iss">
+    <column id="362" parent="24" name="iss">
       <Position>18</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="366" parent="27" name="origem">
+    <column id="363" parent="24" name="origem">
       <Position>19</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="367" parent="27" name="preco_venda">
+    <column id="364" parent="24" name="preco_venda">
       <Position>20</Position>
       <DataType>decimal(19,2)|0</DataType>
     </column>
-    <column id="368" parent="27" name="tipo_cadastro">
+    <column id="365" parent="24" name="tipo_cadastro">
       <Position>21</Position>
       <DataType>varchar(255)|0</DataType>
     </column>
-    <column id="369" parent="27" name="unidade_medida">
+    <column id="366" parent="24" name="unidade_medida">
       <Position>22</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="370" parent="27" name="cest_id">
+    <column id="367" parent="24" name="cest_id">
       <Position>23</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="371" parent="27" name="id_cfop_estadual">
+    <column id="368" parent="24" name="id_cfop_estadual">
       <Position>24</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="372" parent="27" name="id_cfop_interestadual">
+    <column id="369" parent="24" name="id_cfop_interestadual">
       <Position>25</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="373" parent="27" name="id_empresa">
+    <column id="370" parent="24" name="id_empresa">
       <Position>26</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <column id="374" parent="27" name="ncm_id">
+    <column id="371" parent="24" name="ncm_id">
       <Position>27</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="375" parent="27" name="FKcd5osvwq7t57ghlvfy0c24pfp">
+    <index id="372" parent="24" name="FKcd5osvwq7t57ghlvfy0c24pfp">
       <ColNames>id_cfop_estadual</ColNames>
     </index>
-    <index id="376" parent="27" name="FKd4seccmqrve13ow461ibxx473">
+    <index id="373" parent="24" name="FKd4seccmqrve13ow461ibxx473">
       <ColNames>ncm_id</ColNames>
     </index>
-    <index id="377" parent="27" name="FKfgrypvh6luilaq30oiwl1hc14">
+    <index id="374" parent="24" name="FKfgrypvh6luilaq30oiwl1hc14">
       <ColNames>id_empresa</ColNames>
     </index>
-    <index id="378" parent="27" name="FKkklxa7y3l4gkk9a14m0n58xv">
+    <index id="375" parent="24" name="FKkklxa7y3l4gkk9a14m0n58xv">
       <ColNames>id_cfop_interestadual</ColNames>
     </index>
-    <index id="379" parent="27" name="FKq2ef8hd06600uey9ub54sxl2a">
+    <index id="376" parent="24" name="FKq2ef8hd06600uey9ub54sxl2a">
       <ColNames>cest_id</ColNames>
     </index>
-    <key id="380" parent="27" name="PRIMARY">
+    <key id="377" parent="24" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="381" parent="28" name="id">
+    <column id="378" parent="25" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="382" parent="28" name="codigo">
+    <column id="379" parent="25" name="codigo">
       <Position>2</Position>
       <DataType>varchar(4)|0</DataType>
     </column>
-    <column id="383" parent="28" name="nome">
+    <column id="380" parent="25" name="nome">
       <Position>3</Position>
       <DataType>varchar(55)|0</DataType>
     </column>
-    <column id="384" parent="28" name="casasdecimais">
+    <column id="381" parent="25" name="casasdecimais">
       <Position>4</Position>
       <DataType>smallint(6)|0</DataType>
     </column>
-    <key id="385" parent="28" name="PRIMARY">
+    <key id="382" parent="25" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="386" parent="29" name="id">
+    <column id="383" parent="26" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="387" parent="29" name="email">
+    <column id="384" parent="26" name="email">
       <Position>2</Position>
       <DataType>varchar(255)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="388" parent="29" name="inativo">
+    <column id="385" parent="26" name="inativo">
       <Position>3</Position>
       <DataType>bit(1)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="389" parent="29" name="nome">
+    <column id="386" parent="26" name="nome">
       <Position>4</Position>
       <DataType>varchar(80)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="390" parent="29" name="senha">
+    <column id="387" parent="26" name="senha">
       <Position>5</Position>
       <DataType>varchar(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="391" parent="29" name="id_empresa">
+    <column id="388" parent="26" name="id_empresa">
       <Position>6</Position>
       <DataType>bigint(20)|0</DataType>
     </column>
-    <index id="392" parent="29" name="FKi6afn0oum3c6ejol9ahlluox2">
+    <index id="389" parent="26" name="FKi6afn0oum3c6ejol9ahlluox2">
       <ColNames>id_empresa</ColNames>
     </index>
-    <index id="393" parent="29" name="UK_5171l57faosmj8myawaucatdw">
+    <index id="390" parent="26" name="UK_5171l57faosmj8myawaucatdw">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="394" parent="29" name="PRIMARY">
+    <key id="391" parent="26" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="395" parent="29" name="UK_5171l57faosmj8myawaucatdw">
+    <key id="392" parent="26" name="UK_5171l57faosmj8myawaucatdw">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UK_5171l57faosmj8myawaucatdw</UnderlyingIndexName>
     </key>
