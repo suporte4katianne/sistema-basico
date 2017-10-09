@@ -14,8 +14,9 @@ import java.io.Serializable;
 @ViewScoped
 public class GridBean implements Serializable {
 
-    public void redrirect(String caminho) throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/" + caminho + ".xhtml");
+    public void redrirect(String caminho, String parametro, String valor) throws IOException {
+        FacesContext.getCurrentInstance().
+                getExternalContext().redirect("/HSI/Sistemas/" + caminho + ".xhtml?" + parametro + "=" + valor);
     }
 
 }
