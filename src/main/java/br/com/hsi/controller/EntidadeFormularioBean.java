@@ -1,11 +1,13 @@
 package br.com.hsi.controller;
 
 import br.com.hsi.model.Entidade;
+import br.com.hsi.model.Praca;
 import br.com.hsi.model.dados.Cep;
 import br.com.hsi.model.dados.Cidade;
 import br.com.hsi.model.dados.Estado;
 import br.com.hsi.service.GestaoEndereco;
 import br.com.hsi.service.GestaoEntidade;
+import br.com.hsi.service.GestaoPraca;
 import br.com.hsi.util.consulta.ConsultaCadastro;
 import br.com.hsi.util.exception.NegocioException;
 import br.com.hsi.util.jsf.FacesUtil;
@@ -32,17 +34,20 @@ public class EntidadeFormularioBean implements Serializable{
 	@Inject
 	private GestaoEndereco gestaoEndereco;
 	@Inject
+	private GestaoPraca gestaoPraca;
+	@Inject
 	private FacesContext facesContext;
 
 	private Entidade entidade;
 	private List<Cidade> cidades;
 	private List<Estado> estados;
-	
+	private List<Praca> pracas;
 	private Estado estadoConsulta;
 	private String cnpjConsulta;
 
 	
 	public void inicializar(){
+		pracas = gestaoPraca.listarPracas();
 		estados = gestaoEndereco.estados();
 
 		if(entidade == null) {
@@ -61,6 +66,10 @@ public class EntidadeFormularioBean implements Serializable{
                 entidade.setTipoEntidade("T");
             } else if(facesContext.getViewRoot().getViewId().contains("Fornecedor")){
                 entidade.setTipoEntidade("F");
+            } else if(facesContext.getViewRoot().getViewId().contains("Representante")){
+                entidade.setTipoEntidade("R");
+            } else if(facesContext.getViewRoot().getViewId().contains("Vendedor")){
+                entidade.setTipoEntidade("V");
             }
 			entidade.setNomecidade(entidade.getCidade().getCidade());
 			entidade.setCodigoIbgeCidade(entidade.getCidade().getCodigo());
@@ -75,6 +84,10 @@ public class EntidadeFormularioBean implements Serializable{
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Transportadora.xhtml");
 			} else if(facesContext.getViewRoot().getViewId().contains("Fornecedor")){
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Fornecedor.xhtml");
+			} else if(facesContext.getViewRoot().getViewId().contains("Representante")){
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Hawker/Representante.xhtml");
+			} else if(facesContext.getViewRoot().getViewId().contains("Vendedor")){
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Hawker/Vendedor.xhtml");
 			}
 
 		} catch (NegocioException e) {
@@ -151,5 +164,13 @@ public class EntidadeFormularioBean implements Serializable{
 
 	public void setCnpjConsulta(String cnpjConsulta) {
 		this.cnpjConsulta = cnpjConsulta;
+	}
+
+	public List<Praca> getPracas() {
+		return pracas;
+	}
+
+	public void setPracas(List<Praca> pracas) {
+		this.pracas = pracas;
 	}
 }

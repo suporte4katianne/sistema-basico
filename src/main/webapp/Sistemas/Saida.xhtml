@@ -49,8 +49,12 @@
 					<h:outputText value="#{dados.numeroNota}" />
 				</p:column>
 
-				<p:column headerText="Serie" style="width:6%" filterBy="#{dados.serieNota}" filterStyle="display:none">
+				<p:column headerText="Serie" style="width:4%" filterBy="#{dados.serieNota}" filterStyle="display:none">
 					<h:outputText value="#{dados.serieNota}" />
+				</p:column>
+
+				<p:column headerText="Modelo" style="width:4%" filterBy="#{dados.modeloNota}" filterStyle="display:none">
+					<h:outputText value="#{dados.modeloNota}" />
 				</p:column>
 
 				<p:column headerText="Emissão" style="width:10%" filterBy="#{dados.dataHoraEmissao}" filterStyle="display:none">

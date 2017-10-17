@@ -75,9 +75,43 @@
 						<p:ajax listener="${menuBean.segurancaFormulario('AjusteEstoque')}" />
 					</h:commandLink>
 				</li>
+				<li class="#{view.viewId == '/Sistemas/Etiqueta.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw fa-tag"/>Emissão de Etiqueta
+						<p:ajax listener="${menuBean.segurancaFormulario('Etiqueta')}" />
+					</h:commandLink>
+				</li>
 			</ul>
 		</h:form>
 	</div>
+
+	<button class="accordion"><i class="fa fa-fw fa-chevron-down"/>Hawker</button>
+	<div class="panel">
+		<h:form>
+			<ul>
+				<li class="#{view.viewId == '/Sistemas/Hawker/Representante.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-user"/>Representantes
+						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Representante')}" />
+					</h:commandLink>
+				</li>
+				<li class="#{view.viewId == '/Sistemas/Hawker/Vendedor.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-user"/>Vendedores
+						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Vendedor')}" />
+					</h:commandLink>
+				</li>
+				<li class="#{view.viewId == '/Sistemas/Hawker/Praca.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-map"/>Praças
+						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Praca')}" />
+					</h:commandLink>
+				</li>
+			</ul>
+
+		</h:form>
+	</div>
+
 
 	<p:dialog header="Sair sem Salvar" widgetVar="cancelarOperacao" modal="true" minHeight="250" width="400"
 			  resizable="false">

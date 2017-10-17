@@ -72,6 +72,9 @@ public class Empresa {
 	@Column(name = "tipo_certificado")
 	private String tipoCertificado;
 	private int ambiente;
+
+	@Column(name = "fuso_horario", columnDefinition="VARCHAR(255) default '-03:00'")
+	private String fusoHorario;
 	
 	@OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Entidade> destinatarios = new ArrayList<>();
@@ -282,6 +285,14 @@ public class Empresa {
 
 	public void setAmbiente(int ambiente) {
 		this.ambiente = ambiente;
+	}
+
+	public String getFusoHorario() {
+		return fusoHorario;
+	}
+
+	public void setFusoHorario(String fusoHorario) {
+		this.fusoHorario = fusoHorario;
 	}
 
 	@Override

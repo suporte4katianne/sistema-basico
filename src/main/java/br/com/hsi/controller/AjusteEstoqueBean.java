@@ -11,6 +11,16 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Classe de controle para a pagina AjusteEstoque.xhtml
+ *
+ * - Lista Ajustes de Estoque efetuados
+ *
+ * - Exclui ajustes de estoque realizados
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class AjusteEstoqueBean implements Serializable {

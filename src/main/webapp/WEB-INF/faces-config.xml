@@ -138,6 +138,47 @@
             <from-outcome>NumeracaoFormulario</from-outcome>
             <to-view-id>/Sistemas/NumeracaoFormulario.xhtml</to-view-id>
         </navigation-case>
+        <navigation-case>
+            <from-outcome>Etiqueta</from-outcome>
+            <to-view-id>/Sistemas/Etiqueta.xhtml</to-view-id>
+        </navigation-case>
+
+
+        <navigation-case>
+            <from-outcome>RepresentanteFormulario</from-outcome>
+            <to-view-id>/Sistemas/Hawker/RepresentanteFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Representante</from-outcome>
+            <to-view-id>/Sistemas/Hawker/Representante.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>VendedorFormulario</from-outcome>
+            <to-view-id>/Sistemas/Hawker/VendedorFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Vendedor</from-outcome>
+            <to-view-id>/Sistemas/Hawker/Vendedor.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>PracaFormulario</from-outcome>
+            <to-view-id>/Sistemas/Hawker/PracaFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Praca</from-outcome>
+            <to-view-id>/Sistemas/Hawker/Praca.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>RemessaFormulario</from-outcome>
+            <to-view-id>/Sistemas/Hawker/RemessaFormulario.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>Remessa</from-outcome>
+            <to-view-id>/Sistemas/Hawker/Remessa.xhtml</to-view-id>
+        </navigation-case>
 
     </navigation-rule>
 

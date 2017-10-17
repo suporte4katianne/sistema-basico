@@ -12,8 +12,6 @@ import javax.inject.Named;
 @RequestScoped
 public class Seguranca {
 
-	private String nomeEmpresa;
-
 	@Produces
 	@UsuarioLogado
 	public UsuarioSistema getUsuarioLogado() {
@@ -24,18 +22,10 @@ public class Seguranca {
 		if (auth != null && auth.getPrincipal() != null) {
 			usuario = (UsuarioSistema) auth.getPrincipal();
 		}
-		
-		//nomeEmpresa = usuario.getUsuario().getEmpresa().getNome();
-
 
 		return usuario;
 	}
 
-	public String getNomeEmpresa() {
-		return nomeEmpresa;
-	}
-	public void setNomeEmpresa(String nomeEmpresa) {
-		this.nomeEmpresa = nomeEmpresa;
-	}
+
 
 }

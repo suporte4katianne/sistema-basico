@@ -6,8 +6,6 @@ import br.com.hsi.service.GestaoNotaFiscal;
 import br.com.hsi.util.jsf.FacesUtil;
 import br.com.hsi.util.mail.Mailer;
 import br.com.hsi.util.mail.SimpleEmailConcat;
-import br.com.hsi.util.nfe.CertificadoFactory;
-import br.com.hsi.util.nfe.TipoCertificado;
 import br.com.hsi.util.nfe.autorizacao.GeraXmlAutorizacao;
 import br.com.hsi.util.nfe.eventos.GeraXmlEventos;
 import com.outjected.email.api.ContentDisposition;
@@ -29,8 +27,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.security.KeyStore;
-import java.security.PrivateKey;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -141,7 +137,7 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 	public void imprirmirDanfe() throws IOException, JRException, ParseException {
-		InputStream relatorioStream = getClass().getResourceAsStream("/danfe/danfeR.jasper");
+		InputStream relatorioStream = getClass().getResourceAsStream("/reports/atendimento/danfe_retrato.jasper");
 		JRXmlDataSource dataSource = new JRXmlDataSource(new File(
 				"/HSI/Autorizado/" + notaFiscal.getChaveAcesso() + "-procNFE.xml"),
 				"/nfeProc/NFe/infNFe/det");
@@ -198,7 +194,7 @@ public class NotaFiscalBean implements Serializable {
 	// Metodos Privados
 
 	private void gerarDanfe() throws JRException, IOException, ParseException {
-		InputStream relatorioStream = getClass().getResourceAsStream("/danfe/danfeR.jasper");
+		InputStream relatorioStream = getClass().getResourceAsStream("/reports/atendimento/danfe_retrato.jasper");
 		JRXmlDataSource dataSource = new JRXmlDataSource(new File(
 				"/HSI/Autorizado/" + notaFiscal.getChaveAcesso() + "-procNFE.xml"),
 				"/nfeProc/NFe/infNFe/det");

@@ -5,7 +5,7 @@
 	
 	<persistence-unit name="hsi_sistemas" transaction-type="RESOURCE_LOCAL">
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_basico?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useSSL=false" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://192.168.7.111:3306/sistema_basico?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useSSL=false" />
 			<property name="javax.persistence.jdbc.password" value="HSI-p2w*" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

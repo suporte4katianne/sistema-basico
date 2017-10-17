@@ -186,11 +186,16 @@
 						</h:panelGrid>
 					</div>
 
-					<h:panelGrid id="dadosNotaFiscal" columns="2" >
+					<h:panelGrid id="dadosNotaFiscal" columns="4" >
 						<p:outputLabel value="Ambiente:" for="ambiente" />
 						<p:selectOneMenu value="#{empresaFormularioBean.empresa.ambiente}" id="ambiente" >
 							<f:selectItem itemValue="1" itemLabel="PRODUÇÃO" />
 							<f:selectItem itemValue="2" itemLabel="HOMOLOGAÇÃO" />
+						</p:selectOneMenu>
+						<p:outputLabel value="Fuso Horário:" for="fuso" />
+						<p:selectOneMenu value="#{empresaFormularioBean.empresa.fusoHorario}" id="fuso" >
+							<f:selectItem itemValue="-03:00" itemLabel="Normal" />
+							<f:selectItem itemValue="-02:00" itemLabel="Horário de Verão" />
 						</p:selectOneMenu>
 					</h:panelGrid>
 				</p:tab>
@@ -203,9 +208,7 @@
 				<f:facet name="left">
 					<p:commandButton styleClass="ui-priority-primary" process="@form"
 						style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
-						icon="fa fa-floppy-o" value="Salvar" action="#{empresaFormularioBean.salvar()}"
-						onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro"
-						oncomplete="PF('salvarCadastro').enable()" />
+						icon="fa fa-floppy-o" value="Salvar" onclick="PF('atualizarEmpresa').show();"  />
 				</f:facet>
 				<f:facet name="right">
 					<p:button outcome="Empresa" icon="fa fa-reply" value="Cancelar" styleClass="ui-priority-primary"
@@ -213,6 +216,22 @@
 				</f:facet>
 			</p:toolbar>
 		</h:form>
+
+
+		<p:dialog header="Atualizar informações?" widgetVar="atualizarEmpresa" modal="true" minHeight="250" width="400"
+				  resizable="false">
+			<h:outputText value="Para que as informações sejam efetuadas, é necessario refazer o acesso ao sistema" />
+			<div style="margin-top: 15px">
+				<p:commandButton value="Refazer Acesso" icon="fa fa-check" style="margin-right: 5px"
+								 styleClass="ui-priority-primary" action="#{empresaFormularioBean.salvar()}"
+								 oncomplete="PF('atualizarEmpresa').hide();document.location = '/HSI/logout';" />
+				<p:commandButton value="Não" icon="fa fa-close" styleClass="ui-priority-primary"
+								 action="#{empresaFormularioBean.salvar()}"
+								 oncomplete="PF('atualizarEmpresa').hide()" />
+			</div>
+
+		</p:dialog>
+
 	</ui:define>
 
 </ui:composition>

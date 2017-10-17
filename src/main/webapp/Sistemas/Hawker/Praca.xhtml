@@ -5,14 +5,15 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template/Layout.xhtml">
 
+
     <ui:define name="content">
         <h:form>
             <br />
             <p:messages closable="true" autoUpdate="true" />
-            <p:dataTable value="#{cfopBean.cfops}" widgetVar="listaInutilizacoes"
+            <p:dataTable value="#{pracaBean.pracas}" widgetVar="listaPracas"
                          selectionMode="single" emptyMessage="Nenhum item adicionado"
                          reflow="true" var="dados" id="dadosTabela" multiViewState="true"
-                         rowKey="#{dados.id}" selection="#{cfopBean.cfop}" filteredValue="#{cfopBean.cfopsFiltro}"
+                         rowKey="#{dados.id}" selection="#{pracaBean.praca}" filteredValue="#{pracaBean.pracasFiltro}"
                          rows="20" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="20,45,60"
@@ -21,11 +22,11 @@
                 <f:facet name="header">
                     <div align="left">
                         <p:outputPanel style="aling:left">
-                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de CFOP´s" >
-                                <i class="fa fa-arrow-right"/>
+                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Praças" >
+                                <i class="fa fa-arrow-right" />
                             </p:outputLabel>
                             <p:outputLabel value="Pesquisar: " for="globalFilter"/>
-                            <p:inputText id="globalFilter"  onkeyup="PF('listaInutilizacoes').filter()" />
+                            <p:inputText id="globalFilter"  onkeyup="PF('listaPracas').filter()" />
                             <p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
                             <p:tooltip for="refresh" value="Atualizar" position="left"/>
                         </p:outputPanel>
@@ -33,31 +34,28 @@
                 </f:facet>
 
                 <p:ajax event="rowSelect" process="dadosTabela" update="dadosTabela" />
-                <p:ajax event="rowDblselect"
-                        listener="#{gridBean.redrirect('CfopFormulario','cfop',cfopBean.cfop.id)}"
-                        process="dadosTabela"/>
+                <p:ajax event="rowDblselect" process="dadosTabela"
+                        listener="#{gridBean.redrirect('PracaFormulario','praca',pracaBean.praca.id)}" />
 
-                <p:column headerText="Data" style="width: 10%"  filterBy="#{dados.codigo}" filterStyle="display:none">
-                    <h:outputText value="#{dados.codigo}" />
-                </p:column>
 
-                <p:column headerText="Serie"  filterBy="#{dados.cfop}" filterStyle="display:none">
-                    <h:outputText value="#{dados.cfop}" />
+                <p:column headerText="Descrição" style="width: 10%"  filterBy="#{dados.descricao}" filterStyle="display:none">
+                    <h:outputText value="#{dados.descricao}" />
                 </p:column>
 
                 <f:facet name="footer">
                     <div align="left">
-                        <p:button outcome="CfopFormulario"
+                        <p:button outcome="PracaFormulario"
                                   styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle"/>
 
-                        <p:button outcome="CfopFormulario" disabled="#{cfopBean.cfop == null}"
+                        <p:button outcome="PracaFormulario" disabled="#{pracaBean.praca == null}"
                                   value="Alterar" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary">
-                            <f:param name="cfop" value="#{cfopBean.cfop.id}" />
+                            <f:param name="praca" value="#{pracaBean.praca.id}" />
                         </p:button>
                     </div>
                 </f:facet>
 
             </p:dataTable>
         </h:form>
+
     </ui:define>
 </ui:composition>

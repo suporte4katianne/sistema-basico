@@ -2,7 +2,9 @@ package br.com.hsi.controller;
 
 import br.com.hsi.model.Empresa;
 import br.com.hsi.model.Entidade;
+import br.com.hsi.model.Praca;
 import br.com.hsi.service.GestaoEntidade;
+import br.com.hsi.service.GestaoPraca;
 import br.com.hsi.util.exception.NegocioException;
 import br.com.hsi.util.jsf.FacesUtil;
 
@@ -37,6 +39,10 @@ public class EntidadeBean implements Serializable {
 			entidades = gestaoEntidade.listarEntidades("T");
 		}else if (facesContext.getViewRoot().getViewId().contains("Fornecedor")) {
 			entidades = gestaoEntidade.listarEntidades("F");
+		}else if (facesContext.getViewRoot().getViewId().contains("Representante")) {
+			entidades = gestaoEntidade.listarEntidades("R");
+		}else if (facesContext.getViewRoot().getViewId().contains("Vendedor")) {
+			entidades = gestaoEntidade.listarEntidades("V");
 		}
 	}
 	
@@ -60,7 +66,7 @@ public class EntidadeBean implements Serializable {
 		this.entidade = entidade;
 		
 		if(entidade == null){
-			entidade = new Entidade();
+			this.entidade = new Entidade();
 		}
 	}
 

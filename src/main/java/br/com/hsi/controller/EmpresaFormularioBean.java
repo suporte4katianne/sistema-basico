@@ -31,6 +31,18 @@ import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
+/**
+ * Classe de controle para a pagina Empresa.xhtml
+ *
+ * - Salva nova Empresa
+ *
+ * - Edita Empresa
+ *
+ * - Valida Certificado Digital
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class EmpresaFormularioBean implements Serializable {
@@ -117,8 +129,14 @@ public class EmpresaFormularioBean implements Serializable {
 			FacesUtil.addErrorMessage("Erro: "+e.getMessage());
 		}
 	}
-	
-    //-------------- Métodos privados --------------
+
+
+	/**
+	 * Validação do Certificado digital
+	 *
+	 * @param inputCertificado
+	 */
+
 	private void validaCertificado(InputStream inputCertificado){
 		try{
 			KeyStore ks = KeyStore.getInstance("pkcs12");

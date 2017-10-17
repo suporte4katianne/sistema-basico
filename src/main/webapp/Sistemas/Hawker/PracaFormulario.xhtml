@@ -1,0 +1,49 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"  xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{pracaFormularioBean.inicializar()}" />
+            <o:viewParam name="praca" value="#{pracaFormularioBean.praca}"
+                         converter="#{pracaConverter}" />
+        </f:metadata>
+
+
+        <h:form id="frm">
+            <div class="ui-fluid">
+                <br />
+                <p:panel header="Cadastro de Praça" id="painelCfop">
+                    <h:panelGrid id="dadosInutiliacao" columns="4" style="width: 90%"
+                                 columnClasses="rotulo, campo, rotulo, campo" >
+                        <p:outputLabel value="Descrição:" for="descricao" />
+                        <p:inputText id="descricao"
+                                     value="#{pracaFormularioBean.praca.descricao}" />
+
+
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <p:messages autoUpdate="true" id="mensagem" closable="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton styleClass="ui-priority-primary"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+                                     value="Salvar" icon="fa fa-floppy-o" action="#{pracaFormularioBean.salvar()}"
+                                     widgetVar="salvarCadastro" process="@this frm:painelCfop" update="@form frm:mensagem"
+                                     global="false" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:button outcome="Cfop" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

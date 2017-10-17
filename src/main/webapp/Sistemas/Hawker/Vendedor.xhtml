@@ -9,10 +9,10 @@
         <h:form>
             <br />
             <p:messages closable="true" autoUpdate="true" />
-            <p:dataTable value="#{cfopBean.cfops}" widgetVar="listaInutilizacoes"
+            <p:dataTable value="#{entidadeBean.entidades}" widgetVar="listaVendedores"
                          selectionMode="single" emptyMessage="Nenhum item adicionado"
                          reflow="true" var="dados" id="dadosTabela" multiViewState="true"
-                         rowKey="#{dados.id}" selection="#{cfopBean.cfop}" filteredValue="#{cfopBean.cfopsFiltro}"
+                         rowKey="#{dados.id}" selection="#{entidadeBean.entidade}" filteredValue="#{entidadeBean.entidadesFiltro}"
                          rows="20" paginator="true"
                          paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="20,45,60"
@@ -21,11 +21,11 @@
                 <f:facet name="header">
                     <div align="left">
                         <p:outputPanel style="aling:left">
-                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de CFOP´s" >
+                            <p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Vendedores" >
                                 <i class="fa fa-arrow-right"/>
                             </p:outputLabel>
                             <p:outputLabel value="Pesquisar: " for="globalFilter"/>
-                            <p:inputText id="globalFilter"  onkeyup="PF('listaInutilizacoes').filter()" />
+                            <p:inputText id="globalFilter"  onkeyup="PF('listaVendedores').filter()" />
                             <p:button icon="fa fa-refresh" id="refresh" style="float:right" styleClass="ui-priority-primary"/>
                             <p:tooltip for="refresh" value="Atualizar" position="left"/>
                         </p:outputPanel>
@@ -33,31 +33,46 @@
                 </f:facet>
 
                 <p:ajax event="rowSelect" process="dadosTabela" update="dadosTabela" />
-                <p:ajax event="rowDblselect"
-                        listener="#{gridBean.redrirect('CfopFormulario','cfop',cfopBean.cfop.id)}"
-                        process="dadosTabela"/>
 
-                <p:column headerText="Data" style="width: 10%"  filterBy="#{dados.codigo}" filterStyle="display:none">
-                    <h:outputText value="#{dados.codigo}" />
+                <p:column headerText="Nome" style="width:30%" filterBy="#{dados.nome}" filterStyle="display:none">
+                    <h:outputText value="#{dados.nome}" />
                 </p:column>
 
-                <p:column headerText="Serie"  filterBy="#{dados.cfop}" filterStyle="display:none">
-                    <h:outputText value="#{dados.cfop}" />
+                <p:column headerText="CPF/CNPJ" style="width:10%" filterBy="#{dados.cpfCnpj}" filterStyle="display:none">
+                    <h:outputText value="#{dados.cpfCnpj}" />
+                </p:column>
+
+                <p:column headerText="Cidade" style="width:10%" filterBy="#{dados.cidade.cidade}" filterStyle="display:none">
+                    <h:outputText value="#{dados.cidade.cidade}" />
+                </p:column>
+
+                <p:column headerText="Estado" style="width:5%" filterBy="#{dados.estado.siglaEstado}" filterStyle="display:none">
+                    <h:outputText value="#{dados.estado.siglaEstado}" />
+                </p:column>
+
+                <p:column headerText="Telefone" style="width:10%" filterBy="#{dados.telefone}" filterStyle="display:none">
+                    <h:outputText value="#{dados.telefone}" />
                 </p:column>
 
                 <f:facet name="footer">
                     <div align="left">
-                        <p:button outcome="CfopFormulario"
+                        <p:button outcome="VendedorFormulario"
                                   styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle"/>
 
-                        <p:button outcome="CfopFormulario" disabled="#{cfopBean.cfop == null}"
+                        <p:button outcome="VendedorFormulario" disabled="#{entidadeBean.entidade == null}"
                                   value="Alterar" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary">
-                            <f:param name="cfop" value="#{cfopBean.cfop.id}" />
+                            <f:param name="entidade" value="#{entidadeBean.entidade.id}" />
                         </p:button>
+
+                        <p:commandButton value="Excluir" icon="fa fa-minus-circle" process="dadosTabela"
+                                         styleClass="ui-priority-primary" disabled="#{entidadeBean.entidade == null}"
+                                         action="#{entidadeBean.excluir()}" global="false" />
                     </div>
                 </f:facet>
 
             </p:dataTable>
         </h:form>
+
     </ui:define>
+
 </ui:composition>

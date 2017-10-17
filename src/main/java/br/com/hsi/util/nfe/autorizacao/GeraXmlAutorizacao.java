@@ -106,7 +106,7 @@ public class GeraXmlAutorizacao {
 	private static Ide dadosDeIdentificacao() {
 		LocalDateTime now = LocalDateTime.now();
 
-		String hora = now.withNano(0) + "-03:00";
+		String hora = now.withNano(0) + notaFiscal.getEmpresa().getFusoHorario();
 
 		notaFiscal.setDataHoraEmissao(Date.from(now.withNano(0).atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));
 		notaFiscal.setDataHoraSaidaEntrada(Date.from(now.withNano(0).atZone(ZoneId.of("America/Sao_Paulo")).toInstant()));

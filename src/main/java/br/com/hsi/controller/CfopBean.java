@@ -10,6 +10,14 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Classe de controle para a pagina Cfop.xhtml
+ *
+ * - Lista CFOPs cadastradas
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class CfopBean implements Serializable {
@@ -24,7 +32,6 @@ public class CfopBean implements Serializable {
 
     @PostConstruct
     public void init(){
-
         cfops = gestaoNotaFiscal.listarCfops();
     }
 

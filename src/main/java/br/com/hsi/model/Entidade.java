@@ -7,6 +7,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "entidade")
@@ -84,6 +85,12 @@ public class Entidade {
 	@Column(name = "produtor_rural")
 	private Boolean produtorRural;
 
+	@OneToMany(mappedBy = "entidade")
+	private List<EntidadePraca> pracas;
+
+	@ManyToOne
+	@JoinColumn(name = "id_praca")
+	private Praca praca;
 
 
 	public Long getId() {
@@ -270,6 +277,21 @@ public class Entidade {
 		this.produtorRural = produtorRural;
 	}
 
+	public List<EntidadePraca> getPracas() {
+		return pracas;
+	}
+
+	public void setPracas(List<EntidadePraca> pracas) {
+		this.pracas = pracas;
+	}
+
+	public Praca getPraca() {
+		return praca;
+	}
+
+	public void setPraca(Praca praca) {
+		this.praca = praca;
+	}
 
 	@Override
 	public boolean equals(Object o) {

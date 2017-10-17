@@ -10,6 +10,14 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Classe de controle para a pagina AlterarSenha.xhtml
+ *
+ * - Alterar senha de usuários já cadastrados
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class AlterarSenhaBean implements Serializable{

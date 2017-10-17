@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 /**
+ * Classe de controle para gerenciar rotas de edição de itens utilizando duplo clique e linhas da Grid
+ *
  * @author Eriel Miquilino
  */
 

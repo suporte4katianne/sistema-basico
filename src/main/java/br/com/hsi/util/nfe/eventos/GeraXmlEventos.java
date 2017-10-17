@@ -28,7 +28,7 @@ public class GeraXmlEventos {
                 .replaceAll("-", "")
                 .replaceAll("/", "");
         String chave = (notaFiscal.getChaveAcesso().replaceAll("NFe", ""));
-        String dataHoraEvento = now.withNano(0)+"-03:00";
+        String dataHoraEvento = now.withNano(0) + notaFiscal.getEmpresa().getFusoHorario();
         String protocoloNfe = notaFiscal.getProtocoloAutorizacao();
 
         StringBuilder xml = new StringBuilder();
@@ -79,7 +79,7 @@ public class GeraXmlEventos {
                 .replaceAll("\\.", "")
                 .replaceAll("-", "").replaceAll("/", "");
         String chave = (notaFiscal.getChaveAcesso().replaceAll("NFe", ""));
-        String dataHoraEvento = now.withNano(0)+"-03:00";
+        String dataHoraEvento = now.withNano(0) + notaFiscal.getEmpresa().getFusoHorario();
         String condicoesDeUso = "A Carta de Correcao e disciplinada pelo paragrafo 1o-A do art. 7o do Convenio S/N, de 15" +
                 " de dezembro de 1970 e pode ser utilizada para regularizacao de erro ocorrido na emissao de documento fiscal," +
                 " desde que o erro nao esteja relacionado com: I - as variaveis que determinam o valor do imposto tais como: base " +

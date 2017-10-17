@@ -10,6 +10,14 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * Classe de controle para a pagina Empresa.xhtml
+ *
+ * - Lista Empresas cadastradas
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class EmpresaBean implements Serializable {

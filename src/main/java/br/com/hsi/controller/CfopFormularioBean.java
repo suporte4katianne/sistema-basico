@@ -11,6 +11,13 @@ import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Classe de controle para a pagina CfopFormulario.xhtml
+ *
+ * - Salva nova CFOP
+ *
+ * @author Eriel Miquilino
+ */
 
 @Named
 @ViewScoped
@@ -29,7 +36,6 @@ public class CfopFormularioBean implements Serializable {
 
     public void salvar () throws IOException {
         gestaoNotaFiscal.salvarCfop(cfop);
-        FacesUtil.addInfoMessage("Cfop salva com sucesso!");
         FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cfop.xhtml");
     }
 

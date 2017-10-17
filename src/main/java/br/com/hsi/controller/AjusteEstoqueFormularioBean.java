@@ -19,6 +19,18 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Classe de controle para a pagina AjusteEstoqueFormulario.xhtml
+ *
+ * - Salva novo Ajuste de Estoque
+ *
+ * - Edita Ajuste de Estoque
+ *
+ * - Gera a movimentação realizada pelo produto ao ajustar o estoque
+ *
+ * @author Eriel Miquilino
+ */
+
 @Named
 @ViewScoped
 public class AjusteEstoqueFormularioBean implements Serializable {
