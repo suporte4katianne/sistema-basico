@@ -228,7 +228,7 @@
                     <div class="ui-fluid">
                         <p:panel header="Dados do Produto" id="dadosProduto">
                             <p:messages />
-                            <h:panelGrid columns="6" style="width:90%;text-align:right">
+                            <h:panelGrid columns="8" style="width:90%;text-align:right">
                                 <p:outputLabel value="Produto:" for="produto" />
                                 <h:panelGroup style="display:flex;">
                                     <p:inputText value="#{notaFiscalFormularioBean.notaFiscalItem.produto.descricao}"
@@ -269,11 +269,15 @@
                                 <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.desconto}" id="desconto"
                                                decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
+                                <p:outputLabel value="Total:" for="totalItem" />
+                                <p:inputNumber id="totalItem"
+                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+
                             </h:panelGrid>
 
                             <br />
 
-                            <p:panel header="Impostos do Produto" >
+                            <p:panel header="Impostos do Produto na Nota" >
                                 <h:panelGrid columns="14" style="width:100%" >
                                     <p:outputLabel value="Origem:" for="origem" />
                                     <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.origem}" id="origem" >
@@ -307,7 +311,7 @@
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                 </h:panelGrid>
 
-                                <h:panelGrid columns="4" >
+                                <h:panelGrid columns="10" >
                                     <p:outputLabel value="CST IPI:" for="cstIPI"/>
                                     <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.cstIpi}" id="cstIPI" >
                                         <f:selectItems value="#{notaFiscalFormularioBean.cstsIpi}" var="cstIpi"
@@ -317,9 +321,6 @@
                                     <p:inputNumber value="#{notaFiscalFormularioBean.notaFiscalItem.aliquotaIpi}" id="ipi"
                                                    placeholder="%" inputStyle="max-width: 80px"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
-                                </h:panelGrid>
-
-                                <h:panelGrid columns="6"  >
                                     <p:outputLabel value="CST Pis/Cofins:" for="cstPisCofins"/>
                                     <p:selectOneMenu value="#{notaFiscalFormularioBean.notaFiscalItem.cstPisCofins}" id="cstPisCofins" >
                                         <f:selectItems value="#{notaFiscalFormularioBean.cstsPisCofins}" var="cstPisCofins"
@@ -334,8 +335,8 @@
                                                    placeholder="%" inputStyle="max-width: 80px"
                                                    symbol="% " decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
                                 </h:panelGrid>
+
                             </p:panel>
-                            <br />
                             <h:panelGrid columns="1" style="width:10%">
                                 <p:commandButton value="Incluir"
                                                  action="#{notaFiscalFormularioBean.incluirProduto()}"
@@ -346,10 +347,10 @@
 
                             <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
                                          value="#{notaFiscalFormularioBean.notaFiscal.notaFiscalItens}"
-                                         var="produtoItem" style="margin-top: 15px" id="dadosTabelaProduto"
+                                         var="produtoItem" id="dadosTabelaProduto"
                                          rowKey="produtoItem.codProd">
 
-                                <p:column headerText="Código" style="width:10%">
+                                <p:column headerText="Cód" style="width:10%">
                                     <h:outputText value="#{produtoItem.codProd}" />
                                 </p:column>
 
@@ -357,19 +358,19 @@
                                     <h:outputText value="#{produtoItem.nomeProduto}" />
                                 </p:column>
 
-                                <p:column headerText="Qtd." style="width:10%">
+                                <p:column headerText="Qtd" style="width:10%">
                                     <h:outputText value="#{produtoItem.quantidade}" />
                                 </p:column>
 
-                                <p:column headerText="P. Und." style="width:10%">
+                                <p:column headerText="Vlr" style="width:10%">
                                     <h:outputText value="#{produtoItem.valorUnitario}" />
                                 </p:column>
 
-                                <p:column headerText="Desc." style="width:10%">
+                                <p:column headerText="Desc" style="width:10%">
                                     <h:outputText value="#{produtoItem.desconto}" />
                                 </p:column>
 
-                                <p:column headerText="P. Total" style="width:13%">
+                                <p:column headerText="Total" style="width:13%">
                                     <h:outputText value="#{produtoItem.valorTotal}" />
                                 </p:column>
 
@@ -377,7 +378,7 @@
                                     <h:outputText value="#{produtoItem.cst.codigo}" />
                                 </p:column>
 
-                                <p:column headerText="PIS/Cofins" style="width:13%">
+                                <p:column headerText="Pis" style="width:13%">
                                     <h:outputText value="#{produtoItem.cstPisCofins.codigo}" />
                                 </p:column>
 
@@ -385,7 +386,7 @@
                                     <h:outputText value="#{produtoItem.cfop}" />
                                 </p:column>
 
-                                <p:column headerText="Ações" style="width:10%">
+                                <p:column headerText="..." style="width:10%">
                                     <p:commandButton icon="fa fa-trash-o"
                                                      styleClass="ui-priority-primary"
                                                      actionListener="#{notaFiscalFormularioBean.removerProduto(produtoItem)}"

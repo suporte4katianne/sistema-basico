@@ -33,7 +33,9 @@
                 </f:facet>
 
                 <p:ajax event="rowSelect" process="dadosTabela" update="dadosTabela" />
-
+                <p:ajax event="rowDblselect"
+                        listener="#{gridBean.redrirect('CfopFormulario','cfop',cfopBean.cfop.id)}"
+                        process="dadosTabela"/>
 
                 <p:column headerText="Data" style="width: 10%"  filterBy="#{dados.codigo}" filterStyle="display:none">
                     <h:outputText value="#{dados.codigo}" />
