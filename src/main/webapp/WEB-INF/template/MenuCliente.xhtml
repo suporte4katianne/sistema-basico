@@ -17,14 +17,14 @@
 
 				<li class="#{view.viewId == '/Sistemas/Fornecedor.xhtml' ? 'is-selected' : ''}">
 					<h:commandLink>
-						<i class="fa  fa-fw  fa-user"/>Fornecedores
+						<i class="fa  fa-fw  fa-users"/>Fornecedores
 						<p:ajax listener="${menuBean.segurancaFormulario('Fornecedor')}" />
 					</h:commandLink>
 				</li>
 
 				<li class="#{view.viewId == '/Sistemas/Transportadora.xhtml' ? 'is-selected' : ''}">
 					<h:commandLink>
-						<i class="fa  fa-fw  fa-user"/>Transportadoras
+						<i class="fa  fa-fw  fa-truck"/>Transportadoras
 						<p:ajax listener="${menuBean.segurancaFormulario('Transportadora')}" />
 					</h:commandLink>
 				</li>
@@ -77,7 +77,7 @@
 				</li>
 				<li class="#{view.viewId == '/Sistemas/Etiqueta.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
-						<i class="fa  fa-fw fa-tag"/>Emissão de Etiqueta
+						<i class="fa  fa-fw fa-tags"/>Emissão de Etiqueta
 						<p:ajax listener="${menuBean.segurancaFormulario('Etiqueta')}" />
 					</h:commandLink>
 				</li>
@@ -91,13 +91,13 @@
 			<ul>
 				<li class="#{view.viewId == '/Sistemas/Hawker/Representante.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
-						<i class="fa  fa-fw  fa-user"/>Representantes
+						<i class="fa  fa-fw  fa-handshake-o"/>Representantes
 						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Representante')}" />
 					</h:commandLink>
 				</li>
 				<li class="#{view.viewId == '/Sistemas/Hawker/Vendedor.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
-						<i class="fa  fa-fw  fa-user"/>Vendedores
+						<i class="fa  fa-fw  fa-shopping-bag"/>Vendedores
 						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Vendedor')}" />
 					</h:commandLink>
 				</li>
