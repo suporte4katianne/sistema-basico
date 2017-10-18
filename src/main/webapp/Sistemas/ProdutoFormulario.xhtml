@@ -16,68 +16,73 @@
             <p:tabView id="tabView">
                 <div class="ui-fluid">
                     <br />
-                    <p:tab title="Gerais">
-                        <p:panel header="Cadastro de Produtos" id="painelProduto">
-                            <h:panelGrid id="dadosProduto" columns="4"
-                                         columnClasses="rotulo, campo, rotulo, campo">
-                                <p:outputLabel value="Codigo:" for="codigo" />
-                                <p:inputText id="codigo"
-                                             value="#{produtoFormularioBean.produto.codigo}" />
 
-                                <p:outputLabel value="Código Barras:" for="codigoBarras" />
-                                <h:panelGroup style="display:flex;">
-                                    <p:inputMask id="codigoBarras" mask="9?999999999999999"
-                                                 value="#{produtoFormularioBean.produto.codigoBrras}" />
-                                    <p:commandButton icon="fa fa-barcode" process="@this, codigo" update="@this, codigoBarras"
-                                                     styleClass="ui-priority-primary" style="max-width: 30px"
-                                                     action="#{produtoFormularioBean.geraEAN}" />
-                                </h:panelGroup>
+                        <p:tab title="Gerais">
+                            <p:panel header="Cadastro de Produtos" id="painelProduto">
+                                <div class="ui-fluid">
+                                    <h:panelGrid id="dadosProduto" columns="4" style="width:90%"
+                                             columnClasses="rotulo, campo, rotulo, campo">
+                                    <p:outputLabel value="Codigo:" for="codigo" />
+                                    <p:inputText id="codigo"
+                                                 value="#{produtoFormularioBean.produto.codigo}" />
 
-                                <p:outputLabel value="Descrição:" for="nome" />
-                                <p:inputText id="nome"
-                                             value="#{produtoFormularioBean.produto.descricao}" />
+                                    <p:outputLabel value="Código Barras:" for="codigoBarras" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputMask id="codigoBarras" mask="9?999999999999999"
+                                                     value="#{produtoFormularioBean.produto.codigoBrras}" />
+                                        <p:commandButton icon="fa fa-barcode" process="@this, codigo" update="@this, codigoBarras"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         action="#{produtoFormularioBean.geraEAN}" />
+                                    </h:panelGroup>
 
-                                <p:outputLabel value="Unidade de Venda:" for="unidadeMedida" />
-                                <p:selectOneMenu id="unidadeMedida"
-                                                 value="#{produtoFormularioBean.produto.unidadeMedida}">
-                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
-                                    <f:selectItems value="#{produtoFormularioBean.unidadeMedida}"
-                                                   var="dados" itemValue="#{dados.codigo}"
-                                                   itemLabel="#{dados.nome}" />
-                                </p:selectOneMenu>
+                                    <p:outputLabel value="Descrição:" for="nome" />
+                                    <p:inputText id="nome"
+                                                 value="#{produtoFormularioBean.produto.descricao}" />
 
-                                <p:outputLabel value="Preço:" for="preco" />
-                                <p:inputNumber id="preco"  symbol="R$ "
-                                               value="#{produtoFormularioBean.produto.precoVenda}"
-                                               decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+                                    <p:outputLabel value="Unidade de Venda:" for="unidadeMedida" />
+                                    <p:selectOneMenu id="unidadeMedida"
+                                                     value="#{produtoFormularioBean.produto.unidadeMedida}">
+                                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                        <f:selectItems value="#{produtoFormularioBean.unidadeMedida}"
+                                                       var="dados" itemValue="#{dados.codigo}"
+                                                       itemLabel="#{dados.nome}" />
+                                    </p:selectOneMenu>
 
-                                <p:outputLabel value="" />
-                                <p:outputLabel value="" />
+                                    <p:outputLabel value="Preço:" for="preco" />
+                                    <p:inputNumber id="preco"  symbol="R$ "
+                                                   value="#{produtoFormularioBean.produto.precoVenda}"
+                                                   decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
-                                <p:outputLabel value="NCM:" for="ncm" />
-                                <h:panelGroup style="display:flex;">
-                                    <p:inputText
-                                            value="#{produtoFormularioBean.produto.codigo_ncm}" required="true"
-                                            style="opacity: 1;" id="ncm" disabled="true" />
-                                    <p:commandButton icon="fa fa-search"
-                                                     styleClass="ui-priority-primary" style="max-width: 30px"
-                                                     type="button" onclick="PF('ncmDialog').show();" />
-                                </h:panelGroup>
+                                    <p:outputLabel value="Comissão:" for="comissao" />
+                                    <p:inputNumber id="comissao"  symbol="R$ "
+                                                   value="#{produtoFormularioBean.produto.comissao}"
+                                                   decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
 
-                                <p:outputLabel value="Cest:" for="cest" />
-                                <h:panelGroup style="display:flex;">
-                                    <p:inputText required="true"
-                                            value="#{produtoFormularioBean.produto.codigo_cest}" id="cest"
-                                            disabled="true" style="opacity: 1;" />
-                                    <p:commandButton icon="fa fa-search"
-                                                     styleClass="ui-priority-primary" style="max-width: 30px"
-                                                     type="button" onclick="PF('cestDialog').show();" />
-                                </h:panelGroup>
+                                    <p:outputLabel value="NCM:" for="ncm" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputText
+                                                value="#{produtoFormularioBean.produto.codigo_ncm}" required="true"
+                                                style="opacity: 1;" id="ncm" disabled="true" />
+                                        <p:commandButton icon="fa fa-search"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         type="button" onclick="PF('ncmDialog').show();" />
+                                    </h:panelGroup>
+
+                                    <p:outputLabel value="Cest:" for="cest" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputText required="true"
+                                                     value="#{produtoFormularioBean.produto.codigo_cest}" id="cest"
+                                                     disabled="true" style="opacity: 1;" />
+                                        <p:commandButton icon="fa fa-search"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         type="button" onclick="PF('cestDialog').show();" />
+                                    </h:panelGroup>
 
 
-                            </h:panelGrid>
-                        </p:panel>
-                    </p:tab>
+                                </h:panelGrid>
+                                </div>
+                            </p:panel>
+                        </p:tab>
 
                     <p:tab title="Impostos">
                         <p:panel header="Impostos do Produto">

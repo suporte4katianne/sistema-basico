@@ -28,7 +28,7 @@ public class EmpresaBean implements Serializable {
 	private GestaoEmpresa gestaoEmpresa;
 
 
-	private Empresa empresa = new Empresa();
+	private Empresa empresa;
 	private List<Empresa> empresasFiltro;
 	private List<Empresa> empresas;
 

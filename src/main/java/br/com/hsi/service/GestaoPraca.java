@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Classe com regras de negôcio para cadastro de praças
+ * Classe com regras de negócio para cadastro de praças
  *
  * @author Eriel Miquilino
  */

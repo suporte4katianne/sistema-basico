@@ -3,7 +3,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:o="http://omnifaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui" xmlns:ṕp="http://java.sun.com/jsf/html"
                 template="/WEB-INF/template/Layout.xhtml">
 
     <ui:define name="content">
@@ -114,17 +114,19 @@
                         <p:inputMask id="celular" mask="(99) 99999-9999"
                                      value="#{entidadeFormularioBean.entidade.celular}" />
 
-                        <p:outputLabel value="E-mail" for="email" />
+                        <p:outputLabel value="E-mail:" for="email" />
                         <p:inputText value="#{entidadeFormularioBean.entidade.email}"
                                      id="email" />
 
-                        <p:outputLabel value="Praça" for="praca" />
+                        <p:outputLabel value="Praça:" for="praca" />
                         <p:selectOneMenu value="#{entidadeFormularioBean.entidade.praca}"
                                      id="praca" converter="#{pracaConverter}">
                             <f:selectItems value="#{entidadeFormularioBean.pracas}" var="praca"
                                            itemLabel="#{praca.descricao}" itemValue="#{praca}" />
                         </p:selectOneMenu>
 
+                        <p:outputLabel value="Observações:" for="observacao" />
+                        <p:inputText value="#{entidadeFormularioBean.entidade.observacao}" id="observacao"/>
 
                     </h:panelGrid>
                 </p:panel>

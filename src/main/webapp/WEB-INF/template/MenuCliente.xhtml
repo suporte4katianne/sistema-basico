@@ -107,6 +107,12 @@
 						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Praca')}" />
 					</h:commandLink>
 				</li>
+				<li class="#{view.viewId == '/Sistemas/Hawker/Remessa.xhtml' ? 'is-selected' : ''}" >
+					<h:commandLink>
+						<i class="fa  fa-fw  fa-map"/>Remessas
+						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Remessa')}" />
+					</h:commandLink>
+				</li>
 			</ul>
 
 		</h:form>

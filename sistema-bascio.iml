@@ -35,7 +35,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.1" level="project" />
     <orderEntry type="library" name="Maven: br.com.hsi.theme:bootstrap-hsi:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.glassfish:javax.faces:2.2.14" level="project" />
+    <orderEntry type="library" name="Maven: org.glassfish:javax.faces:2.3.3" level="project" />
     <orderEntry type="library" name="Maven: org.jboss.weld.servlet:weld-servlet:2.4.1.Final" level="project" />
     <orderEntry type="library" name="Maven: org.jboss:jandex:2.0.3.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.4.1.Final" level="project" />

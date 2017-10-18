@@ -1,0 +1,237 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"  xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{remessaFormularioBean.inicializar()}" />
+            <o:viewParam name="remessa" value="#{remessaFormularioBean.remessa}"
+                         converter="#{remessaConverter}" />
+        </f:metadata>
+
+
+        <h:form id="frm">
+            <div class="ui-fluid">
+                <br />
+                <p:panel header="Remessa" id="painelRemssa">
+                    <h:panelGrid id="remessa" columns="8">
+                        <p:outputLabel value="Código:" for="codigo" />
+                        <p:inputText id="codigo" disabled="true" style="opacity: 0.8"
+                                     value="#{remessaFormularioBean.remessa.codigo}" />
+
+                        <p:outputLabel value="Representante:" for="representante" />
+                        <h:panelGroup style="display:flex;">
+                            <p:inputText
+                                    value="#{remessaFormularioBean.remessa.representante.nome}"
+                                    style="opacity: 1;" id="representante" disabled="true" />
+                            <p:commandButton icon="fa fa-search"
+                                             styleClass="ui-priority-primary" style="max-width: 30px"
+                                             type="button" onclick="PF('entidadeDialog').show();" />
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Praça:" for="praca" />
+                        <p:selectOneMenu value="#{remessaFormularioBean.remessa.praca}"
+                                         converter="#{remessaConverter}" id="praca">
+                            <f:selectItems itemValue="#{dados}" itemLabel="#{dados.descricao}"
+                                           var="dados" value="#{remessaFormularioBean.pracas}"  />
+                        </p:selectOneMenu>
+
+                        <p:outputLabel value="Emissão:" for="emissao" />
+                        <p:calendar id="emissao" pattern="dd/MM/yyyy" converter="#{dateTimeConverter}"
+                                    value="#{remessaFormularioBean.remessa.emissao}" >
+                        </p:calendar>
+                    </h:panelGrid>
+                    <br/>
+                    <p:panel header="Produtos da Remessa" id="painelRemssaItem">
+                        <h:panelGrid id="remessaItem" columns="5">
+                            <p:outputLabel value="Produto:" for="produto" />
+                            <h:panelGroup style="display:flex;">
+                                <p:inputText
+                                        value="#{remessaFormularioBean.remessaItem.produto.descricao}"
+                                        style="opacity: 1;" id="produto" disabled="true" />
+                                <p:commandButton icon="fa fa-search"
+                                                 styleClass="ui-priority-primary" style="max-width: 30px"
+                                                 type="button" onclick="PF('produtoDialog').show();" />
+                            </h:panelGroup>
+
+
+                            <p:outputLabel value="Quantidade:" for="quantidade" />
+                            <p:inputNumber value="#{remessaFormularioBean.remessaItem.quantidade}"
+                                           decimalPlaces="0"
+                                           id="quantidade" />
+
+                            <p:commandButton value="Incluir" styleClass="ui-priority-primary"
+                                             action="#{remessaFormularioBean.incluirRemessaItem}"
+                                             process="painelRemssaItem"
+                                             update="painelRemssaItem" />
+
+                        </h:panelGrid>
+
+                        <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
+                                     value="#{remessaFormularioBean.remessa.remessaItens}"
+                                     var="remessaItem" style="margin-top: 15px" id="dadosTabela"
+                                     rowKey="remessaItem" >
+
+                            <p:column headerText="Código" style="width:5%">
+                                <h:outputText value="#{remessaItem.produto.codigo}" />
+                            </p:column>
+
+                            <p:column headerText="Descrição" style="width:50%">
+                                <h:outputText value="#{remessaItem.descricao}" />
+                            </p:column>
+
+                            <p:column headerText="Quantidade" style="width:10%">
+                                <h:outputText value="#{remessaItem.quantidade}" />
+                            </p:column>
+
+                            <p:column headerText="valor Unitário" style="width:20%">
+                                <h:outputText value="#{remessaItem.precoUnitario}">
+                                    <f:convertNumber pattern="R$ ##,###.00" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="valor Total" style="width:20%">
+                                <h:outputText value="#{remessaItem.precoTotal}">
+                                    <f:convertNumber pattern="R$ ##,###.00" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Ações" style="width:5%">
+                                <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+                                                 actionListener="#{remessaFormularioBean.removerRemessaItem(remessaItem)}"
+                                                 styleClass="ui-priority-primary" />
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <div align="left" >
+                                    <p:outputLabel value="Valor total de produtos da remessa: " />
+                                    <p:outputLabel value="#{remessaFormularioBean.remessa.total}" >
+                                        <f:convertNumber pattern="R$ ##,###0.00" />
+                                    </p:outputLabel>
+                                </div>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                </p:panel>
+
+            </div>
+
+            <p:messages autoUpdate="true" id="mensagem" closable="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton styleClass="ui-priority-primary" process="@form"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+                                     value="Salvar" icon="fa fa-floppy-o" action="#{remessaFormularioBean.salvar()}"
+                                     oncomplete="PF('salvarCadastro').enable();"
+                                     onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:button outcome="Remessa" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                </f:facet>
+            </p:toolbar>
+
+        </h:form>
+
+
+        <p:dialog widgetVar="entidadeDialog" modal="true" height="450"
+                  width="850" resizable="false">
+            <h:form>
+                <p:dataTable value="#{remessaFormularioBean.representantes}"
+                             widgetVar="listaEntidades" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="representante"
+                             id="dadosEntidadeTabela" multiViewState="true" rowKey="#{representante.id}"
+                             selection="#{remessaFormularioBean.remessa.representante}"
+                             filteredValue="#{remessaFormularioBean.representantesFiltro}"
+                             rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('listaEntidades').filter()" />
+                                <p:button icon="fa fa-refresh" style="float:right"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosEntidadeTabela" />
+                    <p:ajax event="rowDblselect"
+                            process="dadosEntidadeTabela"
+                            oncomplete="PF('entidadeDialog').hide()"
+                            update="frm:painelRemssa"/>
+
+                    <p:column headerText="Nome" filterBy="#{representante.nome}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{representante.nome}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
+                                             oncomplete="PF('entidadeDialog').hide()"
+                                             update="frm:painelRemssa" />
+                        </div>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="produtoDialog" modal="true" height="450"
+                  width="850" resizable="false">
+            <h:form>
+                <p:dataTable value="#{remessaFormularioBean.produtos}"
+                             widgetVar="listaProdutos" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="produto"
+                             id="dadosProdutoTabela" multiViewState="true" rowKey="#{produto.id}"
+                             selection="#{remessaFormularioBean.remessaItem.produto}"
+                             filteredValue="#{remessaFormularioBean.produtosFiltro}"
+                             rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('listaProdutos').filter()" />
+                                <p:button icon="fa fa-refresh" style="float:right"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosProdutoTabela" />
+                    <p:ajax event="rowDblselect" listener="#{remessaFormularioBean.carregaDadosDoProduto()}"
+                            process="dadosProdutoTabela"
+                            oncomplete="PF('produtoDialog').hide()"
+                            update="frm:painelRemssaItem" />
+
+                    <p:column headerText="Nome" filterBy="#{produto.descricao}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{produto.descricao}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar"
+                                             styleClass="ui-priority-primary"
+                                             action="#{remessaFormularioBean.carregaDadosDoProduto()}"
+                                             oncomplete="PF('produtoDialog').hide()"
+                                             update="frm:painelRemssaItem" />
+                        </div>
+                    </f:facet>
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+
+    </ui:define>
+</ui:composition>

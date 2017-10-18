@@ -70,6 +70,8 @@ public class Entidade {
 
 	private String complemento;
 
+	private String observacao;
+
 	@NotBlank
 	private String telefone;
 
@@ -291,6 +293,14 @@ public class Entidade {
 
 	public void setPraca(Praca praca) {
 		this.praca = praca;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 
 	@Override

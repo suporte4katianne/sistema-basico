@@ -52,6 +52,8 @@ public class Produto{
 	@NotBlank
 	private String codigo_ncm;
 
+	private BigDecimal comissao = new BigDecimal(0.0);
+
 	@NotBlank
 	private String codigo_cest;
 
@@ -332,6 +334,14 @@ public class Produto{
 
 	public void setCodigoCfopInterestadual(String codigoCfopInterestadual) {
 		this.codigoCfopInterestadual = codigoCfopInterestadual;
+	}
+
+	public BigDecimal getComissao() {
+		return comissao;
+	}
+
+	public void setComissao(BigDecimal comissao) {
+		this.comissao = comissao;
 	}
 
 	public List<Embalagem> getEmbalagens() {

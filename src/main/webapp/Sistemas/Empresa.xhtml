@@ -22,7 +22,7 @@
 					<div align="left">
 						<p:outputPanel style="aling:left">
 							<p:outputLabel style="color: #39b354; margin-right: 10px" value="Cadastro de Empresas" >
-								<i class="fa fa-arrow-right" aria-hidden="true"></i>
+								<i class="fa fa-arrow-right"/>
 							</p:outputLabel>
 							<h:outputText value="Pesquisar: " />
 							<p:inputText id="globalFilter"  onkeyup="PF('listaEmpresas').filter()"  />
@@ -57,7 +57,8 @@
 
 				<f:facet name="footer">
 					<div align="left">
-						<p:button outcome="EmpresaFormulario" icon="fa fa-pencil-square-o" value="Alterar" styleClass="ui-priority-primary" >
+						<p:button outcome="EmpresaFormulario" disabled="#{empresaBean.empresa == null}"
+								  icon="fa fa-pencil-square-o" value="Alterar" styleClass="ui-priority-primary" >
 							<f:param name="empresa" value="#{empresaBean.empresa.id}"/>
 						</p:button>
 						<p:outputLabel id="cadastros" style="float:right" />

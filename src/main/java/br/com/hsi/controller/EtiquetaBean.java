@@ -74,57 +74,18 @@ public class EtiquetaBean implements Serializable {
     }
 
     public void imprimirEtiquetas() throws IOException, JRException, ParseException {
-        FacesContext context = FacesContext.getCurrentInstance();
-//        try {
-//
-//
-//                HttpServletResponse response = (HttpServletResponse) context
-//                        .getExternalContext().getResponse();
-//                InputStream reportStream = context.getExternalContext()
-//                        .getResourceAsStream("/relatorio/listapai.jasper");
-//                response.setContentType("application/pdf");
-//                ServletOutputStream servletOutputStream = response
-//                        .getOutputStream();
-//                turma = DaoFactory.getTurmaDao().findByPk(turma.getCodId());
-//                List<AlunoEscola> listaALuno = AlunoEscolaController
-//                        .listaAlunoEscola(turma);
-//                String t = turma.getDescricao();
-//                String ano = turma.getEscolaSerie().getDescricao();
-//                Map<String, Object> map = new HashMap<String, Object>();
-//                map.put("turma", ano + " - " + t);
-//                List dados = new ArrayList();
-//                Map record = null;
-//                Aluno aluno = null;
-//                for (AlunoEscola ae : listaALuno) {
-//                    aluno = ae.getAluno();
-//                    record = new HashMap();
-//                    record.put("nome", aluno.getNome());
-//                    record.put("data", aluno.getDataNascimento());
-//                    dados.add(record);
-//                }
-//                JRBeanCollectionDataSource fonteDados = new JRBeanCollectionDataSource(
-//                        dados);
-//                JasperRunManager.runReportToPdfStream(reportStream,
-//                        servletOutputStream, map, fonteDados);
-//                servletOutputStream.flush();
-//                servletOutputStream.close();
-//
-//        } catch (JRException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } finally {
-//            context.responseComplete();
-//        }
 
+        List<Etiqueta> etiquetas = new ArrayList<>();
+        for(Etiqueta etiqueta: getEtiquetas()) {
+            for (int i = 0; i < etiqueta.getQuantidade(); i++) {
+                etiquetas.add(etiqueta);
+            }
+        }
 
-
-        System.out.println("Cheguei aqui!!");
         InputStream relatorioStream = getClass().getResourceAsStream("/reports/atendimento/etiqueta.jasper");
-        JasperPrint print = JasperFillManager.fillReport(relatorioStream, null, new JRBeanCollectionDataSource(getEtiquetas()));
+        JasperPrint print = JasperFillManager.fillReport(relatorioStream, null, new JRBeanCollectionDataSource(etiquetas));
         byte[] pdf = JasperExportManager.exportReportToPdf(print);
-        FileUtils.writeByteArrayToFile(new File(
-                "/HSI/teste.pdf"), pdf);
+        FileUtils.writeByteArrayToFile(new File("/HSI/teste.pdf"), pdf);
         Exporter<ExporterInput, PdfReportConfiguration, PdfExporterConfiguration, OutputStreamExporterOutput> exportador = new JRPdfExporter();
         exportador.setExporterInput(new SimpleExporterInput(print));
         exportador.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));
