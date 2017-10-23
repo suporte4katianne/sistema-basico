@@ -1,0 +1,246 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"  xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{editaRemessaAbertaFormularioBean.inicializar()}" />
+            <o:viewParam name="remessa" value="#{editaRemessaAbertaFormularioBean.remessa}"
+                         converter="#{remessaConverter}" />
+        </f:metadata>
+
+        <h:form id="frm">
+            <div class="ui-fluid">
+                <br />
+                <p:panel header="Remessa - #{editaRemessaAbertaFormularioBean.remessa}" id="painelRemessa">
+                    <h:panelGrid id="dadosRemessa" columns="8">
+                        <p:outputLabel value="Remessa vinculada:" for="remessa" />
+                        <h:panelGroup style="display:flex;">
+                            <p:inputText value="#{editaRemessaAbertaFormularioBean.remessaVinculada.codigo}"
+                                    style="opacity: 1;" id="remessa" disabled="true" />
+                            <p:commandButton icon="fa fa-search"
+                                             styleClass="ui-priority-primary" style="max-width: 30px"
+                                             onclick="PF('remessaVinculadaDialog').show()"
+                                             type="button" />
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Estoque vinculado:" for="saldoVinculado" />
+                        <p:inputText id="saldoVinculado" disabled="true" style="opacity: 0.8"
+                                     value="#{editaRemessaAbertaFormularioBean.saldoVinculado}" />
+
+                        <p:outputLabel value="Saldo:" for="saldo" />
+                        <p:inputText id="saldo" disabled="true" style="opacity: 0.8"
+                                     value="#{editaRemessaAbertaFormularioBean.saldo}" />
+
+                        <p:outputLabel value="Saldo Total:" for="saldoTotal" />
+                        <p:inputText id="saldoTotal" style="opacity: 0.8"
+                                     value="#{editaRemessaAbertaFormularioBean.saldoTotal}" disabled="true" />
+                    </h:panelGrid>
+
+                </p:panel>
+                <p:panel header="Sacola" id="painelSacola">
+                    <h:panelGrid id="sacola" columns="8">
+                        <p:outputLabel value="Código:" for="codigo" />
+                        <p:inputText id="codigo" style="opacity: 0.8"
+                                     value="" />
+
+                        <p:outputLabel value="Vendedor:" for="representante" />
+                        <h:panelGroup style="display:flex;">
+                            <p:inputText
+                                    style="opacity: 1;" id="representante" disabled="true" />
+                            <p:commandButton icon="fa fa-search"
+                                             styleClass="ui-priority-primary" style="max-width: 30px"
+                                             type="button" />
+                        </h:panelGroup>
+
+                        <p:outputLabel value="Emissão:" for="emissao" />
+                        <p:calendar id="emissao" pattern="dd/MM/yyyy"
+                                     >
+                        </p:calendar>
+                    </h:panelGrid>
+                    <br/>
+                    <p:panel header="Produtos da Sacola" id="painelRemssaItem">
+                        <h:panelGrid id="remessaItem" columns="5">
+                            <p:outputLabel value="Produto:" for="produto" />
+                            <h:panelGroup style="display:flex;">
+                                <p:inputText
+                                        style="opacity: 1;" id="produto" disabled="true" />
+                                <p:commandButton icon="fa fa-search"
+                                                 styleClass="ui-priority-primary" style="max-width: 30px"
+                                                 type="button" onclick="PF('produtoDialog').show();" />
+                            </h:panelGroup>
+
+
+                            <p:outputLabel value="Quantidade:" for="quantidade" />
+                            <p:inputNumber
+                                           decimalPlaces="0"
+                                           id="quantidade" />
+
+                            <p:commandButton value="Incluir" styleClass="ui-priority-primary"
+                                             process="painelRemssaItem"
+                                             update="painelRemssaItem" />
+
+                        </h:panelGrid>
+
+                        <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
+
+                                     var="remessaItem" style="margin-top: 15px" id="dadosTabela"
+                                     rowKey="remessaItem" >
+
+                            <p:column headerText="Código" style="width:5%">
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column headerText="Descrição" style="width:50%">
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column headerText="Quantidade" style="width:10%">
+                                <h:outputText value="" />
+                            </p:column>
+
+                            <p:column headerText="valor Unitário" style="width:20%">
+                                <h:outputText value="">
+                                    <f:convertNumber pattern="R$ ##,###.00" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="valor Total" style="width:20%">
+                                <h:outputText value="">
+                                    <f:convertNumber pattern="R$ ##,###.00" />
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Ações" style="width:5%">
+                                <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+
+                                                 styleClass="ui-priority-primary" />
+                            </p:column>
+
+                            <f:facet name="footer">
+                                <div align="left" >
+                                    <p:outputLabel value="Valor total de produtos da remessa: " />
+                                    <p:outputLabel value="" >
+                                        <f:convertNumber pattern="R$ ##,###0.00" />
+                                    </p:outputLabel>
+                                </div>
+                            </f:facet>
+                        </p:dataTable>
+                    </p:panel>
+                    <br />
+                    <h:panelGrid columns="1" >
+                        <p:commandButton value="Incluir Sacola" styleClass="ui-priority-primary" />
+                    </h:panelGrid>
+
+
+                </p:panel>
+                <p:panel header="Sacolas" >
+                    <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
+                                 style="margin-top: 15px" id="listaSacolas">
+                        <p:column headerText="Código" style="width:5%">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Vendedor" style="width:50%">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Total" style="width:50%">
+                            <h:outputText value="" />
+                        </p:column>
+
+                        <p:column headerText="Ações" style="width:10%">
+                            <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+                                             styleClass="ui-priority-primary" />
+                            <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+                                             styleClass="ui-priority-primary" />
+                        </p:column>
+
+                    </p:dataTable>
+                </p:panel>
+            </div>
+
+            <p:messages autoUpdate="true" id="mensagem" closable="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton styleClass="ui-priority-primary" process="@form"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+                                     value="Salvar" icon="fa fa-floppy-o"
+                                     oncomplete="PF('salvarCadastro').enable();"
+                                     onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:button outcome="Remessa" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                </f:facet>
+            </p:toolbar>
+
+        </h:form>
+
+        <p:dialog widgetVar="remessaVinculadaDialog" modal="true" height="450"
+                  width="850" resizable="false">
+            <h:form>
+                <p:dataTable value="#{editaRemessaAbertaFormularioBean.remessas}"
+                             widgetVar="lista" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="dados"
+                             id="dadosEntidadeTabela" multiViewState="true" rowKey="#{dados.id}"
+                             selection="#{editaRemessaAbertaFormularioBean.remessaVinculada}"
+                             filteredValue="#{editaRemessaAbertaFormularioBean.remessasFiltro}"
+                             rows="10" paginator="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('lista').filter()" />
+                                <p:button icon="fa fa-refresh" style="float:right"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosEntidadeTabela"
+                            update="dadosEntidadeTabela" />
+                    <p:ajax event="rowDblselect" listener="#{editaRemessaAbertaFormularioBean.carregaDadosDaRemessa()}"
+                            process="dadosEntidadeTabela"
+                            oncomplete="PF('entidadeDialog').hide()"
+                            update="frm:painelRemessa"/>
+
+                    <p:column headerText="Nome" filterBy="#{dados.codigo}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{dados.codigo}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" filterBy="#{dados.representante.nome}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{dados.representante.nome}" />
+                    </p:column>
+
+                    <p:column headerText="Nome" filterBy="#{dados.praca.descricao}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{dados.praca.descricao}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
+                                             action="#{editaRemessaAbertaFormularioBean.carregaDadosDaRemessa()}"
+                                             oncomplete="PF('remessaVinculadaDialog').hide()"
+                                             update="frm:painelRemessa" />
+                        </div>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

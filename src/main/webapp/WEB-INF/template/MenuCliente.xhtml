@@ -1,10 +1,11 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 				xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 				xmlns:p="http://primefaces.org/ui"
+				xmlns:f="http://xmlns.jcp.org/jsf/core"
 				xmlns:h="http://xmlns.jcp.org/jsf/html">
 
 
-	<button class="accordion"><i class="fa fa-fw fa-chevron-down"/>Cadastros</button>
+<button class="accordion"><i class="fa fa-fw fa-chevron-down"/>Cadastros</button>
 	<div class="panel">
 		<h:form>
 			<ul>
@@ -109,7 +110,7 @@
 				</li>
 				<li class="#{view.viewId == '/Sistemas/Hawker/Remessa.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
-						<i class="fa  fa-fw  fa-map"/>Remessas
+						<i class="fa  fa-fw  fa-exchange"/>Remessas
 						<p:ajax listener="${menuBean.segurancaFormulario('Hawker/Remessa')}" />
 					</h:commandLink>
 				</li>

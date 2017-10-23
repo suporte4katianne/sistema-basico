@@ -14,7 +14,7 @@ public class MailConfigProducer {
 	@ApplicationScoped
 	public SessionConfig getMailConfig() throws IOException{
 		Properties propertiesMail = new Properties();
-		propertiesMail.load(getClass().getResourceAsStream("/mail.properties"));
+		propertiesMail.load(getClass().getResourceAsStream("/hsisistemas/mail.properties"));
 		
 		
 		SimpleMailConfig config = new SimpleMailConfig();

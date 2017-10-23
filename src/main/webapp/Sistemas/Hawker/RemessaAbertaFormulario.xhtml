@@ -35,13 +35,13 @@
 
                         <p:outputLabel value="Praça:" for="praca" />
                         <p:selectOneMenu value="#{remessaFormularioBean.remessa.praca}"
-                                         converter="#{remessaConverter}" id="praca">
+                                         converter="#{pracaConverter}" id="praca">
                             <f:selectItems itemValue="#{dados}" itemLabel="#{dados.descricao}"
                                            var="dados" value="#{remessaFormularioBean.pracas}"  />
                         </p:selectOneMenu>
 
                         <p:outputLabel value="Emissão:" for="emissao" />
-                        <p:calendar id="emissao" pattern="dd/MM/yyyy" converter="#{dateTimeConverter}"
+                        <p:calendar id="emissao" pattern="dd/MM/yyyy" converter="#{localDateConverter}"
                                     value="#{remessaFormularioBean.remessa.emissao}" >
                         </p:calendar>
                     </h:panelGrid>

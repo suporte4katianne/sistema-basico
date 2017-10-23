@@ -19,7 +19,7 @@ public class Cfop {
 	@NotNull
 	private String operacao;
 	@NotNull
-	private int finalidade;
+	private long finalidade;
 	
 	public Long getId() {
 		return id;
@@ -51,14 +51,15 @@ public class Cfop {
 	public void setOperacao(String operacao) {
 		this.operacao = operacao;
 	}
-	public int getFinalidade() {
+
+	public long getFinalidade() {
 		return finalidade;
 	}
-	public void setFinalidade(int finalidade) {
+
+	public void setFinalidade(long finalidade) {
 		this.finalidade = finalidade;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

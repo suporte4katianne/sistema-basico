@@ -6,6 +6,8 @@ import br.com.hsi.service.GestaoEntidade;
 import br.com.hsi.service.GestaoPraca;
 import br.com.hsi.service.GestaoProduto;
 import br.com.hsi.service.GestaoRemessa;
+import br.com.hsi.util.exception.NegocioException;
+import br.com.hsi.util.jsf.FacesUtil;
 
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
@@ -58,6 +60,7 @@ public class RemessaFormularioBean implements Serializable {
         remessaItem = new RemessaItem();
         if(remessa == null) {
             remessa = new Remessa();
+            remessa.setCodigo(gestaoRemessa.sequenciaCodigo());
         }
     }
 
@@ -80,9 +83,13 @@ public class RemessaFormularioBean implements Serializable {
     }
 
     public void salvar () throws IOException {
-        remessa.setStatusRemessa(StatusRemessa.ABERTA);
-        gestaoRemessa.salvar(remessa);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Hawker/Remessa.xhtml");
+        try {
+            remessa.setStatusRemessa(StatusRemessa.ABERTA);
+            gestaoRemessa.salvar(remessa);
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Hawker/Remessa.xhtml");
+        } catch (NegocioException e) {
+            FacesUtil.addErrorMessage(e.getMessage());
+        }
     }
 
     public Remessa getRemessa() {

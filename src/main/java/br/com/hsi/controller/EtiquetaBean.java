@@ -89,9 +89,10 @@ public class EtiquetaBean implements Serializable {
         Exporter<ExporterInput, PdfReportConfiguration, PdfExporterConfiguration, OutputStreamExporterOutput> exportador = new JRPdfExporter();
         exportador.setExporterInput(new SimpleExporterInput(print));
         exportador.setExporterOutput(new SimpleOutputStreamExporterOutput(response.getOutputStream()));
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition",
-                "attachment; filename=\"" + "etiquetas.pdf" + "\"");
+
+        response.setHeader("Content-Type", "application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=\"" + "etiquetas.pdf" + "\"");
+
         exportador.exportReport();
         facesContext.responseComplete();
 

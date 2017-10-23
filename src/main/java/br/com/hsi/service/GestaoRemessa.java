@@ -5,6 +5,7 @@ import br.com.hsi.model.RemessaItem;
 import br.com.hsi.model.dados.text.StatusRemessa;
 import br.com.hsi.repository.RemessaRepository;
 import br.com.hsi.util.Transacional;
+import br.com.hsi.util.exception.NegocioException;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -22,8 +23,14 @@ public class GestaoRemessa implements Serializable{
     private RemessaRepository remessaRepository;
 
     @Transacional
-    public void salvar(Remessa remessa) {
-        remessaRepository.salvar(remessa);
+    public void salvar(Remessa remessa) throws NegocioException{
+        if(remessa.getRepresentante() == null) {
+            throw new NegocioException("Representante deve ser informado");
+        } else if (remessa.getRemessaItens().isEmpty()) {
+            throw new NegocioException("Pelomenos um item deve ser informado");
+        } else {
+            remessaRepository.salvar(remessa);
+        }
     }
 
     @Transacional
@@ -46,6 +53,20 @@ public class GestaoRemessa implements Serializable{
         } else {
             return remessaRepository.listarRemessas();
         }
+    }
+
+    @Transacional
+    public Long sequenciaCodigo() {
+        try {
+            return remessaRepository.listarRemessas().get(0).getCodigo() + 1;
+        } catch (Exception e) {
+            return new Long(1);
+        }
+    }
+
+    @Transacional
+    public Long saldoRemessa(Remessa remessa) {
+        return remessaRepository.saldoRemessa(remessa).longValue();
     }
 
     @Transacional

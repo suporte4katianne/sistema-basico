@@ -6,7 +6,8 @@ package br.com.hsi.model.dados.text;
 public enum  StatusRemessa {
 
     ABERTA("0", "Aberta"),
-    FINALIZADA("1", "Finalizada");
+    DISTRIBUICAO("1", "Em distribuição"),
+    FINALIZADA("2", "Finalizada");
 
     private String codigo;
     private String descricao;

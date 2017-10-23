@@ -9,7 +9,7 @@
 			<property name="javax.persistence.jdbc.password" value="HSI-p2w*" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			
+
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value ="false"/>
 			<property name="hibernate.generate_statistics" value="false"/>

@@ -35,7 +35,7 @@ public class NotaFiscal {
     private String nomeNatureza;
 
 	@Column(name = "condicao_pagamento")
-    private int condicaoPagamento;
+    private long condicaoPagamento;
 	
 	@Column(name = "data_emissao")
 	private Date dataHoraEmissao;
@@ -53,22 +53,22 @@ public class NotaFiscal {
 	private String codIbgeCidadeEmpresa;
 	
 	@Column(name = "tipo_emissao")
-	private int tipoEmissao;     // 1 - Emissão normal (não em contingência);
+	private long tipoEmissao;     // 1 - Emissão normal (não em contingência);
 	
 	@Column(name = "digito_verificador")
-	private int digitoVerificadorChaveAcesso;
+	private long digitoVerificadorChaveAcesso;
 	
 	@Column(name = "ambiente")
-	private int ambiente; //1 - Producao 2 - Homologação
+	private long ambiente; //1 - Producao 2 - Homologação
 	
 	@Column(name = "finalidade")
-	private int finalidadeNfe; //1 - NF-e normal, 2 - NF-e complementar, 3 - NF-e de ajuste, 4 - Devolução ;
+	private long finalidadeNfe; //1 - NF-e normal, 2 - NF-e complementar, 3 - NF-e de ajuste, 4 - Devolução ;
 	
 	@Column(name = "tipo_consumidor")
-	private int tipoConsumidor; // 0 - Não Consumidor Final  1 - Consumidor final;
+	private long tipoConsumidor; // 0 - Não Consumidor Final  1 - Consumidor final;
 	
 	@Column(name = "presenca_consumidor")
-	private int presencaConsumidor; //0 - Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste) 1 - Operação presencial 2 - Operação não presencial, pela Internet 3 - Operação não presencial, Teleatendimento 4 - NFC-e em operação com entrega a domicílio 9 - Operação não presencial, outros.
+	private long presencaConsumidor; //0 - Não se aplica (por exemplo, Nota Fiscal complementar ou de ajuste) 1 - Operação presencial 2 - Operação não presencial, pela Internet 3 - Operação não presencial, Teleatendimento 4 - NFC-e em operação com entrega a domicílio 9 - Operação não presencial, outros.
 
 	private boolean emissao;
 
@@ -91,10 +91,10 @@ public class NotaFiscal {
     private String modeloNota; // 55 Nota Eletronica ou - 01 Nota Manual
 	
 	@Column(name = "serie")
-    private int serieNota;
+    private long serieNota;
 	
 	@Column(name = "numero")
-    private int numeroNota;
+    private long numeroNota;
 	
 	
     
@@ -174,7 +174,7 @@ public class NotaFiscal {
     private String nomeEntidade; 
     
     @Column(name = "tipo_contribuinte_entidade")
-    private int tipoContribuinte; //1 - 2 ou 9
+    private long tipoContribuinte; //1 - 2 ou 9
     
     @Column(name = "tipo_cadastro")
     private String tipoCadastro;
@@ -377,11 +377,11 @@ public class NotaFiscal {
 		this.nomeNatureza = nomeNatureza;
 	}
 
-	public int getCondicaoPagamento() {
+	public long getCondicaoPagamento() {
 		return condicaoPagamento;
 	}
 
-	public void setCondicaoPagamento(int condicaoPagamento) {
+	public void setCondicaoPagamento(long condicaoPagamento) {
 		this.condicaoPagamento = condicaoPagamento;
 	}
 
@@ -425,52 +425,60 @@ public class NotaFiscal {
 		this.codIbgeCidadeEmpresa = codIbgeCidadeEmpresa;
 	}
 
-	public int getTipoEmissao() {
+	public long getTipoEmissao() {
 		return tipoEmissao;
 	}
 
-	public void setTipoEmissao(int tipoEmissao) {
+	public void setTipoEmissao(long tipoEmissao) {
 		this.tipoEmissao = tipoEmissao;
 	}
 
-	public int getDigitoVerificadorChaveAcesso() {
+	public long getDigitoVerificadorChaveAcesso() {
 		return digitoVerificadorChaveAcesso;
 	}
 
-	public void setDigitoVerificadorChaveAcesso(int digitoVerificadorChaveAcesso) {
+	public void setDigitoVerificadorChaveAcesso(long digitoVerificadorChaveAcesso) {
 		this.digitoVerificadorChaveAcesso = digitoVerificadorChaveAcesso;
 	}
 
-	public int getAmbiente() {
+	public long getAmbiente() {
 		return ambiente;
 	}
 
-	public void setAmbiente(int ambiente) {
+	public void setAmbiente(long ambiente) {
 		this.ambiente = ambiente;
 	}
 
-	public int getFinalidadeNfe() {
+	public long getFinalidadeNfe() {
 		return finalidadeNfe;
 	}
 
-	public void setFinalidadeNfe(int finalidadeNfe) {
+	public void setFinalidadeNfe(long finalidadeNfe) {
 		this.finalidadeNfe = finalidadeNfe;
 	}
 
-	public int getTipoConsumidor() {
+	public long getTipoConsumidor() {
 		return tipoConsumidor;
 	}
 
-	public void setTipoConsumidor(int tipoConsumidor) {
+	public void setTipoConsumidor(long tipoConsumidor) {
 		this.tipoConsumidor = tipoConsumidor;
 	}
 
-	public int getPresencaConsumidor() {
+	public long getPresencaConsumidor() {
 		return presencaConsumidor;
 	}
 
-	public void setPresencaConsumidor(int presencaConsumidor) {
+	public void setPresencaConsumidor(long presencaConsumidor) {
 		this.presencaConsumidor = presencaConsumidor;
+	}
+
+	public boolean isEmissao() {
+		return emissao;
+	}
+
+	public void setEmissao(boolean emissao) {
+		this.emissao = emissao;
 	}
 
 	public String getVersaoXml() {
@@ -513,19 +521,19 @@ public class NotaFiscal {
 		this.modeloNota = modeloNota;
 	}
 
-	public int getSerieNota() {
+	public long getSerieNota() {
 		return serieNota;
 	}
 
-	public void setSerieNota(int serieNota) {
+	public void setSerieNota(long serieNota) {
 		this.serieNota = serieNota;
 	}
 
-	public int getNumeroNota() {
+	public long getNumeroNota() {
 		return numeroNota;
 	}
 
-	public void setNumeroNota(int numeroNota) {
+	public void setNumeroNota(long numeroNota) {
 		this.numeroNota = numeroNota;
 	}
 
@@ -713,11 +721,11 @@ public class NotaFiscal {
 		this.nomeEntidade = nomeEntidade;
 	}
 
-	public int getTipoContribuinte() {
+	public long getTipoContribuinte() {
 		return tipoContribuinte;
 	}
 
-	public void setTipoContribuinte(int tipoContribuinte) {
+	public void setTipoContribuinte(long tipoContribuinte) {
 		this.tipoContribuinte = tipoContribuinte;
 	}
 
@@ -1081,14 +1089,6 @@ public class NotaFiscal {
 		this.notaFiscalReferencias = notaFiscalReferencias;
 	}
 
-	public boolean isEmissao() {
-		return emissao;
-	}
-
-	public void setEmissao(boolean emissao) {
-		this.emissao = emissao;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -1114,6 +1114,4 @@ public class NotaFiscal {
 		return true;
 	}
 
-	
-	
 }

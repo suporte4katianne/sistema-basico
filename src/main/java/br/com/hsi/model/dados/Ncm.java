@@ -1,8 +1,6 @@
 package br.com.hsi.model.dados;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -10,6 +8,7 @@ import java.math.BigDecimal;
 public class Ncm {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	private Integer tipo;

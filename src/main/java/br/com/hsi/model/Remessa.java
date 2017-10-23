@@ -3,11 +3,11 @@ package br.com.hsi.model;
 import br.com.hsi.model.dados.text.StatusRemessa;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,15 +25,15 @@ public class Remessa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigo;
+    @NotNull
+    private Long codigo;
 
     @ManyToOne
     @JoinColumn(name = "id_representante")
     private Entidade representante;
 
-    @OneToMany(mappedBy = "remessa")
+    @NotNull
+    @OneToMany(mappedBy = "remessa", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<RemessaItem> remessaItens = new ArrayList<>();
 
@@ -41,7 +41,8 @@ public class Remessa {
     @JoinColumn(name = "id_praca")
     private Praca praca;
 
-    private LocalDateTime emissao;
+    @NotNull
+    private LocalDate emissao;
 
     @Column(name = "status_remessa")
     @Enumerated(EnumType.STRING)
@@ -61,11 +62,11 @@ public class Remessa {
         this.id = id;
     }
 
-    public int getCodigo() {
+    public Long getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(Long codigo) {
         this.codigo = codigo;
     }
 
@@ -85,11 +86,11 @@ public class Remessa {
         this.remessaItens = remessaItens;
     }
 
-    public LocalDateTime getEmissao() {
+    public LocalDate getEmissao() {
         return emissao;
     }
 
-    public void setEmissao(LocalDateTime emissao) {
+    public void setEmissao(LocalDate emissao) {
         this.emissao = emissao;
     }
 
@@ -138,5 +139,10 @@ public class Remessa {
     @Override
     public int hashCode() {
         return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return codigo + " - " + representante.getNome() + " - " + praca.getDescricao();
     }
 }

@@ -7,7 +7,7 @@
 
 
     <ui:define name="content">
-        <h:form>
+        <h:form id="frm">
             <br />
             <p:messages closable="true" autoUpdate="true" />
             <p:dataTable value="#{remessaBean.remessas}" widgetVar="listaPracas"
@@ -38,30 +38,60 @@
                         listener="#{gridBean.redrirect('RemessaFormulario','remessa',remessaBean.remessa.id)}" />
 
 
-                <p:column headerText="Código" style="width: 10%"  filterBy="#{dados.codigo}" filterStyle="display:none">
+                <p:column headerText="Código" style="width: 5%"  filterBy="#{dados.codigo}" filterStyle="display:none">
                     <h:outputText value="#{dados.codigo}" />
                 </p:column>
-                <p:column headerText="Emissão" style="width: 10%"  filterBy="#{dados.emissao}" filterStyle="display:none">
-                    <h:outputText value="#{dados.emissao}" />
-                </p:column>
-                <p:column headerText="Representante" style="width: 10%"  filterBy="#{dados.representante.nome}" filterStyle="display:none">
+                <p:column headerText="Representante" style="width: 50%"  filterBy="#{dados.representante.nome}" filterStyle="display:none">
                     <h:outputText value="#{dados.representante.nome}" />
                 </p:column>
+                <p:column headerText="Emissão" style="width: 10%"  filterBy="#{dados.emissao}" filterStyle="display:none">
+                    <p:outputLabel converter="#{localDateConverter}" value="#{dados.emissao}" />
+                </p:column>
+                <p:column headerText="Status" style="width: 10%"  filterBy="#{dados.statusRemessa}" filterStyle="display:none">
+                    <h:outputText value="#{dados.statusRemessa.descricao}" />
+                </p:column>
+
 
                 <f:facet name="footer">
                     <div align="left">
                         <p:button outcome="RemessaFormulario"
                                   styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle"/>
 
-                        <p:button outcome="RemessaFormulario" disabled="#{remessaBean.remessa == null}"
+                        <p:button outcome="RemessaFormulario"
+                                  disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or remessaBean.remessa == null}"
                                   value="Alterar" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary">
                             <f:param name="remessa" value="#{remessaBean.remessa.id}" />
                         </p:button>
+
+                        <p:commandButton disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or remessaBean.remessa == null}"
+                                         onclick="PF('autorizaSaida').show()"
+                                         value="Autorizar saida" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary"/>
+
+                        <p:button outcome="EditaRemessaAbertaFormulario" value="Editar Remessa" styleClass="ui-priority-primary"
+                                  disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('0') or
+                                  remessaBean.remessa == null}">
+                            <f:param name="remessa" value="#{remessaBean.remessa.id}" />
+                        </p:button>
+
                     </div>
                 </f:facet>
 
             </p:dataTable>
         </h:form>
+
+        <p:dialog widgetVar="autorizaSaida" modal="true" minHeight="250" width="400" resizable="false">
+            <h:outputText value="Ao autorizar a saida a remessa não poderá mais ser alterada!" />
+            <div style="margin-top: 15px">
+                <h:form target="_blank" >
+                    <p:commandButton value="Sim" icon="fa fa-check" style="margin-right: 5px"
+                                     actionListener="#{remessaBean.autorizarSaida()}" ajax="false"
+                                     styleClass="ui-priority-primary" update="@form"
+                                     onclick="PF('autorizaSaida').hide()" />
+                    <p:commandButton value="Não" icon="fa fa-close" styleClass="ui-priority-primary"
+                                     oncomplete="PF('autorizaSaida').hide()" />
+                </h:form>
+            </div>
+        </p:dialog>
 
     </ui:define>
 </ui:composition>

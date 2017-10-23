@@ -1,6 +1,7 @@
 package br.com.hsi.service;
 
 import br.com.hsi.model.Entidade;
+import br.com.hsi.model.Praca;
 import br.com.hsi.repository.EntidadeRepository;
 import br.com.hsi.util.Transacional;
 import br.com.hsi.util.exception.NegocioException;
@@ -48,4 +49,8 @@ public class GestaoEntidade implements Serializable{
 		return entidades.entidadePorId(id);
 	}
 
+	@Transacional
+    public List<Entidade> entidadesPorPraca(Praca praca) throws NegocioException {
+		return entidades.entidadesPorPraca(praca);
+    }
 }

@@ -65,6 +65,7 @@ public class Empresa {
 	@Column(name = "credito_icms")
 	private BigDecimal creditoIcms = new BigDecimal("0.0");
 	private byte[] logo;
+	@Lob
 	@Column(name = "informacao_complementar")
 	private String infoComplementar;
 	@Column(name = "status_certificado")

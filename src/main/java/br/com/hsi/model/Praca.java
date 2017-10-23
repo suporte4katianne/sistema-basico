@@ -18,6 +18,8 @@ public class Praca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String codigo;
+
     @NotBlank
     private String descricao;
 

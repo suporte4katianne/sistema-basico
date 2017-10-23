@@ -4,8 +4,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.inject.Named;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +13,7 @@ import java.time.format.DateTimeParseException;
 
 @Named
 @ApplicationScoped
-public class DateTimeConverter implements Converter {
+public class LocalDateConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String stringValue) {
@@ -22,32 +22,32 @@ public class DateTimeConverter implements Converter {
             return null;
         }
 
-        LocalDateTime localDateTime = null;
+        LocalDate localDate = null;
 
         try {
 
-            localDateTime = LocalDateTime.parse(
+            localDate = LocalDate.parse(
                     stringValue.trim(),
-                    DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").withZone(ZoneId.systemDefault()));
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault()));
 
         } catch (DateTimeParseException e) {
+            e.printStackTrace();
 
-            throw new ConverterException("O formato da data e hora deve ser 13/11/2015 12:00:00.");
         }
 
-        return localDateTime;
+        return localDate;
 
     }
 
     @Override
-    public String getAsString(FacesContext context, UIComponent component, Object localDateTimeValue) {
+    public String getAsString(FacesContext context, UIComponent component, Object localDateValue) {
 
-        if (null == localDateTimeValue) {
+        if (null == localDateValue) {
 
             return "";
         }
 
-        return ((LocalDateTime) localDateTimeValue)
-                .format(DateTimeFormatter.ofPattern("dd/MM/yyyy hh:mm:ss").withZone(ZoneId.systemDefault()));
+        return ((LocalDate) localDateValue)
+                .format(DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(ZoneId.systemDefault()));
     }
 }

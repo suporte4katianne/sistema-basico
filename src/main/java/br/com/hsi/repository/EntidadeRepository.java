@@ -2,6 +2,7 @@ package br.com.hsi.repository;
 
 import br.com.hsi.model.Entidade;
 import br.com.hsi.model.NotaFiscal;
+import br.com.hsi.model.Praca;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -56,5 +57,11 @@ public class EntidadeRepository implements Serializable{
 		}
 		selectQuery.setParameter("id", entidade.getId());
 		return selectQuery.getResultList();
+    }
+
+    public List<Entidade> entidadesPorPraca(Praca praca) {
+		return manager.createQuery("SELECT e FROM Entidade e WHERE e.praca = :praca", Entidade.class)
+				.setParameter("praca", praca)
+				.getResultList();
     }
 }

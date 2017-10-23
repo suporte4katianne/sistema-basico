@@ -180,6 +180,13 @@
             <to-view-id>/Sistemas/Hawker/Remessa.xhtml</to-view-id>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>EditaRemessaAbertaFormulario</from-outcome>
+            <to-view-id>/Sistemas/Hawker/EditaRemessaAbertaFormulario.xhtml</to-view-id>
+        </navigation-case>
+
+
+
     </navigation-rule>
 
     <application>

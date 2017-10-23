@@ -7,6 +7,7 @@ import br.com.hsi.model.dados.text.StatusRemessa;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -35,9 +36,17 @@ public class RemessaRepository implements Serializable{
 
     public List<Remessa> listarRemessas(StatusRemessa statusRemessa){
         return entityManager
-                .createQuery("SELECT r FROM Remessa r WHERE r.statusRemessa = : statusRemessa ORDER BY r.id DESC", Remessa.class)
+                .createQuery("SELECT r FROM Remessa r " +
+                        "WHERE r.statusRemessa = : statusRemessa ORDER BY r.id DESC", Remessa.class)
                 .setParameter("statusRemessa", statusRemessa)
                 .getResultList();
+    }
+
+    public BigDecimal saldoRemessa(Remessa remessa) {
+        return entityManager.createQuery("SELECT sum(r.quantidade) FROM RemessaItem r " +
+                "WHERE r.remessa = :remessa", BigDecimal.class)
+                .setParameter("remessa",remessa)
+                .getSingleResult();
     }
 
 
@@ -47,9 +56,12 @@ public class RemessaRepository implements Serializable{
 
     public List<RemessaItem> remessaItemPorRemessa(Remessa remessa) {
         return entityManager
-                .createQuery("SELECT r FROM RemessaItem r WHERE r.remessa = : remessa ORDER BY r.id DESC", RemessaItem.class)
-                .setParameter("remessa", remessa)
+                .createQuery("SELECT r FROM RemessaItem r WHERE r.remessa.id" +
+                        " = :id", RemessaItem.class)
+                .setParameter("id", remessa.getId())
                 .getResultList();
     }
+
+
 
 }
