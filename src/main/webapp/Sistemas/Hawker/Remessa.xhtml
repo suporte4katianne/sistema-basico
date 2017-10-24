@@ -58,17 +58,22 @@
                                   styleClass="ui-priority-primary" value="Incluir" icon="fa fa-plus-circle"/>
 
                         <p:button outcome="RemessaFormulario"
-                                  disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or remessaBean.remessa == null}"
+                                  disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or
+                                  remessaBean.remessa.statusRemessa.codigo.equals('2') or
+                                  remessaBean.remessa == null}"
                                   value="Alterar" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary">
                             <f:param name="remessa" value="#{remessaBean.remessa.id}" />
                         </p:button>
 
-                        <p:commandButton disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or remessaBean.remessa == null}"
+                        <p:commandButton disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or
+                                         remessaBean.remessa.statusRemessa.codigo.equals('2') or
+                                         remessaBean.remessa == null}"
                                          onclick="PF('autorizaSaida').show()"
                                          value="Autorizar saida" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary"/>
 
                         <p:button outcome="EditaRemessaAbertaFormulario" value="Editar Remessa" styleClass="ui-priority-primary"
                                   disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('0') or
+                                  remessaBean.remessa.statusRemessa.codigo.equals('2') or
                                   remessaBean.remessa == null}">
                             <f:param name="remessa" value="#{remessaBean.remessa.id}" />
                         </p:button>
