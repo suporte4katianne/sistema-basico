@@ -7,7 +7,8 @@ public enum  StatusRemessa {
 
     ABERTA("0", "Aberta"),
     DISTRIBUICAO("1", "Em distribuição"),
-    FINALIZADA("2", "Finalizada");
+    EDITADA("2", "Editada"),
+    FINALIZADA("3", "Finalizada");
 
     private String codigo;
     private String descricao;

@@ -65,7 +65,7 @@ public class EtiquetaBean implements Serializable {
     public void carregaDadosDoProduto() {
         etiqueta.setDescricao(produto.getDescricao());
         etiqueta.setCodigo(produto.getCodigo());
-        etiqueta.setCodigoBarras(produto.getCodigoBrras());
+        etiqueta.setCodigoBarras(produto.getReferencia());
     }
 
     public void incluirEtiqueta() {

@@ -38,6 +38,8 @@ public class Produto{
 
 	private int codigo;
 
+	private String referencia;
+
 	@NotBlank
 	private String descricao;
 
@@ -350,6 +352,14 @@ public class Produto{
 
 	public void setEmbalagens(List<Embalagem> embalagens) {
 		this.embalagens = embalagens;
+	}
+
+	public String getReferencia() {
+		return referencia;
+	}
+
+	public void setReferencia(String referencia) {
+		this.referencia = referencia;
 	}
 
 	@Override

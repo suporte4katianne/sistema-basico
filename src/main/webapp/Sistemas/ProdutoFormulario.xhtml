@@ -17,10 +17,10 @@
                 <div class="ui-fluid">
                     <br />
 
-                        <p:tab title="Gerais">
-                            <p:panel header="Cadastro de Produtos" id="painelProduto">
-                                <div class="ui-fluid">
-                                    <h:panelGrid id="dadosProduto" columns="4" style="width:90%"
+                    <p:tab title="Gerais">
+                        <p:panel header="Cadastro de Produtos" id="painelProduto">
+                            <div class="ui-fluid">
+                                <h:panelGrid id="dadosProduto" columns="4" style="width:90%"
                                              columnClasses="rotulo, campo, rotulo, campo">
                                     <p:outputLabel value="Codigo:" for="codigo" />
                                     <p:inputText id="codigo"
@@ -34,6 +34,9 @@
                                                          styleClass="ui-priority-primary" style="max-width: 30px"
                                                          action="#{produtoFormularioBean.geraEAN}" />
                                     </h:panelGroup>
+
+                                    <p:outputLabel value="Referência:" for="referencia" />
+                                    <p:inputText id="referencia" value="#{produtoFormularioBean.produto.referencia}" />
 
                                     <p:outputLabel value="Descrição:" for="nome" />
                                     <p:inputText id="nome"
@@ -80,9 +83,9 @@
 
 
                                 </h:panelGrid>
-                                </div>
-                            </p:panel>
-                        </p:tab>
+                            </div>
+                        </p:panel>
+                    </p:tab>
 
                     <p:tab title="Impostos">
                         <p:panel header="Impostos do Produto">
@@ -243,8 +246,8 @@
                 </f:facet>
                 <f:facet name="right">
                     <p:commandButton value="Cancelar" icon="fa fa-reply"
-                              styleClass="ui-priority-primary"
-                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
+                                     styleClass="ui-priority-primary"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
                         <p:confirm header = "Cancelar Operação"
                                    message = "  Sair sem salvar?"
                                    icon ="fa fa-hand-paper-o"/>

@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 public class VendedorItem {
 
     private int codigo;
+    private String referencia;
     private String descricao;
     private BigDecimal preco;
 
@@ -34,5 +35,13 @@ public class VendedorItem {
 
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
+    }
+
+    public String getReferencia() {
+        return referencia;
+    }
+
+    public void setReferencia(String referencia) {
+        this.referencia = referencia;
     }
 }

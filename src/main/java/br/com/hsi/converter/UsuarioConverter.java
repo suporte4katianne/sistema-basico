@@ -3,7 +3,7 @@ package br.com.hsi.converter;
 import br.com.hsi.model.Usuario;
 import br.com.hsi.service.GestaoUsuario;
 
-import javax.faces.bean.ApplicationScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;

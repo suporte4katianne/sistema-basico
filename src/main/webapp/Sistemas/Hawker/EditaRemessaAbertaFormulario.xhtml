@@ -42,32 +42,32 @@
                     </h:panelGrid>
 
                 </p:panel>
-                <p:panel header="Sacola" id="painelSacola">
-                    <h:panelGrid id="sacola" columns="8">
+                <p:panel header="Kit" id="painelKit">
+                    <h:panelGrid id="kit" columns="8">
                         <p:outputLabel value="Código:" for="codigo" />
-                        <p:inputText id="codigo" style="opacity: 0.8"
-                                     value="" />
+                        <p:inputText id="codigo" value="#{editaRemessaAbertaFormularioBean.kit.codigo}" />
 
-                        <p:outputLabel value="Vendedor:" for="representante" />
+                        <p:outputLabel value="Vendedor:" for="vendedor" />
                         <h:panelGroup style="display:flex;">
-                            <p:inputText
-                                    style="opacity: 1;" id="representante" disabled="true" />
+                            <p:inputText value="#{editaRemessaAbertaFormularioBean.kit.vendedor.nome}"
+                                    style="opacity: 1;" id="vendedor" disabled="true" />
                             <p:commandButton icon="fa fa-search"
+                                             onclick="PF('vendedorDialog').show()"
                                              styleClass="ui-priority-primary" style="max-width: 30px"
                                              type="button" />
                         </h:panelGroup>
 
-                        <p:outputLabel value="Emissão:" for="emissao" />
-                        <p:calendar id="emissao" pattern="dd/MM/yyyy"
-                                     >
+                        <p:outputLabel value="Data:" for="data" />
+                        <p:calendar id="data" pattern="dd/MM/yyyy" converter="#{localDateConverter}"
+                                    value="#{editaRemessaAbertaFormularioBean.kit.data}" >
                         </p:calendar>
                     </h:panelGrid>
                     <br/>
-                    <p:panel header="Produtos da Sacola" id="painelRemssaItem">
-                        <h:panelGrid id="remessaItem" columns="5">
+                    <p:panel header="Produtos do Kit" id="painelKitItens">
+                        <h:panelGrid id="kitItem" columns="5">
                             <p:outputLabel value="Produto:" for="produto" />
                             <h:panelGroup style="display:flex;">
-                                <p:inputText
+                                <p:inputText value="#{editaRemessaAbertaFormularioBean.kitItem.produto.descricao}"
                                         style="opacity: 1;" id="produto" disabled="true" />
                                 <p:commandButton icon="fa fa-search"
                                                  styleClass="ui-priority-primary" style="max-width: 30px"
@@ -76,55 +76,56 @@
 
 
                             <p:outputLabel value="Quantidade:" for="quantidade" />
-                            <p:inputNumber
+                            <p:inputNumber value="#{editaRemessaAbertaFormularioBean.kitItem.quantidade}"
                                            decimalPlaces="0"
                                            id="quantidade" />
 
                             <p:commandButton value="Incluir" styleClass="ui-priority-primary"
-                                             process="painelRemssaItem"
-                                             update="painelRemssaItem" />
+                                             actionListener="#{editaRemessaAbertaFormularioBean.incluirKitItem()}"
+                                             process="painelKitItens"
+                                             update="painelKitItens" />
 
                         </h:panelGrid>
 
                         <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
-
-                                     var="remessaItem" style="margin-top: 15px" id="dadosTabela"
-                                     rowKey="remessaItem" >
+                                     value="#{editaRemessaAbertaFormularioBean.kit.kitItens}"
+                                     var="kitItem" style="margin-top: 15px" id="dadosTabela"
+                                     rowKey="kitItem" >
 
                             <p:column headerText="Código" style="width:5%">
-                                <h:outputText value="" />
+                                <h:outputText value="#{kitItem.produto.codigo}" />
                             </p:column>
 
                             <p:column headerText="Descrição" style="width:50%">
-                                <h:outputText value="" />
+                                <h:outputText value="#{kitItem.produto.descricao}" />
                             </p:column>
 
                             <p:column headerText="Quantidade" style="width:10%">
-                                <h:outputText value="" />
+                                <h:outputText value="#{kitItem.quantidade}" />
                             </p:column>
 
                             <p:column headerText="valor Unitário" style="width:20%">
-                                <h:outputText value="">
+                                <h:outputText value="#{kitItem.precoUnitario}">
                                     <f:convertNumber pattern="R$ ##,###.00" />
                                 </h:outputText>
                             </p:column>
 
                             <p:column headerText="valor Total" style="width:20%">
-                                <h:outputText value="">
+                                <h:outputText value="#{kitItem.precoTotal}">
                                     <f:convertNumber pattern="R$ ##,###.00" />
                                 </h:outputText>
                             </p:column>
 
                             <p:column headerText="Ações" style="width:5%">
                                 <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
-
+                                                 actionListener="#{editaRemessaAbertaFormularioBean.removerKitItem(kitItem)}"
                                                  styleClass="ui-priority-primary" />
                             </p:column>
 
                             <f:facet name="footer">
                                 <div align="left" >
-                                    <p:outputLabel value="Valor total de produtos da remessa: " />
-                                    <p:outputLabel value="" >
+                                    <p:outputLabel value="Valor total de produtos do kit: " />
+                                    <p:outputLabel value="#{editaRemessaAbertaFormularioBean.kit.total}" >
                                         <f:convertNumber pattern="R$ ##,###0.00" />
                                     </p:outputLabel>
                                 </div>
@@ -133,30 +134,39 @@
                     </p:panel>
                     <br />
                     <h:panelGrid columns="1" >
-                        <p:commandButton value="Incluir Sacola" styleClass="ui-priority-primary" />
+                        <p:commandButton value="Incluir Kit" actionListener="#{editaRemessaAbertaFormularioBean.incluirKit()}"
+                                         styleClass="ui-priority-primary" update="@form" process="@form" />
                     </h:panelGrid>
 
 
                 </p:panel>
-                <p:panel header="Sacolas" >
+                <p:panel header="kits" id="kits" >
                     <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
-                                 style="margin-top: 15px" id="listaSacolas">
+                                 value="#{editaRemessaAbertaFormularioBean.kits}" var="kit"
+                                 rowKey="kit" style="margin-top: 15px" id="listaKits">
+
                         <p:column headerText="Código" style="width:5%">
-                            <h:outputText value="" />
+                            <h:outputText value="#{kit.codigo}" />
                         </p:column>
 
                         <p:column headerText="Vendedor" style="width:50%">
-                            <h:outputText value="" />
+                            <h:outputText value="#{kit.vendedor.nome}" />
                         </p:column>
 
                         <p:column headerText="Total" style="width:50%">
-                            <h:outputText value="" />
+                            <h:outputText value="#{kit.total}" />
+                        </p:column>
+
+                        <p:column headerText="Data" style="width: 50%">
+                            <p:outputLabel converter="#{localDateConverter}" value="#{kit.data}" />
                         </p:column>
 
                         <p:column headerText="Ações" style="width:10%">
-                            <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+                            <p:commandButton icon="fa fa-trash-o" update="listaKits"
+                                             actionListener="#{editaRemessaAbertaFormularioBean.removerKit(kit)}"
                                              styleClass="ui-priority-primary" />
-                            <p:commandButton icon="fa fa-trash-o" update="dadosTabela"
+                            <p:commandButton icon="fa fa-trash-o" update="listaKits, frm:painelKit"
+                                             actionListener="#{editaRemessaAbertaFormularioBean.alterarKit(kit)}"
                                              styleClass="ui-priority-primary" />
                         </p:column>
 
@@ -168,9 +178,10 @@
 
             <p:toolbar>
                 <f:facet name="left">
-                    <p:commandButton styleClass="ui-priority-primary" process="@form"
+                    <p:commandButton styleClass="ui-priority-primary" process="@this, frm:kits" update="frm:mensagem"
                                      style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
                                      value="Salvar" icon="fa fa-floppy-o"
+                                     actionListener="#{editaRemessaAbertaFormularioBean.salvar()}"
                                      oncomplete="PF('salvarCadastro').enable();"
                                      onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro" />
                 </f:facet>
@@ -211,7 +222,7 @@
                             update="dadosEntidadeTabela" />
                     <p:ajax event="rowDblselect" listener="#{editaRemessaAbertaFormularioBean.carregaDadosDaRemessa()}"
                             process="dadosEntidadeTabela"
-                            oncomplete="PF('entidadeDialog').hide()"
+                            oncomplete="PF('remessaVinculadaDialog').hide()"
                             update="frm:painelRemessa"/>
 
                     <p:column headerText="Nome" filterBy="#{dados.codigo}"
@@ -229,6 +240,8 @@
                         <h:outputText value="#{dados.praca.descricao}" />
                     </p:column>
 
+
+
                     <f:facet name="footer">
                         <div align="left">
                             <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
@@ -238,6 +251,101 @@
                         </div>
                     </f:facet>
 
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+
+        <p:dialog widgetVar="vendedorDialog" modal="true" height="450"
+                  width="850" resizable="false">
+            <h:form>
+                <p:dataTable value="#{editaRemessaAbertaFormularioBean.vendedores}"
+                             widgetVar="lista" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="vendedor"
+                             id="dadosVendedor" multiViewState="true" rowKey="#{vendedor.id}"
+                             selection="#{editaRemessaAbertaFormularioBean.kit.vendedor}"
+                             filteredValue="#{editaRemessaAbertaFormularioBean.vendedoreFiltro}"
+                             rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('lista').filter()" />
+                                <p:button icon="fa fa-refresh" style="float:right"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosVendedor"
+                            update="dadosVendedor" />
+                    <p:ajax event="rowDblselect"
+                            process="dadosVendedor"
+                            oncomplete="PF('vendedorDialog').hide()"
+                            update="frm:vendedor"/>
+
+                    <p:column headerText="Nome" filterBy="#{vendedor.nome}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{vendedor.nome}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
+                                             oncomplete="PF('vendedorDialog').hide()"
+                                             update="frm:vendedor" />
+                        </div>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="produtoDialog" modal="true" height="450"
+                  width="850" resizable="false">
+            <h:form>
+                <p:dataTable value="#{editaRemessaAbertaFormularioBean.produtos}"
+                             widgetVar="listaProdutos" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="produto"
+                             id="dadosProdutoTabela" multiViewState="true" rowKey="#{produto.id}"
+                             selection="#{editaRemessaAbertaFormularioBean.kitItem.produto}"
+                             filteredValue="#{editaRemessaAbertaFormularioBean.produtosFiltro}"
+                             rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('listaProdutos').filter()" />
+                                <p:button icon="fa fa-refresh" style="float:right"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosProdutoTabela" />
+                    <p:ajax event="rowDblselect" listener="#{editaRemessaAbertaFormularioBean.carregaDadosDoProduto()}"
+                            process="dadosProdutoTabela"
+                            oncomplete="PF('produtoDialog').hide()"
+                            update="frm:painelKitItens" />
+
+                    <p:column headerText="Nome" filterBy="#{produto.descricao}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{produto.descricao}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar"
+                                             styleClass="ui-priority-primary"
+                                             action="#{editaRemessaAbertaFormularioBean.carregaDadosDoProduto()}"
+                                             oncomplete="PF('produtoDialog').hide()"
+                                             update="frm:painelKitItens" />
+                        </div>
+                    </f:facet>
                 </p:dataTable>
             </h:form>
         </p:dialog>
