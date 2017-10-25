@@ -76,17 +76,8 @@ public class RemessaBean implements Serializable {
 
             List<RemessaItem> remessaItens = gestaoRemessa.remessaItemPorRemessa(remessa);
 
-            List<VendedorItem> vendedorItens = new ArrayList<>();
-            for (RemessaItem remessaItem: remessaItens) {
-                 VendedorItem vendedorItem = new VendedorItem();
-                 vendedorItem.setCodigo(remessaItem.getProduto().getCodigo());
-                 vendedorItem.setDescricao(remessaItem.getDescricao());
-                 vendedorItem.setPreco(remessaItem.getPrecoUnitario());
-                 vendedorItens.add(vendedorItem);
-            }
-
             for (Entidade vendedor: vendedores ) {
-                geraRelatorioProdutosPorVendedor(vendedor, vendedorItens);
+                geraRelatorioProdutosPorVendedor(vendedor, vendedorItensConverter(remessaItens));
             }
 
             concatReports();
@@ -99,13 +90,27 @@ public class RemessaBean implements Serializable {
         }
     }
 
-    private void geraRelatorioProdutosPorVendedor(Entidade entidade, List<VendedorItem> vendedorItens) throws JRException, IOException {
+    private List<VendedorItem> vendedorItensConverter (List<RemessaItem> remessaItens) {
+        List<VendedorItem> vendedorItens = new ArrayList<>();
+        for (RemessaItem remessaItem: remessaItens) {
+            VendedorItem vendedorItem = new VendedorItem();
+            vendedorItem.setCodigo(remessaItem.getProduto().getCodigo());
+            vendedorItem.setDescricao(remessaItem.getDescricao());
+            vendedorItem.setPreco(remessaItem.getPrecoUnitario());
+            vendedorItens.add(vendedorItem);
+        }
+        return vendedorItens;
+    }
+
+    private File geraRelatorioProdutosPorVendedor(Entidade entidade, List<VendedorItem> vendedorItens) throws JRException, IOException {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nome", entidade.getNome());
         parametros.put("cpf", entidade.getCpfCnpj());
         parametros.put("endereco", entidade.getRua() + " Nº " +entidade.getNumero());
         parametros.put("telefones", entidade.getTelefone() + " " + entidade.getCelular());
-        parametros.put("cidade", entidade.getCidade().getCidade());
+        if(entidade.getCidade() != null) {
+            parametros.put("cidade", entidade.getCidade().getCidade());
+        }
         parametros.put("bairro", entidade.getBairro());
         parametros.put("observacao", entidade.getObservacao());
         parametros.put("representante", remessa.getRepresentante().getNome());
@@ -115,7 +120,9 @@ public class RemessaBean implements Serializable {
         InputStream relatorioStream = getClass().getResourceAsStream("/reports/hawker/produtos_por_vendedor_referencia.jasper");
         JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, new JRBeanCollectionDataSource(vendedorItens));
         byte[] pdf = JasperExportManager.exportReportToPdf(print);
-        FileUtils.writeByteArrayToFile(new File("/HSI/temp/" + "temp" + System.currentTimeMillis() + ".pdf"), pdf);
+        File report = new File("/HSI/temp/" + "temp" + System.currentTimeMillis() + ".pdf");
+        FileUtils.writeByteArrayToFile(report, pdf);
+        return report;
     }
 
     /**
@@ -190,16 +197,26 @@ public class RemessaBean implements Serializable {
 
     private void remover (File f) {
         if (f.isDirectory()) {
-            File[] files = f.listFiles();
-            for (int i = 0; i < files.length; ++i) {
-                remover (files[i]);
+            File[] sun = f.listFiles();
+            for (File toDelete : sun) {
+                toDelete.delete();
             }
         }
-        f.delete();
     }
 
-    public void priemeiro() {
+    public void imprimeDadosEmBranco() {
+        try {
+            remover(new File("/HSI/temp/"));
 
+            List<RemessaItem> remessaItens = gestaoRemessa.remessaItemPorRemessa(remessa);
+
+            List<VendedorItem> vendedorItens = vendedorItensConverter(remessaItens);
+            File report = geraRelatorioProdutosPorVendedor(new Entidade(), vendedorItens);
+
+            downloadPDF(report);
+        } catch (JRException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void segundo() {

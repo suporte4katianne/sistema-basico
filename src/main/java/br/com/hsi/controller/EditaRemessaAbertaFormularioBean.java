@@ -16,8 +16,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Eriel Miquilino
@@ -55,6 +57,7 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
     private List<Remessa> remessasFiltro;
 
     public void inicializar() {
+        remessa.setRemessaItens(gestaoRemessa.remessaItemPorRemessa(remessa));
         produtos = gestaoProduto.listarProdutos();
         vendedores = gestaoEntidade.listarEntidades("V");
         saldo = gestaoRemessa.saldoRemessa(remessa);
@@ -82,10 +85,32 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
     }
 
     public void incluirKitItem() {
-        kitItem.setPrecoTotal(kitItem.getQuantidade().multiply(kitItem.getPrecoUnitario()));
-        kit.setTotal(kit.getTotal().add(kitItem.getPrecoTotal()));
-        kit.getKitItens().add(kitItem);
-        kitItem = new KitItem();
+        for (RemessaItem remessaItem: remessa.getRemessaItens()) {
+            if (remessaItem.getProduto().getId() == kitItem.getProduto().getId()) {
+                if(kitItem.getQuantidade().doubleValue() <= saldoItemRemessa(remessaItem).doubleValue()) {
+                    boolean gravar = true;
+                    for (KitItem kitItem : kit.getKitItens()) {
+                        if (kitItem.getProduto().equals(this.kitItem.getProduto())) {
+                            FacesUtil.addErrorMessage("Este item já existe em seu kit, altere ou exclua o registro para continuar");
+                            gravar = false;
+                        }
+                    }
+                    if (gravar) {
+                        kitItem.setPrecoTotal(kitItem.getQuantidade().multiply(kitItem.getPrecoUnitario()));
+                        kit.setTotal(kit.getTotal().add(kitItem.getPrecoTotal()));
+                        kit.getKitItens().add(kitItem);
+                        kitItem = new KitItem();
+                    }
+
+                } else {
+                    FacesUtil.addErrorMessage("Quantidade informada acima do saldo disponivel na remessa!");
+                }
+            } else {
+                FacesUtil.addErrorMessage("Este item não possui saldo disponivel nesta remessa!");
+            }
+        }
+
+
     }
 
     public void removerKitItem(KitItem kitItem) {
@@ -94,10 +119,21 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
     }
 
     public void incluirKit() {
-        kit.setRemessa(remessa);
-        kits.add(kit);
-        kit = new Kit();
-        kitItem = new KitItem();
+        boolean gravar = true;
+        for (Kit kit : kits) {
+            if(kit.getCodigo() == this.kit.getCodigo()) {
+                FacesUtil.addErrorMessage("Já possui um kit usando este código");
+                gravar = false;
+            }
+        }
+
+        if (gravar) {
+            kit.setRemessa(remessa);
+            kits.add(kit);
+            kit = new Kit();
+            kitItem = new KitItem();
+        }
+
     }
 
     public void removerKit(Kit kit) {
@@ -110,7 +146,6 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
     }
 
     public void salvar() {
-        System.out.println("TESTE!!!!");
         try {
             remessa.setStatusRemessa(StatusRemessa.EDITADA);
             gestaoRemessa.salvar(remessa);
@@ -122,6 +157,20 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
             FacesUtil.addErrorMessage(e.getMessage());
         }
     }
+
+
+    private BigDecimal saldoItemRemessa (RemessaItem remessaItem) {
+        BigDecimal saldoLancado = remessaItem.getQuantidade();
+        for (Kit kit : kits) {
+            for (KitItem item : kit.getKitItens()) {
+                if (remessaItem.getProduto().getId() == item.getProduto().getId()) {
+                    saldoLancado = saldoLancado.subtract(item.getQuantidade());
+                }
+            }
+        }
+        return saldoLancado;
+    }
+
 
     public Remessa getRemessa() {
         return remessa;

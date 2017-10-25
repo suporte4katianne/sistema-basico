@@ -71,10 +71,20 @@ public class RemessaFormularioBean implements Serializable {
     }
 
     public void incluirRemessaItem() {
-        remessaItem.setPrecoTotal(remessaItem.getQuantidade().multiply(remessaItem.getPrecoUnitario()));
-        remessa.setTotal(remessa.getTotal().add(remessaItem.getPrecoTotal()));
-        remessa.getRemessaItens().add(remessaItem);
-        remessaItem = new RemessaItem();
+        boolean gravar = true;
+        for (RemessaItem remessaItem : remessa.getRemessaItens()) {
+            if (remessaItem.getProduto().equals(this.remessaItem.getProduto())) {
+                FacesUtil.addErrorMessage("Este item já existe em sua remessa, altere ou exclua o registro para continuar");
+                gravar = false;
+            }
+        }
+
+        if (gravar) {
+            remessaItem.setPrecoTotal(remessaItem.getQuantidade().multiply(remessaItem.getPrecoUnitario()));
+            remessa.setTotal(remessa.getTotal().add(remessaItem.getPrecoTotal()));
+            remessa.getRemessaItens().add(remessaItem);
+            remessaItem = new RemessaItem();
+        }
     }
 
     public void removerRemessaItem(RemessaItem remessaItem) {
