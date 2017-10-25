@@ -131,8 +131,13 @@
                                      onclick="PF('salvarCadastro').disable();" widgetVar="salvarCadastro" />
                 </f:facet>
                 <f:facet name="right">
-                    <p:button outcome="Remessa" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
-                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                    <p:commandButton value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
+                        <p:confirm header = "Cancelar Operação"
+                                   message = "  Sair sem salvar?"
+                                   icon= "fa fa-hand-paper-o"/>
+                    </p:commandButton>
+
                 </f:facet>
             </p:toolbar>
 
@@ -231,6 +236,14 @@
                 </p:dataTable>
             </h:form>
         </p:dialog>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:button value="Sim" outcome="Remessa" type="button"
+                      styleClass="ui-confirmdialog-yes ui-priority-primary" icon="fa fa-check" />
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-priority-primary"
+                             icon="fa fa-close" />
+        </p:confirmDialog>
+
 
 
     </ui:define>
