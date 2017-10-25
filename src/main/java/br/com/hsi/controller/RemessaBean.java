@@ -106,9 +106,9 @@ public class RemessaBean implements Serializable {
         Map<String, Object> parametros = new HashMap<>();
         parametros.put("nome", entidade.getNome());
         parametros.put("cpf", entidade.getCpfCnpj());
-        parametros.put("endereco", entidade.getRua() + " Nº " +entidade.getNumero());
-        parametros.put("telefones", entidade.getTelefone() + " " + entidade.getCelular());
         if(entidade.getCidade() != null) {
+            parametros.put("endereco", entidade.getRua() + " Nº " +entidade.getNumero());
+            parametros.put("telefones", entidade.getTelefone() + " " + entidade.getCelular());
             parametros.put("cidade", entidade.getCidade().getCidade());
         }
         parametros.put("bairro", entidade.getBairro());
