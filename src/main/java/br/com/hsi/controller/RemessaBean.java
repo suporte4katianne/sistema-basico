@@ -95,6 +95,7 @@ public class RemessaBean implements Serializable {
         for (RemessaItem remessaItem: remessaItens) {
             VendedorItem vendedorItem = new VendedorItem();
             vendedorItem.setCodigo(remessaItem.getProduto().getCodigo());
+            vendedorItem.setReferencia(remessaItem.getProduto().getReferencia());
             vendedorItem.setDescricao(remessaItem.getDescricao());
             vendedorItem.setPreco(remessaItem.getPrecoUnitario());
             vendedorItens.add(vendedorItem);
@@ -115,7 +116,9 @@ public class RemessaBean implements Serializable {
         parametros.put("observacao", entidade.getObservacao());
         parametros.put("representante", remessa.getRepresentante().getNome());
         parametros.put("telefone_representante", remessa.getRepresentante().getTelefone());
-        parametros.put("logo", new ByteArrayInputStream(seguranca.getUsuarioLogado().getUsuario().getEmpresa().getLogo()));
+        if (seguranca.getUsuarioLogado().getUsuario().getEmpresa().getLogo() != null) {
+            parametros.put("logo", new ByteArrayInputStream(seguranca.getUsuarioLogado().getUsuario().getEmpresa().getLogo()));
+        }
 
         InputStream relatorioStream = getClass().getResourceAsStream("/reports/hawker/produtos_por_vendedor_referencia.jasper");
         JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, new JRBeanCollectionDataSource(vendedorItens));

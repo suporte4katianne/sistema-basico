@@ -85,13 +85,14 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
     }
 
     public void incluirKitItem() {
+        boolean verificaRegistro = true;
         for (RemessaItem remessaItem: remessa.getRemessaItens()) {
-            if (remessaItem.getProduto().getId() == kitItem.getProduto().getId()) {
+            if (Objects.equals(remessaItem.getProduto().getId(), kitItem.getProduto().getId())) {
+                verificaRegistro = false;
                 if(kitItem.getQuantidade().doubleValue() <= saldoItemRemessa(remessaItem).doubleValue()) {
                     boolean gravar = true;
                     for (KitItem kitItem : kit.getKitItens()) {
                         if (kitItem.getProduto().equals(this.kitItem.getProduto())) {
-                            FacesUtil.addErrorMessage("Este item já existe em seu kit, altere ou exclua o registro para continuar");
                             gravar = false;
                         }
                     }
@@ -99,19 +100,23 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
                         kitItem.setPrecoTotal(kitItem.getQuantidade().multiply(kitItem.getPrecoUnitario()));
                         kit.setTotal(kit.getTotal().add(kitItem.getPrecoTotal()));
                         kit.getKitItens().add(kitItem);
-                        kitItem = new KitItem();
+                    } else {
+                        FacesUtil.addErrorMessage("Este item já existe em seu kit, altere ou exclua o registro para continuar");
                     }
-
                 } else {
                     FacesUtil.addErrorMessage("Quantidade informada acima do saldo disponivel na remessa!");
                 }
-            } else {
-                FacesUtil.addErrorMessage("Este item não possui saldo disponivel nesta remessa!");
             }
         }
-
-
+        if (verificaRegistro) {
+            FacesUtil.addErrorMessage("Este item não possoui saldo disponivel nesta remessa!");
+        } else {
+            kitItem = new KitItem();
+        }
     }
+
+
+
 
     public void removerKitItem(KitItem kitItem) {
         kit.setTotal(kit.getTotal().subtract(kitItem.getPrecoTotal()));
@@ -163,7 +168,7 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
         BigDecimal saldoLancado = remessaItem.getQuantidade();
         for (Kit kit : kits) {
             for (KitItem item : kit.getKitItens()) {
-                if (remessaItem.getProduto().getId() == item.getProduto().getId()) {
+                if (Objects.equals(remessaItem.getProduto().getId(), item.getProduto().getId())) {
                     saldoLancado = saldoLancado.subtract(item.getQuantidade());
                 }
             }
