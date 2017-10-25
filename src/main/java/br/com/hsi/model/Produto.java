@@ -363,30 +363,84 @@ public class Produto{
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Produto produto = (Produto) o;
+
+		if (codigo != produto.codigo) return false;
+		if (id != null ? !id.equals(produto.id) : produto.id != null) return false;
+		if (tipoCadastro != null ? !tipoCadastro.equals(produto.tipoCadastro) : produto.tipoCadastro != null)
+			return false;
+		if (empresa != null ? !empresa.equals(produto.empresa) : produto.empresa != null) return false;
+		if (codigoBrras != null ? !codigoBrras.equals(produto.codigoBrras) : produto.codigoBrras != null) return false;
+		if (referencia != null ? !referencia.equals(produto.referencia) : produto.referencia != null) return false;
+		if (descricao != null ? !descricao.equals(produto.descricao) : produto.descricao != null) return false;
+		if (ncm != null ? !ncm.equals(produto.ncm) : produto.ncm != null) return false;
+		if (cest != null ? !cest.equals(produto.cest) : produto.cest != null) return false;
+		if (codigo_ncm != null ? !codigo_ncm.equals(produto.codigo_ncm) : produto.codigo_ncm != null) return false;
+		if (comissao != null ? !comissao.equals(produto.comissao) : produto.comissao != null) return false;
+		if (codigo_cest != null ? !codigo_cest.equals(produto.codigo_cest) : produto.codigo_cest != null) return false;
+		if (origem != produto.origem) return false;
+		if (unidadeMedida != null ? !unidadeMedida.equals(produto.unidadeMedida) : produto.unidadeMedida != null)
+			return false;
+		if (precoVenda != null ? !precoVenda.equals(produto.precoVenda) : produto.precoVenda != null) return false;
+		if (aliquotaIcms != null ? !aliquotaIcms.equals(produto.aliquotaIcms) : produto.aliquotaIcms != null)
+			return false;
+		if (aliquotaIpi != null ? !aliquotaIpi.equals(produto.aliquotaIpi) : produto.aliquotaIpi != null) return false;
+		if (aliquotaPis != null ? !aliquotaPis.equals(produto.aliquotaPis) : produto.aliquotaPis != null) return false;
+		if (aliquotaCofins != null ? !aliquotaCofins.equals(produto.aliquotaCofins) : produto.aliquotaCofins != null)
+			return false;
+		if (cstIcms != produto.cstIcms) return false;
+		if (cstIpi != produto.cstIpi) return false;
+		if (cstPisCofins != produto.cstPisCofins) return false;
+		if (iss != null ? !iss.equals(produto.iss) : produto.iss != null) return false;
+		if (AliquotaIss != null ? !AliquotaIss.equals(produto.AliquotaIss) : produto.AliquotaIss != null) return false;
+		if (codigoLc != null ? !codigoLc.equals(produto.codigoLc) : produto.codigoLc != null) return false;
+		if (cfopEstadual != null ? !cfopEstadual.equals(produto.cfopEstadual) : produto.cfopEstadual != null)
+			return false;
+		if (cfopInterestadual != null ? !cfopInterestadual.equals(produto.cfopInterestadual) : produto.cfopInterestadual != null)
+			return false;
+		if (codigoCfopEstadual != null ? !codigoCfopEstadual.equals(produto.codigoCfopEstadual) : produto.codigoCfopEstadual != null)
+			return false;
+		if (codigoCfopInterestadual != null ? !codigoCfopInterestadual.equals(produto.codigoCfopInterestadual) : produto.codigoCfopInterestadual != null)
+			return false;
+		return embalagens != null ? embalagens.equals(produto.embalagens) : produto.embalagens == null;
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Produto other = (Produto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (tipoCadastro != null ? tipoCadastro.hashCode() : 0);
+		result = 31 * result + (empresa != null ? empresa.hashCode() : 0);
+		result = 31 * result + (codigoBrras != null ? codigoBrras.hashCode() : 0);
+		result = 31 * result + codigo;
+		result = 31 * result + (referencia != null ? referencia.hashCode() : 0);
+		result = 31 * result + (descricao != null ? descricao.hashCode() : 0);
+		result = 31 * result + (ncm != null ? ncm.hashCode() : 0);
+		result = 31 * result + (cest != null ? cest.hashCode() : 0);
+		result = 31 * result + (codigo_ncm != null ? codigo_ncm.hashCode() : 0);
+		result = 31 * result + (comissao != null ? comissao.hashCode() : 0);
+		result = 31 * result + (codigo_cest != null ? codigo_cest.hashCode() : 0);
+		result = 31 * result + (origem != null ? origem.hashCode() : 0);
+		result = 31 * result + (unidadeMedida != null ? unidadeMedida.hashCode() : 0);
+		result = 31 * result + (precoVenda != null ? precoVenda.hashCode() : 0);
+		result = 31 * result + (aliquotaIcms != null ? aliquotaIcms.hashCode() : 0);
+		result = 31 * result + (aliquotaIpi != null ? aliquotaIpi.hashCode() : 0);
+		result = 31 * result + (aliquotaPis != null ? aliquotaPis.hashCode() : 0);
+		result = 31 * result + (aliquotaCofins != null ? aliquotaCofins.hashCode() : 0);
+		result = 31 * result + (cstIcms != null ? cstIcms.hashCode() : 0);
+		result = 31 * result + (cstIpi != null ? cstIpi.hashCode() : 0);
+		result = 31 * result + (cstPisCofins != null ? cstPisCofins.hashCode() : 0);
+		result = 31 * result + (iss != null ? iss.hashCode() : 0);
+		result = 31 * result + (AliquotaIss != null ? AliquotaIss.hashCode() : 0);
+		result = 31 * result + (codigoLc != null ? codigoLc.hashCode() : 0);
+		result = 31 * result + (cfopEstadual != null ? cfopEstadual.hashCode() : 0);
+		result = 31 * result + (cfopInterestadual != null ? cfopInterestadual.hashCode() : 0);
+		result = 31 * result + (codigoCfopEstadual != null ? codigoCfopEstadual.hashCode() : 0);
+		result = 31 * result + (codigoCfopInterestadual != null ? codigoCfopInterestadual.hashCode() : 0);
+		result = 31 * result + (embalagens != null ? embalagens.hashCode() : 0);
+		return result;
 	}
-	
-	
-
 }

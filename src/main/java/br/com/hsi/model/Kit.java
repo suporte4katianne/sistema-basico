@@ -23,7 +23,7 @@ public class Kit {
     private Long id;
 
     @NotNull
-    private int codigo;
+    private int codigo = 1;
 
     @ManyToOne
     @JoinColumn(name = "id_vendedor")
