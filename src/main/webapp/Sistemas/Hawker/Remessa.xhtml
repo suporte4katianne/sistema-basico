@@ -14,10 +14,7 @@
                          selectionMode="single" emptyMessage="Nenhum item adicionado"
                          reflow="true" var="dados" id="dadosTabela" multiViewState="true"
                          rowKey="#{dados.id}" selection="#{remessaBean.remessa}" filteredValue="#{remessaBean.remessasFiltro}"
-                         rows="20" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="20,45,60"
-                         paginatorPosition="top">
+                         rows="20">
 
                 <f:facet name="header">
                     <div align="left">
@@ -69,9 +66,10 @@
                                          remessaBean.remessa.statusRemessa.codigo.equals('2') or
                                          remessaBean.remessa == null}"
                                          onclick="PF('autorizaSaida').show()"
-                                         value="Autorizar saida" icon="fa fa-pencil-square-o" styleClass="ui-priority-primary"/>
+                                         value="Autorizar Saida" icon="fa fa-car" styleClass="ui-priority-primary"/>
 
-                        <p:button outcome="EditaRemessaAbertaFormulario" value="Editar Remessa" styleClass="ui-priority-primary"
+                        <p:button outcome="EditaRemessaAbertaFormulario" value="Retorno Remessa" icon="fa fa-download"
+                                  styleClass="ui-priority-primary"
                                   disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('0') or
                                   remessaBean.remessa.statusRemessa.codigo.equals('2') or
                                   remessaBean.remessa == null}">
@@ -80,7 +78,7 @@
 
                         <p:commandButton disabled="#{remessaBean.remessa == null}" ajax="false" update="@form"
                                          actionListener="#{remessaBean.imprimeDadosEmBranco()}"
-                                         value="Ficha com dados em branco" icon="fa fa-pencil-square-o"
+                                         value="Ficha Individual" icon="fa fa-clone"
                                          styleClass="ui-priority-primary"/>
                     </div>
                 </f:facet>

@@ -13,10 +13,7 @@
                          selectionMode="single" emptyMessage="Nenhum item adicionado"
                          reflow="true" var="dados" id="dadosTabela" multiViewState="true"
                          rowKey="#{dados.id}" selection="#{entidadeBean.entidade}" filteredValue="#{entidadeBean.entidadesFiltro}"
-                         rows="20" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="20,45,60"
-                         paginatorPosition="top">
+                         rows="20">
 
                 <f:facet name="header">
                     <div align="left">
@@ -33,6 +30,9 @@
                 </f:facet>
 
                 <p:ajax event="rowSelect" process="dadosTabela" update="dadosTabela" />
+                <p:ajax event="rowDblselect"
+                        listener="#{gridBean.redrirect('Hawker/RepresentanteFormulario','entidade',entidadeBean.entidade.id)}"
+                        process="dadosTabela"/>
 
                 <p:column headerText="Nome" style="width:30%" filterBy="#{dados.nome}" filterStyle="display:none">
                     <h:outputText value="#{dados.nome}" />

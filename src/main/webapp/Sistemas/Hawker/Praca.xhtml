@@ -14,10 +14,7 @@
                          selectionMode="single" emptyMessage="Nenhum item adicionado"
                          reflow="true" var="dados" id="dadosTabela" multiViewState="true"
                          rowKey="#{dados.id}" selection="#{pracaBean.praca}" filteredValue="#{pracaBean.pracasFiltro}"
-                         rows="20" paginator="true"
-                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                         rowsPerPageTemplate="20,45,60"
-                         paginatorPosition="top">
+                         rows="20">
 
                 <f:facet name="header">
                     <div align="left">

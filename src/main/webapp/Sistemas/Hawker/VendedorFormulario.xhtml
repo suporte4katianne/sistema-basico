@@ -125,10 +125,16 @@
                                            itemLabel="#{praca.descricao}" itemValue="#{praca}" />
                         </p:selectOneMenu>
 
-                        <p:outputLabel value="Observações:" for="observacao" />
-                        <p:inputText value="#{entidadeFormularioBean.entidade.observacao}" id="observacao"/>
-
                     </h:panelGrid>
+
+                    <h:panelGrid
+                        id="capaPanel2" style="width:90%"  columns="2"
+                        columnClasses="rotulo,campo,rotulo ">
+                        <p:outputLabel value="Observações:" for="observacao" />
+                        <p:inputText value="#{entidadeFormularioBean.entidade.observacao}"
+                                     maxlength="250" id="observacao"/>
+                    </h:panelGrid>
+
                 </p:panel>
             </div>
 
