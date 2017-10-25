@@ -78,9 +78,7 @@
                             <f:param name="remessa" value="#{remessaBean.remessa.id}" />
                         </p:button>
 
-                        <p:commandButton disabled="#{remessaBean.remessa.statusRemessa.codigo.equals('1') or
-                                         remessaBean.remessa.statusRemessa.codigo.equals('2') or
-                                         remessaBean.remessa == null}" ajax="false" update="@form"
+                        <p:commandButton disabled="#{remessaBean.remessa == null}" ajax="false" update="@form"
                                          actionListener="#{remessaBean.imprimeDadosEmBranco()}"
                                          value="Ficha com dados em branco" icon="fa fa-pencil-square-o"
                                          styleClass="ui-priority-primary"/>

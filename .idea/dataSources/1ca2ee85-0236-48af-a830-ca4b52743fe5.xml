@@ -416,7 +416,7 @@
     </column>
     <column id="115" parent="15" name="logo">
       <Position>15</Position>
-      <DataType>tinyblob|0</DataType>
+      <DataType>longblob|0</DataType>
     </column>
     <column id="116" parent="15" name="nome">
       <Position>16</Position>
