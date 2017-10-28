@@ -14,106 +14,99 @@
         <!-- Acesso Empresa -->
         <navigation-case>
             <from-outcome>Empresa</from-outcome>
-            <to-view-id>/Sistemas/Empresa.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/Empresa.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>EmitenteFormulario</from-outcome>
-            <to-view-id>/Sistemas/EmpresaFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/EmpresaFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Cliente</from-outcome>
-            <to-view-id>/Sistemas/Cliente.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/Cliente.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>DestinatarioFormulario</from-outcome>
-            <to-view-id>/Sistemas/ClienteFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/ClienteFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Transportadora</from-outcome>
-            <to-view-id>/Sistemas/Transportadora.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/Transportadora.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>TransportadoraFormulario</from-outcome>
-            <to-view-id>/Sistemas/TransportadoraFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/TransportadoraFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>Fornecedor</from-outcome>
-            <to-view-id>/Sistemas/Fornecedor.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/Fornecedor.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>FornecedorFormulario</from-outcome>
-            <to-view-id>/Sistemas/FornecedorFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/FornecedorFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
-            <from-outcome>Servico</from-outcome>
-            <to-view-id>/Sistemas/Servico.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
             <from-outcome>Produto</from-outcome>
-            <to-view-id>/Sistemas/Produto.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/Produto.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>ProdutoFormulario</from-outcome>
-            <to-view-id>/Sistemas/ProdutoFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Cadastros/ProdutoFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>SaidaFormulario</from-outcome>
-            <to-view-id>/Sistemas/SaidaFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/SaidaFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Saida</from-outcome>
-            <to-view-id>/Sistemas/Saida.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/Saida.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>EntradaFormulario</from-outcome>
-            <to-view-id>/Sistemas/EntradaFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/EntradaFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Entrada</from-outcome>
-            <to-view-id>/Sistemas/Entrada.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/Entrada.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>AjusteEstoqueFormulario</from-outcome>
-            <to-view-id>/Sistemas/AjusteEstoqueFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/AjusteEstoqueFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>AjusteEstoque</from-outcome>
-            <to-view-id>/Sistemas/AjusteEstoque.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/AjusteEstoque.xhtml</to-view-id>
         </navigation-case>
 
-        <navigation-case>
-            <from-outcome>Relatorio</from-outcome>
-            <to-view-id>/Sistemas/Relatorio.xhtml</to-view-id>
-        </navigation-case>
+
         <navigation-case>
             <from-outcome>Usuario</from-outcome>
-            <to-view-id>/Sistemas/Usuario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/Usuario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>UsuarioFormulario</from-outcome>
-            <to-view-id>/Sistemas/UsuarioFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/UsuarioFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Inutilizacao</from-outcome>
-            <to-view-id>/Sistemas/Inutilizacao.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/Inutilizacao.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>InutilizacaoFormulario</from-outcome>
-            <to-view-id>/Sistemas/InutilizacaoFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/InutilizacaoFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>Cfop</from-outcome>
-            <to-view-id>/Sistemas/Cfop.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/Cfop.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>CfopFormulario</from-outcome>
-            <to-view-id>/Sistemas/CfopFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/CfopFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -123,24 +116,24 @@
 
         <navigation-case>
             <from-outcome>UnidadeMedida</from-outcome>
-            <to-view-id>/Sistemas/UnidadeMedida.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/UnidadeMedida.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>UnidadeMedidaFormulario</from-outcome>
-            <to-view-id>/Sistemas/UnidadeMedidaFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/UnidadeMedidaFormulario.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>Numeracao</from-outcome>
-            <to-view-id>/Sistemas/Numeracao.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/Numeracao.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>NumeracaoFormulario</from-outcome>
-            <to-view-id>/Sistemas/NumeracaoFormulario.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Preferencias/NumeracaoFormulario.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>Etiqueta</from-outcome>
-            <to-view-id>/Sistemas/Etiqueta.xhtml</to-view-id>
+            <to-view-id>/Sistemas/Estoque/Etiqueta.xhtml</to-view-id>
         </navigation-case>
 
 

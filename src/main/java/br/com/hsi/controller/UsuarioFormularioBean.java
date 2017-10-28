@@ -35,7 +35,7 @@ public class UsuarioFormularioBean implements Serializable{
 	    usuario.setEmpresa(gestaoEmpresa.emitentePorId((long) 1));
 		gestaoUsuario.salvar(usuario);
 		FacesUtil.addInfoMessage("Usuário salvo com sucesso!");
-		FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Usuario.xhtml");
+		FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Preferencias/Usuario.xhtml");
 	}
 
 

@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Eriel Miquilino" id="1509109571700-1">
+        <createTable tableName="ajuste_estoque">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ajuste_estoquePK"/>
+            </column>
+            <column name="data" type="timestamp"/>
+            <column name="documento" type="VARCHAR(255)"/>
+            <column name="motivo" type="VARCHAR(255)"/>
+            <column name="tipo" type="VARCHAR(255)"/>
+            <column name="id_empresa" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-2">
+        <createTable tableName="ajuste_estoque_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ajuste_estoque_itemPK"/>
+            </column>
+            <column name="quantidade" type="DECIMAL(19, 2)"/>
+            <column name="id_ajuste_estoque" type="BIGINT"/>
+            <column name="movimentacao_id" type="BIGINT"/>
+            <column name="id_produto" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-3">
+        <createTable tableName="cep">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bairro" type="VARCHAR(255)"/>
+            <column name="cep" type="VARCHAR(255)"/>
+            <column name="endereco" type="VARCHAR(255)"/>
+            <column name="idcidade" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-4">
+        <createTable tableName="cest">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cestPK"/>
+            </column>
+            <column name="cest" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-5">
+        <createTable tableName="cfop">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cfopPK"/>
+            </column>
+            <column name="cfop" type="VARCHAR(255)"/>
+            <column name="codigo" type="VARCHAR(255)"/>
+            <column name="finalidade" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="operacao" type="VARCHAR(255)"/>
+            <column name="tipo" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-6">
+        <createTable tableName="cidade">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="cidadePK"/>
+            </column>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="codigo" type="VARCHAR(255)"/>
+            <column name="idestado" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-7">
+        <createTable tableName="embalagem">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="embalagemPK"/>
+            </column>
+            <column name="codigo_barras" type="VARCHAR(255)"/>
+            <column name="fator_conversao" type="DECIMAL(19, 2)"/>
+            <column name="produto_id" type="BIGINT"/>
+            <column name="unidadeMedida_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-8">
+        <createTable tableName="empresa">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="empresaPK"/>
+            </column>
+            <column name="ambiente" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="bairro" type="VARCHAR(255)"/>
+            <column name="celular" type="VARCHAR(255)"/>
+            <column name="cep" type="VARCHAR(255)"/>
+            <column name="codigo_ibge_cidade" type="VARCHAR(255)"/>
+            <column name="codigo_ibge_estado" type="VARCHAR(255)"/>
+            <column name="complemento" type="VARCHAR(255)"/>
+            <column name="cpf_cnpj" type="VARCHAR(255)"/>
+            <column name="credito_icms" type="DECIMAL(19, 2)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="enquadramento_fiscal" type="VARCHAR(255)"/>
+            <column defaultValue="-03:00" name="fuso_horario" type="VARCHAR(255)"/>
+            <column name="inativo" type="BIT(1)"/>
+            <column name="informacao_complementar" type="LONGTEXT"/>
+            <column name="inscricao_estadual" type="VARCHAR(255)"/>
+            <column name="logo" type="LONGVARBINARY"/>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="nome_certificado" type="VARCHAR(255)"/>
+            <column name="estado" type="VARCHAR(255)"/>
+            <column name="cidade" type="VARCHAR(255)"/>
+            <column name="numero" type="VARCHAR(255)"/>
+            <column name="rua" type="VARCHAR(255)"/>
+            <column name="senha_certificado" type="VARCHAR(255)"/>
+            <column name="status_certificado" type="VARCHAR(255)"/>
+            <column name="telefone" type="VARCHAR(255)"/>
+            <column name="tipo_certificado" type="VARCHAR(255)"/>
+            <column name="cidade_id" type="BIGINT"/>
+            <column name="estado_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-9">
+        <createTable tableName="entidade">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="entidadePK"/>
+            </column>
+            <column name="bairro" type="VARCHAR(255)"/>
+            <column name="celular" type="VARCHAR(255)"/>
+            <column name="cep" type="VARCHAR(255)"/>
+            <column name="codigo_ibge_cidade" type="VARCHAR(255)"/>
+            <column name="codigo_ibge_estado" type="VARCHAR(255)"/>
+            <column name="complemento" type="VARCHAR(255)"/>
+            <column name="cpf_cnpj" type="VARCHAR(255)"/>
+            <column name="email" type="VARCHAR(255)"/>
+            <column name="inscricao_estadual" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="estado" type="VARCHAR(255)"/>
+            <column name="cidade" type="VARCHAR(255)"/>
+            <column name="numero" type="VARCHAR(255)"/>
+            <column name="observacao" type="VARCHAR(255)"/>
+            <column name="produtor_rural" type="BIT(1)"/>
+            <column name="rua" type="VARCHAR(255)"/>
+            <column name="telefone" type="VARCHAR(255)"/>
+            <column name="tipo_contribuinte" type="INT"/>
+            <column name="tipo_entidade" type="VARCHAR(255)"/>
+            <column name="tipo_modalidade" type="VARCHAR(255)"/>
+            <column name="cidade_id" type="BIGINT"/>
+            <column name="id_empresa" type="BIGINT"/>
+            <column name="estado_id" type="BIGINT"/>
+            <column name="id_praca" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-10">
+        <createTable tableName="entidade_praca">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="entidade_pracaPK"/>
+            </column>
+            <column name="id_entidade" type="BIGINT"/>
+            <column name="id_praca" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-11">
+        <createTable tableName="estado">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_ibge" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)"/>
+            <column name="codigo" type="VARCHAR(255)"/>
+            <column name="url_consulta_cadastro" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-12">
+        <createTable tableName="ibpt">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="ibptPK"/>
+            </column>
+            <column name="estadual" type="DECIMAL(19, 2)"/>
+            <column name="importadoFederal" type="DECIMAL(19, 2)"/>
+            <column name="municipal" type="DECIMAL(19, 2)"/>
+            <column name="nacionalFederal" type="DECIMAL(19, 2)"/>
+            <column name="ncm" type="VARCHAR(255)"/>
+            <column name="tipo" type="INT"/>
+            <column name="versao" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-13">
+        <createTable tableName="inutilizacao">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="inutilizacaoPK"/>
+            </column>
+            <column name="ambiente" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data" type="timestamp"/>
+            <column name="motivo" type="VARCHAR(255)"/>
+            <column name="numero_fim" type="INT"/>
+            <column name="numero_inicio" type="INT"/>
+            <column name="serie" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="id_empresa" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-14">
+        <createTable tableName="kit">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="kitPK"/>
+            </column>
+            <column name="codigo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="data" type="DATE"/>
+            <column name="total" type="DECIMAL(19, 2)"/>
+            <column name="id_remessa" type="BIGINT"/>
+            <column name="id_representante" type="BIGINT"/>
+            <column name="id_vendedor" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-15">
+        <createTable tableName="kit_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="kit_itemPK"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)"/>
+            <column name="devolvido" type="DECIMAL(19, 2)"/>
+            <column name="preco_total" type="DECIMAL(19, 2)"/>
+            <column name="preco_unitario" type="DECIMAL(19, 2)"/>
+            <column name="quantidade" type="DECIMAL(19, 2)"/>
+            <column name="vendido" type="DECIMAL(19, 2)"/>
+            <column name="id_kit" type="BIGINT"/>
+            <column name="id_produto" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-16">
+        <createTable tableName="movimentacao">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="movimentacaoPK"/>
+            </column>
+            <column name="data" type="timestamp"/>
+            <column name="numero_documento" type="VARCHAR(255)"/>
+            <column name="qunatidade" type="DECIMAL(19, 2)"/>
+            <column name="tipo_documento" type="VARCHAR(255)"/>
+            <column name="tipo_movimentacao" type="VARCHAR(255)"/>
+            <column name="id_ajuste_estoque_item" type="BIGINT"/>
+            <column name="id_empresa" type="BIGINT"/>
+            <column name="id_nota_fiscal_item" type="BIGINT"/>
+            <column name="id_produto" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-17">
+        <createTable tableName="nota_fiscal">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="nota_fiscalPK"/>
+            </column>
+            <column name="cidade_empresa" type="VARCHAR(255)"/>
+            <column name="senha_certificado" type="VARCHAR(255)"/>
+            <column name="ambiente" type="BIGINT"/>
+            <column name="bairro_empresa" type="VARCHAR(255)"/>
+            <column name="bairro_entidade" type="VARCHAR(255)"/>
+            <column name="caminho_certificado" type="VARCHAR(255)"/>
+            <column name="cep_empresa" type="VARCHAR(255)"/>
+            <column name="cep_entidade" type="VARCHAR(255)"/>
+            <column name="chave_acesso" type="VARCHAR(60)"/>
+            <column name="cidade_transportadora" type="VARCHAR(255)"/>
+            <column name="cnpj_empresa" type="VARCHAR(255)"/>
+            <column name="cod_cidade_empresa" type="VARCHAR(20)"/>
+            <column name="cod_cidade_entidade" type="VARCHAR(255)"/>
+            <column name="cod_estado_empresa" type="VARCHAR(10)"/>
+            <column name="cod_pais_entidade" type="VARCHAR(255)"/>
+            <column name="cod_pais_empresa" type="VARCHAR(255)"/>
+            <column name="complemento_empresa" type="VARCHAR(255)"/>
+            <column name="complemento_entidade" type="VARCHAR(255)"/>
+            <column name="condicao_pagamento" type="BIGINT"/>
+            <column name="cpf_cnpj_entidade" type="VARCHAR(255)"/>
+            <column name="cpfCnpj_transportadora" type="VARCHAR(255)"/>
+            <column name="credito_icms" type="VARCHAR(255)"/>
+            <column name="data_emissao" type="timestamp"/>
+            <column name="data_saida_entrada" type="timestamp"/>
+            <column name="digito_verificador" type="BIGINT"/>
+            <column name="email_empresa" type="VARCHAR(255)"/>
+            <column name="email_entidade" type="VARCHAR(255)"/>
+            <column name="emissao" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endereco_transportadora" type="VARCHAR(255)"/>
+            <column name="enquadramento_empresa" type="VARCHAR(255)"/>
+            <column name="estado_empresa" type="VARCHAR(255)"/>
+            <column name="estado_entidade" type="VARCHAR(255)"/>
+            <column name="estado_transportadora" type="VARCHAR(255)"/>
+            <column name="finalidade" type="BIGINT"/>
+            <column name="dados_complementares" type="LONGTEXT"/>
+            <column name="ie_empresa" type="VARCHAR(255)"/>
+            <column name="ie_entidade" type="VARCHAR(255)"/>
+            <column name="ie_transportadora" type="VARCHAR(255)"/>
+            <column name="retorno" type="VARCHAR(255)"/>
+            <column name="modelo_frete" type="VARCHAR(255)"/>
+            <column name="modelo" type="VARCHAR(2)"/>
+            <column name="cidade_entidade" type="VARCHAR(255)"/>
+            <column name="nome_entidade" type="VARCHAR(255)"/>
+            <column name="nome_fantasia_empresa" type="VARCHAR(255)"/>
+            <column name="natureza_operacao" type="VARCHAR(150)"/>
+            <column name="pais_empresa" type="VARCHAR(255)"/>
+            <column name="pais_entidade" type="VARCHAR(255)"/>
+            <column name="transportadora" type="VARCHAR(255)"/>
+            <column name="numero_empresa" type="VARCHAR(255)"/>
+            <column name="numero_entidade" type="VARCHAR(255)"/>
+            <column name="numero" type="BIGINT"/>
+            <column name="sequencia_chave" type="VARCHAR(255)"/>
+            <column name="numero_volume" type="DECIMAL(19, 2)"/>
+            <column name="operacao" type="VARCHAR(1)"/>
+            <column name="peso_bruto" type="DECIMAL(19, 2)"/>
+            <column name="peso_liquido" type="DECIMAL(19, 2)"/>
+            <column name="presenca_consumidor" type="BIGINT"/>
+            <column name="protocolo" type="VARCHAR(100)"/>
+            <column name="quantidade_volume" type="DECIMAL(19, 2)"/>
+            <column name="razao_social_empresa" type="VARCHAR(255)"/>
+            <column name="rua_empresa" type="VARCHAR(255)"/>
+            <column name="rua_entidade" type="VARCHAR(255)"/>
+            <column name="serie" type="BIGINT"/>
+            <column name="status" type="VARCHAR(255)"/>
+            <column name="telefone_empresa" type="VARCHAR(255)"/>
+            <column name="telefone_entidade" type="VARCHAR(255)"/>
+            <column name="tipo_cadastro" type="VARCHAR(255)"/>
+            <column name="tipo_cadastro_transportadora" type="VARCHAR(255)"/>
+            <column name="tipo_consumidor" type="BIGINT"/>
+            <column name="tipo_contribuinte_entidade" type="BIGINT"/>
+            <column name="tipo_emissao" type="BIGINT"/>
+            <column name="tipo_nfe" type="VARCHAR(1)"/>
+            <column name="base_icms" type="DECIMAL(19, 2)"/>
+            <column name="base_icms_st" type="DECIMAL(19, 2)"/>
+            <column name="total_cofins" type="DECIMAL(19, 2)"/>
+            <column name="total_desconto" type="DECIMAL(19, 2)"/>
+            <column name="total_frete" type="DECIMAL(19, 2)"/>
+            <column name="icms" type="DECIMAL(19, 2)"/>
+            <column name="icms_deson" type="DECIMAL(19, 2)"/>
+            <column name="icms_st" type="DECIMAL(19, 2)"/>
+            <column name="imposto_aproximado" type="DECIMAL(19, 2)"/>
+            <column name="total_ipi" type="DECIMAL(19, 2)"/>
+            <column name="total_nfe" type="DECIMAL(19, 2)"/>
+            <column name="total_outros" type="DECIMAL(19, 2)"/>
+            <column name="total_pis" type="DECIMAL(19, 2)"/>
+            <column name="total_produtos" type="DECIMAL(19, 2)"/>
+            <column name="total_seguro" type="DECIMAL(19, 2)"/>
+            <column name="versao" type="VARCHAR(5)"/>
+            <column name="id_cfop" type="BIGINT"/>
+            <column name="id_empresa" type="BIGINT"/>
+            <column name="id_entidade" type="BIGINT"/>
+            <column name="id_transportadora" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-18">
+        <createTable tableName="nota_fiscal_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="nota_fiscal_itemPK"/>
+            </column>
+            <column name="aliquota_cofins" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_ipi" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_pis" type="DECIMAL(19, 2)"/>
+            <column name="valor_base_icms" type="DECIMAL(19, 2)"/>
+            <column name="valor_base_icms_st" type="DECIMAL(19, 2)"/>
+            <column name="cest" type="VARCHAR(255)"/>
+            <column name="cfop" type="VARCHAR(255)"/>
+            <column name="cod_produto" type="VARCHAR(255)"/>
+            <column name="codigo_barras" type="VARCHAR(255)"/>
+            <column name="compoe_valor_nota" type="VARCHAR(255)"/>
+            <column name="cst" type="VARCHAR(255)"/>
+            <column name="cst_ipi" type="INT"/>
+            <column name="cst_pis_cofins" type="INT"/>
+            <column name="desconto" type="DECIMAL(19, 2)"/>
+            <column name="valor_icms" type="DECIMAL(19, 2)"/>
+            <column name="valor_icms_st" type="DECIMAL(19, 2)"/>
+            <column name="informacao_adcional" type="VARCHAR(255)"/>
+            <column name="ncm" type="VARCHAR(255)"/>
+            <column name="nome_produto" type="VARCHAR(255)"/>
+            <column name="numero_item" type="INT"/>
+            <column name="origem" type="VARCHAR(255)"/>
+            <column name="quantidade" type="DECIMAL(19, 2)"/>
+            <column name="reducao_base_icms" type="DECIMAL(19, 2)"/>
+            <column name="unidade_medida" type="VARCHAR(255)"/>
+            <column name="valor_total" type="DECIMAL(19, 2)"/>
+            <column name="valor_total_cofins" type="DECIMAL(19, 2)"/>
+            <column name="valor_total_pis" type="DECIMAL(19, 2)"/>
+            <column name="valor_unitario" type="DECIMAL(19, 2)"/>
+            <column name="movimentacao_id" type="BIGINT"/>
+            <column name="id_nota_fiscal" type="BIGINT"/>
+            <column name="id_produto" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-19">
+        <createTable tableName="nota_fiscal_referencia">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="nota_fiscal_referenciaPK"/>
+            </column>
+            <column name="chave" type="VARCHAR(255)"/>
+            <column name="coo" type="VARCHAR(255)"/>
+            <column name="data" type="timestamp"/>
+            <column name="ecfSerie" type="VARCHAR(255)"/>
+            <column name="modelo" type="VARCHAR(255)"/>
+            <column name="numero" type="VARCHAR(255)"/>
+            <column name="pdv" type="VARCHAR(255)"/>
+            <column name="serie" type="VARCHAR(255)"/>
+            <column name="tipo_documento" type="VARCHAR(255)"/>
+            <column name="id_nfe" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-20">
+        <createTable tableName="numeracao">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="numeracaoPK"/>
+            </column>
+            <column name="modelo" type="VARCHAR(255)"/>
+            <column name="numero" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="serie" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_empresa" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-21">
+        <createTable tableName="praca">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="pracaPK"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-22">
+        <createTable tableName="produto">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="produtoPK"/>
+            </column>
+            <column name="aliquota_iss" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_cofins" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_icms" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_ipi" type="DECIMAL(19, 2)"/>
+            <column name="aliquota_pis" type="DECIMAL(19, 2)"/>
+            <column name="codigo" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_barras" type="VARCHAR(255)"/>
+            <column name="cfop_estadual" type="VARCHAR(255)"/>
+            <column name="cfop_interestadual" type="VARCHAR(255)"/>
+            <column name="codigo_lc" type="VARCHAR(255)"/>
+            <column name="codigo_cest" type="VARCHAR(255)"/>
+            <column name="codigo_ncm" type="VARCHAR(255)"/>
+            <column name="comissao" type="DECIMAL(19, 2)"/>
+            <column name="cst_icms" type="VARCHAR(255)"/>
+            <column name="cst_ipi" type="VARCHAR(255)"/>
+            <column name="cst_cofins" type="VARCHAR(255)"/>
+            <column name="descricao" type="VARCHAR(255)"/>
+            <column name="iss" type="VARCHAR(255)"/>
+            <column name="origem" type="VARCHAR(255)"/>
+            <column name="preco_venda" type="DECIMAL(19, 2)"/>
+            <column name="referencia" type="VARCHAR(255)"/>
+            <column name="tipo_cadastro" type="VARCHAR(255)"/>
+            <column name="unidade_medida" type="VARCHAR(255)"/>
+            <column name="cest_id" type="BIGINT"/>
+            <column name="id_cfop_estadual" type="BIGINT"/>
+            <column name="id_cfop_interestadual" type="BIGINT"/>
+            <column name="id_empresa" type="BIGINT"/>
+            <column name="ncm_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-23">
+        <createTable tableName="remessa">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="remessaPK"/>
+            </column>
+            <column name="codigo" type="BIGINT"/>
+            <column name="emissao" type="DATE"/>
+            <column name="status_remessa" type="VARCHAR(255)"/>
+            <column name="total" type="DECIMAL(19, 2)"/>
+            <column name="id_praca" type="BIGINT"/>
+            <column name="id_representante" type="BIGINT"/>
+            <column name="id_usuario" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-24">
+        <createTable tableName="remessa_item">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="remessa_itemPK"/>
+            </column>
+            <column name="descricao" type="VARCHAR(255)"/>
+            <column name="preco_total" type="DECIMAL(19, 2)"/>
+            <column name="preco_unitario" type="DECIMAL(19, 2)"/>
+            <column name="quantidade" type="DECIMAL(19, 2)"/>
+            <column name="id_produto" type="BIGINT"/>
+            <column name="id_remessa" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-25">
+        <createTable tableName="unidade_medida">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="unidade_medidaPK"/>
+            </column>
+            <column name="codigo" type="VARCHAR(255)"/>
+            <column name="nome" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-26">
+        <createTable tableName="usuario">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="usuarioPK"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="inativo" type="BIT(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nome" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="senha" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_empresa" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-27">
+        <addPrimaryKey columnNames="id" constraintName="cepPK" tableName="cep"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-28">
+        <addPrimaryKey columnNames="id" constraintName="estadoPK" tableName="estado"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-29">
+        <addUniqueConstraint columnNames="email" constraintName="UC_USUARIOEMAIL_COL" tableName="usuario"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-30">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="movimentacao" constraintName="FK1eppow3vr7cdui8wg2i9j394x" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-31">
+        <addForeignKeyConstraint baseColumnNames="id_representante" baseTableName="kit" constraintName="FK1qexpm1a58aq3g2nl8tmnubj4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-32">
+        <addForeignKeyConstraint baseColumnNames="id_cfop" baseTableName="nota_fiscal" constraintName="FK27e3o4asfeyaerbhy299plemo" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cfop"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-33">
+        <addForeignKeyConstraint baseColumnNames="estado_id" baseTableName="entidade" constraintName="FK27upxmnwm9csl3xh1uqfs83yy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="estado"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-34">
+        <addForeignKeyConstraint baseColumnNames="produto_id" baseTableName="embalagem" constraintName="FK2f5qu4q2ve9py6fvmessipgh8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-35">
+        <addForeignKeyConstraint baseColumnNames="cidade_id" baseTableName="entidade" constraintName="FK2nbf3c97ixmneryfv4xahfpbi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-36">
+        <addForeignKeyConstraint baseColumnNames="id_remessa" baseTableName="remessa_item" constraintName="FK3auls1fy03y6fwipkb70sehoi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="remessa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-37">
+        <addForeignKeyConstraint baseColumnNames="id_nfe" baseTableName="nota_fiscal_referencia" constraintName="FK3ex5jj05qm7tjxxnwer8axfsm" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="nota_fiscal"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-38">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="numeracao" constraintName="FK49pr3exe2tya46pdgigapxr1g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-39">
+        <addForeignKeyConstraint baseColumnNames="id_praca" baseTableName="entidade_praca" constraintName="FK5d4evvnktxfl20jhdiaxgyb2g" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="praca"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-40">
+        <addForeignKeyConstraint baseColumnNames="idcidade" baseTableName="cep" constraintName="FK6t2nfck2hr8wk2k4t0afp74mh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-41">
+        <addForeignKeyConstraint baseColumnNames="id_remessa" baseTableName="kit" constraintName="FK7c63gmykjktpmlgkukc189k04" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="remessa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-42">
+        <addForeignKeyConstraint baseColumnNames="movimentacao_id" baseTableName="ajuste_estoque_item" constraintName="FK8ico2uc2s6py9md012nvjyucw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="movimentacao"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-43">
+        <addForeignKeyConstraint baseColumnNames="id_transportadora" baseTableName="nota_fiscal" constraintName="FKbejli3h3k09eeap6m4tbmfdqy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-44">
+        <addForeignKeyConstraint baseColumnNames="id_entidade" baseTableName="entidade_praca" constraintName="FKbemm5f32r4xoy51ki6igrlg9d" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-45">
+        <addForeignKeyConstraint baseColumnNames="id_praca" baseTableName="remessa" constraintName="FKbhlwgmqhjh2mp24m89cyrrv2f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="praca"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-46">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="nota_fiscal" constraintName="FKbog1tpbeu4oolsf76ubo9t6j2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-47">
+        <addForeignKeyConstraint baseColumnNames="id_cfop_estadual" baseTableName="produto" constraintName="FKcd5osvwq7t57ghlvfy0c24pfp" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cfop"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-48">
+        <addForeignKeyConstraint baseColumnNames="ncm_id" baseTableName="produto" constraintName="FKd4seccmqrve13ow461ibxx473" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ibpt"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-49">
+        <addForeignKeyConstraint baseColumnNames="id_produto" baseTableName="ajuste_estoque_item" constraintName="FKdop4q1kqu9mhku1beixf1du47" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-50">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="produto" constraintName="FKfgrypvh6luilaq30oiwl1hc14" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-51">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="inutilizacao" constraintName="FKfjxq2dy48d1fstslt9qv5hebh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-52">
+        <addForeignKeyConstraint baseColumnNames="id_entidade" baseTableName="nota_fiscal" constraintName="FKg0b69qeck1fetvb6st4fdh7el" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-53">
+        <addForeignKeyConstraint baseColumnNames="id_nota_fiscal_item" baseTableName="movimentacao" constraintName="FKgpgvsaa4ub9un9brxyhv6uv0f" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="nota_fiscal_item"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-54">
+        <addForeignKeyConstraint baseColumnNames="id_ajuste_estoque" baseTableName="ajuste_estoque_item" constraintName="FKhhbuk0hkbx155edm5t4a0p8mu" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ajuste_estoque"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-55">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="usuario" constraintName="FKi6afn0oum3c6ejol9ahlluox2" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-56">
+        <addForeignKeyConstraint baseColumnNames="id_produto" baseTableName="nota_fiscal_item" constraintName="FKk1w33tug74a5stouitmg57c8m" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-57">
+        <addForeignKeyConstraint baseColumnNames="id_cfop_interestadual" baseTableName="produto" constraintName="FKkklxa7y3l4gkk9a14m0n58xv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cfop"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-58">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="entidade" constraintName="FKkmv1ybaxwltehcany9g4i98bv" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-59">
+        <addForeignKeyConstraint baseColumnNames="id_usuario" baseTableName="remessa" constraintName="FKlbmfi3hxu7keblc01c2xnea87" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="usuario"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-60">
+        <addForeignKeyConstraint baseColumnNames="unidadeMedida_id" baseTableName="embalagem" constraintName="FKldayayv4irv9ya8s77oo636mf" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="unidade_medida"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-61">
+        <addForeignKeyConstraint baseColumnNames="estado_id" baseTableName="empresa" constraintName="FKlhbxac3ffp3bnr9qp7ilvx5d4" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="estado"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-62">
+        <addForeignKeyConstraint baseColumnNames="id_produto" baseTableName="movimentacao" constraintName="FKlktvhoh96h5gxv4l4e3f7v0c8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-63">
+        <addForeignKeyConstraint baseColumnNames="cidade_id" baseTableName="empresa" constraintName="FKmwu5vrlfrn44ja26d5h4tcodh" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-64">
+        <addForeignKeyConstraint baseColumnNames="id_kit" baseTableName="kit_item" constraintName="FKoaagxpp58fgcj2j4if5gl5cl7" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="kit"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-65">
+        <addForeignKeyConstraint baseColumnNames="id_produto" baseTableName="remessa_item" constraintName="FKpx1k84qe1m0ryq5n5nro0i1k1" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-66">
+        <addForeignKeyConstraint baseColumnNames="cest_id" baseTableName="produto" constraintName="FKq2ef8hd06600uey9ub54sxl2a" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="cest"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-67">
+        <addForeignKeyConstraint baseColumnNames="id_representante" baseTableName="remessa" constraintName="FKqctae58u70h4vdk09hux8c8y0" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-68">
+        <addForeignKeyConstraint baseColumnNames="id_nota_fiscal" baseTableName="nota_fiscal_item" constraintName="FKrlsi95yq6frseitn8195hdb97" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="nota_fiscal"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-69">
+        <addForeignKeyConstraint baseColumnNames="idestado" baseTableName="cidade" constraintName="FKroyptlyuv6j0if22h77gd4ww" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="estado"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-70">
+        <addForeignKeyConstraint baseColumnNames="id_empresa" baseTableName="ajuste_estoque" constraintName="FKs6tpufhj7y9s3h7se17kjpi5j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="empresa"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-71">
+        <addForeignKeyConstraint baseColumnNames="id_produto" baseTableName="kit_item" constraintName="FKsqra23ynrugms6i2x1wls6wyc" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="produto"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-72">
+        <addForeignKeyConstraint baseColumnNames="id_praca" baseTableName="entidade" constraintName="FKst5343heo0mr1g4tlrhjjm2g9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="praca"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-73">
+        <addForeignKeyConstraint baseColumnNames="movimentacao_id" baseTableName="nota_fiscal_item" constraintName="FKsupv2oixtl5rvydmh3ejthq6c" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="movimentacao"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-74">
+        <addForeignKeyConstraint baseColumnNames="id_ajuste_estoque_item" baseTableName="movimentacao" constraintName="FKtk8v91p6s0oeknmg7pgimrwa" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="ajuste_estoque_item"/>
+    </changeSet>
+    <changeSet author="Eriel Miquilino" id="1509109571700-75">
+        <addForeignKeyConstraint baseColumnNames="id_vendedor" baseTableName="kit" constraintName="FKtll9i532wbvr2qs28ljc99ih9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="entidade"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-76" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/cest.csv"
+                  separator=","
+                  tableName="cest"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-77" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/cfop.csv"
+                  separator=","
+                  tableName="cfop"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-78" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/estado.csv"
+                  separator=","
+                  tableName="estado"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-79" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/cidade.csv"
+                  separator=","
+                  tableName="cidade"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-80" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/cep.csv"
+                  separator=","
+                  tableName="cep"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-81" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/ibpt.csv"
+                  separator=","
+                  tableName="ibpt"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-82" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/unidade_medida.csv"
+                  separator=","
+                  tableName="unidade_medida"/>
+    </changeSet>
+
+    <changeSet id="1509109571700-83" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/empresa.csv"
+                  separator=","
+                  tableName="empresa">
+            <column name="inativo" type="boolean"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="1509109571700-84" author="Eriel Miquilino">
+        <loadData encoding="UTF-8"
+                  file="hsisistemas/liquibase/dados/usuario.csv"
+                  separator=","
+                  tableName="usuario">
+        <column name="inativo" type="boolean"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>

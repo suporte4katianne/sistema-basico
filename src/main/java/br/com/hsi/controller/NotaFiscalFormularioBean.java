@@ -326,9 +326,9 @@ public class NotaFiscalFormularioBean implements Serializable {
             }
 		}
         if(facesContext.getViewRoot().getViewId().contains("Saida")) {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Saida.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Estoque/Saida.xhtml");
         } else {
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Entrada.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Estoque/Entrada.xhtml");
         }
 	}
 
@@ -363,6 +363,22 @@ public class NotaFiscalFormularioBean implements Serializable {
 		}
 	}
 
+
+	public void refreshEntidade() {
+		if(facesContext.getViewRoot().getViewId().contains("Saida")){
+			entidades = gestaoEntidade.listarEntidades("C");
+		}else {
+			entidades = gestaoEntidade.listarEntidades("F");
+		}
+	}
+
+	public void refreshTransportadora() {
+		transportadoras = gestaoEntidade.listarEntidades("T");
+	}
+
+	public void refreshProduto() {
+		produtos = gestaoProduto.listarProdutos();
+	}
 
 	//getters and setters
 	

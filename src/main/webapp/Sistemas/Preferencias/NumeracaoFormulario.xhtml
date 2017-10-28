@@ -1,0 +1,56 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"  xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{numeracaoFormularioBean.inicializar()}" />
+            <o:viewParam name="numeracao" value="#{numeracaoFormularioBean.numeracao}"
+                         converter="#{numeracaoConverter}" />
+        </f:metadata>
+
+
+        <h:form id="frm">
+            <div class="ui-fluid">
+                <br />
+                <p:panel header="Numeração" id="painelNumeracao">
+                    <h:panelGrid id="dadosInutiliacao" columns="6" style="width: 90%"
+                                 columnClasses="rotulo, campo, rotulo, campo, rotulo" >
+                        <p:outputLabel value="Modelo:" for="modelo" />
+                        <p:inputText id="modelo"
+                                     value="#{numeracaoFormularioBean.numeracao.modelo}" />
+                        <p:outputLabel value="Série:" for="serie" />
+                        <p:inputText id="serie"
+                                     value="#{numeracaoFormularioBean.numeracao.serie}" />
+                        <p:outputLabel value="Número:" for="numero" />
+                        <p:inputText id="numero"
+                                     value="#{numeracaoFormularioBean.numeracao.numero}" />
+
+
+
+                    </h:panelGrid>
+                </p:panel>
+            </div>
+
+            <p:messages autoUpdate="true" id="mensagem" closable="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton styleClass="ui-priority-primary"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+                                     value="Salvar" icon="fa fa-floppy-o" action="#{numeracaoFormularioBean.salvar()}"
+                                     widgetVar="salvarCadastro" process="@this frm:painelNumeracao" update="@form frm:mensagem"
+                                     global="false" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:button outcome="Numeracao" value="Cancelar" icon="fa fa-reply" styleClass="ui-priority-primary"
+                              style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" />
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+    </ui:define>
+</ui:composition>

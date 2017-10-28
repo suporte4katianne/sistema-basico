@@ -102,6 +102,15 @@ public class RemessaFormularioBean implements Serializable {
         }
     }
 
+
+    public void refreshProdutos() {
+        produtos = gestaoProduto.listarProdutos();
+    }
+
+    public void refreshRepresentantes() {
+        representantes = gestaoEntidade.listarEntidades("R");
+    }
+
     public Remessa getRemessa() {
         return remessa;
     }

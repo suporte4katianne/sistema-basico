@@ -61,16 +61,13 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
         produtos = gestaoProduto.listarProdutos();
         vendedores = gestaoEntidade.listarEntidades("V");
         saldo = gestaoRemessa.saldoRemessa(remessa);
+        remessas = gestaoRemessa.listarRemessas(StatusRemessa.FINALIZADA);
         saldoTotal = saldo;
         kit = new Kit();
         kitItem = new KitItem();
         kits = new ArrayList<>();
     }
 
-    @PostConstruct
-    public void init() {
-        remessas = gestaoRemessa.listarRemessas(null);
-    }
 
     public void carregaDadosDaRemessa() {
         saldoTotal = new Long(0);
@@ -174,6 +171,18 @@ public class EditaRemessaAbertaFormularioBean implements Serializable{
             }
         }
         return saldoLancado;
+    }
+
+    public void refreshProdutos() {
+        produtos = gestaoProduto.listarProdutos();
+    }
+
+    public void refreshVendedores() {
+        vendedores = gestaoEntidade.listarEntidades("V");
+    }
+
+    public void refreshRemessaVinculada() {
+        remessas = gestaoRemessa.listarRemessas(StatusRemessa.FINALIZADA);
     }
 
 

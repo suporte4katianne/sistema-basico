@@ -72,7 +72,7 @@ public class ProdutoFormularioBean implements Serializable {
 		}
 		try{
 			gestaoProduto.salvar(produto);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Produto.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cadastros/Produto.xhtml");
 		}catch (PersistenceException e) {
 			FacesUtil.addErrorMessage("Este valor já existe no banco de dados");
 		}
@@ -121,6 +121,14 @@ public class ProdutoFormularioBean implements Serializable {
         produto.getEmbalagens().remove(embalagem);
         this.embalagem = embalagem;
     }
+
+    public void refreshNcm() {
+		ncms = gestaoProduto.listaNcms();
+	}
+
+	public void refreshCest() {
+		cest = gestaoProduto.listaCest();
+	}
 
     public void excluirEmbalagem(Embalagem embalagem) {
         produto.getEmbalagens().remove(embalagem);

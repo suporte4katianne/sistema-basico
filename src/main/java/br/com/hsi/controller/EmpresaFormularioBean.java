@@ -123,7 +123,7 @@ public class EmpresaFormularioBean implements Serializable {
 
 		try {
 			gestaoEmpresa.salvar(empresa);
-			FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Empresa.xhtml");
+			FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Preferencias/Empresa.xhtml");
 		} catch (NegocioException e) {
 			empresa = new Empresa();
 			FacesUtil.addErrorMessage("Erro: "+e.getMessage());

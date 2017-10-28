@@ -25,12 +25,15 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.5.3</version>
                 <configuration>
-                    <diffChangeLogFile>liquibase-diff-changeLog.xml</diffChangeLogFile>
-                    <propertyFile>src/main/resources/hsisistemas/liquibase.properties</propertyFile>
+                    <changeLogFile>src/main/resources/hsisistemas/liquibase/sistema_basico.xml</changeLogFile>
+                    <diffChangeLogFile>src/main/resources/hsisistemas/liquibase/${maven.build.timestamp}-changelog.xml</diffChangeLogFile>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost:3306/sistema_basico</url>
+                    <defaultSchemaName>sistema_basico</defaultSchemaName>
+                    <username>root</username>
+                    <password>HSI-p2w*</password>
+                    <referenceUrl>hibernate:ejb3:hsi_sistemas?hibernate.ejb.naming_strategy=org.hibernate.cfg.ImprovedNamingStrategy?dialect=org.hibernate.dialect.MySQLDialect</referenceUrl>
                 </configuration>
-                <goals>
-                    <goal>diff</goal>
-                </goals>
                 <dependencies>
                     <dependency>
                         <groupId>javax.validation</groupId>
@@ -318,6 +321,18 @@
             <groupId>org.apache.pdfbox</groupId>
             <artifactId>pdfbox</artifactId>
             <version>2.0.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.5.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-cdi</artifactId>
+            <version>3.5.3</version>
         </dependency>
 
     </dependencies>

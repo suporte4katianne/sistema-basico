@@ -118,6 +118,10 @@ public class AjusteEstoqueFormularioBean implements Serializable {
         }
     }
 
+    public void refreshProdutos() {
+        produtos = gestaoProduto.listarProdutos();
+    }
+
 
     public AjusteEstoque getAjusteEstoque() {
         return ajusteEstoque;

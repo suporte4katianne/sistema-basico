@@ -79,11 +79,11 @@ public class EntidadeFormularioBean implements Serializable{
 
 
 			if(facesContext.getViewRoot().getViewId().contains("Cliente")){
-				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cliente.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cadastros/Cliente.xhtml");
 			} else if(facesContext.getViewRoot().getViewId().contains("Transportadora")){
-				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Transportadora.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cadastros/Transportadora.xhtml");
 			} else if(facesContext.getViewRoot().getViewId().contains("Fornecedor")){
-				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Fornecedor.xhtml");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cadastros/Fornecedor.xhtml");
 			} else if(facesContext.getViewRoot().getViewId().contains("Representante")){
 				FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Hawker/Representante.xhtml");
 			} else if(facesContext.getViewRoot().getViewId().contains("Vendedor")){

@@ -38,12 +38,13 @@
 			<ul class="drop_menu">
 				<li><a href='#'><i class="fa fa-cog fa-lg" /> Preferências</a>
 					<ul>
-						<li><a href="/HSI/Sistemas/Empresa.xhtml">Empresa</a></li>
-						<li><a href='/HSI/Sistemas/Usuario.xhtml'>Usuários</a></li>
-						<li><a href='/HSI/Sistemas/Inutilizacao.xhtml'>Inutilização de Numeração</a></li>
-						<li><a href='/HSI/Sistemas/Numeracao.xhtml'>Numeração</a></li>
-						<li><a href='/HSI/Sistemas/Cfop.xhtml'>CFOP</a></li>
-						<li><a href='/HSI/Sistemas/UnidadeMedida.xhtml'>Unidades de Medida</a></li>
+						<li><a href="/HSI/Sistemas/Preferencias/Empresa.xhtml">Empresa</a></li>
+						<li><a href='/HSI/Sistemas/Preferencias/Usuario.xhtml'>Usuários</a></li>
+						<li><a href='/HSI/Sistemas/Preferencias/Inutilizacao.xhtml'>Inutilização de Numeração</a></li>
+						<li><a href='/HSI/Sistemas/Preferencias/Numeracao.xhtml'>Numeração</a></li>
+						<li><a href='/HSI/Sistemas/Preferencias/Cfop.xhtml'>CFOP</a></li>
+						<li><a href='/HSI/Sistemas/Preferencias/UnidadeMedida.xhtml'>Unidades de Medida</a></li>
+						<li><a onclick="PF('sobreDialog').show()">Sobre</a></li>
 					</ul>
 				</li>
 				<li><a href='#'><i class="fa fa-user fa-lg" /> Olá #{seguranca.usuarioLogado.usuario.nome}</a>
@@ -85,5 +86,19 @@
 	</section>
 
 </h:body>
+
+<p:dialog header="Sobre" modal="true" widgetVar="sobreDialog" resizable="false" minHeight="250" width="460" >
+	<h:panelGrid columns="2" >
+		<h:panelGroup>
+			<img src="/HSI/javax.faces.resource/images/HSI_SISTEMAS_CROPED.png.xhtml?ln=hsisistemas"/>
+		</h:panelGroup>
+		<h:panelGroup>
+			<h4>HSI Automação comercial</h4>
+			<h4>Sistema basico - v1.1.0</h4>
+			<h4>Banco de dados - vDB-liquibase-84</h4>
+		</h:panelGroup>
+	</h:panelGrid>
+
+</p:dialog>
 
 </html>

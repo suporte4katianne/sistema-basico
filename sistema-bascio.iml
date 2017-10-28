@@ -154,5 +154,8 @@
     <orderEntry type="library" name="Maven: org.jrobin:jrobin:1.5.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:pdfbox:2.0.7" level="project" />
     <orderEntry type="library" name="Maven: org.apache.pdfbox:fontbox:2.0.7" level="project" />
+    <orderEntry type="library" name="Maven: org.liquibase:liquibase-core:3.5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.17" level="project" />
+    <orderEntry type="library" name="Maven: org.liquibase:liquibase-cdi:3.5.3" level="project" />
   </component>
 </module>

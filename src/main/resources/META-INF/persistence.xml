@@ -4,6 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	
 	<persistence-unit name="hsi_sistemas" transaction-type="RESOURCE_LOCAL">
+		<jta-data-source>java:comp/env/jdbc/banco</jta-data-source>
 		<properties>
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_basico?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useSSL=false" />
 			<property name="javax.persistence.jdbc.password" value="HSI-p2w*" />
@@ -14,7 +15,7 @@
 			<property name="hibernate.format_sql" value ="false"/>
 			<property name="hibernate.generate_statistics" value="false"/>
 			<property name="hibernate.use_sql_comments" value="false"/>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+
 		</properties>
 	</persistence-unit>
 </persistence>

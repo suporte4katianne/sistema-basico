@@ -36,7 +36,7 @@ public class CfopFormularioBean implements Serializable {
 
     public void salvar () throws IOException {
         gestaoNotaFiscal.salvarCfop(cfop);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Cfop.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Preferencias/Cfop.xhtml");
     }
 
     public Cfop getCfop() {

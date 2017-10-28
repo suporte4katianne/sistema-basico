@@ -9,31 +9,31 @@
 	<div class="panel">
 		<h:form>
 			<ul>
-				<li class="#{view.viewId == '/Sistemas/Cliente.xhtml' ? 'is-selected' : ''}">
+				<li class="#{view.viewId == '/Sistemas/Cadastros/Cliente.xhtml' ? 'is-selected' : ''}">
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-user"/>Clientes
-						<p:ajax listener="${menuBean.segurancaFormulario('Cliente')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Cadastros/Cliente')}" />
 					</h:commandLink>
 				</li>
 
-				<li class="#{view.viewId == '/Sistemas/Fornecedor.xhtml' ? 'is-selected' : ''}">
+				<li class="#{view.viewId == '/Sistemas/Cadastros/Fornecedor.xhtml' ? 'is-selected' : ''}">
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-users"/>Fornecedores
-						<p:ajax listener="${menuBean.segurancaFormulario('Fornecedor')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Cadastros/Fornecedor')}" />
 					</h:commandLink>
 				</li>
 
-				<li class="#{view.viewId == '/Sistemas/Transportadora.xhtml' ? 'is-selected' : ''}">
+				<li class="#{view.viewId == '/Sistemas/Cadastros/Transportadora.xhtml' ? 'is-selected' : ''}">
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-truck"/>Transportadoras
-						<p:ajax listener="${menuBean.segurancaFormulario('Transportadora')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Cadastros/Transportadora')}" />
 					</h:commandLink>
 				</li>
 
-				<li class="#{view.viewId == '/Sistemas/Produto.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Cadastros/Produto.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-cube"/>Produtos
-						<p:ajax listener="${menuBean.segurancaFormulario('Produto')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Cadastros/Produto')}" />
 					</h:commandLink>
 				</li>
 			</ul>
@@ -44,10 +44,10 @@
 	<div class="panel">
 		<h:form>
 			<ul>
-				<li class="#{view.viewId == '/Sistemas/Orcamento.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Atendimento/Orcamento.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-calculator"/>Orçamentos
-						<p:ajax listener="${menuBean.segurancaFormulario('Orcamento')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Atendimento/Orcamento')}" />
 					</h:commandLink>
 				</li>
 			</ul>
@@ -58,28 +58,28 @@
 	<div class="panel">
 		<h:form>
 			<ul>
-				<li class="#{view.viewId == '/Sistemas/Saida.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Estoque/Saida.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-file-text"/>Notas de Saidas
-						<p:ajax listener="${menuBean.segurancaFormulario('Saida')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Estoque/Saida')}" />
 					</h:commandLink>
 				</li>
-				<li class="#{view.viewId == '/Sistemas/Entrada.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Estoque/Entrada.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw  fa-file-text"/>Notas de Entradas
-						<p:ajax listener="${menuBean.segurancaFormulario('Entrada')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Estoque/Entrada')}" />
 					</h:commandLink>
 				</li>
-				<li class="#{view.viewId == '/Sistemas/AjusteEstoque.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Estoque/AjusteEstoque.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw fa-pencil-square-o"/>Ajustes de Estoque
-						<p:ajax listener="${menuBean.segurancaFormulario('AjusteEstoque')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Estoque/AjusteEstoque')}" />
 					</h:commandLink>
 				</li>
-				<li class="#{view.viewId == '/Sistemas/Etiqueta.xhtml' ? 'is-selected' : ''}" >
+				<li class="#{view.viewId == '/Sistemas/Estoque/Etiqueta.xhtml' ? 'is-selected' : ''}" >
 					<h:commandLink>
 						<i class="fa  fa-fw fa-tags"/>Emissão de Etiqueta
-						<p:ajax listener="${menuBean.segurancaFormulario('Etiqueta')}" />
+						<p:ajax listener="${menuBean.segurancaFormulario('Estoque/Etiqueta')}" />
 					</h:commandLink>
 				</li>
 			</ul>

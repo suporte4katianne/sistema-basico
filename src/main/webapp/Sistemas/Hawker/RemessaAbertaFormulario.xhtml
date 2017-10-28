@@ -144,7 +144,7 @@
         </h:form>
 
 
-        <p:dialog widgetVar="entidadeDialog" modal="true" height="450"
+        <p:dialog widgetVar="entidadeDialog" modal="true" height="450" header="Pesquisa de Representantes"
                   width="850" resizable="false">
             <h:form>
                 <p:dataTable value="#{remessaFormularioBean.representantes}"
@@ -161,8 +161,9 @@
                                 <p:outputLabel value="Pesquisar: " for="globalFilter" />
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('listaEntidades').filter()" />
-                                <p:button icon="fa fa-refresh" style="float:right"
-                                          styleClass="ui-priority-primary" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosEntidadeTabela"
+                                                 actionListener="#{remessaFormularioBean.refreshRepresentantes()}"
+                                                 styleClass="ui-priority-primary" process="@this" />
                             </p:outputPanel>
                         </div>
                     </f:facet>
@@ -190,7 +191,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="produtoDialog" modal="true" height="450"
+        <p:dialog widgetVar="produtoDialog" modal="true" height="450" header="Pesquisa de Produtos"
                   width="850" resizable="false">
             <h:form>
                 <p:dataTable value="#{remessaFormularioBean.produtos}"
@@ -207,8 +208,9 @@
                                 <p:outputLabel value="Pesquisar: " for="globalFilter" />
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('listaProdutos').filter()" />
-                                <p:button icon="fa fa-refresh" style="float:right"
-                                          styleClass="ui-priority-primary" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosProdutoTabela"
+                                                 actionListener="#{remessaFormularioBean.refreshProdutos()}"
+                                                 styleClass="ui-priority-primary" process="@this" />
                             </p:outputPanel>
                         </div>
                     </f:facet>

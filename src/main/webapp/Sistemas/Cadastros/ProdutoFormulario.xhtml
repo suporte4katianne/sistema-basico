@@ -1,0 +1,364 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+                template="/WEB-INF/template/Layout.xhtml">
+
+    <ui:define name="content">
+        <f:metadata>
+            <f:viewAction action="#{produtoFormularioBean.inicializar()}" />
+            <o:viewParam name="produto" value="#{produtoFormularioBean.produto}"
+                         converter="#{produtoConverter}" />
+        </f:metadata>
+
+        <h:form id="frm">
+            <p:tabView id="tabView">
+                <div class="ui-fluid">
+                    <br />
+
+                    <p:tab title="Gerais">
+                        <p:panel header="Cadastro de Produtos" id="painelProduto">
+                            <div class="ui-fluid">
+                                <h:panelGrid id="dadosProduto" columns="4" style="width:90%"
+                                             columnClasses="rotulo, campo, rotulo, campo">
+                                    <p:outputLabel value="Codigo:" for="codigo" />
+                                    <p:inputText id="codigo"
+                                                 value="#{produtoFormularioBean.produto.codigo}" />
+
+                                    <p:outputLabel value="Código Barras:" for="codigoBarras" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputMask id="codigoBarras" mask="9?999999999999999"
+                                                     value="#{produtoFormularioBean.produto.codigoBrras}" />
+                                        <p:commandButton icon="fa fa-barcode" process="@this, codigo" update="@this, codigoBarras"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         action="#{produtoFormularioBean.geraEAN}" />
+                                    </h:panelGroup>
+
+                                    <p:outputLabel value="Referência:" for="referencia" />
+                                    <p:inputText id="referencia" value="#{produtoFormularioBean.produto.referencia}" />
+
+                                    <p:outputLabel value="Descrição:" for="nome" />
+                                    <p:inputText id="nome"
+                                                 value="#{produtoFormularioBean.produto.descricao}" />
+
+                                    <p:outputLabel value="Unidade de Venda:" for="unidadeMedida" />
+                                    <p:selectOneMenu id="unidadeMedida"
+                                                     value="#{produtoFormularioBean.produto.unidadeMedida}">
+                                        <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                        <f:selectItems value="#{produtoFormularioBean.unidadeMedida}"
+                                                       var="dados" itemValue="#{dados.codigo}"
+                                                       itemLabel="#{dados.nome}" />
+                                    </p:selectOneMenu>
+
+                                    <p:outputLabel value="Preço:" for="preco" />
+                                    <p:inputNumber id="preco"  symbol="R$ "
+                                                   value="#{produtoFormularioBean.produto.precoVenda}"
+                                                   decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+
+                                    <p:outputLabel value="Comissão:" for="comissao" />
+                                    <p:inputNumber id="comissao"  symbol="%"
+                                                   value="#{produtoFormularioBean.produto.comissao}"
+                                                   decimalSeparator="," thousandSeparator="." decimalPlaces="4" />
+
+                                    <p:outputLabel value="NCM:" for="ncm" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputText
+                                                value="#{produtoFormularioBean.produto.codigo_ncm}" required="true"
+                                                style="opacity: 1;" id="ncm" disabled="true" />
+                                        <p:commandButton icon="fa fa-search"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         type="button" onclick="PF('ncmDialog').show();" />
+                                    </h:panelGroup>
+
+                                    <p:outputLabel value="Cest:" for="cest" />
+                                    <h:panelGroup style="display:flex;">
+                                        <p:inputText required="true"
+                                                     value="#{produtoFormularioBean.produto.codigo_cest}" id="cest"
+                                                     disabled="true" style="opacity: 1;" />
+                                        <p:commandButton icon="fa fa-search"
+                                                         styleClass="ui-priority-primary" style="max-width: 30px"
+                                                         type="button" onclick="PF('cestDialog').show();" />
+                                    </h:panelGroup>
+
+
+                                </h:panelGrid>
+                            </div>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab title="Impostos">
+                        <p:panel header="Impostos do Produto">
+                            <h:panelGrid id="impostoProduto" columns="2"
+                                         style="margin-top:20px" columnClasses="rotulo">
+
+                                <p:outputLabel value="CST de ICMS:" for="CSTICMSIcms" />
+                                <p:selectOneMenu id="CSTICMSIcms" autoWidth="false"
+                                                 value="#{produtoFormularioBean.produto.cstIcms}">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{produtoFormularioBean.csts}" var="CSTICMS"
+                                                   itemValue="#{CSTICMS}"
+                                                   itemLabel="#{CSTICMS.codigo} - #{CSTICMS.descricao}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Alíquota ICMS:" for="aliquotaIcms" />
+                                <p:inputNumber id="aliquotaIcms" symbol="%" symbolPosition="s"
+                                               emptyValue="zero" decimalSeparator="," thousandSeparator="."
+                                               value="#{produtoFormularioBean.produto.aliquotaIcms}" />
+
+
+                                <p:outputLabel value="CST de IPI:" for="cstIpi" />
+                                <p:selectOneMenu id="cstIpi"
+                                                 value="#{produtoFormularioBean.produto.cstIpi}">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{produtoFormularioBean.cstsIpi}" var="cstIpi"
+                                                   itemValue="#{cstIpi}"
+                                                   itemLabel="#{cstIpi.codigo} - #{cstIpi.descircao}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Alíquota IPI:" for="aliquotaIpi" />
+                                <p:inputNumber id="aliquotaIpi" symbol="%" symbolPosition="s"
+                                               emptyValue="zero" decimalSeparator="," thousandSeparator="."
+                                               value="#{produtoFormularioBean.produto.aliquotaIpi}" />
+
+
+                                <p:outputLabel value="CST PIS/Cofins:" for="cstPis" />
+                                <p:selectOneMenu id="cstPis" autoWidth="false" value="#{produtoFormularioBean.produto.cstPisCofins}">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{produtoFormularioBean.cstsPisCofins}" var="cstPisCofins"
+                                                   itemValue="#{cstPisCofins}"
+                                                   itemLabel="#{cstPisCofins.codigo} - #{cstPisCofins.descricao}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="Alíquota PIS:" for="aliquotaPis" />
+                                <p:inputNumber id="aliquotaPis" symbol="%" symbolPosition="s"
+                                               emptyValue="zero" decimalSeparator="," thousandSeparator="."
+                                               value="#{produtoFormularioBean.produto.aliquotaPis}" />
+
+                                <p:outputLabel value="Alíquota Cofins:" for="aliquotaCofins" />
+                                <p:inputNumber id="aliquotaCofins" symbol="%" symbolPosition="s"
+                                               emptyValue="zero" decimalSeparator="," thousandSeparator="."
+                                               value="#{produtoFormularioBean.produto.aliquotaCofins}" />
+
+
+                                <p:outputLabel value="Origem:" for="origem" />
+                                <p:selectOneMenu id="origem" autoWidth="false" value="#{produtoFormularioBean.produto.origem}">
+                                    <f:selectItems value="#{produtoFormularioBean.origens}" var="origem"
+                                                   itemValue="#{origem}" itemLabel="#{origem.codigo} - #{origem.descricao}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="CFOP Estadual:" for="cfopEstadual" />
+                                <p:selectOneMenu id="cfopEstadual" converter="#{cfopConverter}"
+                                                 value="#{produtoFormularioBean.produto.cfopEstadual}">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{produtoFormularioBean.cfopsEstaduais}"
+                                                   var="dados" itemValue="#{dados}"
+                                                   itemLabel="#{dados.codigo} - #{dados.cfop}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="CFOP Interestadual:" for="cfopInterestadual" />
+                                <p:selectOneMenu id="cfopInterestadual" converter="#{cfopConverter}"
+                                                 value="#{produtoFormularioBean.produto.cfopInterestadual}">
+                                    <f:selectItem itemLabel="Selecione..." />
+                                    <f:selectItems value="#{produtoFormularioBean.cfopsInterestaduais}"
+                                                   var="dados" itemValue="#{dados}"
+                                                   itemLabel="#{dados.codigo} - #{dados.cfop}" />
+                                </p:selectOneMenu>
+                            </h:panelGrid>
+                        </p:panel>
+                    </p:tab>
+
+                    <p:tab title="Embalagens">
+                        <p:panel id="embalagemProdutos" header="Embalagens do produto">
+                            <h:panelGrid id="dadosEmbalagem" columns="6"
+                                         columnClasses="rotulo, campo, rotulo, campo, rotulo, campo">
+
+                                <p:outputLabel value="Código de Barras:" for="codigoBarrasEmbalagem" />
+                                <p:inputText id="codigoBarrasEmbalagem"
+                                             value="#{produtoFormularioBean.embalagem.codigoBarras}" />
+                                <p:outputLabel value="Fator de Conversão:" for="fatorConversao" />
+                                <p:inputText id="fatorConversao"
+                                             value="#{produtoFormularioBean.embalagem.fatorConversao}" />
+
+                                <p:outputLabel value="Unidade de Medida:" for="unidadeMedidaEmbalagem" />
+                                <p:selectOneMenu id="unidadeMedidaEmbalagem" converter="#{unidadeMedidaConverter}"
+                                                 value="#{produtoFormularioBean.embalagem.unidadeMedida}">
+                                    <f:selectItem itemLabel="Selecione..." itemValue="" />
+                                    <f:selectItems value="#{produtoFormularioBean.unidadeMedida}"
+                                                   var="unidadeMedidaSelect" itemValue="#{unidadeMedidaSelect}"
+                                                   itemLabel="#{unidadeMedidaSelect.nome}" />
+                                </p:selectOneMenu>
+
+                                <p:outputLabel value="" />
+
+                                <p:commandButton styleClass="ui-priority-primary" value="Incluir"
+                                                 process="frm:tabView:embalagemProdutos" update="frm:tabView:embalagemProdutos"
+                                                 actionListener="#{produtoFormularioBean.incluirEmbalagem()}"/>
+                            </h:panelGrid>
+
+                            <p:dataTable emptyMessage="Nenhum item adicionado." reflow="true"
+                                         value="#{produtoFormularioBean.produto.embalagens}"
+                                         var="embalagem" style="margin-top: 15px" id="tabelaEmbalagemProdutos"
+                                         rowKey="#{embalagem.id}">
+
+                                <p:column headerText="Unidade de Medida" style="width:10%">
+                                    <h:outputText value="#{embalagem.unidadeMedida.codigo}" />
+                                </p:column>
+
+                                <p:column headerText="Código de Barras" style="width:10%">
+                                    <h:outputText value="#{embalagem.codigoBarras}" />
+                                </p:column>
+
+                                <p:column headerText="Fator de Conversão" style="width:10%">
+                                    <h:outputText value="#{embalagem.fatorConversao}" />
+                                </p:column>
+
+                                <p:column headerText="Ações" style="width:10%">
+                                    <p:commandButton icon="fa fa-trash-o"
+                                                     styleClass="ui-priority-primary"
+                                                     actionListener="#{produtoFormularioBean.excluirEmbalagem(embalagem)}"
+                                                     process="@this"
+                                                     update="frm:tabView:embalagemProdutos" />
+                                    <p:commandButton icon="fa fa-pencil"
+                                                     styleClass="ui-priority-primary"
+                                                     actionListener="#{produtoFormularioBean.alterarEmbalagem(embalagem)}"
+                                                     process="@this"
+                                                     update="frm:tabView:embalagemProdutos" />
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:panel>
+                    </p:tab>
+                </div>
+
+            </p:tabView>
+            <p:messages autoUpdate="true" closable="true" />
+
+            <p:toolbar>
+                <f:facet name="left">
+                    <p:commandButton styleClass="ui-priority-primary"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: 7px"
+                                     value="Salvar" icon="fa fa-floppy-o" action="#{produtoFormularioBean.salvar()}"
+                                     process="@form @this tabView:impostoProduto" update="@form"
+                                     onclick="PF('salvarCadastro').disable();"
+                                     widgetVar="salvarCadastro" />
+                </f:facet>
+                <f:facet name="right">
+                    <p:commandButton value="Cancelar" icon="fa fa-reply"
+                                     styleClass="ui-priority-primary"
+                                     style="margin-top: 3px; margin-bottom: 3px; margin-left: -7px" >
+                        <p:confirm header = "Cancelar Operação"
+                                   message = "  Sair sem salvar?"
+                                   icon ="fa fa-hand-paper-o"/>
+                    </p:commandButton>
+                </f:facet>
+            </p:toolbar>
+        </h:form>
+
+        <p:dialog widgetVar="ncmDialog" modal="true" height="400" width="700"
+                  resizable="false">
+            <h:form>
+                <p:dataTable value="#{produtoFormularioBean.ncms}"
+                             widgetVar="listaNcms" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="dados"
+                             id="dadosTabela" multiViewState="true" rowKey="#{dados.id}"
+                             selection="#{produtoFormularioBean.produto.ncm}"
+                             filteredValue="#{produtoFormularioBean.ncmsFiltro}" rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter"
+                                             onkeyup="PF('listaNcms').filter()" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosTabela"
+                                          actionListener="#{produtoFormularioBean.refreshNcm}" process="@this"
+                                          styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowSelect" process="dadosTabela"
+                            update="dadosTabela" />
+                    <p:ajax event="rowDblselect" listener="#{produtoFormularioBean.selecionaNcm()}"
+                            process="dadosTabela"
+                            oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm" />
+
+                    <p:column headerText="NCM" filterBy="#{dados.ncm}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{dados.ncm}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar"
+                                             action="#{produtoFormularioBean.selecionaNcm()}"
+                                             styleClass="ui-priority-primary"
+                                             oncomplete="PF('ncmDialog').hide()" update="frm:tabView:ncm"/>
+                        </div>
+                    </f:facet>
+
+                </p:dataTable>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog widgetVar="cestDialog" modal="true" height="400" width="700"
+                  resizable="false">
+            <h:form id="cestFiltro">
+                <p:dataTable value="#{produtoFormularioBean.cest}"
+                             widgetVar="listaCest" selectionMode="single"
+                             emptyMessage="Nenhum item adicionado" reflow="true" var="dadosCest"
+                             id="dadosTabelaCest" multiViewState="true" rowKey="#{dadosCest.id}"
+                             selection="#{produtoFormularioBean.produto.cest}"
+                             filteredValue="#{produtoFormularioBean.cestFiltro}" rows="10">
+
+                    <f:facet name="header">
+                        <div align="left">
+                            <p:outputPanel style="aling:left">
+                                <p:outputLabel value="Pesquisar: " for="globalFilter" />
+                                <p:inputText id="globalFilter" onkeyup="PF('listaCest').filter()" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosTabelaCest"
+                                                 actionListener="#{produtoFormularioBean.refreshCest}" process="@this"
+                                                 styleClass="ui-priority-primary" />
+                            </p:outputPanel>
+                        </div>
+                    </f:facet>
+
+                    <p:ajax event="rowDblselect" process="dadosTabelaCest"
+                            listener="#{produtoFormularioBean.selecionaCest()}"
+                            oncomplete="PF('cestDialog').hide()"
+                            update="frm:tabView:cest" />
+
+                    <p:ajax event="rowSelect" process="dadosTabelaCest"
+                            update="dadosTabelaCest" />
+
+                    <p:column headerText="Cest" filterBy="#{dadosCest.cest}"
+                              filterStyle="display:none">
+                        <h:outputText value="#{dadosCest.cest}" />
+                    </p:column>
+
+                    <f:facet name="footer">
+                        <div align="left">
+                            <p:commandButton value="Selecionar" styleClass="ui-priority-primary"
+                                             action="#{produtoFormularioBean.selecionaCest()}" id="selecionarCest"
+                                             oncomplete="PF('cestDialog').hide()" update="frm:tabView:cest" />
+                        </div>
+                    </f:facet>
+
+                </p:dataTable>
+
+                <p:defaultCommand target="cestFiltro:dadosTabelaCest:selecionarCest" />
+            </h:form>
+        </p:dialog>
+
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:button value="Sim" outcome="Produto" type="button" styleClass="ui-confirmdialog-yes ui-priority-primary"
+                      icon="fa fa-check" />
+            <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no ui-priority-primary"
+                             icon="fa fa-close" />
+        </p:confirmDialog>
+
+    </ui:define>
+
+</ui:composition>

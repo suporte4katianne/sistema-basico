@@ -98,6 +98,11 @@ public class EtiquetaBean implements Serializable {
 
     }
 
+    public void refreshProdutos() {
+        produtos = gestaoProduto.listarProdutos();
+    }
+
+
     public void removerEtiqueta(Etiqueta etiqueta) {
         etiquetas.remove(etiqueta);
     }

@@ -238,11 +238,6 @@ public class NotaFiscalBean implements Serializable {
 	}
 
 
-
-
-
-
-
 	// Getters and Setters
 
 	public Empresa getEmitente() {

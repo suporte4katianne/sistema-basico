@@ -34,7 +34,7 @@ public class NumeracaoFormularioBean implements Serializable {
         try {
             numeracao.setEmpresa(seguranca.getUsuarioLogado().getUsuario().getEmpresa());
             gestaoNumeracao.salvar(numeracao);
-            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Numeracao.xhtml");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Preferencias/Numeracao.xhtml");
         } catch (NegocioException e) {
             FacesUtil.addErrorMessage(e.getMessage());
         }

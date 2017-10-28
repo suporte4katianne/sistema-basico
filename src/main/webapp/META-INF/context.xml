@@ -3,4 +3,14 @@
               auth="Container"
               type="javax.enterprise.inject.spi.BeanManager"
               factory="org.jboss.weld.resources.ManagerObjectFactory" />
+
+    <Resource
+            name="jdbc/banco"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="root"
+            password="HSI-p2w*"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://localhost:3306/sistema_basico?autoReconnect=true&amp;useSSL=false" />
+    
 </Context>

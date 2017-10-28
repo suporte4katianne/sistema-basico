@@ -198,7 +198,7 @@
 
         </h:form>
 
-        <p:dialog widgetVar="remessaVinculadaDialog" modal="true" height="450"
+        <p:dialog widgetVar="remessaVinculadaDialog" modal="true" height="450" header="Pesquisa de Remessas"
                   width="850" resizable="false">
             <h:form>
                 <p:dataTable value="#{editaRemessaAbertaFormularioBean.remessas}"
@@ -207,9 +207,7 @@
                              id="dadosEntidadeTabela" multiViewState="true" rowKey="#{dados.id}"
                              selection="#{editaRemessaAbertaFormularioBean.remessaVinculada}"
                              filteredValue="#{editaRemessaAbertaFormularioBean.remessasFiltro}"
-                             rows="10" paginator="true"
-                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="10,20,30" paginatorPosition="top">
+                             rows="10">
 
                     <f:facet name="header">
                         <div align="left">
@@ -217,8 +215,9 @@
                                 <p:outputLabel value="Pesquisar: " for="globalFilter" />
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('lista').filter()" />
-                                <p:button icon="fa fa-refresh" style="float:right"
-                                          styleClass="ui-priority-primary" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosEntidadeTabela"
+                                                 actionListener="#{editaRemessaAbertaFormularioBean.refreshRemessaVinculada()}"
+                                                 styleClass="ui-priority-primary" process="@this" />
                             </p:outputPanel>
                         </div>
                     </f:facet>
@@ -278,8 +277,9 @@
                                 <p:outputLabel value="Pesquisar: " for="globalFilter" />
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('lista').filter()" />
-                                <p:button icon="fa fa-refresh" style="float:right"
-                                          styleClass="ui-priority-primary" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosVendedor"
+                                                 actionListener="#{editaRemessaAbertaFormularioBean.refreshVendedores()}"
+                                                 styleClass="ui-priority-primary" process="@this" />
                             </p:outputPanel>
                         </div>
                     </f:facet>
@@ -308,7 +308,7 @@
             </h:form>
         </p:dialog>
 
-        <p:dialog widgetVar="produtoDialog" modal="true" height="450"
+        <p:dialog widgetVar="produtoDialog" modal="true" height="450" header="Pesquisa de Produtos"
                   width="850" resizable="false">
             <h:form>
                 <p:dataTable value="#{editaRemessaAbertaFormularioBean.produtos}"
@@ -325,8 +325,9 @@
                                 <p:outputLabel value="Pesquisar: " for="globalFilter" />
                                 <p:inputText id="globalFilter"
                                              onkeyup="PF('listaProdutos').filter()" />
-                                <p:button icon="fa fa-refresh" style="float:right"
-                                          styleClass="ui-priority-primary" />
+                                <p:commandButton icon="fa fa-refresh" style="float:right" update="dadosProdutoTabela"
+                                                 actionListener="#{editaRemessaAbertaFormularioBean.refreshProdutos}"
+                                                 styleClass="ui-priority-primary" process="@this"/>
                             </p:outputPanel>
                         </div>
                     </f:facet>

@@ -27,7 +27,7 @@ public class UnidadeMedidaFormularioBean implements Serializable {
 
     public void salvar () throws IOException {
         gestaoProduto.salvarUnidadeMedida(unidadeMedida);
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/UnidadeMedida.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/HSI/Sistemas/Preferencias/UnidadeMedida.xhtml");
     }
 
     public UnidadeMedida getUnidadeMedida() {
