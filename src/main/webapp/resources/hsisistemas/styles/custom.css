@@ -40,24 +40,3 @@ body {
 		border: none;
 	}
 }
-
-/* FileUpload */
-.ui-fileupload-buttonbar.ui-widget-header {
-	border: 0;
-	background: #ffffff;
-	color: #333333;
-	font-weight: bold;
-}
-
-.ui-fileupload-content.ui-widget-content {
-	border: 0;
-}
-
-.ui-fileupload-buttonbar {
-	padding: 0 !important;
-}
-
-.ui-selectonemenu-panel .ui-selectonemenu-filter {
-    width: 100% !important;
-    padding-right: 0 !important;
-}

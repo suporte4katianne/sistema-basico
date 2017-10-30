@@ -37,7 +37,7 @@ public class RemessaRepository implements Serializable{
     public List<Remessa> listarRemessas(StatusRemessa statusRemessa){
         return entityManager
                 .createQuery("SELECT r FROM Remessa r " +
-                        "WHERE r.statusRemessa = : statusRemessa ORDER BY r.id DESC", Remessa.class)
+                        "WHERE r.statusRemessa = :statusRemessa ORDER BY r.id DESC", Remessa.class)
                 .setParameter("statusRemessa", statusRemessa)
                 .getResultList();
     }

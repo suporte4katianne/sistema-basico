@@ -242,6 +242,7 @@
                                      value="Salvar" icon="fa fa-floppy-o" action="#{produtoFormularioBean.salvar()}"
                                      process="@form @this tabView:impostoProduto" update="@form"
                                      onclick="PF('salvarCadastro').disable();"
+                                     oncomplete="PF('salvarCadastro').enable();"
                                      widgetVar="salvarCadastro" />
                 </f:facet>
                 <f:facet name="right">
