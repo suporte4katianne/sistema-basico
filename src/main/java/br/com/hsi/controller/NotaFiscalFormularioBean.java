@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class NotaFiscalFormularioBean implements Serializable {
         }
 		produtos = gestaoProduto.listarProdutos();
 		transportadoras = gestaoEntidade.listarEntidades("T");
+		numeracoes = new ArrayList<>();
 		numeracoes = gestaoNumeracao.numeracoes();
 	}
 	
@@ -78,10 +80,15 @@ public class NotaFiscalFormularioBean implements Serializable {
 		if(notaFiscal == null){
 			limpar();
 			carregaDadosDoEmitente();
+			if (numeracoes.size() > 0) {
+				numeracao = numeracoes.get(0);
+				selecionaNumeracao();
+			}
 		}else{
 			notaFiscalItem = new NotaFiscalItem();
 			notaFiscalReferencia = new NotaFiscalReferencia();
 		}
+
 
 		carregaCfopPorTipoEOperacao();
 	}
@@ -147,7 +154,6 @@ public class NotaFiscalFormularioBean implements Serializable {
 	}
 	
 	public boolean selecionaNumeracao() {
-        System.out.println("numeracao = " + numeracao);
         if(numeracao != null){
             notaFiscal.setSerieNota(numeracao.getSerie());
             notaFiscal.setNumeroNota(numeracao.getNumero());
@@ -195,11 +201,10 @@ public class NotaFiscalFormularioBean implements Serializable {
             }
         }
 
-        notaFiscalItem.setCodProd(String.valueOf(notaFiscalItem.getProduto().getCodigo()));
-        notaFiscalItem.setNomeProduto(notaFiscalItem.getProduto().getDescricao());
-        notaFiscalItem.setNcm(notaFiscalItem.getProduto().getCodigo_ncm());
-        notaFiscalItem.setCest(notaFiscalItem.getProduto().getCodigo_cest());
-        notaFiscalItem.setCodigoBarras(notaFiscalItem.getProduto().getCodigoBrras());
+		notaFiscalItem.setCodProd(String.valueOf(notaFiscalItem.getProduto().getCodigo()));
+		notaFiscalItem.setNomeProduto(notaFiscalItem.getProduto().getDescricao());
+		notaFiscalItem.setNcm(notaFiscalItem.getProduto().getCodigo_ncm());
+		notaFiscalItem.setCest(notaFiscalItem.getProduto().getCodigo_cest());
         notaFiscalItem.setUnidadeMedida(notaFiscalItem.getProduto().getUnidadeMedida());
         notaFiscalItem.setValorUnitario(notaFiscalItem.getProduto().getPrecoVenda());
         notaFiscalItem.setCompoeValorNota("1");
@@ -222,7 +227,6 @@ public class NotaFiscalFormularioBean implements Serializable {
         notaFiscalItem.setNomeProduto(notaFiscalItem.getProduto().getDescricao());
         notaFiscalItem.setNcm(notaFiscalItem.getProduto().getCodigo_ncm());
         notaFiscalItem.setCest(notaFiscalItem.getProduto().getCodigo_cest());
-        notaFiscalItem.setCodigoBarras(notaFiscalItem.getProduto().getCodigoBrras());
         notaFiscalItem.setCompoeValorNota("1");
         notaFiscalItem.setNotaFiscal(notaFiscal);
     }

@@ -8,5 +8,6 @@
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="hsisistemas/liquibase/0001-liquibase-changeLog-file.xml" relativeToChangelogFile="false"/>
+    <include file="hsisistemas/liquibase/0002-liquibase-changeLog-file.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

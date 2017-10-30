@@ -35,9 +35,6 @@ public class NotaFiscalItem{
 
 	private String cfop;
 
-	@Column(name = "codigo_barras")
-	private String codigoBarras;
-
 	@Column(name = "unidade_medida")
 	private String unidadeMedida;
 
@@ -66,6 +63,7 @@ public class NotaFiscalItem{
 
     @Column(name = "valor_icms")
     private BigDecimal icms;
+
 
     @Column(name = "valor_base_icms_st")
 	private BigDecimal baseIcmsSt;
@@ -105,7 +103,6 @@ public class NotaFiscalItem{
 
 	@OneToOne(cascade = {CascadeType.ALL})
     private Movimentacao movimentacao;
-
 
     public Long getId() {
         return id;
@@ -169,14 +166,6 @@ public class NotaFiscalItem{
 
     public void setCfop(String cfop) {
         this.cfop = cfop;
-    }
-
-    public String getCodigoBarras() {
-        return codigoBarras;
-    }
-
-    public void setCodigoBarras(String codigoBarras) {
-        this.codigoBarras = codigoBarras;
     }
 
     public String getUnidadeMedida() {

@@ -276,7 +276,8 @@ public class GeraXmlAutorizacao {
 
 			Prod prod = new Prod();
 			prod.setCProd(notaFiscalItem.getCodProd());
-			prod.setCEAN(notaFiscalItem.getCodigoBarras());
+			prod.setCEAN(notaFiscalItem.getProduto().getCodigoBrras());
+			prod.setCEANTrib(notaFiscalItem.getProduto().getCodigoBrras());
 			prod.setXProd(notaFiscalItem.getNomeProduto().trim());
 			prod.setNCM(notaFiscalItem.getNcm());
 			prod.setCFOP(notaFiscalItem.getCfop());
@@ -286,7 +287,6 @@ public class GeraXmlAutorizacao {
 			prod.setVProd(String.valueOf(notaFiscalItem.getValorTotal()));
 			prod.setUTrib(notaFiscalItem.getUnidadeMedida());
 			prod.setQTrib(String.valueOf(notaFiscalItem.getQuantidade()));
-			prod.setCEANTrib(notaFiscalItem.getCodigoBarras());
 			prod.setCEST(notaFiscalItem.getCest().replaceAll("\\.", ""));
 			prod.setVUnTrib(String.valueOf(notaFiscalItem.getValorUnitario()));
 			prod.setIndTot(notaFiscalItem.getCompoeValorNota());

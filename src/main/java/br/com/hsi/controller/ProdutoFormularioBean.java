@@ -64,6 +64,11 @@ public class ProdutoFormularioBean implements Serializable {
 	}
 	
 	public void salvar() throws IOException {
+
+		if(produto.getCodigoBrras().isEmpty()) {
+			System.out.println("EMPTY Funciona!!");
+		}
+
 		if(produto.getCfopEstadual() != null){
 			produto.setCodigoCfopEstadual(produto.getCfopEstadual().getCodigo());
 		}
